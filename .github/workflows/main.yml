@@ -23,7 +23,6 @@ jobs:
             # Go to the http folder
             cd /var/www/http/candice
             
-            git checkout main -f            
             git pull
 
             # Install dependencies
