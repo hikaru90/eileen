@@ -17,6 +17,7 @@ jobs:
           host: ${{ secrets.DROPLET_IP }}
           username: ${{ secrets.DROPLET_USERNAME }}
           key: ${{ secrets.DROPLET_PRIVATE_KEY }}
+          passphrase: ${{ secrets.KEYPASSPHRASE }}
           port: 22
           script: |
             # Go to the http folder
