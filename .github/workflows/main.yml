@@ -21,7 +21,7 @@ jobs:
           port: 22
           script: |
             # Go to the http folder
-            cd /www
+            cd /var/www/http/
             # Clone the repo
             git clone git@github.com:hikaru90/candice.git
 
