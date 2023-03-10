@@ -23,7 +23,7 @@ jobs:
             # Go to the http folder
             cd /var/www/http/
             # Remove old folder
-            rm -rf ./candice/.git
+            rm -rf candice
             # Clone the repo
             git clone git@github.com:hikaru90/candice.git
 
