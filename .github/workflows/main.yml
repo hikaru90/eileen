@@ -26,6 +26,8 @@ jobs:
             git pull
 
             # Install dependencies
+            node -v
+            npm -v
             npm install
 
             # Build the app
