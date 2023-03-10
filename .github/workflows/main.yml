@@ -1,0 +1,32 @@
+name: Deploy to Droplet
+on:
+  push:
+    branches:
+      - main
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Connect to Droplet
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.DROPLET_IP }}
+          username: ${{ secrets.DROPLET_USERNAME }}
+          key: ${{ secrets.DROPLET_PRIVATE_KEY }}
+          port: 22
+          script: |
+            # Go to the http folder
+            cd /var/www/http/candice
+            # Clone the repo
+            git clone https://github.com/hikaru90/candice.git
+
+            # Install dependencies
+            npm install
+
+            # Build the app
+            npm run build
+
+            # Start the app
+            npm run start
