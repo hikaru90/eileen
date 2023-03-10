@@ -23,6 +23,10 @@ jobs:
             # Go to the http folder
             cd /var/www/http/candice
             
+            export NVM_DIR=~/.nvm
+            source ~/.nvm/nvm.sh
+            npm --help
+            
             git pull
 
             # Install dependencies
