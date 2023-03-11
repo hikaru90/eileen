@@ -36,6 +36,3 @@ jobs:
 
             # Build the app
             npm run build
-
-            # Start the app
-            pm2 start npm --name "candiceApp" -- start
