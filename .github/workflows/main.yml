@@ -1,0 +1,38 @@
+name: Deploy to Droplet
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+  
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Connect to Droplet
+        uses: appleboy/ssh-action@v0.1.8
+        with:
+          host: ${{ secrets.DROPLET_IP }}
+          username: ${{ secrets.DROPLET_USERNAME }}
+          key: ${{ secrets.DROPLET_PRIVATE_KEY }}
+          passphrase: ${{ secrets.KEYPASSPHRASE }}
+          port: 22
+          script: |
+            # Go to the http folder
+            cd /var/www/http/candice
+            
+            export NVM_DIR=~/.nvm
+            source ~/.nvm/nvm.sh
+            npm --help
+            
+            git pull
+
+            # Install dependencies
+            node -v
+            npm -v
+            npm install
+
+            # Build the app
+            npm run build
