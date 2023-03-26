@@ -1,0 +1,97 @@
+@keyframes icon-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
+}
+
+@keyframes beacon {
+  from {
+    @apply bg-neonYellow;
+    padding: 0;
+    border-radius: 6px;
+    opacity: 0.8;
+  }
+  to {
+    background: transparent;
+    margin: -20px;
+    border-radius: 16px;
+    opacity: 0;
+  }
+}
+.beacon:after {
+  content: "";
+  @apply rounded-sm absolute left-0 top-0 bottom-0 right-0 -z-10;
+  animation-name: beacon;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes lightBeacon {
+  from {
+    background: white;
+    padding: 0;
+    border-radius: 6px;
+    opacity: 1;
+  }
+  to {
+    background: transparent;
+    margin: -20px;
+    border-radius: 16px;
+    opacity: 0;
+  }
+}
+.lightBeacon:after {
+  content: "";
+  @apply rounded-sm absolute left-0 top-0 bottom-0 right-0 -z-10;
+  animation-name: lightBeacon;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+}
+
+
+
+
+@keyframes floating {
+  from {
+    transform: translate(0,0);
+  }
+  to {
+    transform: translate(0,20px);
+  }
+}
+.floating {
+  animation-name: floating;
+  animation-duration: 3s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+  animation-direction: alternate;
+}
+
+
+
+@keyframes pulse {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+.pulse {
+  animation-name: pulse;
+  animation-duration: 500ms;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+  animation-direction: alternate;
+}
+
+.slow-pulse {
+  animation-name: pulse;
+  animation-duration: 1000ms;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+  animation-direction: alternate;
+}

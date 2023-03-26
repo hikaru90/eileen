@@ -1,0 +1,30 @@
+@import 'animations';
+
+body,
+html,
+#__nuxt,
+#__layout {
+  // @apply font-body;
+  color: theme("colors.black");
+  box-sizing: border-box;
+  @apply h-full w-full overflow-x-hidden;
+}
+
+
+.max-container{
+  max-width: 1600px;
+  margin: 0 auto;
+  display: block;
+  @apply px-1;
+
+  @media screen and (min-width: theme('screens.md')){
+    @apply px-3;
+  }
+  @media screen and (min-width: theme('screens.lg')){
+    @apply px-3;
+  }
+}
+
+.nuxt-icon svg{
+  margin-bottom: 0 !important;
+}
