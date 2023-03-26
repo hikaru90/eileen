@@ -35,3 +35,4 @@ jobs:
 
             # Build the app
             npm run build
+            npm run start
