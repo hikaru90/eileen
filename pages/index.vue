@@ -7,7 +7,7 @@
 <template>
   <div class="max-container">
     <div class="w-full h-40 bg-green">
-      hi
+      look ma, no hands
     </div>
   </div>
 </template>

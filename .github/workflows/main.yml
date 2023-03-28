@@ -35,4 +35,4 @@ jobs:
 
             # Build the app
             npm run build
-            npm run start
+            pm2 restart all
