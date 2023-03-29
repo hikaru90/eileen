@@ -24,6 +24,9 @@ module.exports = {
         '25': '.25',
         '80': '.8',
       },
+      boxShadow: {
+        'edit': 'inset 0 0 0 2px #E6A7F1',
+      },
       colors: {
         offwhite: "#f8f8f8",
         darkOffwhite: "#eee",

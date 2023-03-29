@@ -6,7 +6,7 @@
 </script>
 
 <template>
-  <div class="bg-lightGrey m-2 p-2 rounded">
+  <div class="bg-lightGrey p-2 rounded">
     <p class="text-sm">
       {{ props.content }}
     </p>

@@ -1,6 +1,8 @@
 <script setup>
   import { useAuthStore } from "~/store/auth";
+  import { useContentStore } from "~/store/content";
   const authStore = useAuthStore();
+  const contentStore = useContentStore();
   const { logout } = authStore;
 
   const data = reactive({
@@ -16,12 +18,23 @@
         </div>
         <div class="flex items-center">
           <button
+            @click="contentStore.$patch({
+              debugVisible: !contentStore.debugVisible
+            })"
+            class="rounded-sm border border-darkLilac px-3 py-1 mx-2"
+          >
+            Debug
+          </button>
+          <button
             @click="data.modalVisible = true"
             class="rounded-sm border border-darkLilac px-3 py-1 mx-2"
           >
             Edit Pages
           </button>
-          <div @click="logout" class="text-red border-red rounded-sm cursor-pointer mx-2 flex items-center">
+          <div
+            @click="logout"
+            class="text-red border-red rounded-sm cursor-pointer mx-2 flex items-center"
+          >
             <nuxt-icon name="icon-trash" class="text-3xl" />
             Logout
           </div>
@@ -42,9 +55,7 @@
         </div>
 
         <div>
-
           <Pagelist />
-
         </div>
       </div>
     </div>
