@@ -2,19 +2,14 @@
   import { useAuthStore } from "~/store/auth";
   const authStore = useAuthStore();
 
-  const { nodeEnv } = useRuntimeConfig();
+  const { isDev } = useRuntimeConfig();
+  console.log('isDev',isDev);
 
-  const isProd = computed(() => {
-    if (nodeEnv === "production") {
-      return true;
-    }
-    return false;
-  });
 </script>
 
 <template>
   <div class="flex flex-col h-full justify-between">
-    <template v-if="isProd">
+    <template v-if="!isDev">
       <Placeholder />
     </template>
     <template v-else>
