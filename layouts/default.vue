@@ -14,7 +14,9 @@
 
 <template>
   <div class="flex flex-col h-full justify-between">
-    <template v-if="isProd"> </template>
+    <template v-if="isProd">
+      <Placeholder />
+    </template>
     <template v-else>
       <div class="flex flex-col flex-grow">
         <div>

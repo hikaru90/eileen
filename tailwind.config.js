@@ -20,6 +20,9 @@ module.exports = {
 
   theme: {
     extend: {
+      fontFamily: {
+        'heading': ['Heading'],
+      },
       scale: {
         '25': '.25',
         '80': '.8',
@@ -37,9 +40,7 @@ module.exports = {
         blackHighlight: "#082C3E",
         lightOrange: "#FFC9BD",
         orange: "#FBB03B",
-        sand: "#E7E3DE",
-        //darkSand: '#CECAC4',
-        darkSand: "#ddd8d1",
+        sand: "#CB8B65",
         lightGreen: "#38f3af",
         grassGreen: "#F1FF2B",
         // green: '#1edf99',

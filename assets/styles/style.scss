@@ -1,4 +1,5 @@
 @import 'animations';
+@import 'fonts';
 
 body,
 html,
@@ -12,17 +13,19 @@ html,
 
 
 .max-container{
-  max-width: 1600px;
-  margin: 0 auto;
-  display: block;
-  @apply px-1;
+  max-width: 1200px;
+  @apply w-full px-10 my-0 mx-auto block;
 
   @media screen and (min-width: theme('screens.md')){
-    @apply px-3;
+    @apply px-24;
   }
   @media screen and (min-width: theme('screens.lg')){
-    @apply px-3;
+    @apply px-40;
   }
+}
+
+.outer-container{
+  @apply w-full px-8;
 }
 
 .nuxt-icon svg{
