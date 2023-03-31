@@ -24,7 +24,7 @@ export default defineNuxtConfig({
     // apiSecret: '123',
     // Keys within public, will be also exposed to the client-side
     public: {
-      isDev: process.env.ISDEV
+      ENV: process.env.ENV
     }
   }
 
