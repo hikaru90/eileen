@@ -1,13 +1,11 @@
 <template>
   <div>
-    <div class="mb-16 bg-gradient-to-r from-darkYellow to-yellow">
+    <div class="mb-16 bg-black text-lightGrey">
       <div class="outer-container">
-        <div class="flex items-center py-4">
-          <div class="leading-8 font-heading text-4xl">Hier entsteht<br />Großartiges</div>
+        <div class="flex items-center justify-center py-8">
+          <div class="leading-8 font-heading text-4xl">Hier entsteht Großartiges</div>
           <div class="ml-10 leading-5 mt-1">
-            Diese Seite<br />
-            befindet sich <br />
-            im Aufbau<br />
+            Diese Seite befindet sich im Aufbau
           </div>
         </div>
       </div>
@@ -15,10 +13,10 @@
 
     <div class="max-container">
       <div class="flex flex-col items-center justify-center mb-20">
-        <img src="/dimple_goertz.jpg" alt="Dimple Görtz" style="max-width: 600px" class="w-full" />
-        <h1 class="mt-6 lg:ml-6">
-          <span class="font-heading text-4xl"> Dimple Görtz<br /> </span>
-          <span class="lg:ml-20 text-sm"> — Paartherapeutin und systemischer Coach </span>
+        <img src="/dimple_goertz.jpg" alt="Dimple Goertz" style="max-width: 400px" class="w-full" />
+        <h1 class="mt-6 flex flex-col items-center">
+          <span class="font-heading text-4xl"> Dimple Goertz<br /> </span>
+          <span class="text-2xl"> Paartherapeutin und systemischer Coach </span>
         </h1>
       </div>
     </div>
@@ -59,15 +57,14 @@
 
     <div class="max-container">
       <div class="flex flex-col gap-2 my-20">
-        <div class="text-gray-600">Ich bin</div>
-        <p class="text-4xl leading-relaxed">
+        <!-- <div class="text-gray-600">Werdegang</div> -->
+        <p class="text-4xl leading-relaxed font-heading">
           Systemische Paartherapeutin<br />
           Systemischer Coach <sup class="text-xl">(DBVC)</sup><br />
+          <!-- Weiterbildung in Systemischer Beratung & Therapie<br /> -->
           Personalentwicklerin<br />
           Erwachsenenpädagogin<br />
         </p>
-        <div class="text-gray-600 mt-16">Weiterbildung</div>
-        <p class="text-4xl leading-relaxed">Systemische Beratung & Therapie<br /></p>
       </div>
     </div>
 
@@ -75,7 +72,7 @@
 
     <div class="max-container">
       <div class="flex flex-col gap-2 my-20">
-        <p class="text-4xl leading-relaxed">
+        <p class="text-4xl leading-relaxed font-heading">
           Dimple Goertz<br />
           <a href="tel:+49 (0) 1573 1664595" class="underline">+49 (0) 1573 1664595</a><br />
           <a href="mailto:goertz@paartherapieundcoaching.de" class="underline"

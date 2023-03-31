@@ -41,6 +41,10 @@
             E-Mail: goertz@paartherapieundcoaching.de<br />
             Umsatzsteuer-ID: Aufgrund des Kleinunternehmerstatus wird gemäß §19 UStg die MwSt. in der Rechnung nicht
             ausgewiesen.<br />
+
+            EU-Streitschlichtung<br /><br />
+            Plattform der Europäischen Kommission zur Online-Streitbeilegung (OS) für Verbraucher: https://ec.europa.eu/consumers/odr/. Ich bin nicht bereit und nicht verpflichtet an einem Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.
+
           </p>
         </div>
       </div>
