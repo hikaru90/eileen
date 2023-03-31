@@ -1,10 +1,9 @@
 <template>
   <div>
-    <div class="mb-16 bg-black text-lightGrey">
-      <div class="outer-container">
-        <div class="flex items-center justify-center py-8">
-          <div class="leading-8 font-heading text-4xl">Hier entsteht Großartiges</div>
-          <div class="ml-10 leading-5 mt-1">
+    <div class="mb-16 bg-black text-darkOffwhite">
+      <div class="max-container">
+        <div class="flex items-center justify-start py-8">
+          <div class="leading-5 mt-1 font-heading text-3xl">
             Diese Seite befindet sich im Aufbau
           </div>
         </div>
@@ -12,16 +11,16 @@
     </div>
 
     <div class="max-container">
-      <div class="flex flex-col items-center justify-center mb-20">
-        <img src="/dimple_goertz.jpg" alt="Dimple Goertz" style="max-width: 400px" class="w-full" />
-        <h1 class="mt-6 flex flex-col items-center">
+      <div class="flex items-center justify-start mb-20">
+        <img src="/dimple_goertz2.jpg" alt="Dimple Goertz" style="max-width: 260px" class="w-full mr-10 rounded-md" />
+        <h1 class="mt-6">
           <span class="font-heading text-4xl"> Dimple Goertz<br /> </span>
           <span class="text-2xl"> Paartherapeutin und systemischer Coach </span>
         </h1>
       </div>
     </div>
 
-    <PlaceholderSeparator number="01" text="Leistung" />
+    <PlaceholderSeparator number="01" text="Angebot" />
 
     <div class="max-container">
       <div class="flex flex-col md:flex-row gap-20 my-20">
