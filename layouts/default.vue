@@ -9,9 +9,9 @@
 
 <template>
   <div class="flex flex-col h-full justify-between">
-    <!-- <template v-if="ENV === 'prod'"> -->
+    <template v-if="ENV === 'prod'">
       <Placeholder />
-    <!-- </template>
+    </template>
     <template v-else>
       <div class="flex flex-col flex-grow">
         <div>
@@ -21,6 +21,6 @@
         <slot />
       </div>
       <Footer />
-    </template> -->
+    </template>
   </div>
 </template>

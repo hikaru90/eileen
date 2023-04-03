@@ -3,7 +3,7 @@
     <div class="mb-16 bg-black text-darkOffwhite">
       <div class="max-container">
         <div class="flex items-center justify-start py-8">
-          <div class="leading-5 mt-1 font-heading text-3xl">
+          <div class="leading-5 mt-1 font-heading lg:text-3xl">
             Diese Seite befindet sich im Aufbau
           </div>
         </div>
@@ -11,10 +11,10 @@
     </div>
 
     <div class="max-container">
-      <div class="flex items-center justify-start mb-20">
+      <div class="flex flex-col md:flex-row items-start md:items-center justify-start mb-20">
         <img src="/dimple_goertz2.jpg" alt="Dimple Goertz" style="max-width: 260px" class="w-full mr-10 rounded-md" />
         <h1 class="mt-6">
-          <span class="font-heading text-4xl"> Dimple Goertz<br /> </span>
+          <span class="font-heading text-xl lg:text-4xl"> Dimple Goertz<br /> </span>
           <span class="text-2xl"> Paartherapeutin und systemischer Coach </span>
         </h1>
       </div>
@@ -29,7 +29,7 @@
             <div class="w-4 h-4 bg-red transform rotate-45"></div>
             <div class="w-4 h-4 bg-sand transform rotate-45"></div>
           </div>
-          <h2 class="font-heading text-4xl my-6">Für Paare</h2>
+          <h2 class="font-heading text-xl lg:text-4xl my-6">Für Paare</h2>
           <p class="leading-7 text-gray-600">
             Ihr verliert euch in Streitigkeiten, körperliche Zuneigung findet kaum mehr statt oder
             fühlt euch als Paar nicht mehr verbunden? Als systemische Paartherapeutin und Coach
@@ -41,7 +41,7 @@
           <div class="flex">
             <div class="w-4 h-4 bg-emerald-900 transform rotate-45"></div>
           </div>
-          <h2 class="font-heading text-4xl my-6">Für Einzelpersonen</h2>
+          <h2 class="font-heading text-xl lg:text-4xl my-6">Für Einzelpersonen</h2>
           <p class="leading-7 text-gray-600">
             Du befindest dich aktuell in einer Beziehung und möchtest eine Veränderung oder bist
             Single und wünschst dir eine Beziehung? Ich begleite dich dabei, in eine glückliche und
@@ -57,9 +57,9 @@
     <div class="max-container">
       <div class="flex flex-col gap-2 my-20">
         <!-- <div class="text-gray-600">Werdegang</div> -->
-        <p class="text-4xl leading-relaxed font-heading">
+        <p class="text-xl lg:text-4xl leading-relaxed font-heading">
           Systemische Paartherapeutin<br />
-          Systemischer Coach <sup class="text-xl">(DBVC)</sup><br />
+          Systemischer Coach <sup class="lg:text-xl">(DBVC)</sup><br />
           <!-- Weiterbildung in Systemischer Beratung & Therapie<br /> -->
           Personalentwicklerin<br />
           Erwachsenenpädagogin<br />
@@ -71,11 +71,11 @@
 
     <div class="max-container">
       <div class="flex flex-col gap-2 my-20">
-        <p class="text-4xl leading-relaxed font-heading">
+        <p class="text-xl lg:text-4xl leading-relaxed font-heading">
           Dimple Goertz<br />
           <a href="tel:+49 (0) 1573 1664595" class="underline">+49 (0) 1573 1664595</a><br />
-          <a href="mailto:goertz@paartherapieundcoaching.de" class="underline"
-            >goertz@paartherapieundcoaching.de</a
+          <a href="mailto:kontakt@dimplegoertz.de" class="underline"
+            >kontakt@dimplegoertz.de</a
           ><br />
         </p>
       </div>

@@ -23,7 +23,7 @@
         <div class="w-full h-full bg-black text-lightGrey -ml-2 p-10">
 
           <div class="flex items-center justify-between mb-20">
-            <h2 class="text-4xl">
+            <h2 class="text-xl lg:text-4xl">
               Impressum
             </h2>
 
@@ -32,18 +32,18 @@
             </button>
           </div>
 
-          <p>
+          <p class="text-sm lg:text-base break-inside">
             Impressum gemäß § 5 TMG<br /><br />
             Dimple Goertz<br />
             Paartherapeutin und systemischer Coach<br />
             Kronenstraße 45<br />
             70174 Stuttgart <br /><br />
-            E-Mail: goertz@paartherapieundcoaching.de<br />
+            E-Mail: kontakt@dimplegoertz.de<br />
             Umsatzsteuer-ID: Aufgrund des Kleinunternehmerstatus wird gemäß §19 UStg die MwSt. in der Rechnung nicht
             ausgewiesen.<br />
 
             EU-Streitschlichtung<br /><br />
-            Plattform der Europäischen Kommission zur Online-Streitbeilegung (OS) für Verbraucher: https://ec.europa.eu/consumers/odr/. Ich bin nicht bereit und nicht verpflichtet an einem Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.
+            Plattform der Europäischen Kommission zur Online-Streitbeilegung (OS) für Verbraucher: <a href="https://ec.europa.eu/consumers/odr/">link</a>. Ich bin nicht bereit und nicht verpflichtet an einem Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.
 
           </p>
         </div>
