@@ -8,7 +8,7 @@ const { token } = storeToRefs(authStore)
 const sidebarStore = useSidebarStore()
 const { setSidebarComponent, setSidebarData } = sidebarStore
 
-// const res = await $fetch('/api/saveTailwindClasses')
+// const res = await $fetch('/nuxtapi/saveTailwindClasses')
 // console.log('res',res);
 
 const props = withDefaults(

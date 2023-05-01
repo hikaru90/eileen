@@ -29,7 +29,8 @@ export default defineNuxtConfig({
     // Keys within public, will be also exposed to the client-side
     GITHUB_ACTIONS_TOKEN: process.env.GITHUB_ACTIONS_TOKEN,
     public: {
-      ENV: process.env.ENV
+      ENV: process.env.ENV,
+      NODE_ENV: process.env.NODE_ENV,
     }
   },
 

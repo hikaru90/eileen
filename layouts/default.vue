@@ -2,14 +2,14 @@
   import { useAuthStore } from "~/store/auth";
   const authStore = useAuthStore();
 
-  const { ENV } = useRuntimeConfig();
-  console.log('ENV',ENV);
-
+  const isDev = computed(() => {
+    return process.dev
+  })
 </script>
 
 <template>
   <div class="flex flex-col h-full justify-between">
-    <template v-if="ENV === 'prod'">
+    <template v-if="!isDev">
       <Placeholder />
     </template>
     <template v-else>

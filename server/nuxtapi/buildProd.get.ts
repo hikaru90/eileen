@@ -13,9 +13,9 @@ export default defineEventHandler(async (event) => {
       },
     };
     const workflows: object = await $fetch("https://api.github.com/repos/hikaru90/dimple/actions/runs", headerConfig);
-    const id = workflows.workflow_runs.find((run) => run.name === 'Deploy to Droplet').id
+    const id = workflows.workflow_runs.find((run) => run.name === 'Rebuild Prod').id
     
-    const res = await $fetch("https://api.github.com/repos/OWENER/REPO/actions/runs/" + id + "/rerun", { 
+    const res = await $fetch("https://api.github.com/repos/hikaru90/dimple/actions/runs/" + id + "/rerun", { 
       method: "POST",
       headers: headerConfig.headers,
     })

@@ -15,6 +15,16 @@
   const handleModalVisibility = (payload) => {
     data.modalVisible = payload;
   };
+
+  const rebuildProd = async () => {
+    try{
+      const res = await $fetch('/nuxtapi/buildProd')
+      console.log('res',res);
+      return res
+    }catch(err){
+      console.log('error rebuilding prod', err);
+    }
+  }
 </script>
 <template>
   <div class="bg-lilac text-darkLilac py-4">
@@ -24,6 +34,12 @@
           {{ authStore?.user?.name }}
         </div>
         <div class="flex items-center">
+          <button
+            @click="rebuildProd"
+            class="rounded-sm border border-green px-3 py-1 mx-2"
+          >
+            Rebuild Prod
+          </button>
           <button
             @click="
               contentStore.$patch({
