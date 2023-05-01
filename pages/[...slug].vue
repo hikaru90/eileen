@@ -1,10 +1,14 @@
 <script setup lang="ts">
   import { useContentStore } from "~/store/content";
   const contentStore = useContentStore();
-  const {pb} = usePocketbase()
+  const { pb } = usePocketbase();
   const route = useRoute();
   let slug = route.params.slug;
-  !slug ? 'index' : slug
+  !slug ? "index" : slug;
+
+  definePageMeta({
+    layout: "sidebar",
+  });
 
   const { pending, data: content } = await useAsyncData("count", () =>
     pb.collection("pages").getFirstListItem(`slug="${slug}"`, {
@@ -13,7 +17,7 @@
   );
   const refresh = () => {
     refreshNuxtData("count");
-  }
+  };
 </script>
 
 <template>
@@ -22,11 +26,10 @@
 
     <div class="max-container">
       <div class="py-10">
-
         <h1>{{ content?.title }}</h1>
-        
+
         <BlockRenderer :blocks="content?.expand.blocks" />
-      </div>      
+      </div>
     </div>
   </main>
 </template>

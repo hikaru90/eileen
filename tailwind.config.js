@@ -8,6 +8,7 @@ module.exports = {
     "./pages/**/*.vue",
     "./plugins/**/*.js",
     "./nuxt.config.js",
+    "./assets/dynamicTailwindClasses/classes.txt",
   ],
   safelist: [
     'bg-lightRed',
@@ -16,6 +17,7 @@ module.exports = {
     'bg-grey/25',
     'bg-white',
     'bg-green',
+    'bg-blue',
   ],
 
   theme: {

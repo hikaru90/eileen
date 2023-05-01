@@ -1,8 +1,15 @@
 <script setup lang="ts">
 import { storeToRefs } from "pinia";
 import { useAuthStore } from "~/store/auth";
+import { useSidebarStore } from "~~/store/sidebar";
+
 const authStore = useAuthStore();
 const { token } = storeToRefs(authStore)
+const sidebarStore = useSidebarStore()
+const { setSidebarComponent, setSidebarData } = sidebarStore
+
+// const res = await $fetch('/api/saveTailwindClasses')
+// console.log('res',res);
 
 const props = withDefaults(
     defineProps<{
@@ -18,10 +25,15 @@ const props = withDefaults(
     return false
   })
 
+  const selectBlock = (block) => {
+    setSidebarData(block.twClasses)
+    setSidebarComponent('SidebarBlock')
+  }
+
 </script>
 
 <template>
-  <div v-for="block in props.blocks" :key="block.id" :class="[block.twClass, { 'hover:shadow-edit cursor-pointer': editMode } ]" >
+  <div @click="selectBlock(block)" v-for="block in props.blocks" :key="block.id" :class="[block.twClasses, { 'hover:shadow-edit cursor-pointer': editMode } ]" class="" >
     {{ block }}
   </div>
 </template>

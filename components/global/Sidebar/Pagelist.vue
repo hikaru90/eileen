@@ -1,6 +1,7 @@
 <script setup lang="ts">
   const {pb} = usePocketbase()
-  
+  const emit = defineEmits(['setTitle'])
+
   const data = reactive({
     pending: true,
     pagelist: [],
@@ -20,6 +21,7 @@
   }
 
   onMounted(() => {
+    emit('setTitle', 'Edit Pages')
     getPagelist()
   })
 
