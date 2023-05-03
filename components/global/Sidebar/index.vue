@@ -2,7 +2,7 @@
   import { storeToRefs } from "pinia";
   import { useSidebarStore } from "~/store/sidebar";
   const sidebarStore = useSidebarStore();
-  const { componentName, componentData } = storeToRefs(sidebarStore);
+  const { componentName, componentCss } = storeToRefs(sidebarStore);
 
   const dynamicComponent = computed(() => {
     const componentNameValue = componentName.value

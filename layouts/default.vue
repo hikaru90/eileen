@@ -1,10 +1,12 @@
 <script setup lang="ts">
   import { useAuthStore } from "~/store/auth";
   const authStore = useAuthStore();
+  const config = useRuntimeConfig();
 
   const isDev = computed(() => {
-    return process.dev
-  })
+    // return process.dev
+    return config.ENV;
+  });
 </script>
 
 <template>

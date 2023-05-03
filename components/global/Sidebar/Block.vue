@@ -4,16 +4,16 @@
   const sidebarStore = useSidebarStore();
   const { pb } = usePocketbase();
   const emit = defineEmits(["setTitle"]);
-  const { safelistDynamicClasses } = sidebarStore;
-  const { componentData } = storeToRefs(sidebarStore);
+  // const { safelistDynamicClasses } = sidebarStore;
+  const { componentCss } = storeToRefs(sidebarStore);
 
-  const classes = computed(() => {
-    if (componentData) {
-      const twClasses = componentData.value.split(" ");
-      return twClasses;
-    }
-    return null;
-  });
+  const state = reactive({
+    viewport: null
+  })
+
+  const setViewport = (value) => {
+    state.viewport = value
+  };
 
   onMounted(() => {
     emit("setTitle", "Edit Block");
@@ -23,10 +23,10 @@
 
 <template>
   <div>
-    <div>
-      {{ classes }}
-    </div>
+    <ViewportSelector @setViewport="setViewport" />
+    <InputColor :viewport="state.viewport" class="mb-2" />
+    <InputBackgroundColor :viewport="state.viewport" class="mb-2" />
 
-    <button @click="safelistDynamicClasses">Save Classes</button>
+    <!-- <button @click="safelistDynamicClasses">Save Classes</button> -->
   </div>
 </template>

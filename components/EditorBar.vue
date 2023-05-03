@@ -6,7 +6,7 @@
   const contentStore = useContentStore();
   const { logout } = authStore;
   const sidebarStore = useSidebarStore();
-  const { setSidebarComponent } = sidebarStore
+  const { setComponentName } = sidebarStore
 
   const data = reactive({
     modalVisible: false,
@@ -51,7 +51,7 @@
             Debug
           </button>
           <button
-            @click="setSidebarComponent('SidebarPagelist')"
+            @click="setComponentName('SidebarPagelist')"
             class="rounded-sm border border-darkLilac px-3 py-1 mx-2"
           >
             Edit Pages
