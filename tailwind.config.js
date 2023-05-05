@@ -18,6 +18,10 @@ module.exports = {
     'bg-white',
     'bg-green',
     'bg-blue',
+    'border-black',
+    'border-darkLilac',
+    'border-2',
+    'h-6',
   ],
 
   theme: {

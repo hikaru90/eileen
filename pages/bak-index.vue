@@ -6,6 +6,6 @@
 
 <template>
   <div class="max-container">
-    <BlockRenderer />
+    <BlockContainer />
   </div>
 </template>

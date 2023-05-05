@@ -24,7 +24,7 @@
 
 <template>
   <div>
-    <div class="p-5">
+    <div class="">
       <div class="mb-5">
         {{ data.title }}
       </div>

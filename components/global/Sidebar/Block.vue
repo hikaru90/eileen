@@ -8,7 +8,7 @@
   const { componentCss } = storeToRefs(sidebarStore);
 
   const state = reactive({
-    viewport: null
+    viewport: 0
   })
 
   const setViewport = (value) => {

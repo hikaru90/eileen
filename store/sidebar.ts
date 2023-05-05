@@ -4,11 +4,11 @@ const { pb } = usePocketbase();
 export const useSidebarStore = defineStore("sidebarStore", {
   state: () => ({
     viewports: [
-      { name: "mobile", value: null },
-      { name: "mobile+", value: 500 },
-      { name: "table", value: 768 },
-      { name: "laptop", value: 1024 },
-      { name: "desktop", value: 1366 },
+      { id: 0, name: "mobile", value: 0, icon: "icon-mobile" },
+      { id: 1, name: "mobile+", value: 500, icon: "icon-mobile+" },
+      { id: 2, name: "tablet", value: 768, icon: "icon-tablet" },
+      { id: 3, name: "laptop", value: 1024, icon: "icon-laptop" },
+      { id: 4, name: "desktop", value: 1366, icon: "icon-desktop" },
     ],
     componentId: undefined,
     componentName: "",

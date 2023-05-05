@@ -2,50 +2,52 @@
   import { useSidebarStore } from "~/store/sidebar";
   import { storeToRefs } from "pinia";
   const sidebarStore = useSidebarStore();
-  const { componentCss } = storeToRefs(sidebarStore);
+  const { componentCss, viewports } = storeToRefs(sidebarStore);
   const { saveBlock } = sidebarStore
 
   const props = withDefaults(
     defineProps<{
-      viewport?: null | number;
+      viewport?: number;
     }>(),
     {
-      viewport: null,
+      viewport: 0,
     }
   );
 
+  const realColor = computed(() => {
+    const color = componentCss.value[props.viewport]?.find((entry) => entry.hasOwnProperty('color'))?.color;
+    if(color)return true
+    return false
+  })
+
+  const currentColor = computed(() =>{
+    const color = componentCss.value[props.viewport]?.find((entry) => entry.hasOwnProperty('color'))?.color;
+    return color
+  })
+
   const setProperty = (property, value) => {
-    const entry = componentCss.value.find((entry) => entry.hasOwnProperty(property));
+    const entry = componentCss.value[props.viewport]?.find((entry) => entry.hasOwnProperty(property));
     if (entry) {
       entry[property] = value;
     } else {
       let newValue = {};
       newValue[property] = value;
-      componentCss.value.push(newValue);
+      componentCss.value[props.viewport]?.push(newValue);
     }
     saveBlock()
   };
 
-  const state = reactive({
-    testColor: 'red',
-    colors: [
-      'white', 'black'
-    ]
-  })
+  const setColor = (payload) =>{
+    setProperty('color', payload)
+  }
 </script>
 
 <template>
-  <div>
+  <div class="px-4">
 
-    <h2 class="test">
+    <h2 class="text-xs mb-2">
       Font Color
     </h2>
-    <div class="flex items-center gap-1">
-      <button v-for="(color, index) in state.colors" @click="setProperty('color', color)" :style="[{ backgroundColor: color}]" class="w-5 h-5 rounded-full" :key="'color'+index"></button>
-    </div>
-    
-    <component :is="`style`">
-      .test {color: {{state.testColor}};}
-    </component>
+    <InputColorPicker :color="currentColor" @setColor="setColor" :class="[ realColor ? 'opacity-100' : 'opacity-20' ]" />
   </div>
 </template>
