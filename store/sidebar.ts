@@ -36,6 +36,7 @@ export const useSidebarStore = defineStore("sidebarStore", {
     },
     setComponentContentType(payload) {
       this.componentContentType = payload;
+      this.saveContentType()
     },
     setComponentContent(payload) {
       this.componentContent = payload;
@@ -49,7 +50,7 @@ export const useSidebarStore = defineStore("sidebarStore", {
         newValue[property] = value;
         this.componentCss[this.viewport]?.push(newValue);
       }
-      this.saveBlock()
+      this.saveCssClasses()
     },
     deleteProperty(property) {
       const entry = this.componentCss[this.viewport]?.find((entry) => entry.hasOwnProperty(property));
@@ -62,17 +63,39 @@ export const useSidebarStore = defineStore("sidebarStore", {
         return entry
       });
       this.componentCss[this.viewport] = newValue
-      this.saveBlock()
+      this.saveCssClasses()
     },
-    async saveBlock() {
+    async saveContentType() {
       try {
-        console.log("save block");
+        console.log("save componentContentType");
+        const record = await pb
+          .collection("blocks")
+          .update(this.componentId, { type: this.componentContentType });
+        return record;
+      } catch (err) {
+        console.log("error saving componentContentType", err);
+      }
+    },
+    async saveContent() {
+      try {
+        console.log("save componentContent");
+        const record = await pb
+          .collection("blocks")
+          .update(this.componentId, { content: this.componentContent });
+        return record;
+      } catch (err) {
+        console.log("error saving componentContent", err);
+      }
+    },
+    async saveCssClasses() {
+      try {
+        console.log("save componentCss");
         const record = await pb
           .collection("blocks")
           .update(this.componentId, { cssClasses: this.componentCss });
         return record;
       } catch (err) {
-        console.log("error saving block", err);
+        console.log("error saving componentCss", err);
       }
     },
     async safelistDynamicClasses() {

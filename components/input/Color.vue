@@ -3,7 +3,7 @@
   import { storeToRefs } from "pinia";
   const sidebarStore = useSidebarStore();
   const { componentCss, viewports, viewport } = storeToRefs(sidebarStore);
-  const { saveBlock, setProperty, deleteProperty } = sidebarStore
+  const { saveCssClasses, setProperty, deleteProperty } = sidebarStore
 
   const property = 'color'
 

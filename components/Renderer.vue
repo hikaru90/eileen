@@ -21,6 +21,10 @@
     block: object;
   }>();
 
+  const state = reactive({
+    matrix: []
+  })
+
   const createMatrix = (cssClasses) => {
     try {
       const keys = JSON.parse(JSON.stringify(cssClasses.flat())).map((row) => Object.keys(row)[0]);
@@ -32,7 +36,7 @@
           matrix[index] = cssClasses[index];
         } else if (cssClasses[index]) {
           // const lastKeys = cssClasses[index - 1].map(entry => Object.keys(entry)[0])
-          const lastEntries = cssClasses[index - 1].map((entry) => Object.entries(entry)[0]);
+          const lastEntries = matrix[index - 1].map((entry) => Object.entries(entry)[0]);
           const lastKeys = lastEntries.map((entry) => entry[0]);
           const lastValues = lastEntries.map((entry) => entry[1]);
           // const currentKeys = cssClasses[index].map(entry => Object.keys(entry)[0])
@@ -41,11 +45,13 @@
           const currentValues = currentEntries.map((entry) => entry[1]);
           for (const currentEntry of currentEntries) {
             if (lastKeys.includes(currentEntry[0])) {
+              // console.log(currentEntry[0],' was changed');
               let newProperty = {};
               newProperty[currentEntry[0]] = currentEntry[1];
               matrix[index].push(newProperty);
             }
-            if (!lastKeys.includes(currentEntry[0])) {
+            else{
+              // console.log(currentEntry[0],' was added');
               let newProperty = {};
               newProperty[currentEntry[0]] = currentEntry[1];
               matrix[index].push(newProperty);
@@ -53,6 +59,7 @@
           }
           for (const lastEntry of lastEntries) {
             if (!currentKeys.includes(lastEntry[0])) {
+              // console.log(lastEntry[0],' was removed');
               let newProperty = {};
               newProperty[lastEntry[0]] = lastEntry[1];
               matrix[index].push(newProperty);
@@ -79,8 +86,8 @@
   });
 
   const style = computed(() => {
-    const matrix = createMatrix(props.block.cssClasses);
-    const style = matrix[currentViewportIndex.value];
+    state.matrix = createMatrix(props.block.cssClasses);
+    const style = state.matrix[currentViewportIndex.value];
     return style;
   });
 
@@ -100,6 +107,9 @@
     if (componentId.value === props.block.id) return true;
     return false;
   });
+
+  onMounted(() => {
+  })
 </script>
 
 <template>
