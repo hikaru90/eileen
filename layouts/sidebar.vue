@@ -1,10 +1,11 @@
 <script setup lang="ts">
   import { useAuthStore } from "~/store/auth";
   const authStore = useAuthStore();
+  
 
   const isDev = computed(() => {
-    return process.dev
-  })
+    return process.dev;
+  });
 </script>
 
 <template>

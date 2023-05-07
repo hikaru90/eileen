@@ -3,30 +3,34 @@
   import { storeToRefs } from "pinia";
   const sidebarStore = useSidebarStore();
   const { pb } = usePocketbase();
-  const emit = defineEmits(["setTitle"]);
-  // const { safelistDynamicClasses } = sidebarStore;
+  const emit = defineEmits(["setContentType"]);
+  const { setComponentType } = sidebarStore;
   const { componentCss } = storeToRefs(sidebarStore);
 
-  const state = reactive({
-    viewport: 0
-  })
-
-  const setViewport = (value) => {
-    state.viewport = value
-  };
+  const props = withDefaults(
+    defineProps<{
+      selectedMode: number;
+    }>(),
+    {
+      selectedMode: 0,
+    }
+  );
 
   onMounted(() => {
-    emit("setTitle", "Edit Block");
-    // getPagelist()
+    setComponentType('block')
   });
 </script>
 
 <template>
   <div>
-    <ViewportSelector @setViewport="setViewport" />
-    <InputColor :viewport="state.viewport" class="mb-2" />
-    <InputBackgroundColor :viewport="state.viewport" class="mb-2" />
-
-    <!-- <button @click="safelistDynamicClasses">Save Classes</button> -->
+    <div v-if="props.selectedMode === 0">
+      <InputTypeSelector class="border-b border-darkLilac border-opacity-20" />
+      
+    </div>
+    <div v-else-if="props.selectedMode === 1">
+      <InputViewportSelector />
+      <InputColor class="mb-2" />
+      <InputBackgroundColor class="mb-2" />
+    </div>
   </div>
 </template>

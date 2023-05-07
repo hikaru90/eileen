@@ -50,7 +50,7 @@
           >
             Debug
           </button>
-          <button
+          <button id="sidebarTarget"
             @click="setComponentName('SidebarPagelist')"
             class="rounded-sm border border-darkLilac px-3 py-1 mx-2"
           >

@@ -10,11 +10,18 @@ export const useSidebarStore = defineStore("sidebarStore", {
       { id: 3, name: "laptop", value: 1024, icon: "icon-laptop" },
       { id: 4, name: "desktop", value: 1366, icon: "icon-desktop" },
     ],
+    viewport: 0,
     componentId: undefined,
     componentName: "",
     componentCss: [],
+    componentType: undefined,
+    componentContentType: undefined,
+    componentContent: undefined,
   }),
   actions: {
+    setViewport(payload: number){
+      this.viewport = payload
+    },
     setComponentId(payload: string) {
       this.componentId = payload;
     },
@@ -23,6 +30,39 @@ export const useSidebarStore = defineStore("sidebarStore", {
     },
     setComponentCss(payload) {
       this.componentCss = payload;
+    },
+    setComponentType(payload) {
+      this.componentType = payload;
+    },
+    setComponentContentType(payload) {
+      this.componentContentType = payload;
+    },
+    setComponentContent(payload) {
+      this.componentContent = payload;
+    },
+    setProperty(property, value) {
+      const entry = this.componentCss[this.viewport]?.find((entry) => entry.hasOwnProperty(property));
+      if (entry) {
+        entry[property] = value;
+      } else {
+        let newValue = {};
+        newValue[property] = value;
+        this.componentCss[this.viewport]?.push(newValue);
+      }
+      this.saveBlock()
+    },
+    deleteProperty(property) {
+      const entry = this.componentCss[this.viewport]?.find((entry) => entry.hasOwnProperty(property));
+      if (entry) {
+        delete entry[property]
+      }
+      const newValue = this.componentCss[this.viewport].filter(value => {
+        const entry = Object.keys(value).length !== 0
+        console.log('entry',entry);
+        return entry
+      });
+      this.componentCss[this.viewport] = newValue
+      this.saveBlock()
     },
     async saveBlock() {
       try {

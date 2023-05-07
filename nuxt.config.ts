@@ -5,7 +5,7 @@ export default defineNuxtConfig({
   },
 
   devServer: {
-    port: 5000
+    port: 5000,
   },
 
   typescript: {
@@ -13,11 +13,16 @@ export default defineNuxtConfig({
     typeCheck: false,
   },
 
-  css: ['~/assets/styles/style.scss'],
+  css: ["~/assets/styles/style.scss"],
 
-  modules: ["@nuxtjs/tailwindcss", "@pinia/nuxt", "@vueuse/nuxt", "nuxt-icons"],
+  modules: [
+    "@nuxtjs/tailwindcss",
+    "@pinia/nuxt",
+    "@vueuse/nuxt",
+    "nuxt-icons",
+  ],
 
-  plugins: ["~/plugins/piniaStore"],
+  plugins: ["~/plugins/piniaStore", { src: "~/plugins/markdown-it", ssr: false }],
 
   tailwindcss: {
     exposeConfig: true,
@@ -31,7 +36,6 @@ export default defineNuxtConfig({
     public: {
       ENV: process.env.ENV,
       NODE_ENV: process.env.NODE_ENV,
-    }
+    },
   },
-
-})
+});

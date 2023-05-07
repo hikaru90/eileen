@@ -2,45 +2,29 @@
   import { useSidebarStore } from "~/store/sidebar";
   import { storeToRefs } from "pinia";
   const sidebarStore = useSidebarStore();
-  const { componentCss } = storeToRefs(sidebarStore);
-  const { saveBlock } = sidebarStore
+  const { componentCss, viewports, viewport } = storeToRefs(sidebarStore);
+  const { saveBlock, setProperty, deleteProperty } = sidebarStore
 
-  const props = withDefaults(
-    defineProps<{
-      viewport?: null | number;
-    }>(),
-    {
-      viewport: null,
-    }
-  );
+  const property = 'backgroundColor'
 
-  const setProperty = (property, value) => {
-    const entry = componentCss.value.find((entry) => entry.hasOwnProperty(property));
-    if (entry) {
-      entry[property] = value;
-    } else {
-      let newValue = {};
-      newValue[property] = value;
-      componentCss.value.push(newValue);
-    }
-    saveBlock()
-  };
-
-  const state = reactive({
-    colors: [
-      'blue', 'yellow'
-    ]
+  const isRealColor = computed(() => {
+    const entry = componentCss.value[viewport.value]?.find((entry) => entry.hasOwnProperty(property))
+    if(entry)return true
+    return false
   })
+
+  const currentColor = computed(() =>{
+    const entry = componentCss.value[viewport.value]?.find((entry) => entry.hasOwnProperty(property))
+    if(entry) return entry[property]
+  })
+
 </script>
 
 <template>
-  <div>
-
-    <h2>
-      Background Color
+  <div class="px-4">
+    <h2 class="text-xs mb-2">
+      Font Color
     </h2>
-    <div  class="flex items-center gap-1">
-      <button v-for="(color, index) in state.colors" @click="setProperty('backgroundColor', color)" :style="[{ backgroundColor: color}]" class="w-5 h-5 rounded-full" :key="'color'+index"></button>
-    </div>
+    <InputColorPicker :color="currentColor" @deleteColor="deleteProperty(property)" @setColor="setProperty(property, $event)" :class="[ isRealColor ? 'opacity-100' : 'opacity-20' ]" />
   </div>
-  </template>
+</template>

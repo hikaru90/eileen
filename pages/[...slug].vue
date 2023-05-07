@@ -28,7 +28,7 @@
       <div class="py-10">
         <h1>{{ content?.title }}</h1>
 
-        <BlockContainer :blocks="content?.expand.blocks" />
+        <Container :blocks="content?.expand.blocks" />
       </div>
     </div>
   </main>

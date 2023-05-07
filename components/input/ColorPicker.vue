@@ -1,5 +1,8 @@
 <script setup lang="ts">
-  const emit = defineEmits(["setColor"]);
+  import { useValidationStore } from "~/store/validation";
+  const validationStore = useValidationStore();
+  const { isHexColor } = validationStore
+  const emit = defineEmits(["setColor", "deleteColor"]);
   const props = withDefaults(
     defineProps<{
       color?: string;
@@ -10,10 +13,28 @@
   );
 
   const setColor = (event) => {
-    emit('setColor', event?.target.value)
+    const value = event?.target.value
+    if(!value){
+      deleteColor()
+    }else{
+      if(isHexColor(value)){
+        emit('setColor', value)
+      }else{
+        console.log('is not a hex color');
+      }
+    }
+  }
+
+  const deleteColor = () => {
+    emit('deleteColor')
   }
 </script>
 
 <template>
-  <input type="color" @change="setColor" :value="props.color" class="rounded-sm" />
+  <div class="flex items-center">
+    <input type="color" @change="setColor" :value="props.color" class="rounded-sm w-6 h-6 mr-2" />
+    <div>
+      <input type="text" @change="setColor" :value="props.color" class="rounded-sm h-6 mr-2" />
+    </div>
+  </div>
 </template>

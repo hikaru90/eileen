@@ -11,6 +11,9 @@ export const useContentStore = defineStore("contentStore",{
     // },
     setWindowWidth(payload: number){
       this.windowWidth = payload
+    },
+    capitalize(payload: string){
+      return payload.charAt(0).toUpperCase() + payload.slice(1);
     }
   },
 });
