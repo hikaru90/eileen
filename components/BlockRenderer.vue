@@ -95,7 +95,7 @@
     setComponentId(props.block.id);
     setComponentCss(props.block.cssClasses);
     setComponentName("SidebarBlock");
-    setComponentContentType(props.block.type);
+    setComponentContentType({type: props.block.type, collection: 'blocks'});
     setComponentContent(props.block.content);
   };
 

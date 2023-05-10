@@ -27,7 +27,7 @@
   }
 </script>
 <template>
-  <div class="bg-lilac text-darkLilac py-4">
+  <div class="bg-black text-darkOffwhite py-4">
     <div class="max-container">
       <div class="flex items-center justify-between">
         <div>
@@ -46,13 +46,13 @@
                 debugVisible: !contentStore.debugVisible,
               })
             "
-            class="rounded-sm border border-darkLilac px-3 py-1 mx-2"
+            class="rounded-sm border border-lightBlue px-3 py-1 mx-2"
           >
             Debug
           </button>
           <button id="sidebarTarget"
             @click="setComponentName('SidebarPagelist')"
-            class="rounded-sm border border-darkLilac px-3 py-1 mx-2"
+            class="rounded-sm border border-lightBlue px-3 py-1 mx-2"
           >
             Edit Pages
           </button>

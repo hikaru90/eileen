@@ -25,7 +25,7 @@
           </div>
           <Footer />
         </div>
-        <div class="bg-lilac w-96 text-darkLilac">
+        <div class="bg-black w-96 text-darkOffwhite">
           <Sidebar />
         </div>
       </div>

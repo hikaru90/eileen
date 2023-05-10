@@ -35,8 +35,8 @@ export const useSidebarStore = defineStore("sidebarStore", {
       this.componentType = payload;
     },
     setComponentContentType(payload) {
-      this.componentContentType = payload;
-      this.saveContentType()
+      this.componentContentType = payload.type;
+      this.saveContentType(payload.collection)
     },
     setComponentContent(payload) {
       this.componentContent = payload;
@@ -65,11 +65,11 @@ export const useSidebarStore = defineStore("sidebarStore", {
       this.componentCss[this.viewport] = newValue
       this.saveCssClasses()
     },
-    async saveContentType() {
+    async saveContentType(collection) {
       try {
         console.log("save componentContentType");
         const record = await pb
-          .collection("blocks")
+          .collection(collection)
           .update(this.componentId, { type: this.componentContentType });
         return record;
       } catch (err) {

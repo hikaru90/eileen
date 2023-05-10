@@ -1,39 +1,33 @@
 <script setup lang="ts">
-  import { storeToRefs } from "pinia";
-  import { useAuthStore } from "~/store/auth";
-  import { useSidebarStore } from "~~/store/sidebar";
-  const authStore = useAuthStore();
-  const { token } = storeToRefs(authStore);
-  const sidebarStore = useSidebarStore();
-  
-
   // const res = await $fetch('/nuxtapi/saveTailwindClasses')
   // console.log('res',res);
 
   const props = withDefaults(
     defineProps<{
-      blocks?: object[];
+      container?: object;
     }>(),
     {
-      blocks: [],
+      container: undefined,
     }
   );
 
 
-  const editMode = computed(() => {
-    if (token) return true;
-    return false;
-  });
+  const contentType = computed(() => {
+    if(props.container.block){
+      return 'block'
+    }else if(props.container.component){
+      return 'component'
+    }else{
+      return false
+    }
+  })
 
 </script>
 
 <template>
-  <div
-    v-for="block in props.blocks"
-    :key="block.id"
-    :class="[{ 'hover:shadow-edit cursor-pointer': editMode }]"
-    class=""
-  >
-    <Renderer :block="block" />
+  <div>
+    <div v-if="!contentType">Block or Component could not be found</div>
+    <BlockRenderer v-else-if="contentType === 'block'" :block="container.expand.block" />
+    <ComponentRenderer v-else-if="contentType === 'component'" :component="container.expand.component" />
   </div>
 </template>

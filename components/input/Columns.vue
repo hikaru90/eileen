@@ -29,12 +29,12 @@
 </script>
 
 <template>
-  <div class="px-4 mb-2">
-    <h2 class="text-xs mb-2">
+  <div class="">
+    <h2 class="text-xs mb-2 opacity-40">
       Text Columns
     </h2>
     <div class="flex items-center gap-2" :class="[{ 'opacity-60': !isRealProperty }]">
-      <button v-for="option in state.options" @click="setProperty(property, option.value)" :key="'columnCount'+option.value" :class="[ { 'bg-white bg-opacity-20': currentProperty === option.value } ]" class="rounded-sm hover:bg-white hover:bg-opacity-20 px-2 border border-darkLilac border-opacity-20">
+      <button v-for="option in state.options" @click="setProperty(property, option.value)" :key="'columnCount'+option.value" :class="[ { 'bg-white bg-opacity-20': currentProperty === option.value } ]" class="rounded-sm hover:bg-white hover:bg-opacity-20 px-2 border border-darkOffwhite border-opacity-20">
         {{ option.name }}
       </button>
       <button v-if="isRealProperty" @click="deleteProperty(property)" class="border border-red rounded-sm">

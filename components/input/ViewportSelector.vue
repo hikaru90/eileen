@@ -9,8 +9,8 @@
 </script>
 
 <template>
-  <div class="flex items-center px-4 gap-2 mb-2 py-4 border-b border-darkLilac border-opacity-20">
-    <div v-for="(viewportEntry, index) in viewports" :key="'viewport'+index" :class="[ viewport === viewportEntry.id ? 'bg-white bg-opacity-20 opacity-100' : 'opacity-60' ]" class="flex rounded-sm hover:text-white border border-darkLilac border-opacity-20">
+  <div class="flex items-center px-4 gap-2 mb-2 py-4 border-b border-darkOffwhite border-opacity-20">
+    <div v-for="(viewportEntry, index) in viewports" :key="'viewport'+index" :class="[ viewport === viewportEntry.id ? 'bg-white bg-opacity-20 opacity-100' : 'opacity-60' ]" class="flex rounded-sm hover:text-white border border-darkOffwhite border-opacity-20">
       <button @click="setViewport(viewportEntry.id)">
         <nuxt-icon :name="viewportEntry.icon" class="text-4xl animate-spin" />
       </button>

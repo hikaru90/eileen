@@ -25,10 +25,15 @@
 <template>
   <div>
     <div class="">
-      <div v-if="componentType === 'block'" style="padding-top: 17px;padding-bottom: 17px;" class="border-b border-darkLilac border-opacity-20 px-4 flex gap-2">
+      <div v-if="componentType === 'block'" style="padding-top: 17px;padding-bottom: 17px;" class="border-b border-darkOffwhite border-opacity-20 px-4 flex gap-2">
         <button v-for="mode in state.modes" :key="'mode'+mode.id" @click="state.selectedMode = mode.id" :class="[ {'bg-white bg-opacity-20': mode.id === state.selectedMode} ]" class="rounded-sm px-2 py-1">
           {{ mode.name }}
         </button>
+      </div>
+      <div v-else-if="componentType === 'component'" style="padding-top: 17px;padding-bottom: 17px;" class="border-b border-darkOffwhite border-opacity-20 px-4 flex gap-2">
+        <div class="rounded-sm px-2 py-1">
+          Component
+        </div>
       </div>
       <component :is="dynamicComponent" :selectedMode="state.selectedMode" />
     </div>

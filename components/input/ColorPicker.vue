@@ -30,7 +30,7 @@
   <div class="flex items-center">
     <input type="color" @change="setColor" :value="props.color" class="rounded-sm w-6 h-6 mr-2" />
     <div>
-      <input type="text" @change="setColor" :value="props.color" class="rounded-sm h-6 w-20 mr-2 bg-transparent border border-darkLilac border-opacity-20" />
+      <input type="text" @change="setColor" :value="props.color" class="rounded-sm h-6 w-20 mr-2 bg-transparent border border-darkOffwhite border-opacity-20" />
     </div>
     <button @click="deleteColor" class="border border-red rounded-sm">
         <nuxt-icon name="icon-cross" class="text-red text-xl" />

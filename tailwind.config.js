@@ -19,7 +19,7 @@ module.exports = {
     'bg-green',
     'bg-blue',
     'border-black',
-    'border-darkLilac',
+    'border-darkOffwhite',
     'border-2',
     'h-6',
   ],
@@ -27,7 +27,8 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        'heading': ['Heading'],
+        'heading': ['Heading, serif'],
+        'body': ['Inter, sans-serif'],
       },
       scale: {
         '25': '.25',
@@ -48,9 +49,9 @@ module.exports = {
         orange: "#FBB03B",
         sand: "#CB8B65",
         lightGreen: "#38f3af",
-        grassGreen: "#F1FF2B",
+        grassGreen: "#C3CC59",
         // green: '#1edf99',
-        lilac: "#E6A7F1",
+        lilac: "#C792EA",
         darkLilac: "#651273",
         green: "#44B57A",
         lightYellow: "#FED600",
@@ -59,9 +60,9 @@ module.exports = {
         neonYellow: "#ddff33",
         darkNeonYellow: "#B7D231",
         lightRed: "#F2ADAD",
-        red: "#E12D39",
+        red: "#F05C4D",
         darkRed: "#DD3A3A",
-        lightBlue: "#7bd3ff",
+        lightBlue: "#72D2FF",
         blue: "#48BAFF",
         darkBlue: "#2F3676",
         blueGrey: "#F3F7FA",

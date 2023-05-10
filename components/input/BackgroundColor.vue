@@ -21,9 +21,9 @@
 </script>
 
 <template>
-  <div class="px-4">
-    <h2 class="text-xs mb-2">
-      Font Color
+  <div class="">
+    <h2 class="text-xs mb-2 opacity-40">
+      Background Color
     </h2>
     <InputColorPicker :color="currentColor" @deleteColor="deleteProperty(property)" @setColor="setProperty(property, $event)" :class="[ isRealColor ? 'opacity-100' : 'opacity-20' ]" />
   </div>

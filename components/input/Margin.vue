@@ -36,8 +36,8 @@
 </script>
 
 <template>
-  <div class="px-4 mb-2">
-    <h2 class="text-xs mb-2">
+  <div class="">
+    <h2 class="text-xs mb-2 opacity-40">
       Margin
     </h2>
     <div class="flex items-center gap-2" :class="[{ 'opacity-60': !isRealProperty }]">
@@ -46,7 +46,7 @@
           <div class="flex">
             <nuxt-icon :name="margin.icon" class="text-3xl -mt-1" />
           </div>
-          <input @change="compileAndSetProperty" v-model="margin.value" type="number" class="w-12 rounded-sm pl-1 bg-transparent border border-darkLilac border-opacity-20">
+          <input @change="compileAndSetProperty" v-model="margin.value" type="number" class="w-12 rounded-sm pl-1 bg-transparent border border-darkOffwhite border-opacity-20">
           <span class="text-sm ml-1">px</span>
         </div>
       </template>

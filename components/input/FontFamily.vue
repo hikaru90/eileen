@@ -5,7 +5,7 @@
   const { componentCss, viewports, viewport } = storeToRefs(sidebarStore);
   const { saveCssClasses, setProperty, deleteProperty } = sidebarStore
 
-  const property = 'display'
+  const property = 'fontFamily'
 
   const isRealProperty = computed(() => {
     const entry = componentCss.value[viewport.value]?.find((entry) => entry.hasOwnProperty(property))
@@ -20,11 +20,8 @@
 
   const state = reactive({
     options: [
-      { id: 0, name: 'block', value: 'block'},
-      { id: 1, name: 'flex', value: 'flex'},
-      { id: 2, name: 'inline', value: 'inline'},
-      { id: 3, name: 'inline-block', value: 'inline-block'},
-      { id: 4, name: 'inline-flex', value: 'inline-flex'},
+      { value: 'Heading, serif', name: 'Silk Serif'},
+      { value: 'Inter, sans-serif', name: 'Inter'},
     ]
   })
 
@@ -33,16 +30,15 @@
 <template>
   <div class="">
     <h2 class="text-xs mb-2 opacity-40">
-      Display
+      Font
     </h2>
-    <div class="flex flex-wrap items-center gap-2" :class="[{ 'opacity-60': !isRealProperty }]">
-      <button v-for="option in state.options" @click="setProperty(property, option.value)" :key="'columnCount'+option.id" :class="[ { 'bg-white bg-opacity-20': currentProperty === option.value } ]" class="rounded-sm hover:bg-white hover:bg-opacity-20 px-2 break-inside-avoid whitespace-nowrap border border-darkOffwhite border-opacity-20">
+    <div class="flex items-center gap-2" :class="[{ 'opacity-60': !isRealProperty }]">
+      <button v-for="option in state.options" @click="setProperty(property, option.value)" :key="'columnCount'+option.value" :class="[ { 'bg-white bg-opacity-20': currentProperty === option.value } ]" class="rounded-sm hover:bg-white hover:bg-opacity-20 px-2 border border-darkOffwhite border-opacity-20">
         {{ option.name }}
       </button>
       <button v-if="isRealProperty" @click="deleteProperty(property)" class="border border-red rounded-sm">
         <nuxt-icon name="icon-cross" class="text-red text-xl" />
       </button>
     </div>
-    <!-- <InputColorPicker :color="currentColor" @deleteColor="deleteProperty(property)" @setColor="setProperty(property, $event)" :class="[ isRealColor ? 'opacity-100' : 'opacity-20' ]" /> -->
   </div>
 </template>
