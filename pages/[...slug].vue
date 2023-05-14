@@ -5,6 +5,8 @@
   import { useAuthStore } from "~/store/auth";
   const authStore = useAuthStore();
   const { token } = storeToRefs(authStore);
+  const { $listen } = useNuxtApp()
+  import EventBus from "~/plugins/mitt";
 
   const sidebarStore = useSidebarStore();
   const contentStore = useContentStore();
@@ -21,15 +23,15 @@
     storePending: true,
   });
 
-  const { pending, data: content } = await useAsyncData("count", () =>
+  const { pending, data: content } = await useAsyncData("data", () =>
     pb.collection("pages").getFirstListItem(`slug="${slug}"`, {
       expand: "containers.block,containers.component",
     })
   );
   state.storePending = false;
 
-  sidebarStore.$subscribe((mutation, state) => {
-    console.log("refresh");
+  EventBus.on("refresh", () => {
+    console.log('content saved');
     state.storePending = true;
     refresh();
   });
@@ -41,8 +43,8 @@
 
   const refresh = async () => {
     await setTimeout(async () => {
-      await refreshNuxtData("count");
-    }, 200);
+      await refreshNuxtData("data");
+    }, 400);
     state.storePending = false;
   };
 </script>
@@ -56,12 +58,11 @@
       <div class="max-container">
         <div class="py-10">
           <h1>{{ content?.title }}</h1>
-
-          {{ content }}
+          <!-- {{ content }} -->
           <div
             v-for="container in content?.expand.containers"
             :key="container.id"
-            :class="[{ 'hover:shadow-edit cursor-pointer': editMode }]"
+            :class="[{ 'hover:shadow-edit cursor-cell': editMode }]"
             class=""
           >
             <Container :container="container" />

@@ -6,7 +6,7 @@
   const { componentContent, componentContentType } = storeToRefs(sidebarStore);
 
   const changeType = (event) => {
-    setComponentContentType({type: event.target.value, collection: 'blocks'})
+    setComponentContentType(event.target.value)
   }
 </script>
 <template>

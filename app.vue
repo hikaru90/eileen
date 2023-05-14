@@ -30,7 +30,7 @@
       setComponentCss([]);
       setComponentName("");
       setComponentType(undefined);
-      setComponentContentType({type: undefined, collection: 'blocks'});
+      setComponentContentType(undefined);
       setComponentContent(undefined);
     }
   };

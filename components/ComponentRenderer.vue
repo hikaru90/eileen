@@ -14,6 +14,7 @@
     setComponentId,
     setComponentContentType,
     setComponentContent,
+    setComponentFiles,
   } = sidebarStore;
   const { capitalize } = contentStore;
 
@@ -29,7 +30,9 @@
     setComponentId(props.component.id);
     setComponentCss(undefined);
     setComponentName("SidebarComponent");
+    setComponentContentType(props.component.type);
     setComponentContent(props.component.content);
+    setComponentFiles(props.component.files);
   };
 
   const isSelected = computed(() => {

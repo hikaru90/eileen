@@ -14,6 +14,23 @@ export const useContentStore = defineStore("contentStore",{
     },
     capitalize(payload: string){
       return payload.charAt(0).toUpperCase() + payload.slice(1);
-    }
+    },
+    moveUp(array: [], index: number){
+      if (index === 0) {
+        return;
+      }
+      const temp = array[index];
+      array[index] = array[index - 1];
+      array[index - 1] = temp;
+    },
+    moveDown(array: [], index: number){
+      if (index === array.length - 1) {
+        return;
+      }
+      const temp = array[index];
+      array[index] = array[index + 1];
+      array[index + 1] = temp;
+    },
+
   },
 });

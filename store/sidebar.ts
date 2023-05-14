@@ -1,14 +1,15 @@
 import { defineStore } from "pinia";
 const { pb } = usePocketbase();
+import EventBus from "~/plugins/mitt";
 
 export const useSidebarStore = defineStore("sidebarStore", {
   state: () => ({
     viewports: [
       { id: 0, name: "mobile", value: 0, icon: "icon-mobile" },
-      { id: 1, name: "mobile+", value: 500, icon: "icon-mobile+" },
-      { id: 2, name: "tablet", value: 768, icon: "icon-tablet" },
-      { id: 3, name: "laptop", value: 1024, icon: "icon-laptop" },
-      { id: 4, name: "desktop", value: 1366, icon: "icon-desktop" },
+      { id: 1, name: "sm", value: 640, icon: "icon-mobile+" },
+      { id: 2, name: "md", value: 768, icon: "icon-tablet" },
+      { id: 3, name: "lg", value: 1024, icon: "icon-laptop" },
+      { id: 4, name: "xl", value: 1366, icon: "icon-desktop" },
     ],
     viewport: 0,
     componentId: undefined,
@@ -17,10 +18,11 @@ export const useSidebarStore = defineStore("sidebarStore", {
     componentType: undefined,
     componentContentType: undefined,
     componentContent: undefined,
+    componentFiles: undefined,
   }),
   actions: {
-    setViewport(payload: number){
-      this.viewport = payload
+    setViewport(payload: number) {
+      this.viewport = payload;
     },
     setComponentId(payload: string) {
       this.componentId = payload;
@@ -32,17 +34,23 @@ export const useSidebarStore = defineStore("sidebarStore", {
       this.componentCss = payload;
     },
     setComponentType(payload) {
+      console.log("setComponentType");
       this.componentType = payload;
     },
     setComponentContentType(payload) {
-      this.componentContentType = payload.type;
-      this.saveContentType(payload.collection)
+      console.log("payload", payload);
+      this.componentContentType = payload;
     },
     setComponentContent(payload) {
       this.componentContent = payload;
     },
+    setComponentFiles(payload: string) {
+      this.componentFiles = payload;
+    },
     setProperty(property, value) {
-      const entry = this.componentCss[this.viewport]?.find((entry) => entry.hasOwnProperty(property));
+      const entry = this.componentCss[this.viewport]?.find((entry) =>
+        entry.hasOwnProperty(property)
+      );
       if (entry) {
         entry[property] = value;
       } else {
@@ -50,27 +58,44 @@ export const useSidebarStore = defineStore("sidebarStore", {
         newValue[property] = value;
         this.componentCss[this.viewport]?.push(newValue);
       }
-      this.saveCssClasses()
+      this.saveCssClasses();
     },
     deleteProperty(property) {
-      const entry = this.componentCss[this.viewport]?.find((entry) => entry.hasOwnProperty(property));
+      const entry = this.componentCss[this.viewport]?.find((entry) =>
+        entry.hasOwnProperty(property)
+      );
       if (entry) {
-        delete entry[property]
+        delete entry[property];
       }
-      const newValue = this.componentCss[this.viewport].filter(value => {
-        const entry = Object.keys(value).length !== 0
-        console.log('entry',entry);
-        return entry
+      const newValue = this.componentCss[this.viewport].filter((value) => {
+        const entry = Object.keys(value).length !== 0;
+        console.log("entry", entry);
+        return entry;
       });
-      this.componentCss[this.viewport] = newValue
-      this.saveCssClasses()
+      this.componentCss[this.viewport] = newValue;
+      this.saveCssClasses();
     },
-    async saveContentType(collection) {
+    async deleteFile(filename){
+      try {
+        console.log("delete file");
+        const record = await pb
+          .collection(this.componentType + "s")
+          .update(this.componentId, {
+            'files-': [filename],
+        });
+          EventBus.emit('refresh')
+        return record;
+      } catch (err) {
+        console.log("error saving componentContentType", err);
+      }
+    },
+    async saveContentType() {
       try {
         console.log("save componentContentType");
         const record = await pb
-          .collection(collection)
+          .collection(this.componentType + "s")
           .update(this.componentId, { type: this.componentContentType });
+          EventBus.emit('refresh')
         return record;
       } catch (err) {
         console.log("error saving componentContentType", err);
@@ -78,10 +103,11 @@ export const useSidebarStore = defineStore("sidebarStore", {
     },
     async saveContent() {
       try {
-        console.log("save componentContent");
+        console.log("save content");
         const record = await pb
-          .collection("blocks")
+          .collection(this.componentType + "s")
           .update(this.componentId, { content: this.componentContent });
+          EventBus.emit('refresh')
         return record;
       } catch (err) {
         console.log("error saving componentContent", err);

@@ -30,6 +30,10 @@ module.exports = {
         'heading': ['Heading, serif'],
         'body': ['Inter, sans-serif'],
       },
+      borderRadius:{
+        'md': '0.275rem',
+        'half': '50%',
+      },
       scale: {
         '25': '.25',
         '80': '.8',
@@ -48,6 +52,7 @@ module.exports = {
         lightOrange: "#FFC9BD",
         orange: "#FBB03B",
         sand: "#CB8B65",
+        gold: "#E3C879",
         lightGreen: "#38f3af",
         grassGreen: "#C3CC59",
         // green: '#1edf99',

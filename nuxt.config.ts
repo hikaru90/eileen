@@ -15,14 +15,12 @@ export default defineNuxtConfig({
 
   css: ["~/assets/styles/style.scss"],
 
-  modules: [
-    "@nuxtjs/tailwindcss",
-    "@pinia/nuxt",
-    "@vueuse/nuxt",
-    "nuxt-icons",
-  ],
+  modules: ["@nuxtjs/tailwindcss", "@pinia/nuxt", "@vueuse/nuxt", "nuxt-icons"],
 
-  plugins: ["~/plugins/piniaStore", { src: "~/plugins/markdown-it", ssr: false }],
+  plugins: [
+    "~/plugins/piniaStore",
+    { src: "~/plugins/markdown-it", ssr: false },
+  ],
 
   tailwindcss: {
     exposeConfig: true,
@@ -35,7 +33,7 @@ export default defineNuxtConfig({
     GITHUB_ACTIONS_TOKEN: process.env.GITHUB_ACTIONS_TOKEN,
     public: {
       ENV: process.env.ENV,
-      NODE_ENV: process.env.NODE_ENV,
+      SERVER_URL: process.env.SERVER_URL,
     },
   },
 });

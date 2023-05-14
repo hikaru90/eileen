@@ -14,8 +14,8 @@
       <Placeholder />
     </template>
     <template v-else>
-      <div class="flex flex-grow">
-        <div class="flex flex-col flex-grow">
+      <div class="flex flex-grow h-screen">
+        <div class="flex flex-col flex-grow overflow-auto">
           <div class="flex flex-col flex-grow">
             <div>
               <EditorBar v-if="authStore.token" />
@@ -25,7 +25,7 @@
           </div>
           <Footer />
         </div>
-        <div class="bg-black w-96 text-darkOffwhite">
+        <div v-if="authStore.token" class="bg-black w-96 text-darkOffwhite overflow-auto">
           <Sidebar />
         </div>
       </div>
