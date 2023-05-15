@@ -3,7 +3,9 @@
   import { useSidebarStore } from "~~/store/sidebar";
   import { useContentStore } from "~/store/content";
   import { onClickOutside } from "@vueuse/core";
+  import { useAuthStore } from "~/store/auth";
 
+  const authStore = useAuthStore();
   const sidebarStore = useSidebarStore();
   const contentStore = useContentStore();
   const { viewports, componentId } = storeToRefs(sidebarStore);
@@ -27,12 +29,14 @@
   });
 
   const selectBlock = () => {
-    setComponentId(props.component.id);
-    setComponentCss(undefined);
-    setComponentName("SidebarComponent");
-    setComponentContentType(props.component.type);
-    setComponentContent(props.component.content);
-    setComponentFiles(props.component.files);
+    if(authStore.token){
+      setComponentId(props.component.id);
+      setComponentCss(undefined);
+      setComponentName("SidebarComponent");
+      setComponentContentType(props.component.type);
+      setComponentContent(props.component.content);
+      setComponentFiles(props.component.files);
+    }
   };
 
   const isSelected = computed(() => {
@@ -50,7 +54,6 @@
       id="sidebarTarget"
       :is="'Component' + capitalize(props.component.type)"
       :component="props.component"
-      :class="[{ 'shadow-edit': isSelected }]"
     >
   </component>
   </div>

@@ -39,7 +39,7 @@ module.exports = {
         '80': '.8',
       },
       boxShadow: {
-        'edit': 'inset 0 0 0 2px #E6A7F1',
+        'edit': 'inset 0 0 0 2px #E3C879',
       },
       colors: {
         offwhite: "#f8f8f8",

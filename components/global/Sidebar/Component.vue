@@ -30,7 +30,7 @@
       <InputComponentSelector class="border-b border-darkOffwhite border-opacity-20" />
     </div>
     <div v-if="props.selectedMode === 1">
-      <component :is="'ComponentContent' + capitalize(componentContentType)"></component>
+      <component :is="'Sidebar' + capitalize(componentContentType)"></component>
     </div>
   </div>
 </template>

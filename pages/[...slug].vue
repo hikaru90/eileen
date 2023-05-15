@@ -3,14 +3,16 @@
   import { useSidebarStore } from "~~/store/sidebar";
   import { storeToRefs } from "pinia";
   import { useAuthStore } from "~/store/auth";
-  const authStore = useAuthStore();
-  const { token } = storeToRefs(authStore);
-  const { $listen } = useNuxtApp()
   import EventBus from "~/plugins/mitt";
-
+  const { pb } = usePocketbase();
+  const authStore = useAuthStore();
   const sidebarStore = useSidebarStore();
   const contentStore = useContentStore();
-  const { pb } = usePocketbase();
+  const { moveDown, moveUp, setPage, savePage } = contentStore;
+  const { page } = storeToRefs(contentStore);
+  const { token } = storeToRefs(authStore);
+  const { viewports, componentId } = storeToRefs(sidebarStore);
+
   const route = useRoute();
   let slug = route.params.slug;
   !slug ? "index" : slug;
@@ -21,9 +23,10 @@
 
   const state = reactive({
     storePending: true,
+    currentContainer: null,
   });
 
-  const { pending, data: content } = await useAsyncData("data", () =>
+  const { pending, data: pageContent } = await useAsyncData("pageContent", () =>
     pb.collection("pages").getFirstListItem(`slug="${slug}"`, {
       expand: "containers.block,containers.component",
     })
@@ -31,40 +34,79 @@
   state.storePending = false;
 
   EventBus.on("refresh", () => {
-    console.log('content saved');
+    console.log("content saved");
     state.storePending = true;
     refresh();
   });
 
-  const editMode = computed(() => {
-    if (token) return true;
-    return false;
-  });
-
   const refresh = async () => {
     await setTimeout(async () => {
-      await refreshNuxtData("data");
+      await refreshNuxtData("pageContent");
+      setPage(pageContent.value);
     }, 400);
     state.storePending = false;
   };
+
+  const moveUpAndSave = (array, index) => {
+    moveUp(array, index);
+    savePage();
+  };
+  const moveDownAndSave = (array, index) => {
+    moveDown(array, index);
+    savePage();
+  };
+
+  const currentContainerAuth = computed(() => {
+    if (authStore.token) {
+      return state.currentContainer;
+    }
+    return null;
+  });
+
+  const isSelected = (container) => {
+    const id = container.expand.block?.id || container.expand.component?.id
+    if (componentId.value === id) return true;
+    return false;
+  };
+
+  onMounted(() => {
+    setPage(pageContent.value);
+  });
 </script>
 
 <template>
   <main>
     <div v-if="state.storePending">pending</div>
     <div v-else>
-      <DebugPane v-if="contentStore.debugVisible" :content="content" @refresh="refresh" />
+      <DebugPane v-if="contentStore.debugVisible" :content="page" @refresh="refresh" />
 
-      <div class="max-container">
+      <div class="">
         <div class="py-10">
-          <h1>{{ content?.title }}</h1>
+          <!-- <h1>{{ page?.title }}</h1> -->
           <!-- {{ content }} -->
           <div
-            v-for="container in content?.expand.containers"
+            @mouseenter="state.currentContainer = index"
+            @mouseleave="state.currentContainer = null"
+            v-if="page.expand"
+            v-for="(container, index) in page.expand.containers"
             :key="container.id"
-            :class="[{ 'hover:shadow-edit cursor-cell': editMode }]"
-            class=""
+            :class="[
+              { 'hover:shadow-edit': authStore.token && currentContainerAuth },
+              { 'cursor-cell': authStore.token },
+              { 'shadow-edit': isSelected(container) },
+            ]"
+            class="relative"
           >
+            <div v-show="currentContainerAuth === index" class="absolute bg-gold">
+              <div class="flex items-center">
+                <button @click="moveUpAndSave(page.containers, index)">
+                  <nuxt-icon name="icon-triangle_up" class="text-xl" />
+                </button>
+                <button @click="moveDownAndSave(page.containers, index)">
+                  <nuxt-icon name="icon-triangle_down" class="text-xl" />
+                </button>
+              </div>
+            </div>
             <Container :container="container" />
           </div>
         </div>

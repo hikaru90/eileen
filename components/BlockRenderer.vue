@@ -3,7 +3,9 @@
   import { useSidebarStore } from "~~/store/sidebar";
   import { useContentStore } from "~/store/content";
   import { onClickOutside } from "@vueuse/core";
+  import { useAuthStore } from "~/store/auth";
 
+  const authStore = useAuthStore();
   const sidebarStore = useSidebarStore();
   const contentStore = useContentStore();
   const { viewports, componentId } = storeToRefs(sidebarStore);
@@ -14,6 +16,7 @@
     setComponentId,
     setComponentContentType,
     setComponentContent,
+    setComponentIsMAxContainer,
   } = sidebarStore;
   const { capitalize } = contentStore;
 
@@ -92,21 +95,19 @@
   });
 
   const selectBlock = () => {
-    setComponentId(props.block.id);
-    setComponentCss(props.block.cssClasses);
-    setComponentName("SidebarBlock");
-    setComponentContentType(props.block.type);
-    setComponentContent(props.block.content);
+    if(authStore.token){
+      setComponentId(props.block.id);
+      setComponentIsMAxContainer(props.block.isMaxContainer);
+      setComponentCss(props.block.cssClasses);
+      setComponentName("SidebarBlock");
+      setComponentContentType(props.block.type);
+      setComponentContent(props.block.content);
+    }
   };
 
   // watch(isLoggedIn, () => {
   //   console.log('isLoggedIn ref changed, do something!')
   // })
-
-  const isSelected = computed(() => {
-    if (componentId.value === props.block.id) return true;
-    return false;
-  });
 
   onMounted(() => {
   })
@@ -119,7 +120,6 @@
     :is="'Block' + capitalize(props.block.type)"
     :block="props.block"
     :style="[style]"
-    :class="[{ 'shadow-edit': isSelected }]"
   >
   </component>
 </template>

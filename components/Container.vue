@@ -11,23 +11,29 @@
     }
   );
 
-
   const contentType = computed(() => {
-    if(props.container.block){
-      return 'block'
-    }else if(props.container.component){
-      return 'component'
-    }else{
-      return false
+    if (props.container.block) {
+      return "block";
+    } else if (props.container.component) {
+      return "component";
+    } else {
+      return false;
     }
-  })
-
+  });
 </script>
 
 <template>
   <div>
     <div v-if="!contentType">Block or Component could not be found</div>
-    <BlockRenderer v-else-if="contentType === 'block'" :block="container.expand.block" />
-    <ComponentRenderer v-else-if="contentType === 'component'" :component="container.expand.component" />
+    <div
+      v-else-if="contentType === 'block'"
+      :class="[{ 'max-container': container.expand.block.isMaxContainer }]"
+    >
+      <BlockRenderer :block="container.expand.block" />
+    </div>
+    <ComponentRenderer
+      v-else-if="contentType === 'component'"
+      :component="container.expand.component"
+    />
   </div>
 </template>

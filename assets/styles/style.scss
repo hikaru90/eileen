@@ -19,10 +19,8 @@ html,
   @apply w-full px-10 my-0 mx-auto block;
 
   @media screen and (min-width: theme('screens.md')){
-    @apply px-24;
   }
   @media screen and (min-width: theme('screens.lg')){
-    @apply px-40;
   }
 }
 

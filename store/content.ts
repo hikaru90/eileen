@@ -1,16 +1,41 @@
 import { defineStore } from "pinia";
-// const { pb } = usePocketbase();
+import EventBus from "~/plugins/mitt";
+const { pb } = usePocketbase();
 
 export const useContentStore = defineStore("contentStore",{
   state: () => ({
     debugVisible: false,
     windowWidth: 0,
+    page: {},
   }),
   actions: {
     // async login(email: string, password: string) {
     // },
     setWindowWidth(payload: number){
       this.windowWidth = payload
+    },
+    setPage(payload: object){
+      this.page = payload
+    },
+    async savePage(){
+      let temp = JSON.parse(JSON.stringify(this.page))
+      delete temp.id
+      delete temp.collectionId
+      delete temp.collectionName
+      delete temp.created
+      delete temp.updated
+      delete temp.expand
+      try {
+        console.log("save page");
+        console.log('this.page.collectionName',this.page.collectionName);
+        const record = await pb
+          .collection(this.page.collectionName)
+          .update(this.page.id, temp);
+          EventBus.emit('refresh')
+        return record;
+      } catch (err) {
+        console.log("error saving page", err);
+      }
     },
     capitalize(payload: string){
       return payload.charAt(0).toUpperCase() + payload.slice(1);

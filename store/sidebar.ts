@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
-const { pb } = usePocketbase();
 import EventBus from "~/plugins/mitt";
+const { pb } = usePocketbase();
 
 export const useSidebarStore = defineStore("sidebarStore", {
   state: () => ({
@@ -12,6 +12,7 @@ export const useSidebarStore = defineStore("sidebarStore", {
       { id: 4, name: "xl", value: 1366, icon: "icon-desktop" },
     ],
     viewport: 0,
+    componentIsMaxContainer: undefined,
     componentId: undefined,
     componentName: "",
     componentCss: [],
@@ -26,6 +27,9 @@ export const useSidebarStore = defineStore("sidebarStore", {
     },
     setComponentId(payload: string) {
       this.componentId = payload;
+    },
+    setComponentIsMAxContainer(payload: boolean){
+      this.componentIsMaxContainer = payload
     },
     setComponentName(payload: string) {
       this.componentName = payload;
@@ -99,6 +103,18 @@ export const useSidebarStore = defineStore("sidebarStore", {
         return record;
       } catch (err) {
         console.log("error saving componentContentType", err);
+      }
+    },
+    async saveIsMaxContainer() {
+      try {
+        console.log("save isMaxContainer");
+        const record = await pb
+          .collection(this.componentType + "s")
+          .update(this.componentId, { isMaxContainer: this.componentIsMaxContainer });
+          EventBus.emit('refresh')
+        return record;
+      } catch (err) {
+        console.log("error saving isMaxContainer", err);
       }
     },
     async saveContent() {
