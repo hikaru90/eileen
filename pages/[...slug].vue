@@ -28,7 +28,7 @@
 
   const { pending, data: pageContent } = await useAsyncData("pageContent", () =>
     pb.collection("pages").getFirstListItem(`slug="${slug}"`, {
-      expand: "containers.block,containers.component",
+      expand: "containers.block.blocks,containers.component",
     })
   );
   state.storePending = false;
@@ -55,6 +55,11 @@
     moveDown(array, index);
     savePage();
   };
+  const deleteContainer = async (array, index) => {
+    await pb.collection('containers').delete(array[index]);
+    array.splice(index,1)
+    savePage();
+  }
 
   const currentContainerAuth = computed(() => {
     if (authStore.token) {
@@ -64,10 +69,24 @@
   });
 
   const isSelected = (container) => {
-    const id = container.expand.block?.id || container.expand.component?.id
+    const id = container?.expand.block?.id || container?.expand.component?.id
     if (componentId.value === id) return true;
     return false;
   };
+
+  const addContainer = async (index) => {
+    const block = await pb.collection('blocks').create({type: 'container', isMaxContainer: false, cssClasses: [[],[],[],[],[]]});
+    const container = await pb.collection('containers').create({block: block.id});
+    const createdId = container.id
+    const containers = pageContent.value.containers
+    containers.splice(index, 0, createdId)
+    const page = await pb.collection('pages').update(pageContent.value.id, {containers: containers});
+    refresh();
+
+    console.log('block',block);
+    console.log('container',container);
+    console.log('page',page);
+  }
 
   onMounted(() => {
     setPage(pageContent.value);
@@ -84,6 +103,7 @@
         <div class="py-10">
           <!-- <h1>{{ page?.title }}</h1> -->
           <!-- {{ content }} -->
+          <Adder @addContainer="addContainer(0)">Container</Adder>
           <div
             @mouseenter="state.currentContainer = index"
             @mouseleave="state.currentContainer = null"
@@ -97,17 +117,23 @@
             ]"
             class="relative"
           >
-            <div v-show="currentContainerAuth === index" class="absolute bg-gold">
-              <div class="flex items-center">
-                <button @click="moveUpAndSave(page.containers, index)">
+            <div v-show="currentContainerAuth === index" class="absolute w-full flex justify-between pointer-events-none">
+              <div class="flex items-center pointer-events-auto">
+                <button @click="moveUpAndSave(page.containers, index)" class="bg-gold">
                   <nuxt-icon name="icon-triangle_up" class="text-xl" />
                 </button>
-                <button @click="moveDownAndSave(page.containers, index)">
+                <button @click="moveDownAndSave(page.containers, index)" class="bg-gold">
                   <nuxt-icon name="icon-triangle_down" class="text-xl" />
+                </button>
+              </div>
+              <div class="flex items-center bg-red pointer-events-auto">
+                <button @click="deleteContainer(page.containers, index)">
+                  <nuxt-icon name="icon-cross" class="text-xl" />
                 </button>
               </div>
             </div>
             <Container :container="container" />
+            <Adder @addContainer="addContainer(index + 1)">Container</Adder>
           </div>
         </div>
       </div>

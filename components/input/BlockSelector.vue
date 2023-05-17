@@ -2,11 +2,12 @@
   import { useSidebarStore } from '~/store/sidebar'
   import { storeToRefs } from "pinia";
   const sidebarStore = useSidebarStore();
-  const { setComponentContentType } = sidebarStore;
+  const { setComponentContentType, saveContentType } = sidebarStore;
   const { componentContent, componentContentType } = storeToRefs(sidebarStore);
 
   const changeType = (event) => {
     setComponentContentType(event.target.value)
+    saveContentType()
   }
 </script>
 <template>

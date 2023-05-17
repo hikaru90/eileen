@@ -12,6 +12,6 @@ import { useSidebarStore } from "~/store/sidebar";
 
 <template>
   <div v-if="props.block" style="min-height: 20px">
-    <div v-html="$mdRenderer.render(props.block.content.markdown)"></div>
+    <div v-if="props.block.content?.markdown" v-html="$mdRenderer.render(props.block?.content?.markdown)"></div>
   </div>
 </template>

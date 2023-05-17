@@ -17,7 +17,7 @@
   );
 
   const displayCssValue = computed(() => {
-    return componentCss.value[viewport.value]?.find((entry) => entry.hasOwnProperty('display')).display
+    return componentCss.value[viewport.value]?.find((entry) => entry.hasOwnProperty('display'))?.display
   })
 
   onMounted(() => {

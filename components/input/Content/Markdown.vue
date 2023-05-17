@@ -13,6 +13,6 @@
 </script>
 <template>
   <div class="p-4">
-    <textarea @change="save" rows="20" :value="componentContent.markdown" class="rounded-sm px-2 py-1 w-full bg-transparent border border-darkOffwhite border-opacity-20"></textarea>
+    <textarea @change="save" rows="20" :value="componentContent?.markdown" class="rounded-sm px-2 py-1 w-full bg-transparent border border-darkOffwhite border-opacity-20"></textarea>
   </div>
 </template>

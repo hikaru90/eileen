@@ -31,7 +31,7 @@
 <template>
   <div class="">
     <h2 class="text-xs mb-2 opacity-40">
-      Max Width
+      Width
     </h2>
     <div class="flex items-center gap-1" :class="[{ 'opacity-60': !isRealProperty }]">
         <input @change="sanitizeInput($event.target.value)" :value="currentProperty ? parseInt(currentProperty) : null" type="number" class="w-12 rounded-sm pl-1 bg-transparent border border-darkOffwhite border-opacity-20">

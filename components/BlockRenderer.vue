@@ -4,7 +4,9 @@
   import { useContentStore } from "~/store/content";
   import { onClickOutside } from "@vueuse/core";
   import { useAuthStore } from "~/store/auth";
+  import EventBus from "~/plugins/mitt";
 
+  const { pb } = usePocketbase();
   const authStore = useAuthStore();
   const sidebarStore = useSidebarStore();
   const contentStore = useContentStore();
@@ -20,13 +22,20 @@
   } = sidebarStore;
   const { capitalize } = contentStore;
 
-  const props = defineProps<{
-    block: object;
-  }>();
+
+  const props = withDefaults(
+    defineProps<{
+      block: object;
+      depth?: number
+    }>(),
+    {
+      depth: 0,
+    }
+  );
 
   const state = reactive({
-    matrix: []
-  })
+    matrix: [],
+  });
 
   const createMatrix = (cssClasses) => {
     try {
@@ -52,8 +61,7 @@
               let newProperty = {};
               newProperty[currentEntry[0]] = currentEntry[1];
               matrix[index].push(newProperty);
-            }
-            else{
+            } else {
               // console.log(currentEntry[0],' was added');
               let newProperty = {};
               newProperty[currentEntry[0]] = currentEntry[1];
@@ -95,7 +103,8 @@
   });
 
   const selectBlock = () => {
-    if(authStore.token){
+    if (authStore.token) {
+      console.log('props.block.id',props.block.id);
       setComponentId(props.block.id);
       setComponentIsMAxContainer(props.block.isMaxContainer);
       setComponentCss(props.block.cssClasses);
@@ -109,17 +118,27 @@
   //   console.log('isLoggedIn ref changed, do something!')
   // })
 
-  onMounted(() => {
-  })
+  const addBlock = async (container) => {
+    console.log("container", container);
+    const block = await pb
+      .collection("blocks")
+      .create({ type: "container", isMaxContainer: false, cssClasses: [[], [], [], [], []] });
+    const updatedBlock = await pb.collection("blocks").update(container.id, { blocks: block.id });
+    EventBus.emit("refresh");
+  };
+
+  onMounted(() => {});
 </script>
 
 <template>
-  <component
-    @click="selectBlock"
+  <component v-if="props.block?.type"
+    @click.stop="selectBlock"
     id="sidebarTarget"
     :is="'Block' + capitalize(props.block.type)"
     :block="props.block"
+    :depth="props.depth + 1"
     :style="[style]"
   >
   </component>
+  <Adder v-if="props.depth === 0" @addContainer="addBlock(props.block)">Block</Adder>
 </template>
