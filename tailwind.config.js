@@ -40,6 +40,8 @@ module.exports = {
       },
       boxShadow: {
         'edit': 'inset 0 0 0 2px #E3C879',
+        'block': 'inset 0 0 0 2px #72D2FF',
+        'component': 'inset 0 0 0 2px #C3CC59',
       },
       colors: {
         offwhite: "#f8f8f8",

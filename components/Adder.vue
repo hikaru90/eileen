@@ -1,9 +1,11 @@
 <script setup lang="ts">
+  import { useAuthStore } from "~/store/auth";
+  const authStore = useAuthStore();
   const emit = defineEmits(["addContainer"]);
 </script>
 
 <template>
-  <div class="element relative w-full h-4">
+  <div v-if="authStore.token" class="element relative w-full h-4">
     <div class="absolute top-1/2 border-b-2 border-gold w-full opacity-0"></div>
     <div
       class="absolute top-1/2 transform -translate-y-1/2 w-full flex items-center justify-center opacity-0 z-10"
@@ -18,11 +20,10 @@
   </div>
 </template>
 
-
 <style scoped lang="scss">
-  .element:hover{
+  .element:hover {
     @apply h-4;
-    .opacity-0{
+    .opacity-0 {
       @apply opacity-100;
     }
   }

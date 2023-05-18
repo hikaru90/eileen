@@ -61,7 +61,7 @@
         </h2>
       </div>
       <div class="flex flex-col lg:flex-row lg:items-stretch">
-        <div class="h-40 lg:h-auto mb-10 relative w-full lg:w-1/2 lg:mr-10 bg-cover">
+        <div class="h-40 lg:h-auto mb-10 relative w-full lg:w-40 lg:mr-10 bg-cover">
           <div
             v-for="(slide, index) in props.component.content.slides"
             :key="'image' + index"
@@ -126,7 +126,7 @@
                   <nuxt-icon :name="slide.icon" class="text-md" />
                 </div>
               </a>
-              <p class="mb-8">
+              <p class="mb-16">
                 {{ slide.description }}
               </p>
             </div>

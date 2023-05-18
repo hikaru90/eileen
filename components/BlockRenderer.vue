@@ -22,11 +22,10 @@
   } = sidebarStore;
   const { capitalize } = contentStore;
 
-
   const props = withDefaults(
     defineProps<{
       block: object;
-      depth?: number
+      depth?: number;
     }>(),
     {
       depth: 0,
@@ -104,7 +103,7 @@
 
   const selectBlock = () => {
     if (authStore.token) {
-      console.log('props.block.id',props.block.id);
+      console.log("props.block.id", props.block.id);
       setComponentId(props.block.id);
       setComponentIsMAxContainer(props.block.isMaxContainer);
       setComponentCss(props.block.cssClasses);
@@ -122,7 +121,7 @@
     console.log("container", container);
     const block = await pb
       .collection("blocks")
-      .create({ type: "container", isMaxContainer: false, cssClasses: [[], [], [], [], []] });
+      .create({ type: "container", isMaxContainer: false, cssClasses: [[{padding: '40px 40px 40px 40px'},{margin: '40px 40px 40px 40px'}], [], [], [], []] });
     const updatedBlock = await pb.collection("blocks").update(container.id, { blocks: block.id });
     EventBus.emit("refresh");
   };
@@ -131,14 +130,16 @@
 </script>
 
 <template>
-  <component v-if="props.block?.type"
-    @click.stop="selectBlock"
-    id="sidebarTarget"
-    :is="'Block' + capitalize(props.block.type)"
-    :block="props.block"
-    :depth="props.depth + 1"
-    :style="[style]"
-  >
-  </component>
-  <Adder v-if="props.depth === 0" @addContainer="addBlock(props.block)">Block</Adder>
+    <component
+      v-if="props.block?.type"
+      @click.stop="selectBlock"
+      id="sidebarTarget"
+      :is="'Block' + capitalize(props.block.type)"
+      :block="props.block"
+      :depth="props.depth + 1"
+      :style="[style]"
+      :class="[{ 'hover:shadow-block': authStore.token },{ 'shadow-block': authStore.token && (componentId === props.block?.id) }]"
+    >
+    </component>
+    <Adder v-if="props.depth === 0" @addContainer="addBlock(props.block)">Block</Adder>
 </template>

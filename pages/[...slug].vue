@@ -75,7 +75,7 @@
   };
 
   const addContainer = async (index) => {
-    const block = await pb.collection('blocks').create({type: 'container', isMaxContainer: false, cssClasses: [[],[],[],[],[]]});
+    const block = await pb.collection('blocks').create({type: 'container', isMaxContainer: false, cssClasses: [[{padding: '40px 40px 40px 40px'},{margin: '40px 40px 40px 40px'}],[],[],[],[]]});
     const container = await pb.collection('containers').create({block: block.id});
     const createdId = container.id
     const containers = pageContent.value.containers
@@ -100,7 +100,7 @@
       <DebugPane v-if="contentStore.debugVisible" :content="page" @refresh="refresh" />
 
       <div class="">
-        <div class="py-10">
+        <div class="">
           <!-- <h1>{{ page?.title }}</h1> -->
           <!-- {{ content }} -->
           <Adder @addContainer="addContainer(0)">Container</Adder>
