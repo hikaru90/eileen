@@ -4,10 +4,10 @@
   import EventBus from "~/plugins/mitt";
   const sidebarStore = useSidebarStore();
   const { componentIsMaxContainer } = storeToRefs(sidebarStore);
-  const { saveIsMaxContainer, setComponentIsMAxContainer } = sidebarStore
+  const { saveIsMaxContainer, setComponentIsMaxContainer } = sidebarStore
 
   const setMaxContainerAndSave = (event) => {
-    setComponentIsMAxContainer(event.target.checked)
+    setComponentIsMaxContainer(event.target.checked)
     saveIsMaxContainer()
     EventBus.emit('refresh')
   }

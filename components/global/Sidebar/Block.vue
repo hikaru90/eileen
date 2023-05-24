@@ -31,11 +31,14 @@
       <InputBlockSelector class="border-b border-darkOffwhite border-opacity-20" />
       <InputMaxContainer />
       <InputContentMarkdown v-if="componentContentType === 'markdown'" />
+      <InputContentCallToAction v-if="componentContentType === 'calltoaction'" />
+      <InputBlockChildren />
     </div>
     <div v-else-if="props.selectedMode === 1">
       <InputViewportSelector />
       <InputDisplay class="mb-4 px-4" />
       <template v-if="displayCssValue === 'flex'">
+        <InputFlexDirection class="mb-4 px-4" />
         <InputAlignItems class="mb-4 px-4" />
         <InputJustifyContent class="mb-4 px-4" />
       </template>

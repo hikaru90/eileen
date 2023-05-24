@@ -20,6 +20,7 @@ export const useSidebarStore = defineStore("sidebarStore", {
     componentContentType: undefined,
     componentContent: undefined,
     componentFiles: undefined,
+    componentChildren: undefined,
   }),
   actions: {
     setViewport(payload: number) {
@@ -28,8 +29,8 @@ export const useSidebarStore = defineStore("sidebarStore", {
     setComponentId(payload: string) {
       this.componentId = payload;
     },
-    setComponentIsMAxContainer(payload: boolean){
-      this.componentIsMaxContainer = payload
+    setComponentIsMaxContainer(payload: boolean) {
+      this.componentIsMaxContainer = payload;
     },
     setComponentName(payload: string) {
       this.componentName = payload;
@@ -37,12 +38,13 @@ export const useSidebarStore = defineStore("sidebarStore", {
     setComponentCss(payload) {
       this.componentCss = payload;
     },
+    setComponentChildren(payload) {
+      this.componentChildren = payload;
+    },
     setComponentType(payload) {
-      console.log("setComponentType");
       this.componentType = payload;
     },
     setComponentContentType(payload) {
-      console.log("payload", payload);
       this.componentContentType = payload;
     },
     setComponentContent(payload) {
@@ -79,15 +81,13 @@ export const useSidebarStore = defineStore("sidebarStore", {
       this.componentCss[this.viewport] = newValue;
       this.saveCssClasses();
     },
-    async deleteFile(filename){
+    async deleteFile(filename) {
       try {
         console.log("delete file");
-        const record = await pb
-          .collection(this.componentType + "s")
-          .update(this.componentId, {
-            'files-': [filename],
+        const record = await pb.collection(this.componentType + "s").update(this.componentId, {
+          "files-": [filename],
         });
-          EventBus.emit('refresh')
+        EventBus.emit("refresh");
         return record;
       } catch (err) {
         console.log("error saving componentContentType", err);
@@ -99,7 +99,7 @@ export const useSidebarStore = defineStore("sidebarStore", {
         const record = await pb
           .collection(this.componentType + "s")
           .update(this.componentId, { type: this.componentContentType });
-          EventBus.emit('refresh')
+        EventBus.emit("refresh");
         return record;
       } catch (err) {
         console.log("error saving componentContentType", err);
@@ -111,10 +111,22 @@ export const useSidebarStore = defineStore("sidebarStore", {
         const record = await pb
           .collection(this.componentType + "s")
           .update(this.componentId, { isMaxContainer: this.componentIsMaxContainer });
-          EventBus.emit('refresh')
+        EventBus.emit("refresh");
         return record;
       } catch (err) {
         console.log("error saving isMaxContainer", err);
+      }
+    },
+    async saveComponentChildren() {
+      try {
+        console.log("save componentChildren");
+        const record = await pb
+          .collection(this.componentType + "s")
+          .update(this.componentId, { blocks: this.componentChildren.map((child) => child.id) });
+        EventBus.emit("refresh");
+        return record;
+      } catch (err) {
+        console.log("error saving componentChildren", err);
       }
     },
     async saveContent() {
@@ -123,7 +135,7 @@ export const useSidebarStore = defineStore("sidebarStore", {
         const record = await pb
           .collection(this.componentType + "s")
           .update(this.componentId, { content: this.componentContent });
-          EventBus.emit('refresh')
+        EventBus.emit("refresh");
         return record;
       } catch (err) {
         console.log("error saving componentContent", err);

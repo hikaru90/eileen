@@ -53,6 +53,7 @@
       <div class="mb-4">
         <ArrayPane
           v-for="(slide, index) in componentContent.slides"
+          @arrayChanged="saveContent"
           :key="'slide' + index"
           :array="componentContent.slides"
           :entry="slide"

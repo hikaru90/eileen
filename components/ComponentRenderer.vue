@@ -50,10 +50,11 @@
 <template>
   <div>
     <component
-      @click="selectBlock"
+      @click.stop="selectBlock"
       id="sidebarTarget"
       :is="'Component' + capitalize(props.component.type)"
       :component="props.component"
+      :class="[{ 'hover:shadow-component': authStore.token },{ 'shadow-component': authStore.token && (componentId === props.component?.id) }]"
     >
   </component>
   </div>

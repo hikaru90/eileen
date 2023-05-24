@@ -3,8 +3,10 @@
   import { useContentStore } from "~/store/content";
   const sidebarStore = useSidebarStore();
   const contentStore = useContentStore();
-  const { setComponentContent, saveContent } = sidebarStore;
+  const { setComponentContent, saveContent, saveComponentChildren } = sidebarStore;
   const { moveUp, moveDown } = contentStore;
+
+  const emit = defineEmits(['arrayChanged'])
 
   const props = defineProps<{
     array: [];
@@ -14,11 +16,15 @@
 
   const moveUpAndSave = (array, index) => {
     moveUp(array, index);
-    saveContent();
+    emit('arrayChanged')
   };
   const moveDownAndSave = (array, index) => {
     moveDown(array, index);
-    saveContent();
+    emit('arrayChanged')
+  };
+  const deleteAndSave = (array, index) => {
+    array.splice(index,1)
+    emit('arrayChanged')
   };
 
   const state = reactive({
@@ -35,6 +41,9 @@
         {{ state.expanded ? "-" : "+" }}
       </button>
       <div class="flex items-center">
+        <button @click="deleteAndSave(props.array, props.index)">
+          <nuxt-icon name="icon-cross" class="text-xl" />
+        </button>
         <button @click="moveUpAndSave(props.array, props.index)">
           <nuxt-icon name="icon-triangle_up" class="text-xl" />
         </button>

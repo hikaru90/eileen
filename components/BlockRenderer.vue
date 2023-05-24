@@ -18,7 +18,8 @@
     setComponentId,
     setComponentContentType,
     setComponentContent,
-    setComponentIsMAxContainer,
+    setComponentIsMaxContainer,
+    setComponentChildren,
   } = sidebarStore;
   const { capitalize } = contentStore;
 
@@ -97,19 +98,21 @@
 
   const style = computed(() => {
     state.matrix = createMatrix(props.block.cssClasses);
-    const style = state.matrix[currentViewportIndex.value];
-    return style;
+    const style = state.matrix.map(viewport => viewport.filter(property => !property.hasOwnProperty('background')))[currentViewportIndex.value];
+    const containerStyle = state.matrix.map(viewport => viewport.filter(property => property.hasOwnProperty('background')))[currentViewportIndex.value]
+    return {container: containerStyle, block: style};
   });
 
   const selectBlock = () => {
     if (authStore.token) {
       console.log("props.block.id", props.block.id);
       setComponentId(props.block.id);
-      setComponentIsMAxContainer(props.block.isMaxContainer);
+      setComponentIsMaxContainer(props.block.isMaxContainer);
       setComponentCss(props.block.cssClasses);
       setComponentName("SidebarBlock");
       setComponentContentType(props.block.type);
       setComponentContent(props.block.content);
+      setComponentChildren(props.block.expand.blocks);
     }
   };
 
@@ -119,10 +122,20 @@
 
   const addBlock = async (container) => {
     console.log("container", container);
-    const block = await pb
-      .collection("blocks")
-      .create({ type: "container", isMaxContainer: false, cssClasses: [[{padding: '40px 40px 40px 40px'},{margin: '40px 40px 40px 40px'}], [], [], [], []] });
-    const updatedBlock = await pb.collection("blocks").update(container.id, { blocks: block.id });
+    const block = await pb.collection("blocks").create({
+      type: "container",
+      isMaxContainer: false,
+      cssClasses: [
+        [{ padding: "40px 40px 40px 40px" }, { margin: "40px 40px 40px 40px" }],
+        [],
+        [],
+        [],
+        [],
+      ],
+    });
+    let allBlocks = props.block.blocks
+    allBlocks.push(block.id)
+    const updatedBlock = await pb.collection("blocks").update(container.id, { blocks: allBlocks });
     EventBus.emit("refresh");
   };
 
@@ -130,16 +143,27 @@
 </script>
 
 <template>
+  <div
+    v-if="props.block?.type"
+    @click.stop="selectBlock"
+    id="sidebarTarget"
+    :style="[style.container]"
+    class="flex justify-center relative"
+  >
     <component
-      v-if="props.block?.type"
-      @click.stop="selectBlock"
-      id="sidebarTarget"
       :is="'Block' + capitalize(props.block.type)"
       :block="props.block"
       :depth="props.depth + 1"
-      :style="[style]"
-      :class="[{ 'hover:shadow-block': authStore.token },{ 'shadow-block': authStore.token && (componentId === props.block?.id) }]"
+      :style="[style.block]"
+      :class="[
+      { 'hover:shadow-block': authStore.token },
+      { 'shadow-block': authStore.token && componentId === props.block?.id },
+      { 'max-container': props.block.isMaxContainer },
+    ]"
     >
     </component>
-    <Adder v-if="props.depth === 0" @addContainer="addBlock(props.block)">Block</Adder>
+  </div>
+  <div class="relative -top-6 h-0">
+    <Adder v-if="props.depth === 0" @addBlock="addBlock(props.block)">Block</Adder>
+  </div>
 </template>

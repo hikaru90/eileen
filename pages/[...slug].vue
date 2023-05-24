@@ -74,18 +74,24 @@
     return false;
   };
 
-  const addContainer = async (index) => {
+  const addBlockContainer = async (index) => {
     const block = await pb.collection('blocks').create({type: 'container', isMaxContainer: false, cssClasses: [[{padding: '40px 40px 40px 40px'},{margin: '40px 40px 40px 40px'}],[],[],[],[]]});
     const container = await pb.collection('containers').create({block: block.id});
+    // const container = await pb.collection('containers').create();
     const createdId = container.id
     const containers = pageContent.value.containers
     containers.splice(index, 0, createdId)
     const page = await pb.collection('pages').update(pageContent.value.id, {containers: containers});
     refresh();
-
-    console.log('block',block);
-    console.log('container',container);
-    console.log('page',page);
+  }
+  const addComponent = async (index) => {
+    const component = await pb.collection('components').create({type: 'default'});
+    const container = await pb.collection('containers').create({component: component.id});
+    const createdId = container.id
+    const containers = pageContent.value.containers
+    containers.splice(index, 0, createdId)
+    const page = await pb.collection('pages').update(pageContent.value.id, {containers: containers});
+    refresh();
   }
 
   onMounted(() => {
@@ -103,7 +109,7 @@
         <div class="">
           <!-- <h1>{{ page?.title }}</h1> -->
           <!-- {{ content }} -->
-          <Adder @addContainer="addContainer(0)">Container</Adder>
+          <Adder @addBlock="addBlockContainer(0)" @addComponent="addComponent(0)" displayComponentOption />
           <div
             @mouseenter="state.currentContainer = index"
             @mouseleave="state.currentContainer = null"
@@ -117,7 +123,7 @@
             ]"
             class="relative"
           >
-            <div v-show="currentContainerAuth === index" class="absolute w-full flex justify-between pointer-events-none">
+            <div v-show="currentContainerAuth === index" class="absolute w-full flex justify-between pointer-events-none z-10">
               <div class="flex items-center pointer-events-auto">
                 <button @click="moveUpAndSave(page.containers, index)" class="bg-gold">
                   <nuxt-icon name="icon-triangle_up" class="text-xl" />
@@ -133,7 +139,7 @@
               </div>
             </div>
             <Container :container="container" />
-            <Adder @addContainer="addContainer(index + 1)">Container</Adder>
+            <Adder @addBlock="addBlockContainer(index + 1)" @addComponent="addComponent(0)" displayComponentOption />
           </div>
         </div>
       </div>

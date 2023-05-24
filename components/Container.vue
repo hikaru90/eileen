@@ -1,6 +1,17 @@
 <script setup lang="ts">
-  // const res = await $fetch('/nuxtapi/saveTailwindClasses')
-  // console.log('res',res);
+  import { useSidebarStore } from "~~/store/sidebar";
+  import { useAuthStore } from "~/store/auth";
+
+  const authStore = useAuthStore();
+  const sidebarStore = useSidebarStore();
+  const {
+    setComponentName,
+    setComponentCss,
+    setComponentId,
+    setComponentContentType,
+    setComponentContent,
+    setComponentFiles,
+  } = sidebarStore;
 
   const props = withDefaults(
     defineProps<{
@@ -20,17 +31,24 @@
       return false;
     }
   });
+
+  const selectContainer = (container) => {
+    if(authStore.token){
+      setComponentId(props.container.id);
+      setComponentCss(undefined);
+      setComponentName("SidebarContainer");
+      setComponentContentType(props.container.type);
+      setComponentContent(undefined);
+      setComponentFiles(undefined);
+    }
+  }
+
 </script>
 
 <template>
   <div>
     <div v-if="!contentType">Block or Component could not be found</div>
-    <div
-      v-else-if="contentType === 'block'"
-      :class="[{ 'max-container': container.expand.block.isMaxContainer }]"
-    >
-      <BlockRenderer :block="container.expand.block" />
-    </div>
+    <BlockRenderer v-else-if="contentType === 'block'" :block="container.expand.block" />
     <ComponentRenderer
       v-else-if="contentType === 'component'"
       :component="container.expand.component"

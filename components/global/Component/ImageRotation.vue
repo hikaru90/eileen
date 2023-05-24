@@ -1,4 +1,5 @@
 <script setup lang="ts">
+  import defaults from '~/lib/defaults'
   const config = useRuntimeConfig();
 
   const props = withDefaults(
@@ -7,18 +8,7 @@
     }>(),
     {
       component: {
-        content: {
-          heading: "Mein Angebot",
-          slides: [
-            {
-              text: "Paartherapie",
-              link: "/angebot/paarthreapie",
-              icon: "icon-arrow_right",
-              description: "Für ein gutes Miteinander und eine erfüllte Partnerschaft.",
-              image: "solar_energy_a2mPxBJIkJ.jpg",
-            },
-          ],
-        },
+        content: defaults.find(el => el.type === 'imageRotation').content
       },
     }
   );
@@ -60,22 +50,24 @@
           {{ props.component.content.heading }}
         </h2>
       </div>
-      <div class="flex flex-col lg:flex-row lg:items-stretch">
-        <div class="h-40 lg:h-auto mb-10 relative w-full lg:w-40 lg:mr-10 bg-cover">
-          <div
-            v-for="(slide, index) in props.component.content.slides"
-            :key="'image' + index"
-            :style="[
-              { backgroundImage: `url(${getCurrentImageUrl(slide.image)})` },
-              {
-                animation:
-                  index === state.currentSlide
-                    ? `fadeInOut ${state.timeout}ms forwards infinite`
-                    : '',
-              },
-            ]"
-            class="absolute top-0 left-0 w-full h-full ease-in rounded-md opacity-0"
-          ></div>
+      <div class="flex flex-col lg:flex-row lg:items-stretch justify-center">
+        <div class="w-full lg:w-1/2 lg:flex lg:justify-end">
+          <div class="h-60 lg:h-auto lg:aspect-square lg:w-2/3 lg:mr-10 mb-10 relative bg-cover">
+            <div
+              v-for="(slide, index) in props.component.content.slides"
+              :key="'image' + index"
+              :style="[
+                { backgroundImage: `url(${getCurrentImageUrl(slide.image)})` },
+                {
+                  animation:
+                    index === state.currentSlide
+                      ? `fadeInOut ${state.timeout}ms forwards infinite`
+                      : '',
+                },
+              ]"
+              class="absolute top-0 left-0 w-full h-full ease-in rounded-md opacity-0"
+            ></div>
+          </div>
         </div>
         <div class="lg:w-1/2">
           <div
@@ -89,7 +81,18 @@
             >
               <div class="w-full my-0 mx-auto transform -rotate-90">
                 <svg viewBox="0 0 40 40" class="donut w-full h-full">
-                  <circle class="transform-center fill-gold" cx="20" cy="20" r="12"></circle>
+                  <linearGradient id="gold" x1="1" x2="0" y1="0" y2="0">
+                    <stop offset="0%" stop-color="#E3C879" />
+                    <stop offset="50%" stop-color="#FBF48A" />
+                    <stop offset="100%" stop-color="#9B6C1C" />
+                  </linearGradient>
+                  <circle
+                    class="transform-center"
+                    fill="url(#gold)"
+                    cx="20"
+                    cy="20"
+                    r="12"
+                  ></circle>
                   <circle
                     :style="[
                       {
@@ -113,7 +116,7 @@
             </div>
             <div
               style="width: 1px"
-              class="connector h-full absolute top-1 left-[9px] lg:left-3 bg-gold mb-1"
+              class="connector h-full absolute top-1 left-[9px] lg:left-3 bg-gold mb-1 -z-10"
             ></div>
             <div>
               <a :href="slide.link" class="flex items-center gap-2 mb-2">
