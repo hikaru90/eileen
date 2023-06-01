@@ -5,7 +5,7 @@
 
   const props = withDefaults(
     defineProps<{
-      displayComponentOption: boolean;
+      displayComponentOption?: boolean;
     }>(),
     {
       displayComponentOption: false,

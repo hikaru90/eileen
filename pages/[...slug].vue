@@ -113,7 +113,7 @@
           <div
             @mouseenter="state.currentContainer = index"
             @mouseleave="state.currentContainer = null"
-            v-if="page.expand"
+            v-if="page?.expand"
             v-for="(container, index) in page.expand.containers"
             :key="container.id"
             :class="[
