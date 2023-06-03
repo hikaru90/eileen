@@ -20,7 +20,15 @@ const defaults = [
   },
   {
     type: "bookingCalendar",
-    content: null
+    content: {
+      days: [
+        {id:1, name: 'Montag', startTime: null, endTime: null},
+        {id:2, name: 'Dienstag', startTime: null, endTime: null},
+        {id:3, name: 'Mittwoch', startTime: null, endTime: null},
+        {id:4, name: 'Donnerstag', startTime: null, endTime: null},
+        {id:5, name: 'Freitag', startTime: null, endTime: null},
+      ]
+    }
   },
 ]
 
