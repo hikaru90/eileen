@@ -117,7 +117,7 @@
   });
 
   const getAppointsmentsOfTheDay = async () => {
-    const filterValue = `start >= "${state.year}-${paddedMonth.value}-${paddedDay.value} 00:00:00" && end <= "${state.year}-${paddedMonth.value}-${paddedDay.value} 23:59:59"`;
+    const filterValue = `start <= "${state.year}-${paddedMonth.value}-${paddedDay.value} 23:59:59" && end >= "${state.year}-${paddedMonth.value}-${paddedDay.value} 00:00:00"`;
     const resultList = await pb.collection("bookings").getFullList(200, {
       filter: filterValue,
     });
@@ -131,32 +131,40 @@
 
     let currentTime = start;
     while (currentTime <= end) {
+      console.log('currentTime.toLocaleTimeString()',currentTime.toLocaleTimeString());
       const timeString = currentTime.toLocaleTimeString([], {
         hour: "2-digit",
         minute: "2-digit",
       });
 
       if (state.appointmentsOfTheDay.length > 0) {
+        let blockers = []
         for (const appointment of state.appointmentsOfTheDay) {
-          const appointmentStart = new Date(
+          let appointmentStart = new Date(
             new Date(appointment.start).getTime() +
               new Date(appointment.start).getTimezoneOffset() * 60000
           );
+          appointmentStart.setMinutes(appointmentStart.getMinutes() - 80)
+
           const appointmentEnd = new Date(
             new Date(appointment.end).getTime() +
               new Date(appointment.end).getTimezoneOffset() * 60000
           );
 
+          console.log('appointmentStart',appointmentStart.toLocaleTimeString(),' || appointmentEnd',appointmentEnd.toLocaleTimeString());
           if (currentTime >= appointmentStart && currentTime < appointmentEnd) {
+            blockers.push(1)
           } else {
-            intervals.push(timeString);
+            blockers.push(0)
           }
         }
+        if(blockers.reduce((partialSum, a) => partialSum + a, 0) === 0) intervals.push(timeString);
       } else {
         intervals.push(timeString);
       }
       currentTime.setMinutes(currentTime.getMinutes() + 30);
     }
+
     return intervals;
   };
 
@@ -164,9 +172,6 @@
     const currentDaySettings = props.component.content.days.find(
       (day) => day.id === new Date(state.selectedDate).getDay()
     );
-    // const startTimeHour = parseInt(currentDaySettings.startTime.split(":")[0]);
-    // const startTimeMinutes = parseInt(currentDaySettings.startTime.split(":")[1]);
-    // const startTime = new Date().setHours(startTimeHour, startTimeMinutes, 0, 0);
     state.timeslots = getIntervalTimes(currentDaySettings?.startTime, currentDaySettings?.endTime);
   };
 
@@ -270,10 +275,24 @@
           </div>
 
           <div class="flex items-center flex-wrap gap-2">
-            <button @click="emit('selectTimeslot', { year: state.year, month: paddedMonth, day: paddedDay, timeslot: timeslot })"
+            <button
+              @click="
+                emit('selectTimeslot', {
+                  year: state.year,
+                  month: paddedMonth,
+                  day: paddedDay,
+                  timeslot: timeslot,
+                })
+              "
               v-for="(timeslot, index) in state.timeslots"
               :key="'timeslot' + index"
-              :class="[ props.selectedTimeslot?.month === paddedMonth && props.selectedTimeslot?.day === paddedDay && props.selectedTimeslot?.timeslot === timeslot ? 'bg-gold' : 'hover:bg-gold']"
+              :class="[
+                props.selectedTimeslot?.month === paddedMonth &&
+                props.selectedTimeslot?.day === paddedDay &&
+                props.selectedTimeslot?.timeslot === timeslot
+                  ? 'bg-gold'
+                  : 'hover:bg-gold',
+              ]"
               class="border border-gold rounded px-1 py-1 w-14 flex items-center justify-center"
             >
               {{ timeslot }}

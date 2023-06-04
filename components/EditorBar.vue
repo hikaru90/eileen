@@ -56,6 +56,12 @@
           >
             Edit Pages
           </button>
+          <button 
+            @click="navigateTo('/buchungen')"
+            class="rounded-sm border border-lightBlue px-3 py-1 mx-2"
+          >
+            Buchungen verwalten
+          </button>
           <div
             @click="logout"
             class="text-red border-red rounded-sm cursor-pointer mx-2 flex items-center"

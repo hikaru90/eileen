@@ -1,5 +1,6 @@
 <script setup lang="ts">
-  const emit = defineEmits(["submitForm"]);
+  const { pb } = usePocketbase();
+  const emit = defineEmits(["formSubmitted"]);
   const props = withDefaults(
     defineProps<{
       selectedTimeslot?: object;
@@ -67,6 +68,9 @@
         validation: "required",
       },
     },
+    success: false,
+    formSubmitted: false,
+    pending: true,
   });
 
   const touchAllFields = () => {
@@ -97,30 +101,94 @@
     }
   });
 
+  const addMinutesToTimeslot = (minutes, timeslot) => {
+    const timeParts = timeslot.split(":");
+    const hours = parseInt(timeParts[0]);
+    const mins = parseInt(timeParts[1]);
+
+    let date = new Date();
+    date.setHours(hours);
+    date.setMinutes(mins);
+    date.setMinutes(date.getMinutes() + minutes);
+
+    const updatedHours = date.getHours().toString().padStart(2, "0");
+    const updatedMinutes = date.getMinutes().toString().padStart(2, "0");
+
+    const res = updatedHours + ":" + updatedMinutes;
+    return res;
+  };
+  const appointmentDuration = computed(() => {
+    let value = [];
+    for (const letter of state.form.service.value) {
+      if (!isNaN(parseInt(letter))) value.push(letter);
+    }
+    return parseInt(value.join(""));
+  });
+
   const submitForm = async () => {
-    if (formIsValid.value) {
-      console.log("submitForm");
-      state.success = false;
-      state.formSubmitted = false;
-      state.pending = true;
-      try {
-        // await $fetch("/api/inquiries/create", {
-        //   method: "POST",
-        //   body: stringifiedForm.value,
-        // });
-        // state.pending = false;
-        // state.formSubmitted = true;
-        // state.success = true;
-      } catch (err) {
-        // state.pending = false;
-        // state.formSubmitted = true;
-        // state.success = false;
-        // console.log("error submitting form", err);
+    if (process.client) {
+      if (formIsValid.value) {
+        console.log("submitForm");
+        state.success = false;
+        state.formSubmitted = false;
+        state.pending = true;
+        try {
+          const data = {
+            bookingType: "appointment",
+            start: `${props.selectedTimeslot.year}-${props.selectedTimeslot.month}-${props.selectedTimeslot.day} ${props.selectedTimeslot.timeslot}:00.123Z`,
+            end: `${props.selectedTimeslot.year}-${props.selectedTimeslot.month}-${
+              props.selectedTimeslot.day
+            } ${addMinutesToTimeslot(
+              appointmentDuration.value,
+              props.selectedTimeslot.timeslot
+            )}:00.123Z`,
+            firstName: state.form.firstName.value,
+            lastName: state.form.lastName.value,
+            mail: state.form.mail.value,
+            phone: state.form.phone.value,
+            appointmentType: state.form.appointmentType.value,
+            service: state.form.service.value,
+            place: state.form.place.value,
+            description: state.form.description.value,
+            invoiceAddress: state.form.invoiceAddress.value,
+          };
+          console.log("data", data);
+          const record = await pb.collection("bookings").create(data);
+
+          state.pending = false;
+          state.formSubmitted = true;
+          state.success = true;
+          emit("formSubmitted", { success: true });
+        } catch (err) {
+          console.log("err", err);
+          state.pending = false;
+          state.formSubmitted = true;
+          state.success = false;
+          emit("formSubmitted", { success: false });
+        }
+      } else {
+        touchAllFields();
       }
-    } else {
-      touchAllFields();
     }
   };
+
+  const fillInDummyData = () => {
+    state.form.firstName.value = "test";
+    state.form.lastName.value = "test";
+    state.form.mail.value = "test@test.de";
+    state.form.phone.value = "1234";
+    state.form.appointmentType.value = "firstMeeting";
+    state.form.service.value = "coupleTherapy50";
+    state.form.place.value = "online";
+    state.form.description.value = "test";
+    state.form.invoiceAddress.value = "test";
+    state.form.approvedCancellationConditions.value = true;
+    state.form.approvedDataprotection.value = true;
+  };
+
+  onMounted(() => {
+    fillInDummyData();
+  });
 </script>
 <template>
   <div class="max-container">
@@ -187,7 +255,7 @@
               value: 'relationshipCoaching50',
             },
           ]"
-          label="Terminart"
+          label="Leistung"
           :validation="state.form.service.validation"
           class="p-2 w-full lg:w-1/2"
         />
@@ -240,8 +308,7 @@
         </FormInputToggle>
 
         <div class="flex justify-center w-full">
-          <button
-            @click="submitForm"
+          <button type="submit"
             class="border-2 border-gold bg-gold rounded text-offwhite flex items-center px-3 py-2 mb-20"
           >
             <div class="text-black font-bold">Termin buchen</div>
