@@ -18,9 +18,16 @@
     if(entry) return entry[property]
   })
 
+  const leftPadding = computed(() => {
+    const value = currentProperty.value?.split('px')[3].trim()
+    return value
+    if(typeof value !== 'number' && value !== 'auto') return 'auto'
+    return parseInt(currentProperty.value?.split('px')[3].trim())
+  })
+
   const state = reactive({
     paddings: [
-      { name: 'paddingLeft', value: parseInt(currentProperty.value?.split('px')[3].trim()), icon: 'icon-padding-left' },
+      { name: 'paddingLeft', value: leftPadding.value, icon: 'icon-padding-left' },
       { name: 'paddingTop', value:  parseInt(currentProperty.value?.split('px')[0].trim()), icon: 'icon-padding-top' },
       { name: 'paddingRight', value:  parseInt(currentProperty.value?.split('px')[1].trim()), icon: 'icon-padding-right' },
       { name: 'paddingBottom', value:  parseInt(currentProperty.value?.split('px')[2].trim()), icon: 'icon-padding-bottom' },
@@ -28,7 +35,7 @@
   })
 
   const compileAndSetProperty = () => {
-    if(state.paddings.every(padding => typeof padding.value === 'number')){
+    if(state.paddings.every(padding => typeof padding.value === 'number' || padding.value === 'auto')){
       setProperty(property, `${state.paddings[1].value}px ${state.paddings[2].value}px ${state.paddings[3].value}px ${state.paddings[0].value}px`)
     }
   }
@@ -46,7 +53,7 @@
           <div class="flex">
             <nuxt-icon :name="padding.icon" class="text-3xl -mt-1" />
           </div>
-          <input @change="compileAndSetProperty" v-model="padding.value" type="number" class="w-12 rounded-sm pl-1 bg-transparent border border-darkOffwhite border-opacity-20">
+          <input @change="compileAndSetProperty" v-model="padding.value" type="text" class="w-12 rounded-sm pl-1 bg-transparent border border-darkOffwhite border-opacity-20">
           <span class="text-sm ml-1">px</span>
         </div>
       </template>

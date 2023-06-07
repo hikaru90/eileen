@@ -1,5 +1,25 @@
 const defaults = [
   {
+    type: 'appointmentTypes',
+    options: [
+      { label: 'Erstgespräch', value: 'firstMeeting' },
+      { label: 'Folgetermin', value: 'followup' },
+    ]
+  },
+  {
+    type: 'services',
+    options: [
+      { label: 'Kennenlerntermin Paartherapie (50 Min.)', value: 'coupleTherapy50' },
+      { label: 'Paartherapie (Paar) (80 Min.)', value: 'coupleTherapy80' },
+      { label: 'Sexualtherapie (Einzelperson) (50 Min.)', value: 'sexTherapy50' },
+      { label: 'Sexualtherapie (Paar) (80 Min.)', value: 'sexTherapy80' },
+      {
+        label: 'Beziehungscoaching (Einzelperson) (50 Min.)',
+        value: 'relationshipCoaching50',
+      },
+    ]
+  },
+  {
     type: "imageRotation",
     content: {
       heading: "Mein Angebot",
@@ -17,6 +37,18 @@ const defaults = [
   {
     type: "default",
     content: null
+  },
+  {
+    type: "heroHome",
+    content: {
+      heading: "Privatpraxis für Systemische Paar- und Sexualtherapie & Beziehungscoaching",
+      image: "solar_energy_a2mPxBJIkJ.jpg",
+      cta: {
+        text: "Jetzt Termin buchen",
+        icon: "icon-caret-right",
+        link: "/buchen",
+      }
+    }
   },
   {
     type: "bookingCalendar",

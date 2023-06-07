@@ -34,12 +34,12 @@
           {{ authStore?.user?.name }}
         </div>
         <div class="flex items-center">
-          <button
+          <!-- <button
             @click="rebuildProd"
             class="rounded-sm border border-green px-3 py-1 mx-2"
           >
             Rebuild Prod
-          </button>
+          </button> -->
           <button
             @click="
               contentStore.$patch({

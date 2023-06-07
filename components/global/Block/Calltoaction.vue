@@ -17,7 +17,7 @@
 
 <template>
   <div>
-    <a :href="authStore.token ? '#' : props.block.content.calltoaction.link" :title="props.block.content.calltoaction.text" class="flex items-center border-2 border-gold rounded text-offwhite px-3 py-2">
+    <a :href="authStore.token ? '#' : props.block.content.calltoaction.link" :title="props.block.content.calltoaction.text" class="flex items-center border-2 border-gold rounded text-offwhite px-4 py-3">
       <div>
         {{ props.block.content.calltoaction.text }}
       </div>

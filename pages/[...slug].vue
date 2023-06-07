@@ -15,7 +15,7 @@
 
   const route = useRoute();
   let slug = route.params.slug;
-  !slug ? "index" : slug;
+  slug = !slug ? "index" : slug;
 
   definePageMeta({
     layout: "sidebar",

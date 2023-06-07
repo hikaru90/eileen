@@ -51,15 +51,12 @@
   animation-iteration-count: infinite;
 }
 
-
-
-
 @keyframes floating {
   from {
-    transform: translate(0,0);
+    transform: translate(0, 0);
   }
   to {
-    transform: translate(0,20px);
+    transform: translate(0, 20px);
   }
 }
 .floating {
@@ -69,8 +66,6 @@
   animation-timing-function: ease-in-out;
   animation-direction: alternate;
 }
-
-
 
 @keyframes pulse {
   from {
@@ -96,34 +91,60 @@
   animation-direction: alternate;
 }
 
-
 @keyframes fadeInOut {
   0% {
-      opacity: 0;
+    opacity: 0;
   }
   10% {
-      opacity: 1;
+    opacity: 1;
   }
   90% {
-      opacity: 1;
+    opacity: 1;
   }
   100% {
-      opacity: 0;
+    opacity: 0;
   }
 }
 @keyframes donut1 {
   0% {
-      opacity: 0;
-      stroke-dasharray: 0 94.2;
+    opacity: 0;
+    stroke-dasharray: 0 94.2;
   }
   10% {
-      opacity: 0.5;
-    }
-    90% {
-      opacity: 0.5;
-    }
-    100% {
-      opacity: 0;
-      stroke-dasharray: 94.2 0;
+    opacity: 0.5;
+  }
+  90% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 0;
+    stroke-dasharray: 94.2 0;
+  }
+}
+
+
+.scroll {
+  animation-name: scroll;
+  animation-duration: 2000ms;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-out;
+  animation-direction: forward;
+}
+@keyframes scroll {
+  0% {
+    opacity:0;
+    transform: translate(0,-100%);
+  }
+  20% {
+    opacity:1;
+    transform: translate(0,-80%);
+  }
+  80% {
+    opacity:1;
+    transform: translate(0,80%);
+  }
+  100% {
+    opacity:0;
+    transform: translate(0,100%);
   }
 }

@@ -34,6 +34,11 @@
         name: "gold",
         value: "linear-gradient(180deg, rgba(227,200,121,1) 0%, rgba(251,244,138,1) 40%, rgba(155,108,28,1) 100%)",
       },
+      {
+        id: 2,
+        name: "darkGreenLinear",
+        value: "linear-gradient(60deg, rgba(2,55,41,1) 0%, rgba(0,31,31,1) 100%)",
+      },
     ],
   });
 </script>

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+  import defaults from '~/lib/defaults'
   const { pb } = usePocketbase();
   const emit = defineEmits(["formSubmitted"]);
   const props = withDefaults(
@@ -235,26 +236,14 @@
         />
         <FormInputSelect
           v-model="state.form.appointmentType.value"
-          :options="[
-            { label: 'Erstgespräch', value: 'firstMeeting' },
-            { label: 'Folgetermin', value: 'followup' },
-          ]"
+          :options="defaults.find((e) => e.type === 'appointmentTypes')!.options"
           label="Terminart"
           :validation="state.form.appointmentType.validation"
           class="p-2 w-full lg:w-1/2"
         />
         <FormInputSelect
           v-model="state.form.service.value"
-          :options="[
-            { label: 'Kennenlerntermin Paartherapie (50 Min.)', value: 'coupleTherapy50' },
-            { label: 'Paartherapie (Paar) (80 Min.)', value: 'coupleTherapy80' },
-            { label: 'Sexualtherapie (Einzelperson) (50 Min.)', value: 'sexTherapy50' },
-            { label: 'Sexualtherapie (Paar) (80 Min.)', value: 'sexTherapy80' },
-            {
-              label: 'Beziehungscoaching (Einzelperson) (50 Min.)',
-              value: 'relationshipCoaching50',
-            },
-          ]"
+          :options="defaults.find((e) => e.type === 'services')!.options"
           label="Leistung"
           :validation="state.form.service.validation"
           class="p-2 w-full lg:w-1/2"

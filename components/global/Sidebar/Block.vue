@@ -44,8 +44,19 @@
       </template>
       <InputColumns class="mb-4 px-4" />
       <InputTextAlign class="mb-4 px-4" />
-      <InputPadding class="mb-4 px-4" />
-      <InputMargin class="mb-4 px-4" />
+      <div class="mb-4 px-4 flex gap-2">
+        <InputPaddingLeft />
+        <InputPaddingTop />
+        <InputPaddingRight />
+        <InputPaddingBottom />
+      </div>
+      <!-- <InputPadding class="mb-4 px-4" /> -->
+      <div class="mb-4 px-4 flex gap-2">
+        <InputMarginLeft />
+        <InputMarginTop />
+        <InputMarginRight />
+        <InputMarginBottom />
+      </div>
       <InputFontFamily class="mb-4 px-4" />
       <InputFontWeight class="mb-4 px-4" />
       <div class="flex items-center mb-4 px-4 gap-4">
