@@ -188,7 +188,7 @@
   };
 
   onMounted(() => {
-    fillInDummyData();
+    // fillInDummyData();
   });
 </script>
 <template>
