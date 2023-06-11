@@ -37,7 +37,12 @@
       {
         id: 2,
         name: "darkGreenLinear",
-        value: "linear-gradient(60deg, rgba(2,55,41,1) 0%, rgba(0,31,31,1) 100%)",
+        value: "linear-gradient(30deg, rgba(2, 55, 41, 1) 0%, rgba(0, 31, 31, 1) 60%)",
+      },
+      {
+        id: 3,
+        name: "creamLinear",
+        value: "linear-gradient(20deg, rgba(243,240,236,1) 0%, rgba(249,247,245,1) 60%)",
       },
     ],
   });

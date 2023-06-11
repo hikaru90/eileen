@@ -10,10 +10,10 @@
 
 <template>
   <div class="flex flex-col h-full justify-between">
-    <template v-if="!isDev">
+    <!-- <template v-if="!isDev">
       <Placeholder />
     </template>
-    <template v-else>
+    <template v-else> -->
       <div class="flex flex-grow h-screen">
         <div class="flex flex-col flex-grow overflow-auto">
           <div class="flex flex-col flex-grow">
@@ -21,7 +21,7 @@
               <EditorBar v-if="authStore.token" />
             </div>
             <div class="flex flex-col flex-grow relative">
-              <Menu class="" />
+              <Menu id="top" class="" />
               <slot />
             </div>
           </div>
@@ -31,6 +31,6 @@
           <Sidebar />
         </div>
       </div>
-    </template>
+    <!-- </template> -->
   </div>
 </template>

@@ -131,34 +131,39 @@
 
     let currentTime = start;
     while (currentTime <= end) {
-      console.log('currentTime.toLocaleTimeString()',currentTime.toLocaleTimeString());
+      console.log("currentTime.toLocaleTimeString()", currentTime.toLocaleTimeString());
       const timeString = currentTime.toLocaleTimeString([], {
         hour: "2-digit",
         minute: "2-digit",
       });
 
       if (state.appointmentsOfTheDay.length > 0) {
-        let blockers = []
+        let blockers = [];
         for (const appointment of state.appointmentsOfTheDay) {
           let appointmentStart = new Date(
             new Date(appointment.start).getTime() +
               new Date(appointment.start).getTimezoneOffset() * 60000
           );
-          appointmentStart.setMinutes(appointmentStart.getMinutes() - 80)
+          appointmentStart.setMinutes(appointmentStart.getMinutes() - 80);
 
           const appointmentEnd = new Date(
             new Date(appointment.end).getTime() +
               new Date(appointment.end).getTimezoneOffset() * 60000
           );
 
-          console.log('appointmentStart',appointmentStart.toLocaleTimeString(),' || appointmentEnd',appointmentEnd.toLocaleTimeString());
+          console.log(
+            "appointmentStart",
+            appointmentStart.toLocaleTimeString(),
+            " || appointmentEnd",
+            appointmentEnd.toLocaleTimeString()
+          );
           if (currentTime >= appointmentStart && currentTime < appointmentEnd) {
-            blockers.push(1)
+            blockers.push(1);
           } else {
-            blockers.push(0)
+            blockers.push(0);
           }
         }
-        if(blockers.reduce((partialSum, a) => partialSum + a, 0) === 0) intervals.push(timeString);
+        if (blockers.reduce((partialSum, a) => partialSum + a, 0) === 0) intervals.push(timeString);
       } else {
         intervals.push(timeString);
       }
@@ -182,124 +187,122 @@
 </script>
 
 <template>
-  <div class="max-container">
-    <div class="flex flex-col lg:flex-row gap-10">
-      <div class="w-1/2 pb-20">
-        <div class="flex items-center justify-between mb-2">
-          <div style="width: 14.285%" class="flex items-center justify-center">
-            <button
-              v-if="state.month > state.minMonth"
-              @click.stop="decreaseMonth"
-              class="aspect-square w-full hover:bg-gold rounded-full m-3 flex items-center justify-center"
-            >
-              <nuxt-icon name="icon-caret-left" class="text-xl" />
-            </button>
-          </div>
-          <div>
-            {{ new Date(state.year, state.month).toLocaleString("de-DE", { month: "long" }) }}
-          </div>
-          <div style="width: 14.285%" class="flex items-center justify-center">
-            <button
-              v-if="state.month < state.maxMonth"
-              @click.stop="increaseMonth"
-              class="aspect-square w-full hover:bg-gold rounded-full m-3 flex items-center justify-center"
-            >
-              <nuxt-icon name="icon-caret-right" class="text-xl" />
-            </button>
-          </div>
+  <div class="flex flex-col lg:flex-row gap-10 mb-36">
+    <div class="w-full lg:w-1/2">
+      <div class="flex items-center justify-between mb-2">
+        <div style="width: 14.285%" class="flex items-center justify-center">
+          <button
+            v-if="state.month > state.minMonth"
+            @click.stop="decreaseMonth"
+            class="aspect-square w-full hover:bg-gold rounded-full m-3 flex items-center justify-center"
+          >
+            <nuxt-icon name="icon-caret-left" class="text-xl" />
+          </button>
         </div>
+        <div>
+          {{ new Date(state.year, state.month).toLocaleString("de-DE", { month: "long" }) }}
+        </div>
+        <div style="width: 14.285%" class="flex items-center justify-center">
+          <button
+            v-if="state.month < state.maxMonth"
+            @click.stop="increaseMonth"
+            class="aspect-square w-full hover:bg-gold rounded-full m-3 flex items-center justify-center"
+          >
+            <nuxt-icon name="icon-caret-right" class="text-xl" />
+          </button>
+        </div>
+      </div>
 
-        <div class="weekdays flex justify-start mb-2">
-          <div
-            v-for="(weekday, index) in weekdays"
-            :key="'weekday' + index"
-            style="width: 14.285%"
-            class="flex items-center justify-center text-lightGrey text-opacity-60"
-          >
-            {{ weekday }}
+      <div class="weekdays flex justify-start mb-2">
+        <div
+          v-for="(weekday, index) in weekdays"
+          :key="'weekday' + index"
+          style="width: 14.285%"
+          class="flex items-center justify-center text-lightGrey text-opacity-60"
+        >
+          {{ weekday }}
+        </div>
+      </div>
+      <div class="flex flex-wrap justify-start">
+        <div
+          v-for="(dayInLastMonth, index) in daysInLastMonth"
+          :key="'offset' + index"
+          style="width: 14.285%"
+          class="offsets text-lightGrey text-opacity-60 flex items-center justify-center flex-shrink-0"
+        >
+          <div class="w-full aspect-square flex items-center justify-center">
+            {{ dayInLastMonth }}
           </div>
         </div>
-        <div class="flex flex-wrap justify-start">
-          <div
-            v-for="(dayInLastMonth, index) in daysInLastMonth"
-            :key="'offset' + index"
-            style="width: 14.285%"
-            class="offsets text-lightGrey text-opacity-60 flex items-center justify-center flex-shrink-0"
+        <div
+          v-for="(day, index) in daysInCurrentMonth"
+          :key="'day' + index"
+          style="width: 14.285%"
+          :class="[day.isDisabled ? 'text-lightGrey text-opacity-60' : '']"
+          class="flex items-center justify-center flex-shrink-0 p-1"
+        >
+          <button
+            v-if="!day.isDisabled"
+            @click.stop="selectDate(day.date)"
+            class="hover:border hover:border-gold rounded-full w-full aspect-square"
+            :class="[
+              state.selectedDate ===
+              new Date(state.year, state.month, day.date).setHours(0, 0, 0, 0)
+                ? 'bg-gold'
+                : '',
+            ]"
           >
-            <div class="w-full aspect-square flex items-center justify-center">
-              {{ dayInLastMonth }}
-            </div>
-          </div>
-          <div
-            v-for="(day, index) in daysInCurrentMonth"
-            :key="'day' + index"
-            style="width: 14.285%"
-            :class="[day.isDisabled ? 'text-lightGrey text-opacity-60' : '']"
-            class="flex items-center justify-center flex-shrink-0 p-1"
-          >
-            <button
-              v-if="!day.isDisabled"
-              @click.stop="selectDate(day.date)"
-              class="hover:border hover:border-gold rounded-full w-full aspect-square"
-              :class="[
-                state.selectedDate ===
-                new Date(state.year, state.month, day.date).setHours(0, 0, 0, 0)
-                  ? 'bg-gold'
-                  : '',
-              ]"
-            >
-              {{ day.date }}
-            </button>
-            <div v-else class="w-full aspect-square flex items-center justify-center">
-              {{ day.date }}
-            </div>
+            {{ day.date }}
+          </button>
+          <div v-else class="w-full aspect-square flex items-center justify-center">
+            {{ day.date }}
           </div>
         </div>
       </div>
-      <div class="w-1/2">
-        <h2 class="font-bold text-md mb-10 mt-6">Wählen Sie einen Termin aus</h2>
-        <template v-if="state.timeslots.length === 0">
+    </div>
+    <div class="w-full lg:w-1/2">
+      <h2 class="font-bold text-md mb-10 mt-6">Wählen Sie einen Termin aus</h2>
+      <template v-if="state.timeslots.length === 0">
+        Am
+        <span class="font-bold">
+          {{ new Date(state.selectedDate).toLocaleDateString("de-DE", {}) }}
+        </span>
+        stehen Ihnen leider keine freien Termine zur Verfügung.
+      </template>
+      <template v-else>
+        <div class="mb-3">
           Am
           <span class="font-bold">
             {{ new Date(state.selectedDate).toLocaleDateString("de-DE", {}) }}
           </span>
-          stehen Ihnen leider keine freien Termine zur Verfügung.
-        </template>
-        <template v-else>
-          <div class="mb-3">
-            Am
-            <span class="font-bold">
-              {{ new Date(state.selectedDate).toLocaleDateString("de-DE", {}) }}
-            </span>
-            stehen Ihnen folgende Termine zur Verfügung:
-          </div>
+          stehen Ihnen folgende Termine zur Verfügung:
+        </div>
 
-          <div class="flex items-center flex-wrap gap-2">
-            <button
-              @click="
-                emit('selectTimeslot', {
-                  year: state.year,
-                  month: paddedMonth,
-                  day: paddedDay,
-                  timeslot: timeslot,
-                })
-              "
-              v-for="(timeslot, index) in state.timeslots"
-              :key="'timeslot' + index"
-              :class="[
-                props.selectedTimeslot?.month === paddedMonth &&
-                props.selectedTimeslot?.day === paddedDay &&
-                props.selectedTimeslot?.timeslot === timeslot
-                  ? 'bg-gold'
-                  : 'hover:bg-gold',
-              ]"
-              class="border border-gold rounded px-1 py-1 w-14 flex items-center justify-center"
-            >
-              {{ timeslot }}
-            </button>
-          </div>
-        </template>
-      </div>
+        <div class="flex items-center flex-wrap gap-2">
+          <button
+            @click="
+              emit('selectTimeslot', {
+                year: state.year,
+                month: paddedMonth,
+                day: paddedDay,
+                timeslot: timeslot,
+              })
+            "
+            v-for="(timeslot, index) in state.timeslots"
+            :key="'timeslot' + index"
+            :class="[
+              props.selectedTimeslot?.month === paddedMonth &&
+              props.selectedTimeslot?.day === paddedDay &&
+              props.selectedTimeslot?.timeslot === timeslot
+                ? 'bg-gold'
+                : 'hover:bg-gold',
+            ]"
+            class="border border-gold rounded px-1 py-1 w-14 flex items-center justify-center"
+          >
+            {{ timeslot }}
+          </button>
+        </div>
+      </template>
     </div>
   </div>
 </template>

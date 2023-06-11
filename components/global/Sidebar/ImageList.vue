@@ -42,54 +42,68 @@
           class="w-full rounded-sm pl-1 bg-transparent border border-darkOffwhite border-opacity-20"
         />
       </div>
+      <div class="mb-4">
+        <h2 class="text-xs mb-2 opacity-40">Image</h2>
+        <input
+          @change="saveContent"
+          v-model="componentContent.image"
+          type="text"
+          class="w-full rounded-sm pl-1 bg-transparent border border-darkOffwhite border-opacity-20"
+        />
+      </div>
       <div class="mb-2 flex items-center justify-between">
         <h2 class="text-xs opacity-40">Slides</h2>
         <div
           class="py-1px px-2 rounded-full bg-offwhite text-xs text-black font-bold flex items-center justify-center"
         >
-          {{ componentContent.slides.length }}
+          {{ componentContent.list.length }}
         </div>
       </div>
       <div class="mb-4">
         <ArrayPane
-          v-for="(slide, index) in componentContent.slides"
+          v-for="(item, index) in componentContent.list"
           @arrayChanged="saveContent"
-          :key="'slide' + index"
+          :key="'item' + index"
           :array="componentContent.slides"
-          :entry="slide"
+          :entry="item"
           :index="index"
         >
           <div class="px-2">
-            <h2 class="text-xs mb-2 opacity-40">Titel</h2>
+            <h2 class="text-xs mb-2 opacity-40">Typ</h2>
             <input
               @change="saveContent"
-              v-model="slide.text"
+              v-model="item.type"
               type="text"
               class="w-full rounded-sm pl-1 bg-transparent border border-darkOffwhite border-opacity-20 mb-4"
             />
-            <h2 class="text-xs mb-2 opacity-40">Link</h2>
+            <h2 class="text-xs mb-2 opacity-40">Ort</h2>
             <input
               @change="saveContent"
-              v-model="slide.link"
+              v-model="item.place"
               type="text"
               class="w-full rounded-sm pl-1 bg-transparent border border-darkOffwhite border-opacity-20 mb-4"
             />
-            <h2 class="text-xs mb-2 opacity-40">Bild</h2>
+            <h2 class="text-xs mb-2 opacity-40">Name</h2>
             <input
               @change="saveContent"
-              v-model="slide.image"
+              v-model="item.name"
               type="text"
               class="w-full rounded-sm pl-1 bg-transparent border border-darkOffwhite border-opacity-20 mb-4"
-            />
-            <h2 class="text-xs mb-2 opacity-40">Text</h2>
-            <textarea
-              @change="saveContent"
-              v-model="slide.description"
-              rows="4"
-              class="w-full rounded-sm pl-1 bg-transparent border border-darkOffwhite border-opacity-20"
             />
           </div>
         </ArrayPane>
+        <button
+        @click="
+          componentContent.list.push({
+          type: 'Ausbildung',
+          place: 'IGST Heidelberg',
+          name: 'Systemische Sexualtherapie',
+        })
+        "
+        class="rounded-sm hover:bg-white hover:bg-opacity-20 px-2 border border-darkOffwhite border-opacity-20"
+      >
+        Hinzufügen
+      </button>
       </div>
       <h2 class="text-xs opacity-40">Dateien</h2>
       <div v-for="(filename, index) in componentFiles" class="flex items-center gap-2">

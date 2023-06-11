@@ -11,7 +11,26 @@ import { useSidebarStore } from "~/store/sidebar";
 </script>
 
 <template>
-  <div v-if="props.block" style="min-height: 20px">
-    <div v-if="props.block.content?.markdown" v-html="$mdRenderer.render(props.block?.content?.markdown)"></div>
+  <div v-if="props.block.content?.markdown" style="min-height: 20px" v-html="$mdRenderer.render(props.block?.content?.markdown)" class="markdown">
   </div>
 </template>
+
+<style lang="scss">
+
+
+.markdown{
+  h1{
+    @apply font-bold text-2xl mb-10 mt-6;
+  }
+  h2{
+    @apply font-bold text-xl mb-8 mt-4;
+  }
+  h3{
+    @apply font-bold text-lg mb-6 mt-2;
+  }
+  p{
+    @apply mb-10;
+  }
+}
+
+</style>

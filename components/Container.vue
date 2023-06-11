@@ -16,9 +16,11 @@
   const props = withDefaults(
     defineProps<{
       container?: object;
+      isFirst?: boolean;
     }>(),
     {
       container: undefined,
+      isFirst: false,
     }
   );
 
@@ -48,9 +50,9 @@
 <template>
   <div>
     <div v-if="!contentType">Block or Component could not be found</div>
-    <BlockRenderer v-else-if="contentType === 'block'" :block="container.expand.block" />
+    <BlockRenderer v-else-if="contentType === 'block'" :block="container.expand.block" :isFirst="props.isFirst" />
     <ComponentRenderer
-      v-else-if="contentType === 'component'"
+      v-else-if="contentType === 'component'" :isFirst="props.isFirst"
       :component="container.expand.component"
     />
   </div>

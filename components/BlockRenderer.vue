@@ -19,6 +19,7 @@
     setComponentContentType,
     setComponentContent,
     setComponentIsMaxContainer,
+    setComponentBackgroundToMaxContainer,
     setComponentChildren,
   } = sidebarStore;
   const { capitalize } = contentStore;
@@ -27,9 +28,11 @@
     defineProps<{
       block: object;
       depth?: number;
+      isFirst?: boolean;
     }>(),
     {
       depth: 0,
+      isFirst: false,
     }
   );
 
@@ -98,9 +101,23 @@
 
   const style = computed(() => {
     state.matrix = createMatrix(props.block.cssClasses);
-    const style = state.matrix.map(viewport => viewport.filter(property => !property.hasOwnProperty('background')))[currentViewportIndex.value];
-    const containerStyle = state.matrix.map(viewport => viewport.filter(property => property.hasOwnProperty('background')))[currentViewportIndex.value]
-    return {container: containerStyle, block: style};
+
+    const blockStyle = state.matrix.map((viewport) =>
+      viewport.filter((property) => {
+        if (property.hasOwnProperty("background") && !props.block.limitBackgroundToMaxContainer) return false;
+        return true;
+      })
+    )[currentViewportIndex.value];
+
+    const containerStyle = state.matrix.map((viewport) =>
+      viewport.filter((property) => {
+        if (property.hasOwnProperty("background") && !props.block.limitBackgroundToMaxContainer) return true;
+        if (property.hasOwnProperty("width")) return true;
+        return false;
+      })
+    )[currentViewportIndex.value];
+
+    return { container: containerStyle, block: blockStyle };
   });
 
   const selectBlock = () => {
@@ -108,6 +125,7 @@
       console.log("props.block.id", props.block.id);
       setComponentId(props.block.id);
       setComponentIsMaxContainer(props.block.isMaxContainer);
+      setComponentBackgroundToMaxContainer(props.block.limitBackgroundToMaxContainer);
       setComponentCss(props.block.cssClasses);
       setComponentName("SidebarBlock");
       setComponentContentType(props.block.type);
@@ -123,18 +141,23 @@
   const addBlock = async (container) => {
     console.log("container", container);
     const block = await pb.collection("blocks").create({
-      type: "container",
+      type: "default",
       isMaxContainer: false,
       cssClasses: [
-        [{ padding: "40px 40px 40px 40px" }, { margin: "40px 40px 40px 40px" }],
+        [
+          { paddingTop: "40px" },
+          { paddingBottom: "40px" },
+          { marginTop: "40px" },
+          { marginBottom: "40px" },
+        ],
         [],
         [],
         [],
         [],
       ],
     });
-    let allBlocks = props.block.blocks
-    allBlocks.push(block.id)
+    let allBlocks = props.block.blocks;
+    allBlocks.push(block.id);
     const updatedBlock = await pb.collection("blocks").update(container.id, { blocks: allBlocks });
     EventBus.emit("refresh");
   };
@@ -144,22 +167,23 @@
 
 <template>
   <div
-    v-if="props.block?.type"
-    @click.stop="selectBlock"
     id="sidebarTarget"
     :style="[style.container]"
-    class="flex justify-center relative"
+    @click.stop="selectBlock"
+    v-if="props.block?.type"
+    class="flex"
   >
     <component
       :is="'Block' + capitalize(props.block.type)"
       :block="props.block"
+      :isFirst="props.isFirst"
       :depth="props.depth + 1"
       :style="[style.block]"
       :class="[
-      { 'hover:shadow-block': authStore.token },
-      { 'shadow-block': authStore.token && componentId === props.block?.id },
-      { 'max-container': props.block.isMaxContainer },
-    ]"
+        { 'hover:shadow-block': authStore.token },
+        { 'shadow-block': authStore.token && componentId === props.block?.id },
+        { 'max-container': props.block.isMaxContainer },
+      ]"
     >
     </component>
   </div>

@@ -18,6 +18,8 @@
     setComponentType,
     setComponentContentType,
     setComponentContent,
+    setComponentIsMaxContainer,
+    setComponentBackgroundToMaxContainer,
   } = sidebarStore;
 
   const handleResize = (event) => {
@@ -32,6 +34,8 @@
       setComponentType(undefined);
       setComponentContentType(undefined);
       setComponentContent(undefined);
+      setComponentIsMaxContainer(false);
+      setComponentBackgroundToMaxContainer(false);
     }
   };
 

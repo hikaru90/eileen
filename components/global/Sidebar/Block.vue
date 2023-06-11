@@ -19,6 +19,9 @@
   const displayCssValue = computed(() => {
     return componentCss.value[viewport.value]?.find((entry) => entry.hasOwnProperty('display'))?.display
   })
+  const columnsCssValue = computed(() => {
+    return componentCss.value[viewport.value]?.find((entry) => entry.hasOwnProperty('columns'))?.columns
+  })
 
   onMounted(() => {
     setComponentType('block')
@@ -30,6 +33,7 @@
     <div v-if="props.selectedMode === 0">
       <InputBlockSelector class="border-b border-darkOffwhite border-opacity-20" />
       <InputMaxContainer />
+      <InputMaxContainerBackground />
       <InputContentMarkdown v-if="componentContentType === 'markdown'" />
       <InputContentCallToAction v-if="componentContentType === 'calltoaction'" />
       <InputBlockChildren />
@@ -37,12 +41,17 @@
     <div v-else-if="props.selectedMode === 1">
       <InputViewportSelector />
       <InputDisplay class="mb-4 px-4" />
+      <InputFlexGrow class="mb-4 px-4" />
+      <InputFlexShrink class="mb-4 px-4" />
       <template v-if="displayCssValue === 'flex'">
         <InputFlexDirection class="mb-4 px-4" />
         <InputAlignItems class="mb-4 px-4" />
         <InputJustifyContent class="mb-4 px-4" />
       </template>
       <InputColumns class="mb-4 px-4" />
+      <template v-if="columnsCssValue">
+        <InputColumnGap class="mb-4 px-4" />
+      </template>
       <InputTextAlign class="mb-4 px-4" />
       <div class="mb-4 px-4 flex gap-2">
         <InputPaddingLeft />

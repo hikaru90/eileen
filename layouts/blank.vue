@@ -16,13 +16,7 @@
     </template>
     <template v-else> -->
       <div class="flex flex-col flex-grow">
-        <div>
-          <EditorBar v-if="authStore.token" />
-        </div>
-        <div class="flex flex-col flex-grow relative">
-          <Menu class="" />
             <slot />
-        </div>
       </div>
       <Footer />
     <!-- </template> -->

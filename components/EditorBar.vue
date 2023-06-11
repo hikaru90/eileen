@@ -62,13 +62,13 @@
           >
             Buchungen verwalten
           </button>
-          <div
+          <!-- <div
             @click="logout"
             class="text-red border-red rounded-sm cursor-pointer mx-2 flex items-center"
           >
             <nuxt-icon name="icon-trash" class="text-3xl" />
             Logout
-          </div>
+          </div> -->
         </div>
       </div>
     </div>

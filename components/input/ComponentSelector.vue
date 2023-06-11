@@ -13,9 +13,11 @@
   const changeType = (componentType:string) => {
     setComponentContentType(componentType)
     setComponentContent(defaults.find(el => el.type === decapitalize(componentType)).content)
-    saveContent()
-    saveContentType()
-    EventBus.emit("refresh");
+    saveContent(true)
+    setTimeout(() => {
+      saveContentType(true)
+      EventBus.emit("refresh");
+    }, 500);
   }
 
   const files = Object.keys(
@@ -32,12 +34,12 @@
       <option value="markdown" class="bg-black">Markdown</option>
     </select> -->
     <template v-for="(component, index) in files" :key="'component' + index">
-      <div @click="changeType(component)" class="flex items-center gap-2">
+      <button @click="changeType(component)" class="flex w-full items-center gap-2" :class="[{ 'bg-white bg-opacity-20 rounded': componentContentType === component }]">
         <nuxt-icon :name="`icon-${component}`" style="font-size: 60px;" class="text-lightBlue" />
-        <button>
+        <div>
           {{ component }}
-        </button>
-      </div>
+        </div>
+      </button>
     </template>
   </div>
 </template>

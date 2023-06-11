@@ -64,7 +64,7 @@
                     : '',
               },
             ]"
-            class="bg-cover absolute top-0 left-0 w-full h-full ease-in lg:rounded-md opacity-0"
+            class="bg-cover bg-center absolute top-0 left-0 w-full h-full ease-in lg:rounded-md opacity-0"
           ></div>
         </div>
       </div>

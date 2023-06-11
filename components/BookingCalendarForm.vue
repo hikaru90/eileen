@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import defaults from '~/lib/defaults'
+  import defaults from "~/lib/defaults";
   const { pb } = usePocketbase();
   const emit = defineEmits(["formSubmitted"]);
   const props = withDefaults(
@@ -192,122 +192,121 @@
   });
 </script>
 <template>
-  <div class="max-container">
-    <div class="flex flex-col items-center justify-center text-center">
-      <div class="mb-4">Sie haben folgenden Termin ausgewählt:</div>
-      <div class="font-bold text-xl border-2 rounded border-gold inline-block px-4 py-1 mb-10">
-        {{ timeslotString }}
-      </div>
-      <div class="w-full lg:w-2/3 mb-10">
-        Um Ihre Buchung abzuschließen, benötige ich noch ein paar Informationen von Ihnen. Füllen
-        Sie bitte untenstehendes Formular aus.
-      </div>
-
-      <form @submit.prevent="submitForm" class="w-full lg:w-2/3 flex flex-wrap -m-2">
-        <FormHeading class="mb-4">Ihre Angaben</FormHeading>
-
-        <FormInput
-          v-model="state.form.firstName.value"
-          label="Vorname"
-          placeholder="Vorname"
-          :validation="state.form.firstName.validation"
-          class="p-2 w-full lg:w-1/2"
-        />
-        <FormInput
-          v-model="state.form.lastName.value"
-          label="Nachname"
-          placeholder="Nachname"
-          :validation="state.form.lastName.validation"
-          class="p-2 w-full lg:w-1/2"
-        />
-        <FormInput
-          v-model="state.form.mail.value"
-          label="E-Mail"
-          placeholder="E-Mail"
-          :validation="state.form.mail.validation"
-          class="p-2 w-full lg:w-1/2"
-        />
-        <FormInput
-          v-model="state.form.phone.value"
-          label="Telefonnummer (optional)"
-          placeholder="Telefonnummer"
-          :validation="state.form.phone.validation"
-          class="p-2 w-full lg:w-1/2"
-        />
-        <FormInputSelect
-          v-model="state.form.appointmentType.value"
-          :options="defaults.find((e) => e.type === 'appointmentTypes')!.options"
-          label="Terminart"
-          :validation="state.form.appointmentType.validation"
-          class="p-2 w-full lg:w-1/2"
-        />
-        <FormInputSelect
-          v-model="state.form.service.value"
-          :options="defaults.find((e) => e.type === 'services')!.options"
-          label="Leistung"
-          :validation="state.form.service.validation"
-          class="p-2 w-full lg:w-1/2"
-        />
-        <FormInputSelect
-          v-model="state.form.place.value"
-          :options="[
-            { label: 'In meiner Praxis', value: 'inPerson' },
-            { label: 'Online', value: 'online' },
-          ]"
-          label="Wo soll der Termin stattfinden?"
-          :validation="state.form.place.validation"
-          class="p-2 w-full lg:w-1/2 mb-8"
-        />
-
-        <FormHeading class="mb-4">Terminvorbereitung</FormHeading>
-        <FormInputTextarea
-          v-model="state.form.description.value"
-          label="Beschreibung Ihres Themas"
-          placeholder="Bitte beschreiben Sie kurz Ihr Thema"
-          :validation="state.form.description.validation"
-          class="p-2 w-full"
-        />
-        <FormInputTextarea
-          v-model="state.form.invoiceAddress.value"
-          label="Rechnungsadresse"
-          placeholder="Bitte tragen Sie die gewünschte Rechnungsadresse ein"
-          :validation="state.form.invoiceAddress.validation"
-          class="p-2 w-full mb-6"
-        />
-        <FormHeading class="mb-4">Rechtliches</FormHeading>
-
-        <FormInputToggle
-          v-model="state.form.approvedCancellationConditions.value"
-          class="p-2 w-full"
-          innerClass=""
-          :validation="state.form.approvedCancellationConditions.validation"
-        >
-          Ich habe verstanden, dass eine kostenlose Stornierung meines Termins bis zu 48 Stunden vor
-          Terminbeginn möglich ist und dass danach eine Ausfallgebühr von 50% fällig wird.
-        </FormInputToggle>
-        <FormInputToggle
-          v-model="state.form.approvedDataprotection.value"
-          class="p-2 w-full mb-6"
-          innerClass=""
-          :validation="state.form.approvedDataprotection.validation"
-        >
-          Ich habe die
-          <a href="/datenschutz" target="_blank" class="underline">Datenschutzbestimmung</a> gelesen
-          und bin damit einverstanden.
-        </FormInputToggle>
-
-        <div class="flex justify-center w-full">
-          <button type="submit"
-            class="border-2 border-gold bg-gold rounded text-offwhite flex items-center px-3 py-2 mb-20"
-          >
-            <div class="text-black font-bold">Termin buchen</div>
-            <div class="flex items-center justify-center bg-white rounded-full ml-2 w-4 h-4">
-              <nuxt-icon name="icon-check" class="text-sm text-black" />
-            </div>
-          </button>
-        </div>
-      </form>
+  <div class="flex flex-col items-center justify-center text-center">
+    <div class="mb-4">Sie haben folgenden Termin ausgewählt:</div>
+    <div class="font-bold text-xl border-2 rounded border-gold inline-block px-4 py-1 mb-10">
+      {{ timeslotString }}
     </div>
+    <div class="w-full lg:w-2/3 mb-10">
+      Um Ihre Buchung abzuschließen, benötige ich noch ein paar Informationen von Ihnen. Füllen Sie
+      bitte untenstehendes Formular aus.
+    </div>
+
+    <form @submit.prevent="submitForm" class="w-full lg:w-2/3 flex flex-wrap -m-2">
+      <FormHeading class="mb-4">Ihre Angaben</FormHeading>
+
+      <FormInput
+        v-model="state.form.firstName.value"
+        label="Vorname"
+        placeholder="Vorname"
+        :validation="state.form.firstName.validation"
+        class="p-2 w-full lg:w-1/2"
+      />
+      <FormInput
+        v-model="state.form.lastName.value"
+        label="Nachname"
+        placeholder="Nachname"
+        :validation="state.form.lastName.validation"
+        class="p-2 w-full lg:w-1/2"
+      />
+      <FormInput
+        v-model="state.form.mail.value"
+        label="E-Mail"
+        placeholder="E-Mail"
+        :validation="state.form.mail.validation"
+        class="p-2 w-full lg:w-1/2"
+      />
+      <FormInput
+        v-model="state.form.phone.value"
+        label="Telefonnummer (optional)"
+        placeholder="Telefonnummer"
+        :validation="state.form.phone.validation"
+        class="p-2 w-full lg:w-1/2"
+      />
+      <FormInputSelect
+        v-model="state.form.appointmentType.value"
+        :options="defaults.find((e) => e.type === 'appointmentTypes')!.options"
+        label="Terminart"
+        :validation="state.form.appointmentType.validation"
+        class="p-2 w-full lg:w-1/2"
+      />
+      <FormInputSelect
+        v-model="state.form.service.value"
+        :options="defaults.find((e) => e.type === 'services')!.options"
+        label="Leistung"
+        :validation="state.form.service.validation"
+        class="p-2 w-full lg:w-1/2"
+      />
+      <FormInputSelect
+        v-model="state.form.place.value"
+        :options="[
+          { label: 'In meiner Praxis', value: 'inPerson' },
+          { label: 'Online', value: 'online' },
+        ]"
+        label="Wo soll der Termin stattfinden?"
+        :validation="state.form.place.validation"
+        class="p-2 w-full lg:w-1/2 mb-8"
+      />
+
+      <FormHeading class="mb-4">Terminvorbereitung</FormHeading>
+      <FormInputTextarea
+        v-model="state.form.description.value"
+        label="Beschreibung Ihres Themas"
+        placeholder="Bitte beschreiben Sie kurz Ihr Thema"
+        :validation="state.form.description.validation"
+        class="p-2 w-full"
+      />
+      <FormInputTextarea
+        v-model="state.form.invoiceAddress.value"
+        label="Rechnungsadresse"
+        placeholder="Bitte tragen Sie die gewünschte Rechnungsadresse ein"
+        :validation="state.form.invoiceAddress.validation"
+        class="p-2 w-full mb-6"
+      />
+      <FormHeading class="mb-4">Rechtliches</FormHeading>
+
+      <FormInputToggle
+        v-model="state.form.approvedCancellationConditions.value"
+        class="p-2 w-full"
+        innerClass=""
+        :validation="state.form.approvedCancellationConditions.validation"
+      >
+        Ich habe verstanden, dass eine kostenlose Stornierung meines Termins bis zu 48 Stunden vor
+        Terminbeginn möglich ist und dass danach eine Ausfallgebühr von 50% fällig wird.
+      </FormInputToggle>
+      <FormInputToggle
+        v-model="state.form.approvedDataprotection.value"
+        class="p-2 w-full mb-6"
+        innerClass=""
+        :validation="state.form.approvedDataprotection.validation"
+      >
+        Ich habe die
+        <a href="/datenschutz" target="_blank" class="underline">Datenschutzbestimmung</a> gelesen
+        und bin damit einverstanden.
+      </FormInputToggle>
+
+      <div class="flex justify-center w-full">
+        <button
+          type="submit"
+          class="border-2 border-gold bg-gold rounded text-offwhite flex items-center px-3 py-2 mb-20"
+        >
+          <div class="text-black font-bold">Termin buchen</div>
+          <div class="flex items-center justify-center bg-white rounded-full ml-2 w-4 h-4">
+            <nuxt-icon name="icon-check" class="text-sm text-black" />
+          </div>
+        </button>
+      </div>
+    </form>
   </div>
 </template>
 

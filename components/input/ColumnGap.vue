@@ -5,7 +5,7 @@
   const { componentCss, viewports, viewport } = storeToRefs(sidebarStore);
   const { saveCssClasses, setProperty, deleteProperty } = sidebarStore
 
-  const property = 'marginRight'
+  const property = 'columnGap'
 
   const isRealProperty = computed(() => {
     const entry = componentCss.value[viewport.value]?.find((entry) => entry.hasOwnProperty(property))
@@ -31,9 +31,8 @@
 <template>
   <div class="">
     <h2 class="text-xs mb-2 opacity-40">
-      Margin Right
+      Column Gap
     </h2>
-    <nuxt-icon name="icon-margin-right" class="block text-3xl -mt-1 -ml-1" />
     <div class="flex items-center gap-1" :class="[{ 'opacity-60': !isRealProperty }]">
         <input @change="sanitizeInput($event.target.value)" :value="currentProperty ? parseInt(currentProperty) : null" type="number" class="w-12 rounded-sm pl-1 bg-transparent border border-darkOffwhite border-opacity-20">
         <span class="text-sm">px</span>

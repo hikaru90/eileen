@@ -4,9 +4,29 @@
   import { storeToRefs } from "pinia";
   const sidebarStore = useSidebarStore();
   const { componentChildren } = storeToRefs(sidebarStore);
-  const { setComponentChildren, saveComponentChildren } = sidebarStore;
+  const {
+    setComponentName,
+    setComponentCss,
+    setComponentId,
+    setComponentContentType,
+    setComponentContent,
+    setComponentIsMaxContainer,
+    setComponentChildren,
+    saveComponentChildren,
+  } = sidebarStore;
   const contentStore = useContentStore();
   const { capitalize } = contentStore;
+
+  const selectChild = (child) => {
+    console.log("child", child);
+    setComponentId(child.id);
+    setComponentIsMaxContainer(child.isMaxContainer);
+    setComponentCss(child.cssClasses);
+    setComponentName("SidebarBlock");
+    setComponentContentType(child.type);
+    setComponentContent(child.content);
+    setComponentChildren(child.expand.blocks);
+  };
 </script>
 
 <template>
@@ -19,9 +39,9 @@
       :entry="child"
       :index="index"
     >
-      <div class="pb-2 px-2">
+      <button @click="selectChild(child)" class="pb-2 px-2">
         {{ capitalize(child.type) }}
-      </div>
+      </button>
     </ArrayPane>
   </div>
 </template>

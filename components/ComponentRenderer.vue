@@ -20,16 +20,22 @@
   } = sidebarStore;
   const { capitalize } = contentStore;
 
-  const props = defineProps<{
-    component: object;
-  }>();
+  const props = withDefaults(
+    defineProps<{
+      component: object;
+      isFirst?: boolean;
+    }>(),
+    {
+      isFirst: false,
+    }
+  );
 
   const state = reactive({
     matrix: [],
   });
 
   const selectBlock = () => {
-    if(authStore.token){
+    if (authStore.token) {
       setComponentId(props.component.id);
       setComponentCss(undefined);
       setComponentName("SidebarComponent");
@@ -54,8 +60,12 @@
       id="sidebarTarget"
       :is="'Component' + capitalize(props.component.type)"
       :component="props.component"
-      :class="[{ 'hover:shadow-component': authStore.token },{ 'shadow-component': authStore.token && (componentId === props.component?.id) }]"
+      :class="[
+        { 'hover:shadow-component': authStore.token },
+        { 'shadow-component': authStore.token && componentId === props.component?.id },
+      ]"
+      :isFirst="props.isFirst"
     >
-  </component>
+    </component>
   </div>
 </template>

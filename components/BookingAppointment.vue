@@ -18,11 +18,11 @@ import { BookingAppointment } from '~~/.nuxt/components';
   };
 
   const prettifyAppointmentType = (payload) => {
-    const value = defaults.find((e) => e.type === 'appointmentTypes')!.options?.find((option) => option.value === payload).label
+    const value = defaults.find((e) => e.type === 'appointmentTypes')!.options?.find((option) => option.value === payload)?.label
     return value
   }
   const prettifyService = (payload) => {
-    const value = defaults.find((e) => e.type === 'services')!.options?.find((option) => option.value === payload).label
+    const value = defaults.find((e) => e.type === 'services')!.options?.find((option) => option.value === payload)?.label
     return value
   }
 

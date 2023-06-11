@@ -5,7 +5,7 @@
   const { componentCss, viewports, viewport } = storeToRefs(sidebarStore);
   const { saveCssClasses, setProperty, deleteProperty } = sidebarStore
 
-  const property = 'marginRight'
+  const property = 'flexGrow'
 
   const isRealProperty = computed(() => {
     const entry = componentCss.value[viewport.value]?.find((entry) => entry.hasOwnProperty(property))
@@ -18,25 +18,27 @@
     if(entry) return entry[property]
   })
 
-  const sanitizeInput = (value) => {
-    if(!value){
-      deleteProperty(property)
-    }else{
-      setProperty(property, `${value}px`)
-    }
-  }
+  const state = reactive({
+    options: [
+      { value: 1, name: 'Grow'},
+      { value: 0, name: 'Don\'t Grow'},
+    ]
+  })
 
 </script>
 
 <template>
   <div class="">
     <h2 class="text-xs mb-2 opacity-40">
-      Margin Right
+      Flex Grow
     </h2>
-    <nuxt-icon name="icon-margin-right" class="block text-3xl -mt-1 -ml-1" />
-    <div class="flex items-center gap-1" :class="[{ 'opacity-60': !isRealProperty }]">
-        <input @change="sanitizeInput($event.target.value)" :value="currentProperty ? parseInt(currentProperty) : null" type="number" class="w-12 rounded-sm pl-1 bg-transparent border border-darkOffwhite border-opacity-20">
-        <span class="text-sm">px</span>
+    <div class="flex items-center gap-2" :class="[{ 'opacity-60': !isRealProperty }]">
+      <button v-for="option in state.options" @click="setProperty(property, option.value)" :key="'columnCount'+option.value" :class="[ { 'bg-white bg-opacity-20': currentProperty === option.value } ]" class="rounded-sm hover:bg-white hover:bg-opacity-20 px-2 border border-darkOffwhite border-opacity-20">
+        {{ option.name }}
+      </button>
+      <button v-if="isRealProperty" @click="deleteProperty(property)" class="border border-red rounded-sm">
+        <nuxt-icon name="icon-cross" class="text-red text-xl" />
+      </button>
     </div>
   </div>
 </template>

@@ -56,10 +56,15 @@
     savePage();
   };
   const deleteContainer = async (array, index) => {
-    await pb.collection('containers').delete(array[index]);
-    array.splice(index,1)
+    const container = await pb.collection("containers").getOne(array[index]);
+    const blockId = container.block
+    const componentId = container.component
+    if(blockId) await pb.collection("blocks").delete(blockId)
+    if(componentId) await pb.collection("components").delete(componentId)
+    await pb.collection("containers").delete(container.id);
+    array.splice(index, 1);
     savePage();
-  }
+  };
 
   const currentContainerAuth = computed(() => {
     if (authStore.token) {
@@ -69,30 +74,40 @@
   });
 
   const isSelected = (container) => {
-    const id = container?.expand.block?.id || container?.expand.component?.id
+    const id = container?.expand.block?.id || container?.expand.component?.id;
     if (componentId.value === id) return true;
     return false;
   };
 
   const addBlockContainer = async (index) => {
-    const block = await pb.collection('blocks').create({type: 'container', isMaxContainer: false, cssClasses: [[{padding: '40px 40px 40px 40px'},{margin: '40px 40px 40px 40px'}],[],[],[],[]]});
-    const container = await pb.collection('containers').create({block: block.id});
+    const block = await pb
+      .collection("blocks")
+      .create({
+        type: "default",
+        isMaxContainer: false,
+        cssClasses: [[{ paddingTop: "40px" }, { marginTop: "40px" }], [], [], [], []],
+      });
+    const container = await pb.collection("containers").create({ block: block.id });
     // const container = await pb.collection('containers').create();
-    const createdId = container.id
-    const containers = pageContent.value.containers
-    containers.splice(index, 0, createdId)
-    const page = await pb.collection('pages').update(pageContent.value.id, {containers: containers});
+    const createdId = container.id;
+    const containers = pageContent.value.containers;
+    containers.splice(index, 0, createdId);
+    const page = await pb
+      .collection("pages")
+      .update(pageContent.value.id, { containers: containers });
     refresh();
-  }
+  };
   const addComponent = async (index) => {
-    const component = await pb.collection('components').create({type: 'default'});
-    const container = await pb.collection('containers').create({component: component.id});
-    const createdId = container.id
-    const containers = pageContent.value.containers
-    containers.splice(index, 0, createdId)
-    const page = await pb.collection('pages').update(pageContent.value.id, {containers: containers});
+    const component = await pb.collection("components").create({ type: "default" });
+    const container = await pb.collection("containers").create({ component: component.id });
+    const createdId = container.id;
+    const containers = pageContent.value.containers;
+    containers.splice(index, 0, createdId);
+    const page = await pb
+      .collection("pages")
+      .update(pageContent.value.id, { containers: containers });
     refresh();
-  }
+  };
 
   onMounted(() => {
     setPage(pageContent.value);
@@ -100,7 +115,7 @@
 </script>
 
 <template>
-  <main>
+  <main class="mt-24">
     <div v-if="state.storePending">pending</div>
     <div v-else>
       <DebugPane v-if="contentStore.debugVisible" :content="page" @refresh="refresh" />
@@ -109,10 +124,13 @@
         <div class="">
           <!-- <h1>{{ page?.title }}</h1> -->
           <!-- {{ content }} -->
-          <Adder @addBlock="addBlockContainer(0)" @addComponent="addComponent(0)" displayComponentOption />
+          <Adder
+            @addBlock="addBlockContainer(0)"
+            @addComponent="addComponent(0)"
+            displayComponentOption
+          />
           <div
             @mouseenter="state.currentContainer = index"
-            @mouseleave="state.currentContainer = null"
             v-if="page?.expand"
             v-for="(container, index) in page.expand.containers"
             :key="container.id"
@@ -123,7 +141,10 @@
             ]"
             class="relative"
           >
-            <div v-show="currentContainerAuth === index" class="absolute w-full flex justify-between pointer-events-none z-10">
+            <div
+              v-show="currentContainerAuth === index"
+              class="absolute w-full flex justify-between pointer-events-none z-10"
+            >
               <div class="flex items-center pointer-events-auto">
                 <button @click="moveUpAndSave(page.containers, index)" class="bg-gold">
                   <nuxt-icon name="icon-triangle_up" class="text-xl" />
@@ -138,8 +159,12 @@
                 </button>
               </div>
             </div>
-            <Container :container="container" />
-            <Adder @addBlock="addBlockContainer(index + 1)" @addComponent="addComponent(0)" displayComponentOption />
+            <Container :container="container" :isFirst="index === 0" />
+            <Adder
+              @addBlock="addBlockContainer(index + 1)"
+              @addComponent="addComponent(index + 1)"
+              displayComponentOption
+            />
           </div>
         </div>
       </div>

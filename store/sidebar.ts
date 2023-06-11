@@ -13,6 +13,7 @@ export const useSidebarStore = defineStore("sidebarStore", {
     ],
     viewport: 0,
     componentIsMaxContainer: undefined,
+    limitBackgroundToMaxContainer: undefined,
     componentId: undefined,
     componentName: "",
     componentCss: [],
@@ -31,6 +32,9 @@ export const useSidebarStore = defineStore("sidebarStore", {
     },
     setComponentIsMaxContainer(payload: boolean) {
       this.componentIsMaxContainer = payload;
+    },
+    setComponentBackgroundToMaxContainer(payload: boolean) {
+      this.limitBackgroundToMaxContainer = payload;
     },
     setComponentName(payload: string) {
       this.componentName = payload;
@@ -75,7 +79,6 @@ export const useSidebarStore = defineStore("sidebarStore", {
       }
       const newValue = this.componentCss[this.viewport].filter((value) => {
         const entry = Object.keys(value).length !== 0;
-        console.log("entry", entry);
         return entry;
       });
       this.componentCss[this.viewport] = newValue;
@@ -93,13 +96,13 @@ export const useSidebarStore = defineStore("sidebarStore", {
         console.log("error saving componentContentType", err);
       }
     },
-    async saveContentType() {
+    async saveContentType(skipRefresh) {
       try {
         console.log("save componentContentType");
         const record = await pb
           .collection(this.componentType + "s")
           .update(this.componentId, { type: this.componentContentType });
-        EventBus.emit("refresh");
+          if(!skipRefresh) EventBus.emit("refresh");
         return record;
       } catch (err) {
         console.log("error saving componentContentType", err);
@@ -117,6 +120,18 @@ export const useSidebarStore = defineStore("sidebarStore", {
         console.log("error saving isMaxContainer", err);
       }
     },
+    async saveLimitToMaxContainer() {
+      try {
+        console.log("save limitToMaxContainer");
+        const record = await pb
+          .collection(this.componentType + "s")
+          .update(this.componentId, { limitBackgroundToMaxContainer: this.limitBackgroundToMaxContainer });
+        EventBus.emit("refresh");
+        return record;
+      } catch (err) {
+        console.log("error saving limitBackgroundToMaxContainer", err);
+      }
+    },
     async saveComponentChildren() {
       try {
         console.log("save componentChildren");
@@ -129,13 +144,13 @@ export const useSidebarStore = defineStore("sidebarStore", {
         console.log("error saving componentChildren", err);
       }
     },
-    async saveContent() {
+    async saveContent(skipRefresh) {
       try {
         console.log("save content");
         const record = await pb
           .collection(this.componentType + "s")
           .update(this.componentId, { content: this.componentContent });
-        EventBus.emit("refresh");
+        if(!skipRefresh) EventBus.emit("refresh");
         return record;
       } catch (err) {
         console.log("error saving componentContent", err);

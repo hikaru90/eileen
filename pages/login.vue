@@ -4,28 +4,33 @@
   const authStore = useAuthStore();
   const { login } = authStore;
 
-  let email = "alexbueckner@gmail.com";
-  let password = "dif6rixa3";
+  let email = "";
+  let password = "";
+
+  definePageMeta({
+    layout: "blank",
+  });
+
 </script>
 
 <template>
-  <div class="flex items-center justify-center">
-    <form @submit.prevent="login(email, password)" class="flex flex-col">
+  <div class="flex items-center justify-center flex-grow">
+    <form @submit.prevent="login(email, password)" class="flex flex-col gap-2">
       <input
         v-model="email"
         type="email"
         required
-        placeholder="Email"
-        class="border border-grey rounded-sm mb-2"
+        placeholder="E-Mail"
+        class="border border-grey border-opacity-20 rounded-sm px-3 py-2"
       />
       <input
         v-model="password"
         type="password"
         required
-        placeholder="Password"
-        class="border border-grey rounded-sm mb-2"
+        placeholder="Passwort"
+        class="border border-grey border-opacity-20 rounded-sm px-3 py-2"
       />
-      <button type="submit" class="bg-green rounded-sm">Log In</button>
+      <button type="submit" class="bg-green rounded-sm px-3 py-2">Einloggen</button>
     </form>
   </div>
 </template>

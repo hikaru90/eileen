@@ -69,6 +69,11 @@
       sort: "-start",
     })
   );
+
+  definePageMeta({
+    layout: "blank",
+  });
+
 </script>
 
 <template>

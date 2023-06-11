@@ -6,25 +6,31 @@
   const { setComponentContent, saveContent, saveComponentChildren } = sidebarStore;
   const { moveUp, moveDown } = contentStore;
 
-  const emit = defineEmits(['arrayChanged'])
+  const emit = defineEmits(["arrayChanged"]);
 
-  const props = defineProps<{
-    array: [];
-    entry: object;
-    index: number;
-  }>();
+  const props = withDefaults(
+    defineProps<{
+      array: [];
+      entry: object;
+      index: number;
+      label?: string;
+    }>(),
+    {
+      label: "Eintrag",
+    }
+  );
 
   const moveUpAndSave = (array, index) => {
     moveUp(array, index);
-    emit('arrayChanged')
+    emit("arrayChanged");
   };
   const moveDownAndSave = (array, index) => {
     moveDown(array, index);
-    emit('arrayChanged')
+    emit("arrayChanged");
   };
   const deleteAndSave = (array, index) => {
-    array.splice(index,1)
-    emit('arrayChanged')
+    array.splice(index, 1);
+    emit("arrayChanged");
   };
 
   const state = reactive({
@@ -35,10 +41,19 @@
 <template>
   <div class="mb-2 border border-offwhite rounded-sm border-opacity-20">
     <div
-      class="flex items-center justify-between px-2 hover:bg-offwhite hover:bg-opacity-20" :class="[{ 'border-b border-offwhite mb-2 border-opacity-20' : state.expanded }]"
+      class="flex items-center justify-between px-2 hover:bg-offwhite hover:bg-opacity-20"
+      :class="[{ 'border-b border-offwhite mb-2 border-opacity-20': state.expanded }]"
     >
-      <button @click="state.expanded = !state.expanded" class="flex-grow text-left">
-        {{ state.expanded ? "-" : "+" }}
+      <button
+        @click="state.expanded = !state.expanded"
+        class="flex-grow text-left flex items-center gap-2"
+      >
+        <div>
+          {{ state.expanded ? "-" : "+" }}
+        </div>
+        <div class="flex-grow">
+          {{ props.label }}
+        </div>
       </button>
       <div class="flex items-center">
         <button @click="deleteAndSave(props.array, props.index)">

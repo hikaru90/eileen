@@ -31,7 +31,7 @@
 <template>
   <div class="">
     <h2 class="text-xs mb-2 opacity-40">
-      Margin Left
+      Margin Top
     </h2>
     <nuxt-icon name="icon-margin-top" class="block text-3xl -mt-1 -ml-1" />
     <div class="flex items-center gap-1" :class="[{ 'opacity-60': !isRealProperty }]">
