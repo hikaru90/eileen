@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
 import PocketBase from "pocketbase";
-const pb = new PocketBase("https://167.172.96.210");
+const pb = new PocketBase("http://dimplegoertz.de");
 
 export default defineEventHandler(async (event) => {
   try {
