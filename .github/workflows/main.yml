@@ -35,4 +35,5 @@ jobs:
 
             # Build the app
             npm run build
+            # pm2 start npm --name "App Production" -- start
             pm2 restart all
