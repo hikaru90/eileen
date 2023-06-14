@@ -42,7 +42,7 @@ Start the server on `http://localhost:3000`
 npm run start
 ```
 
-## Pocketbase
+## Server Setup
 
 Don't bother installing Pocketbase locally (although you totally can), it is just too easy deploying and building the db in the Cloud.
 
@@ -187,12 +187,12 @@ You can now restart nginx
 sudo service nginx restart
 ```
 
-### Congratulations
+## Congratulations
 
 You should see your app on `http://domain.com` and `https://domain.com`  
 Your backend sould be reachable at `https://backend.domain.com/_`
 
-### Use systemd - Nobody wants to remember the above
+## Use systemd - Nobody wants to remember the above
 
 Create two files in `/usr/lib/systemd/system` to register the following services:
 
