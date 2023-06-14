@@ -224,9 +224,8 @@ After=network.target
 [Service]
 User=root
 WorkingDirectory=/var/www/http
-ExecStart=/usr/bin/npm run start
+ExecStart=/root/.nvm/versions/node/v16.20.0/bin/node .output/server/index.mjs
 Restart=always
-Environment=PATH=/usr/bin:/usr/local/bin
 Environment=NODE_ENV=production
 StandardOutput = append:/var/www/http/errors.log
 StandardError  = append:/var/www/http/errors.log
