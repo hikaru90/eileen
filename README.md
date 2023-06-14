@@ -22,7 +22,7 @@ pnpm install
 
 ### Development Server
 
-Start the development server on http://localhost:5000
+Start the development server on `http://localhost:5000`
 
 ```bash
 npm run dev
@@ -36,7 +36,7 @@ Build the application for production:
 npm run build
 ```
 
-Start the server on http://localhost:3000
+Start the server on `http://localhost:3000`
 
 ```bash
 npm run start
@@ -108,11 +108,11 @@ unzip pocketbase_filename
 
 *Our Pocketbase backend now runs on backend.domain.com:8443*
 
-You could just *./pocketbase serve* to see if everything is working, but we want to use http and https in production later, so we might as well set it up correctly.
+You could just `./pocketbase serve` to see if everything is working, but we want to use http and https in production later, so we might as well set it up correctly.
 
 #### Nginx in /etc/nginx/sites-available
 
-- I have an ssl-certificate (.crt) from my domain registrar, which I stored together with my private key (.pem) in */etc/nginx/ssl*
+- I have an ssl-certificate `.crt` from my domain registrar, which I stored together with my private key `.pem` in `/etc/nginx/ssl`
 - I use a subdomain for my backend. (I am not sure if you need one)
 
 The default Nginx-config I am using looks like this
@@ -189,12 +189,12 @@ sudo service nginx restart
 
 ### Congratulations
 
-You should see your app on http://domain.com and https://domain.com
-Your backend sould be reachable at https://backend.domain.com/_
+You should see your app on `http://domain.com` and `https://domain.com`  
+Your backend sould be reachable at `https://backend.domain.com/_`
 
-### Use systemd - Nobody wants to remember this
+### Use systemd - Nobody wants to remember the above
 
-Create two files in */usr/lib/systemd/system* to register the following services:
+Create two files in `/usr/lib/systemd/system` to register the following services:
 
 pocketbase.service
 ```bash
@@ -235,4 +235,4 @@ StandardError  = append:/var/www/http/errors.log
 WantedBy=multi-user.target
 ```
 
-Those should now run on server start and restart if it goes down.
+Those should now run on server start and restart if it restarts.
