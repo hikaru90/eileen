@@ -1,5 +1,5 @@
 import PocketBase from 'pocketbase';
-const pb = new PocketBase('http://dimplegoertz.de');
+const pb = new PocketBase("/");
 import { useStorage } from '@vueuse/core'
 
 export default defineNuxtRouteMiddleware(async (to) => {

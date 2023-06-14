@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
 import PocketBase from "pocketbase";
-const pb = new PocketBase("http://dimplegoertz.de");
+const pb = new PocketBase("/");
 const config = useRuntimeConfig();
 
 export default defineEventHandler(async (event) => {

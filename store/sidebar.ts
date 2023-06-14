@@ -167,12 +167,5 @@ export const useSidebarStore = defineStore("sidebarStore", {
         console.log("error saving componentCss", err);
       }
     },
-    async safelistDynamicClasses() {
-      try {
-        await fetch("/nuxtapi/saveTailwindClasses");
-      } catch (err) {
-        console.log("error saving talwind classes from sidebarStore");
-      }
-    },
   },
 });
