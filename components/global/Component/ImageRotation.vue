@@ -15,7 +15,7 @@
 
   const state = reactive({
     donutSize: 0.15,
-    timeout: 5000,
+    timeout: 8000,
     currentSlide: 0,
     interval: undefined,
   });
@@ -75,7 +75,7 @@
           <div
             v-for="(slide, index) in props.component.content.slides"
             :key="'slide' + index"
-            class="slide flex items-start gap-4 transition-opacity delay-300 relative -ml-2 lg:ml-0"
+            class="slide flex items-start gap-4 transition-opacity relative -ml-2 lg:ml-0"
             :class="[index === state.currentSlide ? 'opacity-100' : 'opacity-40']"
           >
             <div
