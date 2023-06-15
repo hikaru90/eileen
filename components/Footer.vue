@@ -25,6 +25,18 @@
   >
     <div class="max-container">
       <div class="flex flex-col md:flex-row justify-between gap-10">
+        <div class="w-1/5">
+          <h2 class="font-bold opacity-60 mb-2 md:mb-6">
+            Privatpraxis<br />
+          </h2>
+          <p class="">
+            Dimple Goertz<br />
+            Paar- und Sexualtherapeutin & Beziehungscoach<br />
+            Breitscheidstraße 33<br />
+            70176 Stuttgart<br />
+          </p>
+
+        </div>
         <div class="" v-for="column in footerItems">
           <h2 class="font-bold opacity-60 mb-2 md:mb-6">
             {{ column[0].footerGroup }}

@@ -261,7 +261,9 @@
       </div>
     </div>
     <div class="w-full lg:w-1/2">
-      <h2 class="font-bold text-md mb-10 mt-6">Wählen Sie einen Termin aus</h2>
+      <h2 class="font-bold text-md mb-10 mt-6">Hier können Sie ganz bequem über das Online Buchungstool einen Erst- oder Folgetermin buchen.<br /><br />
+        Wählen Sie ein Datum und eine passende Uhrzeit aus.
+      </h2>
       <template v-if="state.timeslots.length === 0">
         Am
         <span class="font-bold">

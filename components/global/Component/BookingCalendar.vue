@@ -62,15 +62,16 @@
         <div
           class="w-full lg:w-2/3 font-bold border-2 rounded border-green bg-green bg-opacity-40 inline-block px-6 py-4 mb-10 text-center"
         >
-          Vielen Dank für Ihre Buchung. <br>Sie haben soeben eine Zusammenfassung Ihrer Daten per E-Mail erhalten.
+          Vielen Dank für Ihre Buchung. <br>
+          Ich melde mich zeitnah per E-Mail bei Ihnen.
+          <!-- Sie haben soeben eine Zusammenfassung Ihrer Daten per E-Mail erhalten. -->
         </div>
       </div>
       <div v-else class="flex justify-center my-20">
         <div
           class="w-full lg:w-2/3 font-bold border-2 rounded border-red bg-red bg-opacity-40 inline-block px-6 py-4 mb-10 text-center"
         >
-          Bei der Übermittlung Ihrer Daten ist leider ein Fehler aufgetreten. <br>Versuchen Sie es bitte
-          erneut. Sollte das Problem weiterhin bestehen, schreiben Sie mir bitte eine Mail an
+          Bei der Übermittlung Ihrer Daten ist leider ein Fehler aufgetreten. <br>Versuchen Sie es bitte erneut. Sollte das Problem weiterhin bestehen, schreiben Sie mir bitte eine Mail an
           <a href="mailto:kontakt@dimplegoertz.de" class="underline">kontakt@dimplegoertz.de</a>.
         </div>
       </div>
