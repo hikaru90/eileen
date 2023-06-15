@@ -17,15 +17,12 @@
 <template>
   <div class="mt-28 mb-40">
     <div class="max-container">
-      <div class="flex flex-col items-center justify-center mb-20">
+      <div class="flex flex-col items-center justify-center mb-10">
         <h2 class="font-bold text-lg md:text-xl lg:text-2xl mb-16">
           {{ props.component.content?.heading }}
         </h2>
-        <p style="max-width: 36em" class="text-center">
-          {{ props.component.content?.subline }}
-        </p>
       </div>
-      <div class="flex flex-col md:flex-row gap-32 items-center justify-center">
+      <div class="flex flex-col md:flex-row gap-32 items-center justify-center mb-32">
         <div v-for="(card, index) in props.component.content?.prices" class="relative">
           <nuxt-img format="webp"
             :src="`/postit-${(index + 1) % 4}.png`"
@@ -56,6 +53,12 @@
             </div>
           </NuxtLink>
         </div>
+      </div>
+      <div class="flex items-center justify-center">
+
+        <p style="max-width: 36em" class="text-center text-sm">
+          {{ props.component.content?.subline }}
+        </p>
       </div>
     </div>
   </div>
