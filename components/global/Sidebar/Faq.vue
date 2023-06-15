@@ -57,7 +57,7 @@
         </div>
       </ArrayPane>
     </div>
-    <button
+    <button aria-label="FAQ Frage hinzufügen"
       @click="componentContent.faqs.push({ question: '', answer: '' })"
       class="rounded-sm hover:bg-white hover:bg-opacity-20 px-2 border border-darkOffwhite border-opacity-20"
     >

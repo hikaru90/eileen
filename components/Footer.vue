@@ -39,7 +39,7 @@
       <div class="mt-16 text-sm flex justify-between">
         <span class="opacity-60"> © {{ new Date().getFullYear() }} — Dimple Goertz </span>
         <div>
-          <button v-if="authStore.token" @click="logout" class="text-red flex items-center">
+          <button aria-label="Anmelden" v-if="authStore.token" @click="logout" class="text-red flex items-center">
             <nuxt-icon name="icon-cross" class="text-2xl" />
             Ausloggen
           </button>

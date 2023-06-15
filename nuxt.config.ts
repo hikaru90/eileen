@@ -13,14 +13,20 @@ export default defineNuxtConfig({
     typeCheck: false,
   },
 
+  app: {
+    head: {
+      htmlAttrs: {
+        lang: "de",
+      },
+      charset: "utf-8",
+    },
+  },
+
   css: ["~/assets/styles/style.scss"],
 
-  modules: ["@nuxtjs/tailwindcss", "@pinia/nuxt", "@vueuse/nuxt", "nuxt-icons"],
+  modules: ["@nuxtjs/tailwindcss", "@pinia/nuxt", "@vueuse/nuxt", "nuxt-icons", "@nuxt/image"],
 
-  plugins: [
-    "~/plugins/piniaStore",
-    { src: "~/plugins/markdown-it", ssr: false },
-  ],
+  plugins: ["~/plugins/piniaStore", { src: "~/plugins/markdown-it", ssr: false }],
 
   tailwindcss: {
     exposeConfig: true,

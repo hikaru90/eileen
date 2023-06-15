@@ -27,7 +27,7 @@
       </div>
       <div class="flex flex-col md:flex-row gap-32 items-center justify-center">
         <div v-for="(card, index) in props.component.content?.prices" class="relative">
-          <img
+          <nuxt-img format="webp"
             :src="`/postit-${(index + 1) % 4}.png`"
             alt="postit"
             style="width: 170%; height: 155%; left: -35%; top: -17%; max-width: none"

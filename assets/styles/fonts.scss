@@ -7,6 +7,7 @@
       url('~/assets/fonts/subset-heading-Italic.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
@@ -19,6 +20,7 @@
       url('~/assets/fonts/subset-Inter-Regular.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
+  font-display: swap;
 }
 @font-face {
   font-family: 'Inter';
@@ -30,4 +32,5 @@
       url('~/assets/fonts/subset-Inter-Bold.ttf') format('truetype');
   font-weight: bold;
   font-style: normal;
+  font-display: swap;
 }

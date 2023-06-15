@@ -14,7 +14,7 @@
 
 <template>
   <div class="bg-white shadow-lg rounded border border-grey border-opacity-10">
-    <button @click="state.isOpen = !state.isOpen" class="w-full flex items-center justify-between p-4 md:p-6 lg:px-8 lg:py-6">
+    <button aria-label="FAQ Frage öffnen" @click="state.isOpen = !state.isOpen" class="w-full flex items-center justify-between p-4 md:p-6 lg:px-8 lg:py-6">
       <span class="text-left mr-5">
         {{ faq.question }}
       </span>

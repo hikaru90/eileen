@@ -191,7 +191,7 @@
     <div class="w-full lg:w-1/2">
       <div class="flex items-center justify-between mb-2">
         <div style="width: 14.285%" class="flex items-center justify-center">
-          <button
+          <button aria-label="Monat zurück"
             v-if="state.month > state.minMonth"
             @click.stop="decreaseMonth"
             class="aspect-square w-full hover:bg-gold rounded-full m-3 flex items-center justify-center"
@@ -203,7 +203,7 @@
           {{ new Date(state.year, state.month).toLocaleString("de-DE", { month: "long" }) }}
         </div>
         <div style="width: 14.285%" class="flex items-center justify-center">
-          <button
+          <button aria-label="Monat vor"
             v-if="state.month < state.maxMonth"
             @click.stop="increaseMonth"
             class="aspect-square w-full hover:bg-gold rounded-full m-3 flex items-center justify-center"
@@ -241,7 +241,7 @@
           :class="[day.isDisabled ? 'text-lightGrey text-opacity-60' : '']"
           class="flex items-center justify-center flex-shrink-0 p-1"
         >
-          <button
+          <button aria-label="Tag auswählen"
             v-if="!day.isDisabled"
             @click.stop="selectDate(day.date)"
             class="hover:border hover:border-gold rounded-full w-full aspect-square"
@@ -279,7 +279,7 @@
         </div>
 
         <div class="flex items-center flex-wrap gap-2">
-          <button
+          <button aria-label="Zeitslot auswählen"
             @click="
               emit('selectTimeslot', {
                 year: state.year,

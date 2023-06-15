@@ -12,7 +12,7 @@
 
     <div class="max-container">
       <div class="flex flex-col md:flex-row items-start md:items-center justify-start mb-20">
-        <img src="/dimple_goertz2.jpg" alt="Dimple Goertz" style="max-width: 260px" class="w-full mr-10 rounded-md" />
+        <nuxt-img format="webp" src="/dimple_goertz2.jpg" alt="Dimple Goertz" style="max-width: 260px" class="w-full mr-10 rounded-md" />
         <h1 class="mt-6">
           <span class="font-heading text-xl lg:text-4xl"> Dimple Goertz<br /> </span>
           <span class="text-2xl"> Paartherapeutin und systemischer Coach </span>

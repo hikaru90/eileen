@@ -44,7 +44,7 @@
       class="flex items-center justify-between px-2 hover:bg-offwhite hover:bg-opacity-20"
       :class="[{ 'border-b border-offwhite mb-2 border-opacity-20': state.expanded }]"
     >
-      <button
+      <button aria-label="Expand"
         @click="state.expanded = !state.expanded"
         class="flex-grow text-left flex items-center gap-2"
       >
@@ -56,13 +56,13 @@
         </div>
       </button>
       <div class="flex items-center">
-        <button @click="deleteAndSave(props.array, props.index)">
+        <button aria-label="Delete and save" @click="deleteAndSave(props.array, props.index)">
           <nuxt-icon name="icon-cross" class="text-xl" />
         </button>
-        <button @click="moveUpAndSave(props.array, props.index)">
+        <button aria-label="Move up and save" @click="moveUpAndSave(props.array, props.index)">
           <nuxt-icon name="icon-triangle_up" class="text-xl" />
         </button>
-        <button @click="moveDownAndSave(props.array, props.index)">
+        <button aria-label="Move down and save" @click="moveDownAndSave(props.array, props.index)">
           <nuxt-icon name="icon-triangle_down" class="text-xl" />
         </button>
       </div>

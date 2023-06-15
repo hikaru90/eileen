@@ -77,7 +77,7 @@
     </template>
     <template v-else>
       <div class="flex items-center justify-center gap-10">
-        <button
+        <button aria-label="Schritt auswählen"
           @click="validateAndSelectStep(step.id)"
           v-for="(step, index) in state.steps"
           :key="'step' + index"

@@ -296,7 +296,7 @@
       </FormInputToggle>
 
       <div class="flex justify-center w-full">
-        <button
+        <button aria-label="Termin buchen"
           type="submit"
           class="border-2 border-gold bg-gold rounded text-offwhite flex items-center px-3 py-2 mb-20"
         >

@@ -45,7 +45,7 @@ import { BookingAppointment } from '~~/.nuxt/components';
   <div
     class="select-none border border-darkGrey border-opacity-40 bg-offwhite rounded"
   >
-    <button @click="state.isOpen = !state.isOpen" class="w-full flex items-center justify-between p-4">
+    <button aria-label="Buchung öffnen" @click="state.isOpen = !state.isOpen" class="w-full flex items-center justify-between p-4">
       <div class="flex items-center">
         <div>Buchung</div>
         <nuxt-icon v-if="!state.isOpen" name="icon-triangle_down" class="text-xl" />

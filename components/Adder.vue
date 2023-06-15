@@ -19,13 +19,13 @@
     <div
       class="absolute top-1/2 transform -translate-y-1/2 w-full flex items-center justify-center opacity-0 z-10 gap-2"
     >
-      <button @click="emit('addBlock')" class="p-0">
+      <button aria-label="Add Block" @click="emit('addBlock')" class="p-0">
         <div class="flex items-center bg-lightBlue rounded-full m-0">
           <nuxt-icon name="icon-plus" class="text-xl" />
           <span style="padding-top: 2px" class="text-xs pr-2"> Block </span>
         </div>
       </button>
-      <button v-if="props.displayComponentOption" @click="emit('addComponent')" class="p-0">
+      <button aria-label="Add Component" v-if="props.displayComponentOption" @click="emit('addComponent')" class="p-0">
         <div class="flex items-center bg-lightGreen rounded-full m-0">
           <nuxt-icon name="icon-plus" class="text-xl" />
           <span style="padding-top: 2px" class="text-xs pr-2"> Component </span>

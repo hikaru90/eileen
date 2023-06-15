@@ -28,10 +28,17 @@
 
   const { pending, data: pageContent } = await useAsyncData("pageContent", () =>
     pb.collection("pages").getFirstListItem(`slug="${slug}"`, {
-      expand: "containers.block.blocks,containers.component",
+      expand: "containers.block.blocks,containers.component,seo",
     })
   );
   state.storePending = false;
+
+  useHead({
+    title: pageContent.value.expand.seo.title
+      ? `Dimple Goertz — ${pageContent.value.expand.seo.title}`
+      : `Dimple Goertz — ${pageContent.value.title}`,
+    meta: [{ name: "description", content: pageContent.value.expand.seo.description }],
+  });
 
   EventBus.on("refresh", () => {
     console.log("content saved");
@@ -57,10 +64,10 @@
   };
   const deleteContainer = async (array, index) => {
     const container = await pb.collection("containers").getOne(array[index]);
-    const blockId = container.block
-    const componentId = container.component
-    if(blockId) await pb.collection("blocks").delete(blockId)
-    if(componentId) await pb.collection("components").delete(componentId)
+    const blockId = container.block;
+    const componentId = container.component;
+    if (blockId) await pb.collection("blocks").delete(blockId);
+    if (componentId) await pb.collection("components").delete(componentId);
     await pb.collection("containers").delete(container.id);
     array.splice(index, 1);
     savePage();
@@ -80,13 +87,11 @@
   };
 
   const addBlockContainer = async (index) => {
-    const block = await pb
-      .collection("blocks")
-      .create({
-        type: "default",
-        isMaxContainer: false,
-        cssClasses: [[{ paddingTop: "40px" }, { marginTop: "40px" }], [], [], [], []],
-      });
+    const block = await pb.collection("blocks").create({
+      type: "default",
+      isMaxContainer: false,
+      cssClasses: [[{ paddingTop: "40px" }, { marginTop: "40px" }], [], [], [], []],
+    });
     const container = await pb.collection("containers").create({ block: block.id });
     // const container = await pb.collection('containers').create();
     const createdId = container.id;

@@ -57,7 +57,7 @@
             <NuxtLink to="/"> Dimple Goertz </NuxtLink>
           </div>
 
-          <button @click="toggleMenu" class="flex items-center justify-center rounded p-1">
+          <button aria-label="Menü öffnen" @click="toggleMenu" class="flex items-center justify-center rounded p-1">
             <nuxt-icon name="icon-cross" class="text-3xl text-red" />
           </button>
         </div>
@@ -126,7 +126,7 @@
           </div>
 
           <div class="lg:hidden">
-            <button @click="toggleMenu" class="flex items-center justify-center rounded p-1">
+            <button aria-label="Menü öffnen" @click="toggleMenu" class="flex items-center justify-center rounded p-1">
               <nuxt-icon name="icon-menu" class="text-2xl text-white" />
             </button>
           </div>
