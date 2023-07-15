@@ -68,10 +68,8 @@
           ></div>
         </div>
       </div>
-      <div class="w-full lg:w-1/2">
-        <div class="max-container">
-          <div class="sm:ml-10">
-
+      <div class="w-full lg:w-1/2 p-10 lg:p-0">
+        <div class="sm:ml-10">
           <div
             v-for="(slide, index) in props.component.content.slides"
             :key="'slide' + index"
@@ -88,13 +86,7 @@
                     <stop offset="50%" stop-color="#FBF48A" />
                     <stop offset="100%" stop-color="#9B6C1C" />
                   </linearGradient>
-                  <circle
-                    class="transform-center"
-                    fill="#e3c879"
-                    cx="20"
-                    cy="20"
-                    r="12"
-                  ></circle>
+                  <circle class="transform-center" fill="#e3c879" cx="20" cy="20" r="12"></circle>
                   <circle
                     :style="[
                       {
@@ -131,12 +123,11 @@
                   <nuxt-icon :name="slide.icon" class="text-sm" />
                 </div>
               </a>
-              <p style="max-width:19em;" class="">
+              <p style="max-width: 19em" class="">
                 {{ slide.description }}
               </p>
             </div>
           </div>
-        </div>
         </div>
       </div>
     </div>
@@ -148,7 +139,7 @@
     .connector {
       display: none;
     }
-    .slideParagraph{
+    .slideParagraph {
       @apply mb-0;
     }
   }

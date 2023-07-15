@@ -23,7 +23,7 @@
         <nuxt-icon v-else name="icon-plus" class="text-xl" />
       </div>
     </button>
-    <div :style="[{ 'maxHeight': state.isOpen ? '500px' : '0px' }]" class="overflow-hidden transition-all ">
+    <div :style="[{ 'maxHeight': state.isOpen ? '1500px' : '0px' }]" class="overflow-hidden transition-all ">
       <div v-html="$mdRenderer.render(faq.answer)" class="p-4 md:px-6 md:pt-4 md:pb-8 lg:px-8 lg:pt-6 lg:pb-10 border-t border-grey border-opacity-10 leading-relaxed">
       </div>
     </div>
