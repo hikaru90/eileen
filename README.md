@@ -91,11 +91,18 @@ npm run start
 
 *So our Nuxt app now runs at localhost:3000*
 
-If something is out of sync
+If something is out of sync, revert to a specific commit:
 
 ```bash
 git reset hard id_of_last_working_commit
 ```
+
+Or reset the branch to the last commit:
+
+```bash
+git reset --hard
+```
+
 
 #### Pocketbase in /root/pb
 
@@ -235,3 +242,13 @@ WantedBy=multi-user.target
 ```
 
 Those should now run on server start and restart if it restarts.
+
+## Deployment with systemd
+
+- Push your commits
+- SSH into the droplet
+- go to `var/www/http/`
+- `git pull`
+- `sudo systemctl stop nuxtapp.service`
+- `npm run build`
+- `sudo systemctl start nuxtapp.service`
