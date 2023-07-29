@@ -29,7 +29,7 @@
           <h2 class="font-bold opacity-60 mb-2 md:mb-6">
             Privatpraxis<br />
           </h2>
-          <p class="">
+          <p style="line-height:37px;" class="">
             Dimple Goertz<br />
             Paar- und Sexualtherapeutin & Beziehungscoach<br />
             Breitscheidstraße 33<br />

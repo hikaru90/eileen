@@ -40,6 +40,7 @@ export default defineNuxtConfig({
     public: {
       ENV: process.env.ENV,
       SERVER_URL: process.env.SERVER_URL,
+      BREVO_API_KEY: process.env.BREVO_API_KEY,
     },
   },
 });

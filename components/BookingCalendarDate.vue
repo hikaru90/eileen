@@ -49,14 +49,21 @@
     }
   };
 
+  const addDays = (date, days) => {
+    var result = new Date(date);
+    result.setDate(result.getDate() + days);
+    return result;
+  };
+
   const isWeekend = (dayIndex: number) => {
     if (dayIndex === 6 || dayIndex === 0) return true;
     return false;
   };
-  const isInThePast = (year: number, month: number, day: number) => {
+  const isTooLate = (year: number, month: number, day: number) => {
     const currentDate = new Date().setHours(0, 0, 0, 0);
+    const datePlus5 = new Date(addDays(currentDate, 5)).setHours(0, 0, 0, 0);
     const truncatedDate = new Date(year, month, day).setHours(0, 0, 0, 0);
-    if (truncatedDate < currentDate) return true;
+    if (truncatedDate < datePlus5) return true;
     return false;
   };
 
@@ -68,7 +75,7 @@
       return {
         date: day,
         weekday: weekday,
-        isDisabled: isWeekend(weekday) || isInThePast(state.year, state.month, day),
+        isDisabled: isWeekend(weekday) || isTooLate(state.year, state.month, day),
       };
     });
   });
@@ -191,7 +198,8 @@
     <div class="w-full lg:w-1/2">
       <div class="flex items-center justify-between mb-2">
         <div style="width: 14.285%" class="flex items-center justify-center">
-          <button aria-label="Monat zurück"
+          <button
+            aria-label="Monat zurück"
             v-if="state.month > state.minMonth"
             @click.stop="decreaseMonth"
             class="aspect-square w-full hover:bg-gold rounded-full m-3 flex items-center justify-center"
@@ -203,7 +211,8 @@
           {{ new Date(state.year, state.month).toLocaleString("de-DE", { month: "long" }) }}
         </div>
         <div style="width: 14.285%" class="flex items-center justify-center">
-          <button aria-label="Monat vor"
+          <button
+            aria-label="Monat vor"
             v-if="state.month < state.maxMonth"
             @click.stop="increaseMonth"
             class="aspect-square w-full hover:bg-gold rounded-full m-3 flex items-center justify-center"
@@ -241,7 +250,8 @@
           :class="[day.isDisabled ? 'text-lightGrey text-opacity-60' : '']"
           class="flex items-center justify-center flex-shrink-0 p-1"
         >
-          <button aria-label="Tag auswählen"
+          <button
+            aria-label="Tag auswählen"
             v-if="!day.isDisabled"
             @click.stop="selectDate(day.date)"
             class="hover:border hover:border-gold rounded-full w-full aspect-square"
@@ -261,7 +271,9 @@
       </div>
     </div>
     <div class="w-full lg:w-1/2">
-      <h2 class="font-bold text-md mb-10 mt-6">Hier können Sie ganz bequem über das Online Buchungstool einen Erst- oder Folgetermin buchen.<br /><br />
+      <h2 class="font-bold text-md mb-10 mt-6">
+        Hier können Sie ganz bequem über das Online Buchungstool einen Erst- oder Folgetermin
+        buchen.<br /><br />
         Wählen Sie ein Datum und eine passende Uhrzeit aus.
       </h2>
       <template v-if="state.timeslots.length === 0">
@@ -281,7 +293,8 @@
         </div>
 
         <div class="flex items-center flex-wrap gap-2">
-          <button aria-label="Zeitslot auswählen"
+          <button
+            aria-label="Zeitslot auswählen"
             @click="
               emit('selectTimeslot', {
                 year: state.year,

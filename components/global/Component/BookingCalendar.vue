@@ -1,4 +1,8 @@
 <script setup lang="ts">
+  import useBrevo from "~~/composables/useBrevo";
+
+  const { sendMail } = useBrevo();
+
   const props = defineProps<{
     component: object;
   }>();
@@ -42,16 +46,29 @@
     }
   };
 
-  const handleFormSubmit = (payload) => {
-    console.log('payload',payload);
-    if (payload.success === false) {
-      console.log('state.success = false;',state.success = false);
-      state.success = false;
-    } else {
-      console.log('state.success = true;',state.success = true);
-      state.success = true;
+  const handleFormSubmit = async (payload) => {
+    try {
+      console.log("payload", payload);
+      if (payload.success === false) {
+        console.log("state.success = false;", (state.success = false));
+        state.success = false;
+      } else {
+        console.log("state.success = true;", (state.success = true));
+
+        const formData = {
+          ...payload.formValues,
+          timeslot: state.selectedTimeslot,
+        };
+        console.log("formData", formData);
+
+        await sendMail('bookingRequestUser', payload.formValues.mail, formData);
+        await sendMail('bookingRequestOwner', 'alexbueckner@gmail.com', formData);
+        state.success = true;
+      }
+      state.formSubmitted = true;
+    } catch (err) {
+      console.error("Error sending Mail", err);
     }
-    state.formSubmitted = true;
   };
 </script>
 
@@ -62,7 +79,7 @@
         <div
           class="w-full lg:w-2/3 font-bold border-2 rounded border-green bg-green bg-opacity-40 inline-block px-6 py-4 mb-10 text-center"
         >
-          Vielen Dank für Ihre Buchung. <br>
+          Vielen Dank für Ihre Buchung. <br />
           Ich melde mich zeitnah per E-Mail bei Ihnen.
           <!-- Sie haben soeben eine Zusammenfassung Ihrer Daten per E-Mail erhalten. -->
         </div>
@@ -71,14 +88,16 @@
         <div
           class="w-full lg:w-2/3 font-bold border-2 rounded border-red bg-red bg-opacity-40 inline-block px-6 py-4 mb-10 text-center"
         >
-          Bei der Übermittlung Ihrer Daten ist leider ein Fehler aufgetreten. <br>Versuchen Sie es bitte erneut. Sollte das Problem weiterhin bestehen, schreiben Sie mir bitte eine Mail an
+          Bei der Übermittlung Ihrer Daten ist leider ein Fehler aufgetreten. <br />Versuchen Sie es
+          bitte erneut. Sollte das Problem weiterhin bestehen, schreiben Sie mir bitte eine Mail an
           <a href="mailto:kontakt@dimplegoertz.de" class="underline">kontakt@dimplegoertz.de</a>.
         </div>
       </div>
     </template>
     <template v-else>
       <div class="flex items-center justify-center gap-10">
-        <button aria-label="Schritt auswählen"
+        <button
+          aria-label="Schritt auswählen"
           @click="validateAndSelectStep(step.id)"
           v-for="(step, index) in state.steps"
           :key="'step' + index"

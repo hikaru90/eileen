@@ -159,13 +159,13 @@
           state.pending = false;
           state.formSubmitted = true;
           state.success = true;
-          emit("formSubmitted", { success: true });
+          emit("formSubmitted", { success: true, formValues: data });
         } catch (err) {
           console.log("err", err);
           state.pending = false;
           state.formSubmitted = true;
           state.success = false;
-          emit("formSubmitted", { success: false });
+          emit("formSubmitted", { success: false, formValues: null });
         }
       } else {
         touchAllFields();
@@ -174,21 +174,21 @@
   };
 
   const fillInDummyData = () => {
-    state.form.firstName.value = "test";
-    state.form.lastName.value = "test";
-    state.form.mail.value = "test@test.de";
+    state.form.firstName.value = "alex";
+    state.form.lastName.value = "bueckner";
+    state.form.mail.value = "alexbueckner@gmail.com";
     state.form.phone.value = "1234";
     state.form.appointmentType.value = "firstMeeting";
     state.form.service.value = "coupleTherapy50";
     state.form.place.value = "online";
     state.form.description.value = "test";
-    state.form.invoiceAddress.value = "test";
+    state.form.invoiceAddress.value = "Teststr. 1, 22098 Hamburg";
     state.form.approvedCancellationConditions.value = true;
     state.form.approvedDataprotection.value = true;
   };
 
   onMounted(() => {
-    // fillInDummyData();
+    fillInDummyData();
   });
 </script>
 <template>

@@ -63,7 +63,7 @@
     await refreshNuxtData("bookings");
   }
 
-  const { pending, data: bookings } = await useAsyncData("bookings", () =>
+  const { pending, data: bookings  } = await useAsyncData("bookings", () =>
     pb.collection("bookings").getFullList(200 /* batch size */, {
       filter: filterString.value,
       sort: "-start",
@@ -79,7 +79,7 @@
 <template>
   <div class="max-container" v-if="authStore.token">
     <div
-      class="flex items-center justify-between mt-10 mb-20 border border-grey border-opacity-20 shadow-lg rounded p-2"
+      class="flex items-center justify-between mt-10 mb-4 border border-grey border-opacity-20 shadow-lg rounded p-2"
     >
       <div class="flex items-center gap-2">
         <button @click="changeType(undefined)" class="border border-grey border-opacity-20 rounded px-4 py-1">Alle</button>
@@ -101,13 +101,20 @@
         />
       </div>
     </div>
+    
+    
+    <div class="mb-10">
+      <BookingBlockCreator @createdBlock="refreshNuxtData('bookings')" />
+    </div>
+
+
     <div v-if="pending" class="flex justify-center">
       <nuxt-icon name="icon-pending" class="text-4xl inline-block animate-spin" />
     </div>
-    <div v-else class="flex flex-col gap-4">
+    <div v-else class="flex flex-col gap-4 mb-20">
       <div v-for="(booking, index) in bookings" class="">
-        <BookingBlock v-if="booking.bookingType === 'block'" :booking="booking" />
-        <BookingAppointment v-if="booking.bookingType === 'appointment'" :booking="booking" />
+        <BookingBlock @deletedBooking="refreshNuxtData('bookings')" v-if="booking.bookingType === 'block'" :booking="booking" />
+        <BookingAppointment @deletedBooking="refreshNuxtData('bookings')" v-if="booking.bookingType === 'appointment'" :booking="booking" />
       </div>
     </div>
   </div>
