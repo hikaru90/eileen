@@ -240,6 +240,12 @@ StandardError  = append:/var/www/http/errors.log
 [Install]
 WantedBy=multi-user.target
 ```
+### Enable the services
+
+```bash
+sudo systemctl enable pocketbase.service
+sudo systemctl enable nuxtapp.service
+```
 
 Those should now run on server start and restart if it restarts.
 
