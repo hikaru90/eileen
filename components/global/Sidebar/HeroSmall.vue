@@ -26,9 +26,16 @@
   };
 
   const getCurrentImageUrl = (filename) => {
-    return `${config.SERVER_URL}/api/files/${componentType.value + "s"}/${
-      componentId.value
-    }/${filename}?thumb=160x90f`;
+    const img = useImage();
+    const imgUrl = img(
+      `${config.SERVER_URL}/api/files/${componentType.value + "s"}/${
+        componentId.value
+      }/${filename}?thumb=160x90f`,
+      {
+        format: "webp",
+      }
+    );
+    return imgUrl;
   };
 </script>
 <template>
@@ -63,6 +70,5 @@
       </button>
     </div>
     <input @change="handleFiles" type="file" class="mt-2 mb-4" />
-
   </div>
 </template>

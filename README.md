@@ -120,7 +120,14 @@ You could just `./pocketbase serve` to see if everything is working, but we want
 #### Nginx in /etc/nginx/sites-available
 
 - I have an ssl-certificate `.crt` from my domain registrar, which I stored together with my private key `.pem` in `/etc/nginx/ssl`
-- I use a subdomain for my backend. (I am not sure if you need one)
+- I also downloaded the intermediate certificate from my registrar and pasted its content into my ssl-certificate file. Both certificates should now be in the right order.
+- I use a subdomain for my backend.
+
+I added my domain to my `etc/hosts` file.
+
+```bash
+127.0.0.1 domain.com
+```
 
 The default Nginx-config I am using looks like this
 
@@ -129,6 +136,23 @@ server {
     listen 80;
     server_name domain.com;
 
+    location = /robots.txt {
+        alias /var/www/http/public/robots.txt;
+    }
+    location = /favicon.ico {
+        alias /var/www/http/public/favicon.ico;
+    }
+
+    return 301 https://$host$request_uri;
+}
+
+server {
+    listen 443 ssl;
+    server_name domain.com;
+    
+    ssl_certificate /etc/nginx/ssl/name_of_crt_file.crt;
+    ssl_certificate_key /etc/nginx/ssl/name_of_pem_file.pem; (remember to include intermediate certificates in the file)
+    
     location / {
         proxy_pass http://localhost:3000;
         proxy_http_version 1.1;
@@ -137,22 +161,11 @@ server {
         proxy_set_header Host $host;
         proxy_cache_bypass $http_upgrade;
     }
-}
 
-server {
-    listen 443 ssl;
-    server_name domain.com;
-    
-    ssl_certificate /etc/nginx/ssl/name_of_crt_file.crt;
-    ssl_certificate_key /etc/nginx/ssl/name_of_pem_file.pem;
-    
-    location / {
-        proxy_pass http://localhost:3000;
-        proxy_http_version 1.1;
-        proxy_set_header Upgrade $http_upgrade;
-        proxy_set_header Connection 'upgrade';
-        proxy_set_header Host $host;
-        proxy_cache_bypass $http_upgrade;
+    location = /favicon.ico {
+        alias /var/www/http/public/favicon.ico;
+        access_log off;
+        log_not_found off;
     }
 }
 
@@ -168,7 +181,7 @@ server {
     client_max_body_size 10M;
 
     ssl_certificate /etc/nginx/ssl/name_of_crt_file.crt;
-    ssl_certificate_key /etc/nginx/ssl/name_of_pem_file.pem;
+    ssl_certificate_key /etc/nginx/ssl/name_of_pem_file.pem; (remember to include intermediate certificates in the file)
     
     location / {
         proxy_set_header Connection '';
@@ -184,7 +197,7 @@ server {
         # enable if you are serving under a subpath location
         # rewrite /yourSubpath/(.*) /$1  break;
 
-        proxy_pass https://backend.domain.com:8443;
+        proxy_pass http://127.0.0.1:8090;
     }
 }
 ```

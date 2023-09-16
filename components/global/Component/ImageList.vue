@@ -16,7 +16,14 @@
   const state = reactive({});
 
   const currentImageUrl = computed(() => {
-    return `${config.SERVER_URL}/api/files/${props.component.collectionName}/${props.component.id}/${props.component.content.image}`;
+    const img = useImage();
+    const imgUrl = img(
+      `${config.SERVER_URL}/api/files/${props.component.collectionName}/${props.component.id}/${props.component.content.image}`,
+      {
+        format: "webp",
+      }
+    );
+    return imgUrl;
   });
 </script>
 

@@ -26,9 +26,16 @@
   };
 
   const getCurrentImageUrl = (filename) => {
-    return `${config.SERVER_URL}/api/files/${componentType.value + "s"}/${
-      componentId.value
-    }/${filename}?thumb=160x90f`;
+    const img = useImage();
+    const imgUrl = img(
+      `${config.SERVER_URL}/api/files/${componentType.value + "s"}/${
+        componentId.value
+      }/${filename}?thumb=160x90f`,
+      {
+        format: "webp",
+      }
+    );
+    return imgUrl;
   };
 </script>
 <template>
