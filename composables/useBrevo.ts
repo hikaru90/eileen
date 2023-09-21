@@ -8,7 +8,7 @@ const getTemplate = (templateName:string, formData:object) => {
       content: `<html><body>
       Liebe/r ${formData.firstName} ${formData.lastName},<br /><br />
     
-      vielen Dank für Ihre Anfrage. Sobald ich Ihre Daten geprüft habe, werde ich Sie umgehend über die Bestätigung Ihres Termins oder eine mögliche alternative Terminoption informieren.<br /><br />
+      vielen Dank für Ihre Anfrage. Sobald ich Ihre Daten geprüft habe, werde ich Sie umgehend über die Bestätigung Ihres Termins informieren.<br /><br />
       
       <strong>Anfragendetails:</strong><br />
       Datum: ${formData.timeslot.day}.${formData.timeslot.month}.${formData.timeslot.year}<br />
@@ -25,7 +25,6 @@ const getTemplate = (templateName:string, formData:object) => {
       ____<br />
       STORNIERUNGSRICHTLINIE<br />
       Eine kostenlose Stornierung Ihres Termins ist bis zu 48 Stunden vorher möglich. Danach wird eine Ausfallgebühr von 50% fällig.<br />
-      Sie können hier Ihren Termin bis zu 48 Stunden vorher kostenfrei stornieren.<br />
       </body></html>`,
     },
     {

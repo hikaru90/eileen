@@ -35,11 +35,11 @@
           >
             Debug
           </button>
-          <button id="sidebarTarget"
-            @click="setComponentName('SidebarPagelist')"
+          <button
+            @click="navigateTo('/seiten')"
             class="rounded-sm border border-lightBlue px-3 py-1 mx-2"
           >
-            Edit Pages
+            Seiten bearbeiten
           </button>
           <button 
             @click="navigateTo('/buchungen')"
