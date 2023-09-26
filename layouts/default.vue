@@ -24,6 +24,7 @@
             <slot />
         </div>
       </div>
+      <UpButton />
       <Footer />
     <!-- </template> -->
   </div>

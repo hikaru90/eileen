@@ -15,10 +15,9 @@
 <template>
   <div class="bg-white shadow-lg rounded border border-grey border-opacity-10">
     <button aria-label="FAQ Frage öffnen" @click="state.isOpen = !state.isOpen" class="w-full flex items-center justify-between p-4 md:p-6 lg:px-8 lg:py-6">
-      <span class="text-left mr-5">
-        {{ faq.question }}
-      </span>
-      <div class="w-5 h-5 rounded-full bg-gradient-to-b from-gold via-lightGold to-darkGold">
+      <div v-html="$mdRenderer.set({ html: true }).render(faq.question)" class="text-left mr-5 overflow-hidden" style="max-width: calc(100% - 40px)">
+      </div>
+      <div class="flex-shrink-0 w-5 h-5 rounded-full bg-gradient-to-b from-gold via-lightGold to-darkGold">
         <nuxt-icon v-if="state.isOpen" name="icon-minus" class="text-xl" />
         <nuxt-icon v-else name="icon-plus" class="text-xl" />
       </div>

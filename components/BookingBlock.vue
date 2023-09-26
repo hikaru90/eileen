@@ -5,7 +5,7 @@
     booking: object;
   }>();
 
-  const emit = defineEmits(["deletedBooking"]);
+  const emit = defineEmits(["refreshBookings"]);
 
   const getDateString = (dateString) => {
     const date = new Date(dateString.split(".")[0]);
@@ -28,7 +28,7 @@
   const deleteBooking = async () => {
     await pb.collection("bookings").delete(props.booking.id);
     state.deletionConfirmed = false;
-    emit("deletedBooking");
+    emit("refreshBookings");
   };
 </script>
 <template>

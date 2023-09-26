@@ -15,7 +15,7 @@
     </template>
     <template v-else> -->
       <div class="flex flex-grow h-screen">
-        <div class="flex flex-col flex-grow overflow-auto">
+        <div id="content-container" class="flex flex-col flex-grow overflow-auto">
           <div class="flex flex-col flex-grow">
             <div>
               <EditorBar v-if="authStore.token" />
@@ -25,6 +25,7 @@
               <slot />
             </div>
           </div>
+          <UpButton />
           <Footer />
         </div>
         <div v-if="authStore.token" class="bg-black w-96 text-darkOffwhite overflow-auto flex-shrink-0">

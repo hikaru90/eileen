@@ -10,11 +10,12 @@
 </script>
 
 <template>
-  <div class="flex flex-col h-full justify-between">
+  <div id="content-container" class="flex flex-col h-full justify-between">
     <!-- <template v-if="!isDev">
       <Placeholder />
     </template>
     <template v-else> -->
+      <EditorBar />
       <div class="flex flex-col flex-grow">
             <slot />
       </div>

@@ -113,8 +113,8 @@
     </div>
     <div v-else class="flex flex-col gap-4 mb-20">
       <div v-for="(booking, index) in bookings" class="">
-        <BookingBlock @deletedBooking="refreshNuxtData('bookings')" v-if="booking.bookingType === 'block'" :booking="booking" />
-        <BookingAppointment @deletedBooking="refreshNuxtData('bookings')" v-if="booking.bookingType === 'appointment'" :booking="booking" />
+        <BookingBlock @refreshBookings="refreshNuxtData('bookings')" v-if="booking.bookingType === 'block'" :booking="booking" />
+        <BookingAppointment @refreshBookings="refreshNuxtData('bookings')" v-if="booking.bookingType === 'appointment'" :booking="booking" />
       </div>
     </div>
   </div>

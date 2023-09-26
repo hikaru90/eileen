@@ -1,6 +1,6 @@
-const config = useRuntimeConfig();
+const getTemplate = (templateName: string, formData: object) => {
+  const config = useRuntimeConfig();
 
-const getTemplate = (templateName:string, formData:object) => {
   const templates = [
     {
       name: "bookingRequestUser",
@@ -14,7 +14,38 @@ const getTemplate = (templateName:string, formData:object) => {
       Datum: ${formData.timeslot.day}.${formData.timeslot.month}.${formData.timeslot.year}<br />
       Uhrzeit: ${formData.timeslot.timeslot}<br /><br />
       
-      Liebe Grüße<br /><br />
+      Herzliche Grüße<br /><br />
+      
+      <strong>Dimple Goertz</strong><br />
+      Paar- und Sexualtherapeutin & Beziehungscoach<br />
+      Breitscheidstraße 33<br />
+      70176 Stuttgart<br />
+      +49 1573 1664595<br />
+      kontakt@dimplegoertz.de<br /><br />
+      ____<br />
+      STORNIERUNGSRICHTLINIE<br />
+      Eine kostenlose Stornierung Ihres Termins ist bis zu 48 Stunden vorher möglich. Danach wird eine Ausfallgebühr von 50% fällig.<br />
+      </body></html>`,
+    },
+    {
+      name: "bookingConfirmationUser",
+      subject: "Terminbestätigung",
+      content: `<html><body>
+      Liebe/r ${formData.firstName} ${formData.lastName},<br /><br />
+    
+      vielen Dank für Ihre Terminbuchung, die ich Ihnen hiermit gerne bestätige.<br /><br />
+
+      ${
+        formData.place === "inPerson"
+          ? "Ich freue mich, Sie bald persönlich in meiner Praxis in Stuttgart zu empfangen.<br /><br />"
+          : "Ich sende Ihnen den entsprechenden Link für die Durchführung Ihres Onlinetermins im Vorfeld zu.<br /><br />"
+      }
+      
+      <strong>Termin:</strong><br />
+      Datum: ${formData.timeslot.day}.${formData.timeslot.month}.${formData.timeslot.year}<br />
+      Uhrzeit: ${formData.timeslot.timeslot}<br /><br />
+      
+      Herzliche Grüße<br /><br />
       
       <strong>Dimple Goertz</strong><br />
       Paar- und Sexualtherapeutin & Beziehungscoach<br />
@@ -49,16 +80,18 @@ const getTemplate = (templateName:string, formData:object) => {
       Rechnungsadresse: ${formData.invoiceAddress}<br /><br />
       E-Mail: ${formData.mail}<br /><br />
       
-      Liebe Grüße aus dem Backend<br />
+      Herzliche Grüße aus dem Backend<br />
       <strong>Alex</strong><br />
       </body></html>`,
     },
   ];
 
-  return templates.find(template => template.name === templateName)
-}
+  return templates.find((template) => template.name === templateName);
+};
 
 export default function useBrevo() {
+  const config = useRuntimeConfig();
+  
   const sendMail = async (template: string, to: string, formData: object) => {
     const response = await fetch("https://api.brevo.com/v3/smtp/email", {
       method: "POST",

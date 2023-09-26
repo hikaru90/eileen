@@ -25,6 +25,12 @@
           {{ authStore?.user?.name }}
         </div>
         <div class="flex items-center">
+          <button 
+            @click="navigateTo('/')"
+            class="rounded-sm border border-lightBlue px-3 py-1 mx-2"
+          >
+            Home
+          </button>
           <button
             @click="
               contentStore.$patch({
@@ -35,12 +41,12 @@
           >
             Debug
           </button>
-          <button
+          <!-- <button
             @click="navigateTo('/seiten')"
             class="rounded-sm border border-lightBlue px-3 py-1 mx-2"
           >
             Seiten bearbeiten
-          </button>
+          </button> -->
           <button 
             @click="navigateTo('/buchungen')"
             class="rounded-sm border border-lightBlue px-3 py-1 mx-2"
