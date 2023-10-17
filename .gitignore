@@ -8,3 +8,4 @@ node_modules
 dist
 unoptimizedAssets
 backup
+.vscode/settings.json

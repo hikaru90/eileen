@@ -31,7 +31,7 @@
     return new Date(year, month, day).getDay();
   };
   const increaseMonth = () => {
-    if (state.month < state.maxMonth) {
+    if (yearMonth.value < state.maxMonth) {
       if (state.month < 11) state.month++;
       else {
         state.month = 0;
@@ -40,7 +40,7 @@
     }
   };
   const decreaseMonth = () => {
-    if (state.month > state.minMonth) {
+    if (yearMonth.value > state.minMonth) {
       if (state.month > 0) state.month--;
       else {
         state.month = 11;
@@ -50,9 +50,14 @@
   };
 
   const addDays = (date, days) => {
-    var result = new Date(date);
+    const result = new Date(date);
     result.setDate(result.getDate() + days);
     return result;
+  };
+  const addMonths = (date, months) => {
+    const newDate = new Date(date);
+    newDate.setMonth(newDate.getMonth() + months);
+    return newDate;
   };
 
   const isWeekend = (dayIndex: number) => {
@@ -100,8 +105,10 @@
 
   const state = reactive({
     step: 1,
-    minMonth: new Date().getMonth(),
-    maxMonth: (new Date().getMonth() + 3) % 12,
+    // minMonth: new Date().getMonth(),
+    minMonth: Number(new Date().toISOString().split("-").slice(0, 2).join("")),
+    maxMonth: Number(addMonths(new Date(), 3).toISOString().split("-").slice(0, 2).join("")),
+    // maxMonth: new Date().getMonth() + 3,
     today: new Date(),
     month: new Date().getMonth(),
     year: new Date().getFullYear(),
@@ -109,6 +116,17 @@
     selectedDate: undefined,
     appointmentsOfTheDay: [],
     timeslots: [],
+  });
+
+  const yearMonth = computed(() => {
+    return Number(new Date(state.year,state.month + 1).toISOString().split("-").slice(0, 2).join(""))
+  })
+
+  const monthIsIncreasable = computed(() => {
+    const minMonth = new Date(state.minMonth).getMonth();
+    const maxMonth = new Date(state.maxMonth).getMonth() + 3;
+    if (minMonth < maxMonth) return true;
+    return false;
   });
 
   const selectDate = async (day) => {
@@ -207,7 +225,7 @@
         <div style="width: 14.285%" class="flex items-center justify-center">
           <button
             aria-label="Monat zurück"
-            v-if="state.month > state.minMonth"
+            v-if="yearMonth > state.minMonth"
             @click.stop="decreaseMonth"
             class="aspect-square w-full hover:bg-gold rounded-full m-3 flex items-center justify-center"
           >
@@ -220,7 +238,7 @@
         <div style="width: 14.285%" class="flex items-center justify-center">
           <button
             aria-label="Monat vor"
-            v-if="state.month < state.maxMonth"
+            v-if="yearMonth < state.maxMonth"
             @click.stop="increaseMonth"
             class="aspect-square w-full hover:bg-gold rounded-full m-3 flex items-center justify-center"
           >
