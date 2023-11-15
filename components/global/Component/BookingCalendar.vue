@@ -62,7 +62,7 @@
         console.log("formData", formData);
 
         await sendMail('bookingRequestUser', payload.formValues.mail, formData);
-        // await sendMail('bookingRequestOwner', 'kontakt@dimplegoertz.de', formData);
+        await sendMail('bookingRequestOwner', 'kontakt@dimplegoertz.de', formData);
         await sendMail('bookingRequestOwner', 'alexbueckner@gmail.com', formData);
         state.success = true;
       }
