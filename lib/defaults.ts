@@ -9,13 +9,23 @@ const defaults = [
   {
     type: "services",
     options: [
-      { label: "Kennenlerntermin Paartherapie (50 Min.)", value: "coupleTherapy50" },
+      { label: "Paartherapie Kennenlerngespräch (50 Min.)", value: "coupleTherapyIntroduction50" },
       { label: "Paartherapie (Paar) (80 Min.)", value: "coupleTherapy80" },
-      { label: "Sexualtherapie (Einzelperson) (50 Min.)", value: "sexTherapy50" },
+      { label: "Paartherapie (Einzelperson) (50 Min.)", value: "coupleTherapySingle50" },
+      { label: "Paartherapie (Einzelperson) (80 Min.)", value: "coupleTherapySingleIntense80" },
+      
+      { label: "Sexualtherapie Kennenlerngespräch (50 Min.)", value: "sexTherapyIntroduction50" },
       { label: "Sexualtherapie (Paar) (80 Min.)", value: "sexTherapy80" },
+      { label: "Sexualtherapie (Einzelperson) (50 Min.)", value: "sexTherapySingle50" },
+      { label: "Sexualtherapie (Einzelperson) (80 Min.)", value: "sexTherapySingleIntense80" },
+      
       {
         label: "Beziehungscoaching (Einzelperson) (50 Min.)",
-        value: "relationshipCoaching50",
+        value: "relationshipCoachingSingle50",
+      },
+      {
+        label: "Beziehungscoaching intensiv (Einzelperson) (80 Min.)",
+        value: "relationshipCoachingSingleIntense80",
       },
     ],
   },
