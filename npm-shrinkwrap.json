@@ -1,9 +1,10 @@
 {
-  "name": "eileen",
+  "name": "http",
   "lockfileVersion": 2,
   "requires": true,
   "packages": {
     "": {
+      "name": "http",
       "hasInstallScript": true,
       "dependencies": {
         "@pinia/nuxt": "^0.4.7",
