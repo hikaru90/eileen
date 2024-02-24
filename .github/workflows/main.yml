@@ -39,6 +39,6 @@ jobs:
             npm -v
             npm i
 
-            npm run build
+            # npm run build
             
-            sudo systemctl start nuxtapp.service
+            sudo systemctl restart nuxtapp.service

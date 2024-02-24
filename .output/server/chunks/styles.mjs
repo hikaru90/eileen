@@ -5,8 +5,8 @@ const styles = {
   "components/global/Component/HeroBig.vue": () => import('./HeroBig-styles.323b8e21.mjs').then(interopDefault),
   "node_modules/@nuxt/ui-templates/dist/templates/error-404.vue": () => import('./error-404-styles.88dd483b.mjs').then(interopDefault),
   "node_modules/@nuxt/ui-templates/dist/templates/error-500.vue": () => import('./error-500-styles.f7652148.mjs').then(interopDefault),
-  "components/global/Component/HeroSmall.vue": () => import('./HeroSmall-styles.d0a1b64a.mjs').then(interopDefault),
   "components/global/Component/ImageRotation.vue": () => import('./ImageRotation-styles.220b8ba8.mjs').then(interopDefault),
+  "components/global/Component/HeroSmall.vue": () => import('./HeroSmall-styles.d0a1b64a.mjs').then(interopDefault),
   "components/global/Component/ImageList.vue": () => import('./ImageList-styles.b381e1c8.mjs').then(interopDefault),
   "components/Form/InputToggle.vue": () => import('./InputToggle-styles.9251df81.mjs').then(interopDefault)
 };
