@@ -1,0 +1,11 @@
+const n=`<?xml version="1.0" encoding="UTF-8"?>\r
+<svg id="Ebene_1" data-name="Ebene 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 68.03 68.03">\r
+  <defs>\r
+    <style>\r
+      .cls-1 {\r
+        fill: #010101;\r
+      }\r
+    </style>\r
+  </defs>\r
+  <path class="cls-1" d="m40.25,51.43c-.77,0-1.54-.29-2.12-.88l-14.47-14.47c-1.17-1.17-1.17-3.07,0-4.24l14.36-14.36c1.17-1.17,3.07-1.17,4.24,0,1.17,1.17,1.17,3.07,0,4.24l-12.24,12.24,12.35,12.35c1.17,1.17,1.17,3.07,0,4.24-.59.59-1.35.88-2.12.88Z"/>\r
+</svg>`;export{n as default};
