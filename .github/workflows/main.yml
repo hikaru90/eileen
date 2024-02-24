@@ -24,7 +24,7 @@ jobs:
             
             export NVM_DIR=~/.nvm
             source ~/.nvm/nvm.sh
-            pnpm --help
+            npm --help
 
             nvm use 18
 
@@ -33,12 +33,12 @@ jobs:
             
             git pull
 
-            sudo systemctl stop nuxtapp.service
+            # sudo systemctl stop nuxtapp.service
             
             node -v
-            pnpm -v
-            pnpm i
+            npm -v
+            npm i
 
-            pnpm run build
+            npm run build
             
             sudo systemctl start nuxtapp.service
