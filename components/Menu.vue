@@ -54,7 +54,7 @@
       <div class="max-container w-full">
         <div class="flex items-center justify-between py-6 mb-10">
           <div class="font-heading text-2xl">
-            <NuxtLink to="/"> Dimple Goertz </NuxtLink>
+            <NuxtLink to="/"> Eileen George </NuxtLink>
           </div>
 
           <button aria-label="Menü öffnen" @click="toggleMenu" class="flex items-center justify-center rounded p-1">
@@ -122,7 +122,7 @@
       <div class="max-container w-full">
         <div class="flex items-center justify-between py-6">
           <div class="font-heading text-2xl">
-            <NuxtLink to="/"> Dimple Goertz </NuxtLink>
+            <NuxtLink to="/"> Eileen George </NuxtLink>
           </div>
 
           <div class="lg:hidden">

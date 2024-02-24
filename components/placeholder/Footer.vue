@@ -34,11 +34,11 @@
 
           <p class="text-sm lg:text-base break-inside">
             Impressum gemäß § 5 TMG<br /><br />
-            Dimple Goertz<br />
+            Eileen George<br />
             Paartherapeutin und systemischer Coach<br />
             Kronenstraße 45<br />
             70174 Stuttgart <br /><br />
-            E-Mail: kontakt@dimplegoertz.de<br />
+            E-Mail: kontakt@eileengeorge.de<br />
             Umsatzsteuer-ID: Aufgrund des Kleinunternehmerstatus wird gemäß §19 UStg die MwSt. in der Rechnung nicht
             ausgewiesen.<br />
 

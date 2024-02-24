@@ -12,9 +12,9 @@
 
     <div class="max-container">
       <div class="flex flex-col md:flex-row items-start md:items-center justify-start mb-20">
-        <nuxt-img format="webp" src="/dimple_goertz2.jpg" alt="Dimple Goertz" style="max-width: 260px" class="w-full mr-10 rounded-md" />
+        <nuxt-img format="webp" src="/dimple_goertz2.jpg" alt="Eileen George" style="max-width: 260px" class="w-full mr-10 rounded-md" />
         <h1 class="mt-6">
-          <span class="font-heading text-xl lg:text-4xl"> Dimple Goertz<br /> </span>
+          <span class="font-heading text-xl lg:text-4xl">Eileen George<br /> </span>
           <span class="text-2xl"> Paartherapeutin und systemischer Coach </span>
         </h1>
       </div>
@@ -72,10 +72,10 @@
     <div class="max-container">
       <div class="flex flex-col gap-2 my-20">
         <p class="text-xl lg:text-4xl leading-relaxed font-heading">
-          Dimple Goertz<br />
+          Eileen George<br />
           <a href="tel:+49 (0) 1573 1664595" class="underline">+49 (0) 1573 1664595</a><br />
-          <a href="mailto:kontakt@dimplegoertz.de" class="underline"
-            >kontakt@dimplegoertz.de</a
+          <a href="mailto:kontakt@eileengeorge.de" class="underline"
+            >kontakt@eileengeorge.de</a
           ><br />
         </p>
       </div>

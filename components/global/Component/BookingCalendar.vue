@@ -62,7 +62,7 @@
         console.log("formData", formData);
 
         await sendMail('bookingRequestUser', payload.formValues.mail, formData);
-        await sendMail('bookingRequestOwner', 'kontakt@dimplegoertz.de', formData);
+        await sendMail('bookingRequestOwner', 'kontakt@eileengeorge.de', formData);
         await sendMail('bookingRequestOwner', 'alexbueckner@gmail.com', formData);
         state.success = true;
       }
@@ -91,7 +91,7 @@
         >
           Bei der Übermittlung Ihrer Daten ist leider ein Fehler aufgetreten. <br />Versuchen Sie es
           bitte erneut. Sollte das Problem weiterhin bestehen, schreiben Sie mir bitte eine Mail an
-          <a href="mailto:kontakt@dimplegoertz.de" class="underline">kontakt@dimplegoertz.de</a>.
+          <a href="mailto:kontakt@eileengeorge.de" class="underline">kontakt@eileengeorge.de</a>.
         </div>
       </div>
     </template>

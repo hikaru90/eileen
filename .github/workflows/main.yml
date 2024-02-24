@@ -17,7 +17,6 @@ jobs:
           host: ${{ secrets.DROPLET_IP }}
           username: ${{ secrets.DROPLET_USERNAME }}
           key: ${{ secrets.DROPLET_KEY }}
-          passphrase: ${{ secrets.DROPLET_KEY_PASSPHRASE }}
           port: 22
           script: |
             # Go to the http folder
@@ -25,16 +24,21 @@ jobs:
             
             export NVM_DIR=~/.nvm
             source ~/.nvm/nvm.sh
-            npm --help
+            pnpm --help
+
+            nvm use 18
+
+            eval $(ssh-agent -s)
+            ssh-add ~/.ssh/id_rsa
             
             git pull
 
-            # Install dependencies
+            sudo systemctl stop nuxtapp.service
+            
             node -v
-            npm -v
-            npm install
+            pnpm -v
+            pnpm i
 
-            # Build the app
-            npm run build
-            # pm2 start npm --name "App Production" -- start
-            pm2 restart all
+            pnpm run build
+            
+            sudo systemctl start nuxtapp.service

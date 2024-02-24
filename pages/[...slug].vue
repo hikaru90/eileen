@@ -35,8 +35,8 @@
 
   useHead({
     title: pageContent.value.expand.seo.title
-      ? `Dimple Goertz — ${pageContent.value.expand.seo.title}`
-      : `Dimple Goertz — ${pageContent.value.title}`,
+      ? `Eileen George — ${pageContent.value.expand.seo.title}`
+      : `Eileen George — ${pageContent.value.title}`,
     meta: [{ name: "description", content: pageContent.value.expand.seo.description }],
   });
 

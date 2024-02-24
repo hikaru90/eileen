@@ -1,4 +1,5 @@
 User-agent: *
-Allow: /
+Disallow: /
+# Allow: /
 
-# Sitemap: https://dimplegoertz.de/sitemap.xml
+# Sitemap: https://eileengeorge.de/sitemap.xml

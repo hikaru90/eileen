@@ -30,7 +30,7 @@
             Privatpraxis<br />
           </h2>
           <p style="line-height:37px;" class="">
-            Dimple Goertz<br />
+            Eileen George<br />
             Paar- und Sexualtherapeutin & Beziehungscoach<br />
             Breitscheidstraße 33<br />
             70176 Stuttgart<br />
@@ -49,7 +49,7 @@
         </div>
       </div>
       <div class="mt-16 text-sm flex justify-between">
-        <span class="opacity-60"> © {{ new Date().getFullYear() }} — Dimple Goertz </span>
+        <span class="opacity-60"> © {{ new Date().getFullYear() }} — Eileen George </span>
         <div>
           <button aria-label="Anmelden" v-if="authStore.token" @click="logout" class="text-red flex items-center">
             <nuxt-icon name="icon-cross" class="text-2xl" />

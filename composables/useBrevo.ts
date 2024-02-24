@@ -4,7 +4,7 @@ const getTemplate = (templateName: string, formData: object) => {
   const templates = [
     {
       name: "bookingRequestUser",
-      subject: "Ihre Buchungsanfrage bei Dimple Goertz",
+      subject: "Ihre Buchungsanfrage bei Eileen George",
       content: `<html><body>
       Liebe/r ${formData.firstName} ${formData.lastName},<br /><br />
     
@@ -16,12 +16,12 @@ const getTemplate = (templateName: string, formData: object) => {
       
       Herzliche Grüße<br /><br />
       
-      <strong>Dimple Goertz</strong><br />
+      <strong>Eileen George</strong><br />
       Paar- und Sexualtherapeutin & Beziehungscoach<br />
       Breitscheidstraße 33<br />
       70176 Stuttgart<br />
       +49 1573 1664595<br />
-      kontakt@dimplegoertz.de<br /><br />
+      kontakt@eileengeorge.de<br /><br />
       ____<br />
       STORNIERUNGSRICHTLINIE<br />
       Eine kostenlose Stornierung Ihres Termins ist bis zu 48 Stunden vorher möglich. Danach wird eine Ausfallgebühr von 50% fällig.<br />
@@ -47,12 +47,12 @@ const getTemplate = (templateName: string, formData: object) => {
       
       Herzliche Grüße<br /><br />
       
-      <strong>Dimple Goertz</strong><br />
+      <strong>Eileen George</strong><br />
       Paar- und Sexualtherapeutin & Beziehungscoach<br />
       Breitscheidstraße 33<br />
       70176 Stuttgart<br />
       +49 1573 1664595<br />
-      kontakt@dimplegoertz.de<br /><br />
+      kontakt@eileengeorge.de<br /><br />
       ____<br />
       STORNIERUNGSRICHTLINIE<br />
       Eine kostenlose Stornierung Ihres Termins ist bis zu 48 Stunden vorher möglich. Danach wird eine Ausfallgebühr von 50% fällig.<br />
@@ -62,10 +62,10 @@ const getTemplate = (templateName: string, formData: object) => {
       name: "bookingRequestOwner",
       subject: `Neue Buchungsanfrage von ${formData.firstName} ${formData.lastName}`,
       content: `<html><body>
-      Liebe Dimple,<br /><br />
+      Liebe Eileen,<br /><br />
     
       es liegt eine neue Buchung von ${formData.firstName} ${formData.lastName} im Backend bereit und wartet auf Moderation.<br />
-      <a href="https://dimplegoertz.de/buchungen" title="Dimple Goertz Buchungen">Zu den Buchungen</a>
+      <a href="https://eileengeorge.de/buchungen" title="Eileen George Buchungen">Zu den Buchungen</a>
       <br /><br />
       
       <strong>Anfragendetails:</strong><br />
@@ -102,12 +102,12 @@ export default function useBrevo() {
       },
       body: JSON.stringify({
         sender: {
-          email: "kontakt@dimplegoertz.de",
-          name: `Dimple Goertz`,
+          email: "kontakt@eileengeorge.de",
+          name: `Eileen George`,
         },
         replyTo: {
-          email: "kontakt@dimplegoertz.de",
-          name: `Dimple Goertz`,
+          email: "kontakt@eileengeorge.de",
+          name: `Eileen George`,
         },
         to: [{ email: to, name: `${formData.firstName} ${formData.lastName}` }],
         subject: getTemplate(template, formData).subject,
