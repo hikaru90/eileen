@@ -18,7 +18,7 @@ module.exports = {
     'bg-white',
     'bg-green',
     'bg-blue',
-    'border-black',
+    'border-sand',
     'border-darkOffwhite',
     'border-2',
     'h-6',
@@ -27,8 +27,8 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        'heading': ['Heading, serif'],
-        'body': ['Inter, sans-serif'],
+        'heading': ['Playfair Display, serif'],
+        'body': ['Nunito, sans-serif'],
       },
       borderRadius:{
         'md': '0.275rem',
@@ -44,16 +44,17 @@ module.exports = {
         'component': 'inset 0 0 0 2px #C3CC59',
       },
       colors: {
-        offwhite: "#f8f8f8",
+        offwhite: "#FBF9F7",
         darkOffwhite: "#eee",
         lightGrey: "#ccc",
         grey: "#999",
         darkGrey: "#666",
-        black: "#031812",
-        blackHighlight: "#082C3E",
+        darkCoffee: '#42250E',
+        coffee: '#814515',
+        black: "#F6F4F2",
+        blackHighlight: "#FEF1D0",
         lightOrange: "#FFC9BD",
         orange: "#FBB03B",
-        sand: "#CB8B65",
         lightGold: "#FBF48A",
         gold: "#E3C879",
         darkGold: "#9B6C1C",

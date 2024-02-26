@@ -53,7 +53,7 @@
     >
       <div class="max-container w-full">
         <div class="flex items-center justify-between py-6 mb-10">
-          <div class="font-heading text-2xl">
+          <div class="font-heading text-2xl text-coffee">
             <NuxtLink to="/"> Eileen George </NuxtLink>
           </div>
 
@@ -107,21 +107,21 @@
             :class="[state.menuIsOpen ? 'transition-all opacity-100' : 'opacity-0']"
             class="border-2 border-gold rounded flex items-center px-3 py-2 duration-300"
           >
-            <div class="font-bold">Jetzt Termin buchen</div>
+            <div class="font-bold">Buchen</div>
             <div
               class="flex items-center justify-center bg-gradient-to-b from-gold via-lightGold to-darkGold rounded-full ml-2 w-4 h-4"
             >
-              <nuxt-icon name="icon-caret-right" class="text-sm text-black" />
+              <nuxt-icon name="icon-caret-right" class="text-sm text-coffee" />
             </div>
           </NuxtLink>
         </div>
       </div>
     </div>
 
-    <div class="absolute top-0 left-0 w-full shadow z-20 text-white">
+    <div class="absolute top-0 left-0 w-full shadow-sm z-20 text-white">
       <div class="max-container w-full">
         <div class="flex items-center justify-between py-6">
-          <div class="font-heading text-2xl">
+          <div class="font-heading text-2xl text-coffee">
             <NuxtLink to="/"> Eileen George </NuxtLink>
           </div>
 
@@ -162,7 +162,7 @@
                   >
                     <!-- <nuxt-icon name="icon-triangle_up" class="block text-2xl -mb-3 text-white" /> -->
                     <div
-                      class="bg-black bg-opacity-100 flex flex-col rounded shadow-lg px-2 py-2 mt-3 gap-2"
+                      class="bg-sand bg-opacity-100 flex flex-col rounded shadow-lg px-2 py-2 mt-3 gap-2"
                     >
                       <NuxtLink
                         v-for="(subpage, i) in menuEntry.expand.subpages"
@@ -178,16 +178,16 @@
               </div>
               <NuxtLink
                 to="/buchen"
-                class="border-2 border-gold rounded flex items-center px-3 py-2"
+                class="bg-white rounded-full text-darkCoffee flex items-center px-5 py-2 shadow-md"
               >
                 <div style="text-shadow: rgba(0, 0, 0, 0.8) 0 0 40px" class="">
-                  Jetzt Termin buchen
+                  Buchen
                 </div>
-                <div
+                <!-- <div
                   class="flex items-center justify-center bg-gradient-to-b from-gold via-lightGold to-darkGold rounded-full ml-2 w-4 h-4"
                 >
-                  <nuxt-icon name="icon-caret-right" class="text-sm text-black" />
-                </div>
+                  <nuxt-icon name="icon-caret-right" class="text-sm text-coffee" />
+                </div> -->
               </NuxtLink>
             </div>
           </div>

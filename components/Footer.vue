@@ -20,8 +20,8 @@
 </script>
 <template>
   <footer
-    style="background: linear-gradient(30deg, rgba(2, 55, 41, 1) 0%, rgba(0, 31, 31, 1) 60%)"
-    class="text-lightGrey py-20"
+    style="background: linear-gradient(30deg, #F6F4F2 0%, #F9F2ED 60%)"
+    class="py-20 text-coffee"
   >
     <div class="max-container">
       <div class="flex flex-col md:flex-row justify-between gap-10">

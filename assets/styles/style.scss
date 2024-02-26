@@ -6,7 +6,7 @@ html,
 #__nuxt,
 #__layout {
   // @apply font-body;
-  color: theme("colors.black");
+  color: theme("colors.coffee");
   box-sizing: border-box;
   @apply h-full w-full overflow-x-hidden font-body;
 }
@@ -22,12 +22,7 @@ ul{
 
 .max-container{
   max-width: 1200px;
-  @apply w-full px-10 my-0 mx-auto block;
-
-  @media screen and (min-width: theme('screens.md')){
-  }
-  @media screen and (min-width: theme('screens.lg')){
-  }
+  @apply w-full px-6 sm:px-10 my-0 mx-auto block;
 }
 
 .outer-container{

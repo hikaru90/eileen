@@ -61,7 +61,7 @@
       <div class="mb-2 flex items-center justify-between">
         <h2 class="text-xs opacity-40">Slides</h2>
         <div
-          class="py-1px px-2 rounded-full bg-offwhite text-xs text-black font-bold flex items-center justify-center"
+          class="py-1px px-2 rounded-full bg-offwhite text-xs text-coffee font-bold flex items-center justify-center"
         >
           {{ componentContent.list.length }}
         </div>

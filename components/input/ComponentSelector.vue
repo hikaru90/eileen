@@ -30,8 +30,8 @@
 <template>
   <div class="p-4">
     <!-- <select @change="changeType" :value="componentContentType" name="contentType" id="contentTypeSelector" class="rounded-sm bg-transparent border border-darkOffwhite border-opacity-20 py-1 px-2">
-      <option value="container" class="bg-black">Container</option>
-      <option value="markdown" class="bg-black">Markdown</option>
+      <option value="container" class="bg-sand">Container</option>
+      <option value="markdown" class="bg-sand">Markdown</option>
     </select> -->
     <template v-for="(component, index) in files" :key="'component' + index">
       <button @click="changeType(component)" class="flex w-full items-center gap-2" :class="[{ 'bg-white bg-opacity-20 rounded': componentContentType === component }]">

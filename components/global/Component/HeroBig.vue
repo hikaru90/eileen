@@ -35,20 +35,21 @@
 <template>
   <div
     :class="[{ '-mt-24': props.isFirst }]"
-    class="h-[400px] lg:h-[900px] relative bg-black text-white overflow-visible"
+    class="h-[400px] lg:h-[900px] relative bg-[#F6F4F2] text-white overflow-visible"
   >
     <!-- <div class="absolute z-20 bottom-0 left-1/2 transform translate-y-1/2 -translate-x-1/3 rounded-full w-5 h-5 bg-gradient-to-b from-gold via-lightGold to-darkGold">
     </div> -->
     <div class="max-container h-full relative z-10">
-      <div class="h-full flex items-center justify-start">
-        <div class="mt-10 sm:ml-10 md:ml-20">
+      <div class="h-full flex items-center justify-center">
+        <div class="mt-10">
           <h2
             style="max-width: 15em"
-            class="font-bold text-xl sm:text-2xl md:text-4xl lg:text-5xl mb-10"
+            class="text-coffee font-heading text-2xl sm:text-5xl md:text-6xl lg:text-7xl mb-10 lg:mb-20 text-center"
+            v-html="$mdRenderer.set({ html: true }).render(props.component.content.heading)"
           >
-            {{ props.component.content.heading }}
           </h2>
-          <NuxtLink
+          <p class="text-coffee uppercase text-center text-xs sm:text-lg" v-html="$mdRenderer.set({ html: true }).render(props.component.content.subline)"></p>
+          <!-- <NuxtLink
             :to="props.component.content.cta.link"
             :title="props.component.content.cta.text"
             class="inline-flex items-center border-2 border-gold rounded text-offwhite px-4 py-3"
@@ -59,9 +60,9 @@
             <div
               class="flex items-center justify-center bg-gradient-to-b from-gold via-lightGold to-darkGold rounded-full ml-2 w-4 h-4"
             >
-              <nuxt-icon :name="props.component.content.cta.icon" class="text-sm text-black" />
+              <nuxt-icon :name="props.component.content.cta.icon" class="text-sm text-coffee" />
             </div>
-          </NuxtLink>
+          </NuxtLink> -->
         </div>
       </div>
     </div>
@@ -70,9 +71,9 @@
         style="
           background-image: radial-gradient(
             circle,
-            rgba(2, 55, 41, 1) 0%,
-            rgba(0, 31, 31, 1) 60%,
-            rgba(53, 65, 30, 1) 100%
+            rgb(250, 244, 216) 0%,
+            #FBF9F7 60%,
+            #f9f3ec 100%
           );
           mix-blend-mode: multiply;
         "
@@ -80,7 +81,7 @@
       ></div>
       <div
         :style="[{ backgroundImage: `url(${getCurrentImageUrl(props.component.content.image)})` }]"
-        class="w-full h-full bg-cover bg-[60%] lg:bg-bottom"
+        class="w-full h-full bg-cover bg-center opacity-70"
       ></div>
     </div>
   </div>

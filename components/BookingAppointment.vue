@@ -146,7 +146,7 @@ import { DeprecationTypes } from "nuxt/dist/app/compat/capi";
       >
         <button
           @click="reactivateBooking"
-          class="border-2 border-black/70 hover:border-black text-black/70 hover:text-black rounded px-4 py-1 flex items-center"
+          class="border-2 border-sand/70 hover:border-sand text-coffee/70 hover:text-coffee rounded px-4 py-1 flex items-center"
         >
           Reaktivieren
         </button>

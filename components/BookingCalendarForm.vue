@@ -300,9 +300,9 @@
           type="submit"
           class="border-2 border-gold bg-gold rounded text-offwhite flex items-center px-3 py-2 mb-20"
         >
-          <div class="text-black font-bold">Termin buchen</div>
+          <div class="text-coffee font-bold">Termin buchen</div>
           <div class="flex items-center justify-center bg-white rounded-full ml-2 w-4 h-4">
-            <nuxt-icon name="icon-check" class="text-sm text-black" />
+            <nuxt-icon name="icon-check" class="text-sm text-coffee" />
           </div>
         </button>
       </div>

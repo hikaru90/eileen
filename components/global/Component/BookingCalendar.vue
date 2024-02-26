@@ -120,7 +120,7 @@
             </div>
           </div>
           <div
-            :class="[state.currentStep === step.id ? 'text-black font-bold' : 'text-lightGrey']"
+            :class="[state.currentStep === step.id ? 'text-coffee font-bold' : 'text-lightGrey']"
             class=""
           >
             {{ step.name }}

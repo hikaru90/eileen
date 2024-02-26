@@ -100,7 +100,7 @@
             duration: 50,
             description: 'MwSt. inklusive',
             cta: {
-              text: 'Jetzt Termin buchen',
+              text: 'Buchen',
               icon: 'icon-caret-right',
               link: '/buchen',
             },

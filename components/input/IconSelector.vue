@@ -36,7 +36,7 @@ import { vOnClickOutside } from '@vueuse/components'
     <button @click="state.isOpen = true" class="border border-darkOffwhite border-opacity-20 p-1">
       <nuxt-icon :name="props.modelValue" class="text-xl text-white" />
     </button>
-    <div v-show="state.isOpen" v-on-click-outside="closeModal" class="absolute top-0 left-0 w-full bg-black border border-darkOffwhite border-opacity-20 rounded-sm flex flex-wrap items-center justify-center gap-1 pt-1">
+    <div v-show="state.isOpen" v-on-click-outside="closeModal" class="absolute top-0 left-0 w-full bg-sand border border-darkOffwhite border-opacity-20 rounded-sm flex flex-wrap items-center justify-center gap-1 pt-1">
       <button
         v-for="(icon, index) in icons"
         :key="index"

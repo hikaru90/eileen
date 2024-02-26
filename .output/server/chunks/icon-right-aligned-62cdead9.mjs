@@ -1,4 +1,0 @@
-const __vite_glob_0_81 = '<?xml version="1.0" encoding="UTF-8"?>\r\n<svg id="Ebene_1" data-name="Ebene 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 68.03 68.03">\r\n  <defs>\r\n    <style>\r\n      .cls-1 {\r\n        fill: #010101;\r\n      }\r\n    </style>\r\n  </defs>\r\n  <path class="cls-1" d="m52.84,22.88H15.19c-.83,0-1.5-.67-1.5-1.5s.67-1.5,1.5-1.5h37.65c.83,0,1.5.67,1.5,1.5s-.67,1.5-1.5,1.5Z"/>\r\n  <path class="cls-1" d="m52.84,31.3h-24.65c-.83,0-1.5-.67-1.5-1.5s.67-1.5,1.5-1.5h24.65c.83,0,1.5.67,1.5,1.5s-.67,1.5-1.5,1.5Z"/>\r\n  <path class="cls-1" d="m52.84,39.73H15.19c-.83,0-1.5-.67-1.5-1.5s.67-1.5,1.5-1.5h37.65c.83,0,1.5.67,1.5,1.5s-.67,1.5-1.5,1.5Z"/>\r\n  <path class="cls-1" d="m52.84,48.15h-24.65c-.83,0-1.5-.67-1.5-1.5s.67-1.5,1.5-1.5h24.65c.83,0,1.5.67,1.5,1.5s-.67,1.5-1.5,1.5Z"/>\r\n</svg>';
-
-export { __vite_glob_0_81 as default };
-//# sourceMappingURL=icon-right-aligned-62cdead9.mjs.map

@@ -18,7 +18,7 @@
 
 </script>
 <template>
-  <div class="bg-black text-darkOffwhite py-4">
+  <div class="bg-coffee text-darkOffwhite py-4">
     <div class="max-container">
       <div class="flex items-center justify-between">
         <div>

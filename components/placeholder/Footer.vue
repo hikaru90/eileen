@@ -20,7 +20,7 @@
       @click.self="state.imprintVisible = !state.imprintVisible"
     >
       <div class="max-container">
-        <div class="w-full h-full bg-black text-lightGrey -ml-2 p-10">
+        <div class="w-full h-full bg-sand text-lightGrey -ml-2 p-10">
 
           <div class="flex items-center justify-between mb-20">
             <h2 class="text-xl lg:text-4xl">

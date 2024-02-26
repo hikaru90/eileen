@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="mb-16 bg-black text-darkOffwhite">
+    <div class="mb-16 bg-sand text-darkOffwhite">
       <div class="max-container">
         <div class="flex items-center justify-start py-8">
           <div class="leading-5 mt-1 font-heading lg:text-3xl">

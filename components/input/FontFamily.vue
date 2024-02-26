@@ -20,8 +20,8 @@
 
   const state = reactive({
     options: [
-      { value: 'Heading, serif', name: 'Silk Serif'},
-      { value: 'Inter, sans-serif', name: 'Inter'},
+      { value: 'Playfair Display, serif', name: 'Playfair Display'},
+      { value: 'Nunito, sans-serif', name: 'Nunito'},
     ]
   })
 

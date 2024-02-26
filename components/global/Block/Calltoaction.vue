@@ -22,7 +22,7 @@
         {{ props.block.content?.calltoaction.text }}
       </div>
       <div class="flex items-center justify-center bg-gradient-to-b from-gold via-lightGold to-darkGold rounded-full ml-2 w-4 h-4">
-        <nuxt-icon :name="props.block.content?.calltoaction.icon" class="text-sm text-black" />
+        <nuxt-icon :name="props.block.content?.calltoaction.icon" class="text-sm text-coffee" />
       </div>
     </a>
   </div>

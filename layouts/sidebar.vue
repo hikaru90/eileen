@@ -28,7 +28,7 @@
           <UpButton />
           <Footer />
         </div>
-        <div v-if="authStore.token" class="bg-black w-96 text-darkOffwhite overflow-auto flex-shrink-0">
+        <div v-if="authStore.token" class="bg-coffee w-96 text-darkOffwhite overflow-auto flex-shrink-0">
           <Sidebar />
         </div>
       </div>

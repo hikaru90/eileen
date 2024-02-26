@@ -13,12 +13,12 @@ const defaults = [
       { label: "Paartherapie (Paar) (80 Min.)", value: "coupleTherapy80" },
       { label: "Paartherapie (Einzelperson) (50 Min.)", value: "coupleTherapySingle50" },
       { label: "Paartherapie (Einzelperson) (80 Min.)", value: "coupleTherapySingleIntense80" },
-      
+
       { label: "Sexualtherapie Kennenlerngespräch (50 Min.)", value: "sexTherapyIntroduction50" },
       { label: "Sexualtherapie (Paar) (80 Min.)", value: "sexTherapy80" },
       { label: "Sexualtherapie (Einzelperson) (50 Min.)", value: "sexTherapySingle50" },
       { label: "Sexualtherapie (Einzelperson) (80 Min.)", value: "sexTherapySingleIntense80" },
-      
+
       {
         label: "Beziehungscoaching (Einzelperson) (50 Min.)",
         value: "relationshipCoachingSingle50",
@@ -45,6 +45,26 @@ const defaults = [
     },
   },
   {
+    type: "offer",
+    content: {
+      heading: "Wie darf ich Dich unterstützen?",
+      offers: [
+        {
+          name: "Psychologisches Coaching",
+          type: "Einzelcoaching",
+          description: "Individuelles psychologisches Coaching",
+          price: 75,
+          duration: "50 Minuten",
+          cta: {
+            text: "Buchen",
+            icon: "icon-caret-right",
+            link: "/buchen",
+          },
+        },
+      ],
+    },
+  },
+  {
     type: "default",
     content: {},
   },
@@ -54,7 +74,7 @@ const defaults = [
       heading: "Privatpraxis für Systemische Paar- und Sexualtherapie & Beziehungscoaching",
       image: "solar_energy_a2mPxBJIkJ.jpg",
       cta: {
-        text: "Jetzt Termin buchen",
+        text: "Buchen",
         icon: "icon-caret-right",
         link: "/buchen",
       },
@@ -66,7 +86,33 @@ const defaults = [
       heading: "Paartherapie",
       image: "solar_energy_a2mPxBJIkJ.jpg",
       cta: {
-        text: "Jetzt Termin buchen",
+        text: "Buchen",
+        icon: "icon-caret-right",
+        link: "/buchen",
+      },
+    },
+  },
+  {
+    type: "portraitText",
+    content: {
+      heading: "Willkommen & Schön, dass Du da bist.",
+      image: "solar_energy_a2mPxBJIkJ.jpg",
+      text: "Mein Name ist Eileen. Ich begleite Dich als zertifizierte psychologisch-systemische Individualcoachin in schwierigen Lebenssituationen, bei vermindertem Selbstwertempfinden und bei Wünschen nach Veränderung. Ganz gleich, an welchen Themen wir gemeinsam arbeiten, Du kommst in unserer Arbeit sanft in einen Zustand der tieferen Verbindung mit Dir selbst und findest zu einem größeren Vertrauen in Dich und Deinen Weg.",
+      cta: {
+        text: "Buchen",
+        icon: "icon-caret-right",
+        link: "/buchen",
+      },
+    },
+  },
+  {
+    type: "myWork",
+    content: {
+      heading: "Mein Weg & meine Arbeit",
+      image: "solar_energy_a2mPxBJIkJ.jpg",
+      text: "Mein Name ist Eileen. Ich begleite Dich als zertifizierte psychologisch-systemische Individualcoachin in schwierigen Lebenssituationen, bei vermindertem Selbstwertempfinden und bei Wünschen nach Veränderung. Ganz gleich, an welchen Themen wir gemeinsam arbeiten, Du kommst in unserer Arbeit sanft in einen Zustand der tieferen Verbindung mit Dir selbst und findest zu einem größeren Vertrauen in Dich und Deinen Weg.",
+      cta: {
+        text: "Buchen",
         icon: "icon-caret-right",
         link: "/buchen",
       },
@@ -106,9 +152,9 @@ const defaults = [
           name: "Einzelsitzung",
           price: 100.05,
           duration: 50,
-          description: 'MwSt. inklusive',
+          description: "MwSt. inklusive",
           cta: {
-            text: "Jetzt Termin buchen",
+            text: "Buchen",
             icon: "icon-caret-right",
             link: "/buchen",
           },

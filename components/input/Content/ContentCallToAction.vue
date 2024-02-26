@@ -13,7 +13,7 @@
 
   const state = reactive({
     calltoaction: {
-      text: "Jetzt Termin buchen",
+      text: "Buchen",
       link: "/buchung",
       icon: "icon-caret-right",
     },

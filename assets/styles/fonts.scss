@@ -1,36 +1,27 @@
 @font-face {
-  font-family: 'Heading';
-  src: url('~/assets/fonts/subset-heading-Italic.eot');
-  src: url('~/assets/fonts/subset-heading-Italic.eot?#iefix') format('embedded-opentype'),
-      url('~/assets/fonts/subset-heading-Italic.woff2') format('woff2'),
-      url('~/assets/fonts/subset-heading-Italic.woff') format('woff'),
-      url('~/assets/fonts/subset-heading-Italic.ttf') format('truetype');
+  font-family: 'Playfair Display';
+  src: url('~/assets/fonts/subset-PlayfairDisplay-Regular.eot');
+  src: local('Playfair Display'), local('PlayfairDisplay-Regular'),
+      url('~/assets/fonts/subset-PlayfairDisplay-Regular.eot?#iefix') format('embedded-opentype'),
+      url('~/assets/fonts/subset-PlayfairDisplay-Regular.woff2') format('woff2'),
+      url('~/assets/fonts/subset-PlayfairDisplay-Regular.woff') format('woff'),
+      url('~/assets/fonts/subset-PlayfairDisplay-Regular.ttf') format('truetype'),
+      url('~/assets/fonts/subset-PlayfairDisplay-Regular.svg#PlayfairDisplay-Regular') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'Inter';
-  src: url('~/assets/fonts/subset-Inter-Regular.eot');
-  src: local('Inter Regular'), local('Inter-Regular'),
-      url('~/assets/fonts/subset-Inter-Regular.eot?#iefix') format('embedded-opentype'),
-      url('~/assets/fonts/subset-Inter-Regular.woff2') format('woff2'),
-      url('~/assets/fonts/subset-Inter-Regular.woff') format('woff'),
-      url('~/assets/fonts/subset-Inter-Regular.ttf') format('truetype');
+  font-family: 'Nunito';
+    src: url('~/assets/fonts/subset-Nunito-Regular.eot');
+    src: local('Nunito Regular'), local('Nunito-Regular'),
+        url('~/assets/fonts/subset-Nunito-Regular.eot?#iefix') format('embedded-opentype'),
+        url('~/assets/fonts/subset-Nunito-Regular.woff2') format('woff2'),
+        url('~/assets/fonts/subset-Nunito-Regular.woff') format('woff'),
+        url('~/assets/fonts/subset-Nunito-Regular.ttf') format('truetype'),
+        url('~/assets/fonts/subset-Nunito-Regular.svg#Nunito-Regular') format('svg');
   font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Inter';
-  src: url('~/assets/fonts/subset-Inter-Bold.eot');
-  src: local('Inter Bold'), local('Inter-Bold'),
-      url('~/assets/fonts/subset-Inter-Bold.eot?#iefix') format('embedded-opentype'),
-      url('~/assets/fonts/subset-Inter-Bold.woff2') format('woff2'),
-      url('~/assets/fonts/subset-Inter-Bold.woff') format('woff'),
-      url('~/assets/fonts/subset-Inter-Bold.ttf') format('truetype');
-  font-weight: bold;
   font-style: normal;
   font-display: swap;
 }

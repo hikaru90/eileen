@@ -33,7 +33,7 @@
       <nuxt-icon name="icon-pending" class="text-4xl animate-spin" />
     </div>
     <div class="my-8" v-else>
-      <div v-for="page in data.pagelist" :key="page.id" class="flex items-center justify-between p-6 hover:bg-black hover:bg-opacity-5 rounded-md cursor-pointer">
+      <div v-for="page in data.pagelist" :key="page.id" class="flex items-center justify-between p-6 hover:bg-sand hover:bg-opacity-5 rounded-md cursor-pointer">
         <div class="flex items-center">
           <ListEntry name="Slug" class="mr-10">
             /{{ page.slug }}

@@ -3,6 +3,6 @@
     <h2 class="font-bold mr-2">
       <slot></slot>
     </h2>
-    <div class="border-b border-black flex-grow"></div>
+    <div class="border-b border-sand flex-grow"></div>
   </div>
 </template>

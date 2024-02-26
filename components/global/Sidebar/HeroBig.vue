@@ -50,6 +50,15 @@
       />
     </div>
     <div class="mb-4">
+      <h2 class="text-xs mb-2 opacity-40">Subline</h2>
+      <input
+        @change="saveContent"
+        v-model="componentContent.subline"
+        type="text"
+        class="w-full rounded-sm pl-1 bg-transparent border border-darkOffwhite border-opacity-20"
+      />
+    </div>
+    <div class="mb-4">
       <h2 class="text-xs mb-2 opacity-40">Hintergrundbild</h2>
       <input
         @change="saveContent"
