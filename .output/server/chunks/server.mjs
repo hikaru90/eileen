@@ -768,11 +768,11 @@ const plugin_vue3_A0OWXRrUgq = defineNuxtPlugin((nuxtApp) => {
 });
 const components = {
   BlockCalltoaction: /* @__PURE__ */ defineAsyncComponent(() => import(
-    './Calltoaction-5774d7a7.mjs'
+    './Calltoaction-b0becd51.mjs'
     /* webpackChunkName: "components/block-calltoaction" */
   ).then((c) => c.default || c)),
   BlockContainer: /* @__PURE__ */ defineAsyncComponent(() => import(
-    './Container-dd575b83.mjs'
+    './Container-49600e3b.mjs'
     /* webpackChunkName: "components/block-container" */
   ).then((c) => c.default || c)),
   BlockDefault: /* @__PURE__ */ defineAsyncComponent(() => import(
@@ -784,7 +784,7 @@ const components = {
     /* webpackChunkName: "components/block-markdown" */
   ).then((c) => c.default || c)),
   ComponentBookingCalendar: /* @__PURE__ */ defineAsyncComponent(() => import(
-    './BookingCalendar-3e04ee4b.mjs'
+    './BookingCalendar-086f5efb.mjs'
     /* webpackChunkName: "components/component-booking-calendar" */
   ).then((c) => c.default || c)),
   ComponentDefault: /* @__PURE__ */ defineAsyncComponent(() => import(
@@ -792,43 +792,47 @@ const components = {
     /* webpackChunkName: "components/component-default" */
   ).then((c) => c.default || c)),
   ComponentFaq: /* @__PURE__ */ defineAsyncComponent(() => import(
-    './Faq-cbe2bd02.mjs'
+    './Faq-51720683.mjs'
     /* webpackChunkName: "components/component-faq" */
   ).then((c) => c.default || c)),
   ComponentHeroBig: /* @__PURE__ */ defineAsyncComponent(() => import(
-    './HeroBig-3139b767.mjs'
+    './HeroBig-9a1c98d0.mjs'
     /* webpackChunkName: "components/component-hero-big" */
   ).then((c) => c.default || c)),
   ComponentHeroSmall: /* @__PURE__ */ defineAsyncComponent(() => import(
-    './HeroSmall-bec1ac05.mjs'
+    './HeroSmall-95a958ad.mjs'
     /* webpackChunkName: "components/component-hero-small" */
   ).then((c) => c.default || c)),
   ComponentImageList: /* @__PURE__ */ defineAsyncComponent(() => import(
-    './ImageList-89043fd8.mjs'
+    './ImageList-457bdfd3.mjs'
     /* webpackChunkName: "components/component-image-list" */
   ).then((c) => c.default || c)),
   ComponentImageRotation: /* @__PURE__ */ defineAsyncComponent(() => import(
-    './ImageRotation-4abda4fa.mjs'
+    './ImageRotation-84dc7e44.mjs'
     /* webpackChunkName: "components/component-image-rotation" */
   ).then((c) => c.default || c)),
   ComponentMyWork: /* @__PURE__ */ defineAsyncComponent(() => import(
-    './MyWork-6d2bde44.mjs'
+    './MyWork-7352abcd.mjs'
     /* webpackChunkName: "components/component-my-work" */
   ).then((c) => c.default || c)),
   ComponentOffer: /* @__PURE__ */ defineAsyncComponent(() => import(
-    './Offer-e002e48a.mjs'
+    './Offer-440f0a76.mjs'
     /* webpackChunkName: "components/component-offer" */
   ).then((c) => c.default || c)),
   ComponentPortraitText: /* @__PURE__ */ defineAsyncComponent(() => import(
-    './PortraitText-30f6f733.mjs'
+    './PortraitText-599a5fdd.mjs'
     /* webpackChunkName: "components/component-portrait-text" */
   ).then((c) => c.default || c)),
   ComponentPrices: /* @__PURE__ */ defineAsyncComponent(() => import(
-    './Prices-ea94bfe0.mjs'
+    './Prices-bb082913.mjs'
     /* webpackChunkName: "components/component-prices" */
   ).then((c) => c.default || c)),
+  ComponentTestimonials: /* @__PURE__ */ defineAsyncComponent(() => import(
+    './Testimonials-082142e1.mjs'
+    /* webpackChunkName: "components/component-testimonials" */
+  ).then((c) => c.default || c)),
   SidebarBlock: /* @__PURE__ */ defineAsyncComponent(() => import(
-    './Block-bdd7a419.mjs'
+    './Block-e4fc3cde.mjs'
     /* webpackChunkName: "components/sidebar-block" */
   ).then((c) => c.default || c)),
   SidebarBookingCalendar: /* @__PURE__ */ defineAsyncComponent(() => import(
@@ -836,55 +840,59 @@ const components = {
     /* webpackChunkName: "components/sidebar-booking-calendar" */
   ).then((c) => c.default || c)),
   SidebarComponent: /* @__PURE__ */ defineAsyncComponent(() => import(
-    './Component-c7be8fc1.mjs'
+    './Component-c9bf083c.mjs'
     /* webpackChunkName: "components/sidebar-component" */
   ).then((c) => c.default || c)),
   SidebarFaq: /* @__PURE__ */ defineAsyncComponent(() => import(
-    './Faq-0dbb5ccd.mjs'
+    './Faq-de4508bb.mjs'
     /* webpackChunkName: "components/sidebar-faq" */
   ).then((c) => c.default || c)),
   SidebarHeroBig: /* @__PURE__ */ defineAsyncComponent(() => import(
-    './HeroBig-e2932f27.mjs'
+    './HeroBig-5161e872.mjs'
     /* webpackChunkName: "components/sidebar-hero-big" */
   ).then((c) => c.default || c)),
   SidebarHeroSmall: /* @__PURE__ */ defineAsyncComponent(() => import(
-    './HeroSmall-82dc3ad0.mjs'
+    './HeroSmall-ed8314bd.mjs'
     /* webpackChunkName: "components/sidebar-hero-small" */
   ).then((c) => c.default || c)),
   SidebarImageList: /* @__PURE__ */ defineAsyncComponent(() => import(
-    './ImageList-2f813530.mjs'
+    './ImageList-d802b9fc.mjs'
     /* webpackChunkName: "components/sidebar-image-list" */
   ).then((c) => c.default || c)),
   SidebarImageRotation: /* @__PURE__ */ defineAsyncComponent(() => import(
-    './ImageRotation-8cc007b1.mjs'
+    './ImageRotation-d8f046dd.mjs'
     /* webpackChunkName: "components/sidebar-image-rotation" */
   ).then((c) => c.default || c)),
   SidebarMyWork: /* @__PURE__ */ defineAsyncComponent(() => import(
-    './MyWork-7e4213f9.mjs'
+    './MyWork-c85ae817.mjs'
     /* webpackChunkName: "components/sidebar-my-work" */
   ).then((c) => c.default || c)),
   SidebarOffer: /* @__PURE__ */ defineAsyncComponent(() => import(
-    './Offer-556fd022.mjs'
+    './Offer-d1decb54.mjs'
     /* webpackChunkName: "components/sidebar-offer" */
   ).then((c) => c.default || c)),
   SidebarPagelist: /* @__PURE__ */ defineAsyncComponent(() => import(
-    './Pagelist-99f369ea.mjs'
+    './Pagelist-b35ff609.mjs'
     /* webpackChunkName: "components/sidebar-pagelist" */
   ).then((c) => c.default || c)),
   SidebarPortraitText: /* @__PURE__ */ defineAsyncComponent(() => import(
-    './PortraitText-67ca2b25.mjs'
+    './PortraitText-bde2f3fb.mjs'
     /* webpackChunkName: "components/sidebar-portrait-text" */
   ).then((c) => c.default || c)),
   SidebarPrices: /* @__PURE__ */ defineAsyncComponent(() => import(
-    './Prices-fd6ae7bb.mjs'
+    './Prices-d0c93f22.mjs'
     /* webpackChunkName: "components/sidebar-prices" */
+  ).then((c) => c.default || c)),
+  SidebarTestimonials: /* @__PURE__ */ defineAsyncComponent(() => import(
+    './Testimonials-2009ef4d.mjs'
+    /* webpackChunkName: "components/sidebar-testimonials" */
   ).then((c) => c.default || c)),
   Sidebar: /* @__PURE__ */ defineAsyncComponent(() => import(
     './index-6b012427.mjs'
     /* webpackChunkName: "components/sidebar" */
   ).then((c) => c.default || c)),
   NuxtIcon: /* @__PURE__ */ defineAsyncComponent(() => import(
-    './nuxt-icon-5eb3d977.mjs'
+    './nuxt-icon-19667aae.mjs'
     /* webpackChunkName: "components/nuxt-icon" */
   ).then((c) => c.default || c))
 };
@@ -935,7 +943,7 @@ const _routes = [
     meta: __nuxt_page_meta$3 || {},
     alias: (__nuxt_page_meta$3 == null ? void 0 : __nuxt_page_meta$3.alias) || [],
     redirect: (__nuxt_page_meta$3 == null ? void 0 : __nuxt_page_meta$3.redirect) || void 0,
-    component: () => import('./_...slug_-8911e993.mjs').then((m) => m.default || m)
+    component: () => import('./_...slug_-2ecdc2ac.mjs').then((m) => m.default || m)
   },
   {
     name: (__nuxt_page_meta$2 == null ? void 0 : __nuxt_page_meta$2.name) ?? "bak-index",
@@ -944,7 +952,7 @@ const _routes = [
     meta: __nuxt_page_meta$2 || {},
     alias: (__nuxt_page_meta$2 == null ? void 0 : __nuxt_page_meta$2.alias) || [],
     redirect: (__nuxt_page_meta$2 == null ? void 0 : __nuxt_page_meta$2.redirect) || void 0,
-    component: () => import('./bak-index-48d0800c.mjs').then((m) => m.default || m)
+    component: () => import('./bak-index-8791d276.mjs').then((m) => m.default || m)
   },
   {
     name: (__nuxt_page_meta$1 == null ? void 0 : __nuxt_page_meta$1.name) ?? "buchungen",
@@ -953,7 +961,7 @@ const _routes = [
     meta: __nuxt_page_meta$1 || {},
     alias: (__nuxt_page_meta$1 == null ? void 0 : __nuxt_page_meta$1.alias) || [],
     redirect: (__nuxt_page_meta$1 == null ? void 0 : __nuxt_page_meta$1.redirect) || void 0,
-    component: () => import('./buchungen-3e0f784f.mjs').then((m) => m.default || m)
+    component: () => import('./buchungen-352c0d0c.mjs').then((m) => m.default || m)
   },
   {
     name: (__nuxt_page_meta == null ? void 0 : __nuxt_page_meta.name) ?? "login",
@@ -1201,9 +1209,9 @@ const _wrapIf = (component, props, slots) => {
   return { default: () => props ? h(component, props === true ? {} : props, slots) : h(Fragment, {}, slots) };
 };
 const layouts = {
-  blank: () => import('./blank-931fa573.mjs').then((m) => m.default || m),
-  default: () => import('./default-b361e1dc.mjs').then((m) => m.default || m),
-  sidebar: () => import('./sidebar-73582354.mjs').then((m) => m.default || m)
+  blank: () => import('./blank-6c707320.mjs').then((m) => m.default || m),
+  default: () => import('./default-389419e6.mjs').then((m) => m.default || m),
+  sidebar: () => import('./sidebar-2fadcd08.mjs').then((m) => m.default || m)
 };
 const LayoutLoader = /* @__PURE__ */ defineComponent({
   name: "LayoutLoader",
