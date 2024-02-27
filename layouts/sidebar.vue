@@ -15,12 +15,12 @@
     </template>
     <template v-else> -->
       <div class="flex flex-grow h-screen">
-        <div id="content-container" class="flex flex-col flex-grow overflow-auto">
-          <div class="flex flex-col flex-grow">
+        <div id="content-container" class="flex flex-col flex-grow overflow-auto relative">
+          <div class="flex flex-col flex-grow ">
             <div>
               <EditorBar v-if="authStore.token" />
             </div>
-            <div class="flex flex-col flex-grow relative">
+            <div :class="[{ 'overflow-x-hidden': !authStore.token }]" class="flex flex-col flex-grow relative">
               <Menu id="top" class="" />
               <slot />
             </div>

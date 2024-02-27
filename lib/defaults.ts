@@ -65,6 +65,19 @@ const defaults = [
     },
   },
   {
+    type: "testimonials",
+    content: {
+      heading: "Feedback",
+      testimonials: [
+        {
+          name: "Silke",
+          Date: "2023-10-01",
+          text: "Es war für mich ein Schicksalmoment und das größte Glück, mit dir arbeiten zu dürfen. Ich bin endlich wieder viel mehr ich als zuvor und bin immer noch auf dem Weg weiter zu mir.",
+        },
+      ],
+    },
+  },
+  {
     type: "default",
     content: {},
   },

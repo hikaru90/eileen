@@ -53,7 +53,7 @@
         <div
           v-for="(offer, index) in props.component.content.offers"
           :key="'slide' + index"
-          class="w-full md:w-1/2 md:max-w-[390px] shadow-2xl rounded-lg overflow-hidden"
+          class="w-full md:w-1/2 md:max-w-[390px] shadow-2xl shadow-coffee/30 rounded-lg overflow-hidden"
         >
           <div :style="[{ backgroundImage: `url(${getCurrentImageUrl(offer.image)})` }]" class="w-full h-52 bg-cover">
 

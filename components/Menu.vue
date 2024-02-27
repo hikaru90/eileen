@@ -178,7 +178,7 @@
               </div>
               <NuxtLink
                 to="/buchen"
-                class="bg-white rounded-full text-darkCoffee flex items-center px-5 py-2 shadow-md"
+                class="bg-white rounded-full text-darkCoffee flex items-center px-5 py-2 shadow-md shadow-coffee/10"
               >
                 <div style="text-shadow: rgba(0, 0, 0, 0.8) 0 0 40px" class="">
                   Buchen

@@ -48,7 +48,7 @@
           <div class="flex flex-col lg:flex-row gap-16 items-center lg:items-start">
             <p class="markdown text-coffee max-w-[44rem]" v-html="$mdRenderer.set({ html: true }).render(props.component.content.text)">
             </p>
-            <img :src="getCurrentImageUrl(props.component.content.image)" alt="Eileen George" class="w-full md:max-w-[300px] rounded-lg shadow-2xl -order-1 lg:order-1 flex-shrink-0">
+            <img :src="getCurrentImageUrl(props.component.content.image)" alt="Eileen George" class="w-full md:max-w-[300px] rounded-lg shadow-2xl shadow-coffee/30 -order-1 lg:order-1 flex-shrink-0">
           </div>
         </div>
       </div>
