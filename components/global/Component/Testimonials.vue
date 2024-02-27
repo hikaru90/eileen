@@ -106,6 +106,9 @@
 
       <div
         id="carousel"
+        @mousedown="startTracking"
+        @mousemove="trackMovement"
+        @mouseup="stopTracking"
         @touchstart="startTracking"
         @touchmove="trackMovement"
         @touchend="stopTracking"
