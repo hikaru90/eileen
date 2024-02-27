@@ -21,6 +21,10 @@
       { width: 0, count: 1 },
     ],
     currentSlide: 0,
+    startX: 0,
+    isTracking: false,
+    flickedLeft: false,
+    flickedRight: false,
   });
 
   const visibleSlideCount = computed(() => {
@@ -52,6 +56,31 @@
       state.currentSlide++;
   };
 
+  const startTracking = (event) => {
+    state.isTracking = true;
+    state.startX = event.clientX;
+  };
+
+  const trackMovement = (event) => {
+    if (state.isTracking) {
+      const deltaX = event.clientX - state.startX;
+      if (deltaX > 0) {
+        state.flickedRight = true;
+        state.flickedLeft = false;
+      } else if (deltaX < 0) {
+        state.flickedLeft = true;
+        state.flickedRight = false;
+      }
+    }
+  };
+
+  const stopTracking = () => {
+    state.isTracking = false;
+    console.log('flickedLeft', state.flickedLeft);
+    if(state.flickedLeft) next()
+    if(state.flickedRight) prev()
+  };
+
   const handleResize = () => {
     state.vw = window.innerWidth;
   };
@@ -77,8 +106,11 @@
 
       <div
         id="carousel"
+        @mousedown="startTracking"
+        @mousemove="trackMovement"
+        @mouseup="stopTracking"
         :style="[{ transform: `translate(${slideTranslation}px,0)` }]"
-        class="flex flex-row itmes-stretch justify-start relative w-full transition duration-300"
+        class="flex flex-row itmes-stretch justify-start relative w-full transition duration-300 select-none cursor-grab"
       >
         <div
           v-for="(offer, index) in props.component.content.testimonials"
