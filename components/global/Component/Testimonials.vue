@@ -76,9 +76,9 @@
 
   const stopTracking = () => {
     state.isTracking = false;
-    console.log('flickedLeft', state.flickedLeft);
-    if(state.flickedLeft) next()
-    if(state.flickedRight) prev()
+    console.log("flickedLeft", state.flickedLeft);
+    if (state.flickedLeft) next();
+    if (state.flickedRight) prev();
   };
 
   const handleResize = () => {
@@ -106,9 +106,10 @@
 
       <div
         id="carousel"
-        @mousedown="startTracking"
-        @mousemove="trackMovement"
-        @mouseup="stopTracking"
+        @touchstart="startTracking"
+        @touchmove="trackMovement"
+        @touchend="stopTracking"
+        @touchcancel="stopTracking"
         :style="[{ transform: `translate(${slideTranslation}px,0)` }]"
         class="flex flex-row itmes-stretch justify-start relative w-full transition duration-300 select-none cursor-grab"
       >

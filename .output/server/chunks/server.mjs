@@ -828,7 +828,7 @@ const components = {
     /* webpackChunkName: "components/component-prices" */
   ).then((c) => c.default || c)),
   ComponentTestimonials: /* @__PURE__ */ defineAsyncComponent(() => import(
-    './Testimonials-082142e1.mjs'
+    './Testimonials-b3d0118c.mjs'
     /* webpackChunkName: "components/component-testimonials" */
   ).then((c) => c.default || c)),
   SidebarBlock: /* @__PURE__ */ defineAsyncComponent(() => import(
@@ -840,7 +840,7 @@ const components = {
     /* webpackChunkName: "components/sidebar-booking-calendar" */
   ).then((c) => c.default || c)),
   SidebarComponent: /* @__PURE__ */ defineAsyncComponent(() => import(
-    './Component-c9bf083c.mjs'
+    './Component-f76ae309.mjs'
     /* webpackChunkName: "components/sidebar-component" */
   ).then((c) => c.default || c)),
   SidebarFaq: /* @__PURE__ */ defineAsyncComponent(() => import(
