@@ -1,10 +1,9 @@
 {
-  "name": "http",
+  "name": "eileen",
   "lockfileVersion": 2,
   "requires": true,
   "packages": {
     "": {
-      "name": "http",
       "hasInstallScript": true,
       "dependencies": {
         "@pinia/nuxt": "^0.4.7",
@@ -12,7 +11,8 @@
         "mitt": "^3.0.0",
         "nuxt-icons": "^3.1.0",
         "pinia": "^2.0.33",
-        "pocketbase": "^0.10.1"
+        "pocketbase": "^0.10.1",
+        "wavesurfer.js": "^7.7.3"
       },
       "devDependencies": {
         "@nuxt/image": "^1.0.0-rc.1",
@@ -11465,6 +11465,11 @@
         "node": ">=10.13.0"
       }
     },
+    "node_modules/wavesurfer.js": {
+      "version": "7.7.3",
+      "resolved": "https://registry.npmjs.org/wavesurfer.js/-/wavesurfer.js-7.7.3.tgz",
+      "integrity": "sha512-TC7cQb0RVggtNC+Dl05gcnhSFL5U+fww3ZYJUuqgfR+r9oY+bh/hChCipDFDjs5cWtuek3GEtsPXWa93a9XYxw=="
+    },
     "node_modules/wcwidth": {
       "version": "1.0.1",
       "resolved": "https://registry.npmjs.org/wcwidth/-/wcwidth-1.0.1.tgz",
@@ -20188,6 +20193,11 @@
         "glob-to-regexp": "^0.4.1",
         "graceful-fs": "^4.1.2"
       }
+    },
+    "wavesurfer.js": {
+      "version": "7.7.3",
+      "resolved": "https://registry.npmjs.org/wavesurfer.js/-/wavesurfer.js-7.7.3.tgz",
+      "integrity": "sha512-TC7cQb0RVggtNC+Dl05gcnhSFL5U+fww3ZYJUuqgfR+r9oY+bh/hChCipDFDjs5cWtuek3GEtsPXWa93a9XYxw=="
     },
     "wcwidth": {
       "version": "1.0.1",

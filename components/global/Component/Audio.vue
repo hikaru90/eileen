@@ -1,0 +1,280 @@
+<script setup lang="ts">
+  import defaults from "~/lib/defaults";
+  import WaveSurfer from "wavesurfer.js";
+
+  const { pb } = usePocketbase();
+
+  const config = useRuntimeConfig();
+
+  const props = withDefaults(
+    defineProps<{
+      component?: object;
+    }>(),
+    {
+      component: {
+        content: defaults.find((el) => el.type === "offer").content,
+      },
+    }
+  );
+
+  const state = reactive({
+    audios: [],
+    mail: "",
+    subscriptionPending: false,
+    subscriptionSubmitted: false,
+    errors: [],
+  });
+
+  const getCurrentFileUrl = (filename) => {
+    const img = useImage();
+    const imgUrl = img(
+      `${config.SERVER_URL}/api/files/${props.component.collectionName}/${props.component.id}/${filename}`,
+      {
+        format: "mp3",
+      }
+    );
+    return imgUrl;
+  };
+  const createAudioInstance = (index, container, file) => {
+    const audioInstance = WaveSurfer.create({
+      container: container,
+      height: 48,
+      width: "auto",
+      splitChannels: false,
+      normalize: true,
+      waveColor: "#D2C4B5",
+      progressColor: "#814515",
+      cursorColor: "#44B57A",
+      cursorWidth: 1,
+      barWidth: 3,
+      barGap: 9,
+      barRadius: 9,
+      barHeight: 1,
+      barAlign: "",
+      fillParent: true,
+      url: file,
+      mediaControls: false,
+      autoplay: false,
+      interact: true,
+      dragToSeek: true,
+      hideScrollbar: false,
+      audioRate: 1,
+      autoScroll: true,
+      autoCenter: true,
+      sampleRate: 8000,
+    });
+    audioInstance.on("audioprocess", function () {
+      if (audioInstance.isPlaying()) {
+        let totalTime = audioInstance.getDuration();
+        let currentTime = audioInstance.getCurrentTime();
+        let remainingTime = totalTime - currentTime;
+
+        // state.audios[index].times.total = totalTime.toFixed(1)
+        state.audios[index].times.current = currentTime.toFixed(1);
+        state.audios[index].times.remaining = remainingTime.toFixed(1);
+      }
+    });
+    audioInstance.on("ready", function () {
+      const totalTime = audioInstance.getDuration();
+      state.audios[index].times.total = totalTime.toFixed(1);
+    });
+    state.audios.push({
+      instance: audioInstance,
+      times: { total: 0, current: 0, remaining: 0 },
+      isPlaying: false,
+    });
+  };
+  const formatTime = (seconds) => {
+    var minutes = Math.floor(seconds / 60);
+    var remainingSeconds = Math.floor(seconds % 60);
+
+    // Add leading zero if necessary
+    remainingSeconds = remainingSeconds < 10 ? "0" + remainingSeconds : remainingSeconds;
+
+    return minutes + ":" + remainingSeconds;
+  };
+  const togglePlayPause = (index) => {
+    state.audios[index].instance.playPause();
+  };
+  const addError = (error) => {
+    state.errors.push(error);
+    setTimeout(() => {
+      clearErrors();
+    }, 3000);
+  };
+  const clearErrors = () => {
+    state.errors = [];
+  };
+  const isValidEmail = (email) => {
+    // Check if the string contains '@' and '.'
+    if (email.includes("@") && email.includes(".")) {
+      // Split the email address by '@'
+      const parts = email.split("@");
+      // Check if there are exactly two parts
+      if (parts.length === 2) {
+        // Check if the second part (domain) contains '.'
+        if (parts[1].includes(".")) {
+          return true;
+        }
+      }
+    }
+    return false;
+  };
+  const subscribe = async () => {
+    if (!state.mail) {
+      addError("Bitte gib eine E-Mail ein.");
+      return;
+    }
+    if (!isValidEmail(state.mail)) {
+      addError("Bitte gib eine gültige E-Mail Adresse ein.");
+      return;
+    }
+    if (!state.subscriptionPending) {
+      state.subscriptionPending = true;
+
+      try {
+        const resultList = await pb.collection("subscriptions").getList(1, 50, {
+          filter: `mail = "${state.mail}"`,
+        });
+        if(resultList.items.length > 0){
+          addError("Diese E-Mail Adresse ist bereits registriert.");
+          state.subscriptionPending = false
+          return
+        }
+
+        const res = await pb.collection("subscriptions").create({
+          mail: state.mail,
+        });
+
+        state.subscriptionPending = false
+        return true
+      } catch (err) {
+        console.log("err", err);
+        state.subscriptionPending = false
+      }
+
+      setTimeout(() => {
+        state.subscriptionPending = false;
+      }, 1000);
+    }
+  };
+
+  onMounted(() => {
+    if (process.client) {
+      for (const audio of Object.entries(props.component.content.audios)) {
+        const index = audio[0];
+        const value = audio[1];
+        const containerSelector = "#audio" + index;
+        createAudioInstance(index, containerSelector, getCurrentFileUrl(value.file));
+      }
+    }
+  });
+</script>
+
+<template>
+  <div class="py-16 md:py-24 relative">
+    <div class="max-container">
+      <div class="flex items-center justify-center">
+        <h2
+          class="font-heading text-lg sm:text-xl md:text-3xl lg:text-4xl mb-16 text-center text-coffee"
+        >
+          {{ props.component.content.heading }}
+        </h2>
+      </div>
+
+      <div class="flex flex-col items-center gap-8 relative mb-32">
+        <div
+          v-for="(audio, index) in props.component.content.audios"
+          :key="'audio' + index"
+          class="w-full md:w-1/2 md:max-w-[500px] shadow-2xl shadow-coffee/30 rounded-lg overflow-hidden bg-white relative"
+        >
+          <div
+            class="mb-4 font-heading text-lg lg:text-xl flex items-center gap-4 border-b border-coffee border-opacity-30 px-6 py-4"
+          >
+            {{ audio.name }}
+          </div>
+          <div class="px-6 pt-3 pb-7">
+            <div class="relative w-full h-full">
+              <div
+                v-if="state.audios.length > 0"
+                class="absolute left-0 top-1/2 transform -translate-y-1/2"
+              >
+                {{ formatTime(Number(state.audios[index].times.total)) }}
+              </div>
+              <div
+                :id="'audio' + index"
+                class="inline-block ml-[60px] h-12 w-[calc(100%-120px)] overflow-hidden"
+              ></div>
+              <button
+                v-if="state.audios.length > 0"
+                @click="togglePlayPause(index)"
+                class="inline-block w-[60px]"
+              >
+                <nuxt-icon
+                  v-if="state.audios[index].isPlaying"
+                  name="icon-pause"
+                  class="text-6xl"
+                />
+                <nuxt-icon name="icon-play" class="text-6xl" />
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex justify-center relative mb-12">
+        <div
+          style="background-image: radial-gradient(circle, #fef1d0 0%, transparent 60%)"
+          class="absolute left-1/2 top-1/2 -z-10 w-[1600px] h-[1600px] transform -translate-x-1/2 -translate-y-1/2"
+        ></div>
+        <div class="max-w-lg text-2xl font-heading text-center">
+          {{ props.component.content.description }}
+        </div>
+      </div>
+
+      <div class="relative">
+        <form @submit.prevent="subscribe" class="flex items-center gap-4 justify-center">
+          <input
+            type="text"
+            v-model="state.mail"
+            :placeholder="props.component.content.placeholder"
+            class="px-5 py-2 shadow-xl shadow-coffee/20 rounded-full flex-grow max-w-[300px]"
+          />
+          <button
+            @click="subscribe"
+            :class="[{ 'pointer-events-none cursor-default': state.subscriptionPending }]"
+            class="shadow-xl shadow-coffee/20 bg-coffee px-5 py-1.5 rounded-full text-white flex-shrink-0 flex items-center justify-center"
+          >
+            <div v-show="!state.subscriptionPending">
+              {{ props.component.content.cta }}
+            </div>
+            <div v-show="state.subscriptionPending" class="animate-spin">
+              <nuxt-icon name="icon-pending" class="text-2xl text-white" />
+            </div>
+          </button>
+          <input type="submit" class="hidden">
+        </form>
+        <div
+          v-for="(error, index) in state.errors"
+          :key="index"
+          class="absolute w-full top-full flex flex-col items-center mt-4"
+        >
+          <div class="bg-lightRed px-3 py-1 text-darkRed rounded-lg">
+            {{ error }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<style scoped lang="scss">
+  .slide:last-child {
+    .connector {
+      display: none;
+    }
+    .slideParagraph {
+      @apply mb-0;
+    }
+  }
+</style>

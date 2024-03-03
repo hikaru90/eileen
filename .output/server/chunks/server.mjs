@@ -783,8 +783,12 @@ const components = {
     './Markdown-89eab06b.mjs'
     /* webpackChunkName: "components/block-markdown" */
   ).then((c) => c.default || c)),
+  ComponentAudio: /* @__PURE__ */ defineAsyncComponent(() => import(
+    './Audio-39addbc1.mjs'
+    /* webpackChunkName: "components/component-audio" */
+  ).then((c) => c.default || c)),
   ComponentBookingCalendar: /* @__PURE__ */ defineAsyncComponent(() => import(
-    './BookingCalendar-086f5efb.mjs'
+    './BookingCalendar-2c45cf4d.mjs'
     /* webpackChunkName: "components/component-booking-calendar" */
   ).then((c) => c.default || c)),
   ComponentDefault: /* @__PURE__ */ defineAsyncComponent(() => import(
@@ -792,44 +796,48 @@ const components = {
     /* webpackChunkName: "components/component-default" */
   ).then((c) => c.default || c)),
   ComponentFaq: /* @__PURE__ */ defineAsyncComponent(() => import(
-    './Faq-51720683.mjs'
+    './Faq-df1c49e8.mjs'
     /* webpackChunkName: "components/component-faq" */
   ).then((c) => c.default || c)),
   ComponentHeroBig: /* @__PURE__ */ defineAsyncComponent(() => import(
-    './HeroBig-9a1c98d0.mjs'
+    './HeroBig-f0aa18f7.mjs'
     /* webpackChunkName: "components/component-hero-big" */
   ).then((c) => c.default || c)),
   ComponentHeroSmall: /* @__PURE__ */ defineAsyncComponent(() => import(
-    './HeroSmall-95a958ad.mjs'
+    './HeroSmall-122eb35b.mjs'
     /* webpackChunkName: "components/component-hero-small" */
   ).then((c) => c.default || c)),
   ComponentImageList: /* @__PURE__ */ defineAsyncComponent(() => import(
-    './ImageList-457bdfd3.mjs'
+    './ImageList-cdfafa9d.mjs'
     /* webpackChunkName: "components/component-image-list" */
   ).then((c) => c.default || c)),
   ComponentImageRotation: /* @__PURE__ */ defineAsyncComponent(() => import(
-    './ImageRotation-84dc7e44.mjs'
+    './ImageRotation-ed4c1861.mjs'
     /* webpackChunkName: "components/component-image-rotation" */
   ).then((c) => c.default || c)),
   ComponentMyWork: /* @__PURE__ */ defineAsyncComponent(() => import(
-    './MyWork-7352abcd.mjs'
+    './MyWork-e7c0201a.mjs'
     /* webpackChunkName: "components/component-my-work" */
   ).then((c) => c.default || c)),
   ComponentOffer: /* @__PURE__ */ defineAsyncComponent(() => import(
-    './Offer-440f0a76.mjs'
+    './Offer-707fb631.mjs'
     /* webpackChunkName: "components/component-offer" */
   ).then((c) => c.default || c)),
   ComponentPortraitText: /* @__PURE__ */ defineAsyncComponent(() => import(
-    './PortraitText-599a5fdd.mjs'
+    './PortraitText-1e89c712.mjs'
     /* webpackChunkName: "components/component-portrait-text" */
   ).then((c) => c.default || c)),
   ComponentPrices: /* @__PURE__ */ defineAsyncComponent(() => import(
-    './Prices-bb082913.mjs'
+    './Prices-60f69fab.mjs'
     /* webpackChunkName: "components/component-prices" */
   ).then((c) => c.default || c)),
   ComponentTestimonials: /* @__PURE__ */ defineAsyncComponent(() => import(
-    './Testimonials-c02d2418.mjs'
+    './Testimonials-384cd231.mjs'
     /* webpackChunkName: "components/component-testimonials" */
+  ).then((c) => c.default || c)),
+  SidebarAudio: /* @__PURE__ */ defineAsyncComponent(() => import(
+    './Audio-e26636d6.mjs'
+    /* webpackChunkName: "components/sidebar-audio" */
   ).then((c) => c.default || c)),
   SidebarBlock: /* @__PURE__ */ defineAsyncComponent(() => import(
     './Block-e4fc3cde.mjs'
@@ -840,7 +848,7 @@ const components = {
     /* webpackChunkName: "components/sidebar-booking-calendar" */
   ).then((c) => c.default || c)),
   SidebarComponent: /* @__PURE__ */ defineAsyncComponent(() => import(
-    './Component-2b65a4dc.mjs'
+    './Component-2b70740a.mjs'
     /* webpackChunkName: "components/sidebar-component" */
   ).then((c) => c.default || c)),
   SidebarFaq: /* @__PURE__ */ defineAsyncComponent(() => import(
@@ -961,7 +969,7 @@ const _routes = [
     meta: __nuxt_page_meta$1 || {},
     alias: (__nuxt_page_meta$1 == null ? void 0 : __nuxt_page_meta$1.alias) || [],
     redirect: (__nuxt_page_meta$1 == null ? void 0 : __nuxt_page_meta$1.redirect) || void 0,
-    component: () => import('./buchungen-352c0d0c.mjs').then((m) => m.default || m)
+    component: () => import('./buchungen-1aabdd38.mjs').then((m) => m.default || m)
   },
   {
     name: (__nuxt_page_meta == null ? void 0 : __nuxt_page_meta.name) ?? "login",

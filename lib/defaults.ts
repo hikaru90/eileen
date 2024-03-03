@@ -78,6 +78,21 @@ const defaults = [
     },
   },
   {
+    type: "audio",
+    content: {
+      heading: "Geführte Meditationen",
+      audios: [
+        {
+          name: "Reise zum inneren Kind",
+          file: "",
+        },
+      ],
+      description: "Für monatliche Meditationen und Inspirationen per Mail, trage Dich gerne in meinen Newsletter ein. Deine persönlichen Daten sind mir heilig und ich verspreche Dir Dich nicht zuzuspammen.",
+      placeholder: "E-Mail Adresse",
+      cta: "Eintragen",
+    },
+  },
+  {
     type: "default",
     content: {},
   },

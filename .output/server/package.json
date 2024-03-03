@@ -64,6 +64,7 @@
     "vue-bundle-renderer": "1.0.2",
     "vue-devtools-stub": "0.1.0",
     "vue-router": "4.1.6",
+    "wavesurfer.js": "7.7.3",
     "xss": "1.0.14"
   }
 }
