@@ -23,6 +23,7 @@
     subscriptionPending: false,
     subscriptionSubmitted: false,
     errors: [],
+    successes: [],
   });
 
   const getCurrentFileUrl = (filename) => {
@@ -70,8 +71,12 @@
         let remainingTime = totalTime - currentTime;
 
         // state.audios[index].times.total = totalTime.toFixed(1)
+        state.audios[index].isPlaying = true
         state.audios[index].times.current = currentTime.toFixed(1);
         state.audios[index].times.remaining = remainingTime.toFixed(1);
+      }
+      else{
+        state.audios[index].isPlaying = false
       }
     });
     audioInstance.on("ready", function () {
@@ -104,6 +109,16 @@
   };
   const clearErrors = () => {
     state.errors = [];
+  };
+  const addSuccess = (success) => {
+    state.successes.push(success);
+    state.mail = ''
+    setTimeout(() => {
+      clearSuccesses();
+    }, 3000);
+  };
+  const clearSuccesses = () => {
+    state.successes = [];
   };
   const isValidEmail = (email) => {
     // Check if the string contains '@' and '.'
@@ -146,6 +161,7 @@
           mail: state.mail,
         });
 
+        addSuccess("Du hast Dich erfolgreich eingetragen.")
         state.subscriptionPending = false
         return true
       } catch (err) {
@@ -186,10 +202,10 @@
         <div
           v-for="(audio, index) in props.component.content.audios"
           :key="'audio' + index"
-          class="w-full md:w-1/2 md:max-w-[500px] shadow-2xl shadow-coffee/30 rounded-lg overflow-hidden bg-white relative"
+          class="w-full md:w-1/2 md:max-w-[500px] shadow-2xl shadow-coffee/30 rounded-lg overflow-hidden bg-white relative border border-coffee border-opacity-10"
         >
           <div
-            class="mb-4 font-heading text-lg lg:text-xl flex items-center gap-4 border-b border-coffee border-opacity-30 px-6 py-4"
+            class="mb-4 font-heading text-lg lg:text-xl flex items-center gap-4 border-b border-coffee border-opacity-10 px-6 py-4"
           >
             {{ audio.name }}
           </div>
@@ -203,19 +219,19 @@
               </div>
               <div
                 :id="'audio' + index"
-                class="inline-block ml-[60px] h-12 w-[calc(100%-120px)] overflow-hidden"
+                class="inline-block ml-[60px] h-12 w-[calc(100%-124px)] overflow-hidden"
               ></div>
               <button
                 v-if="state.audios.length > 0"
                 @click="togglePlayPause(index)"
-                class="inline-block w-[60px]"
+                class="inline-flex ml-[4px] w-[48px] h-[48px] items-center justify-center border border-coffee border-opacity-30 align-top rounded-lg"
               >
                 <nuxt-icon
                   v-if="state.audios[index].isPlaying"
                   name="icon-pause"
-                  class="text-6xl"
+                  class="text-4xl"
                 />
-                <nuxt-icon name="icon-play" class="text-6xl" />
+                <nuxt-icon v-else name="icon-play" class="text-4xl" />
               </button>
             </div>
           </div>
@@ -238,12 +254,12 @@
             type="text"
             v-model="state.mail"
             :placeholder="props.component.content.placeholder"
-            class="px-5 py-2 shadow-xl shadow-coffee/20 rounded-full flex-grow max-w-[300px]"
+            class="px-5 py-2 shadow-xl shadow-coffee/20 rounded-full flex-grow max-w-[300px] border border-coffee border-opacity-10"
           />
           <button
             @click="subscribe"
             :class="[{ 'pointer-events-none cursor-default': state.subscriptionPending }]"
-            class="shadow-xl shadow-coffee/20 bg-coffee px-5 py-1.5 rounded-full text-white flex-shrink-0 flex items-center justify-center"
+            class="shadow-xl shadow-coffee/20 bg-coffee px-5 py-2 rounded-full text-white flex-shrink-0 flex items-center justify-center"
           >
             <div v-show="!state.subscriptionPending">
               {{ props.component.content.cta }}
@@ -261,6 +277,15 @@
         >
           <div class="bg-lightRed px-3 py-1 text-darkRed rounded-lg">
             {{ error }}
+          </div>
+        </div>
+        <div
+          v-for="(success, index) in state.successes"
+          :key="index"
+          class="absolute w-full top-full flex flex-col items-center mt-4"
+        >
+          <div class="bg-green px-3 py-1 text-white rounded-lg">
+            {{ success }}
           </div>
         </div>
       </div>

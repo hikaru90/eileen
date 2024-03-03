@@ -133,7 +133,7 @@
                 ? 'shadow-2xl shadow-coffee/20 scale-100'
                 : 'shadow-sm shadow-coffee/20 scale-80',
             ]"
-            class="bg-white px-8 pt-8 pb-12 h-full rounded-lg overflow-hidden transition-all duration-300 delay-100 transform"
+            class="bg-white px-8 pt-8 pb-12 h-full border border-coffee border-opacity-10 rounded-lg overflow-hidden transition-all duration-300 delay-100 transform"
           >
             <div class="flex items-center gap-1 justify-between mb-8">
               <h3 class="font-heading text-xl mb-1.5">

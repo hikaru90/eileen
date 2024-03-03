@@ -19,8 +19,10 @@
   <div class="my-28">
     <div class="max-container">
       <div class="flex items-center justify-center">
-        <h2 class="font-bold text-lg md:text-xl lg:text-2xl mb-16">
-          {{ props.component.content?.heading }}
+        <h2
+          class="font-heading text-lg sm:text-xl md:text-3xl lg:text-4xl mb-16 text-center text-coffee"
+        >
+          {{ props.component.content.heading }}
         </h2>
       </div>
       <div class="flex flex-col gap-2">

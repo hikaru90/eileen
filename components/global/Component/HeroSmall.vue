@@ -40,10 +40,10 @@
       <div class="h-full flex items-center justify-center">
         <div class="mt-10 ">
           <h2
-            style="max-width: 15em; text-shadow: rgba(0,0,0,0.8) 0 0 80px;"
-            class="font-bold text-xl sm:text-2xl md:text-4xl lg:text-5xl mb-10 border-2 border-gold px-5 py-3 rounded text-center"
+            style="max-width: 15em"
+            class="text-coffee font-heading text-2xl sm:text-5xl md:text-6xl lg:text-7xl mb-10 lg:mb-20 text-center"
+            v-html="$mdRenderer.set({ html: true }).render(props.component.content.heading)"
           >
-            {{ props.component.content.heading }}
           </h2>
         </div>
       </div>
@@ -53,9 +53,9 @@
         style="
           background-image: radial-gradient(
             circle,
-            rgba(2, 55, 41, 1) 0%,
-            rgba(0, 31, 31, 1) 60%,
-            rgba(53, 65, 30, 1) 100%
+            rgb(250, 244, 216) 0%,
+            #FBF9F7 60%,
+            #f9f3ec 100%
           );
           mix-blend-mode: multiply;
         "
@@ -63,7 +63,7 @@
       ></div>
       <div
         :style="[{ backgroundImage: `url(${getCurrentImageUrl(props.component.content.image)})` }]"
-        class="w-full h-full bg-cover bg-[60%] lg:bg-center"
+        class="w-full h-full bg-cover bg-center opacity-70"
       ></div>
     </div>
   </div>
