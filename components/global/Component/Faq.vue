@@ -25,7 +25,7 @@
           {{ props.component.content.heading }}
         </h2>
       </div>
-      <div class="flex flex-col gap-2">
+      <div class="flex flex-col gap-6">
         <FaqEntry v-for="(faq, index) in props.component.content?.faqs" :faq="faq" />
       </div>
     </div>

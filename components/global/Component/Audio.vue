@@ -39,7 +39,7 @@
   const createAudioInstance = (index, container, file) => {
     const audioInstance = WaveSurfer.create({
       container: container,
-      height: 48,
+      height: 28,
       width: "auto",
       splitChannels: false,
       normalize: true,
@@ -205,11 +205,11 @@
           class="w-full md:w-1/2 md:max-w-[500px] shadow-2xl shadow-coffee/30 rounded-lg overflow-hidden bg-white relative border border-coffee border-opacity-10"
         >
           <div
-            class="mb-4 font-heading text-lg lg:text-xl flex items-center gap-4 border-b border-coffee border-opacity-10 px-6 py-4"
+            class="mb-4 font-heading text-lg lg:text-xl flex items-center gap-4 border-b border-coffee border-opacity-10 px-6 py-3"
           >
             {{ audio.name }}
           </div>
-          <div class="px-6 pt-3 pb-7">
+          <div class="px-6 pt-1 pb-5">
             <div class="relative w-full h-full">
               <div
                 v-if="state.audios.length > 0"
@@ -219,12 +219,12 @@
               </div>
               <div
                 :id="'audio' + index"
-                class="inline-block ml-[60px] h-12 w-[calc(100%-124px)] overflow-hidden"
+                class="inline-block ml-[60px] h-7 w-[calc(100%-100px)] overflow-hidden"
               ></div>
               <button
                 v-if="state.audios.length > 0"
                 @click="togglePlayPause(index)"
-                class="inline-flex ml-[4px] w-[48px] h-[48px] items-center justify-center border border-coffee border-opacity-30 align-top rounded-lg"
+                class="inline-flex ml-[4px] w-[32px] h-[32px] items-center justify-center border border-coffee border-opacity-30 align-top rounded-lg"
               >
                 <nuxt-icon
                   v-if="state.audios[index].isPlaying"

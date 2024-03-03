@@ -1,1 +1,0 @@
-import{_ as e}from"./Container.vue.92e058b3.js";import{a as t,o as n,f as a,i as r}from"./entry.7d49cd86.js";import"./BlockRenderer.vue.507c0574.js";import"./nuxt-icon.vue.b4bbe9a3.js";import"./_plugin-vue_export-helper.c27b6911.js";const s={class:"max-container"},u=t({__name:"bak-index",setup(c){return(_,i)=>{const o=e;return n(),a("div",s,[r(o)])}}});export{u as default};

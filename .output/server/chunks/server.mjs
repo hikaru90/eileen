@@ -784,7 +784,7 @@ const components = {
     /* webpackChunkName: "components/block-markdown" */
   ).then((c) => c.default || c)),
   ComponentAudio: /* @__PURE__ */ defineAsyncComponent(() => import(
-    './Audio-b38d118c.mjs'
+    './Audio-97b3b3de.mjs'
     /* webpackChunkName: "components/component-audio" */
   ).then((c) => c.default || c)),
   ComponentBookingCalendar: /* @__PURE__ */ defineAsyncComponent(() => import(
@@ -796,7 +796,7 @@ const components = {
     /* webpackChunkName: "components/component-default" */
   ).then((c) => c.default || c)),
   ComponentFaq: /* @__PURE__ */ defineAsyncComponent(() => import(
-    './Faq-2c868ca5.mjs'
+    './Faq-6ad214a4.mjs'
     /* webpackChunkName: "components/component-faq" */
   ).then((c) => c.default || c)),
   ComponentHeroBig: /* @__PURE__ */ defineAsyncComponent(() => import(
@@ -816,7 +816,7 @@ const components = {
     /* webpackChunkName: "components/component-image-rotation" */
   ).then((c) => c.default || c)),
   ComponentMyWork: /* @__PURE__ */ defineAsyncComponent(() => import(
-    './MyWork-e7c0201a.mjs'
+    './MyWork-d3b63fd8.mjs'
     /* webpackChunkName: "components/component-my-work" */
   ).then((c) => c.default || c)),
   ComponentOffer: /* @__PURE__ */ defineAsyncComponent(() => import(
@@ -824,7 +824,7 @@ const components = {
     /* webpackChunkName: "components/component-offer" */
   ).then((c) => c.default || c)),
   ComponentPortraitText: /* @__PURE__ */ defineAsyncComponent(() => import(
-    './PortraitText-1e89c712.mjs'
+    './PortraitText-d4d0a6e2.mjs'
     /* webpackChunkName: "components/component-portrait-text" */
   ).then((c) => c.default || c)),
   ComponentPrices: /* @__PURE__ */ defineAsyncComponent(() => import(
@@ -848,7 +848,7 @@ const components = {
     /* webpackChunkName: "components/sidebar-booking-calendar" */
   ).then((c) => c.default || c)),
   SidebarComponent: /* @__PURE__ */ defineAsyncComponent(() => import(
-    './Component-96132678.mjs'
+    './Component-72a4ca50.mjs'
     /* webpackChunkName: "components/sidebar-component" */
   ).then((c) => c.default || c)),
   SidebarFaq: /* @__PURE__ */ defineAsyncComponent(() => import(

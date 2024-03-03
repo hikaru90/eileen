@@ -37,7 +37,7 @@
     <!-- <div class="absolute z-20 bottom-0 left-1/2 transform translate-y-1/2 -translate-x-1/3 rounded-full w-5 h-5 bg-gradient-to-b from-gold via-lightGold to-darkGold">
     </div> -->
     <div class="max-container h-full relative z-10">
-      <div class="h-full flex items-center justify-center py-16 md:py-24">
+      <div class="h-full flex items-center justify-center py-16 md:pt-32 md:pb-24">
         <div class="mt-10">
           <h2
             class="font-heading text-lg sm:text-xl md:text-3xl lg:text-4xl mb-10 text-center text-coffee"
@@ -51,7 +51,7 @@
       </div>
     </div>
     <div
-      class="w-32 h-32 md:w-40 md:h-40 absolute top-0 left-1/2 transform -translate-y-1/2 -translate-x-1/2 rounded-full overflow-hidden shadow-2xl shadow-coffee/30"
+      class="w-32 h-32 md:w-52 md:h-52 absolute top-0 left-1/2 transform -translate-y-1/2 -translate-x-1/2 rounded-full overflow-hidden shadow-2xl shadow-coffee/30"
     >
       <div
         style="
