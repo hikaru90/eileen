@@ -1,0 +1,1 @@
+import{_ as e}from"./_plugin-vue_export-helper.c27b6911.js";import{o,f as t,h as s}from"./entry.7d49cd86.js";const c={},a={class:"max-container"},n=s("div",{class:"p-20"},"Default Component",-1),r=[n];function _(f,i){return o(),t("div",a,r)}const m=e(c,[["render",_]]);export{m as default};

@@ -784,7 +784,7 @@ const components = {
     /* webpackChunkName: "components/block-markdown" */
   ).then((c) => c.default || c)),
   ComponentAudio: /* @__PURE__ */ defineAsyncComponent(() => import(
-    './Audio-39addbc1.mjs'
+    './Audio-b38d118c.mjs'
     /* webpackChunkName: "components/component-audio" */
   ).then((c) => c.default || c)),
   ComponentBookingCalendar: /* @__PURE__ */ defineAsyncComponent(() => import(
@@ -796,7 +796,7 @@ const components = {
     /* webpackChunkName: "components/component-default" */
   ).then((c) => c.default || c)),
   ComponentFaq: /* @__PURE__ */ defineAsyncComponent(() => import(
-    './Faq-df1c49e8.mjs'
+    './Faq-2c868ca5.mjs'
     /* webpackChunkName: "components/component-faq" */
   ).then((c) => c.default || c)),
   ComponentHeroBig: /* @__PURE__ */ defineAsyncComponent(() => import(
@@ -804,7 +804,7 @@ const components = {
     /* webpackChunkName: "components/component-hero-big" */
   ).then((c) => c.default || c)),
   ComponentHeroSmall: /* @__PURE__ */ defineAsyncComponent(() => import(
-    './HeroSmall-122eb35b.mjs'
+    './HeroSmall-91b2c123.mjs'
     /* webpackChunkName: "components/component-hero-small" */
   ).then((c) => c.default || c)),
   ComponentImageList: /* @__PURE__ */ defineAsyncComponent(() => import(
@@ -820,7 +820,7 @@ const components = {
     /* webpackChunkName: "components/component-my-work" */
   ).then((c) => c.default || c)),
   ComponentOffer: /* @__PURE__ */ defineAsyncComponent(() => import(
-    './Offer-707fb631.mjs'
+    './Offer-4fcd3f4c.mjs'
     /* webpackChunkName: "components/component-offer" */
   ).then((c) => c.default || c)),
   ComponentPortraitText: /* @__PURE__ */ defineAsyncComponent(() => import(
@@ -832,7 +832,7 @@ const components = {
     /* webpackChunkName: "components/component-prices" */
   ).then((c) => c.default || c)),
   ComponentTestimonials: /* @__PURE__ */ defineAsyncComponent(() => import(
-    './Testimonials-384cd231.mjs'
+    './Testimonials-d00609bc.mjs'
     /* webpackChunkName: "components/component-testimonials" */
   ).then((c) => c.default || c)),
   SidebarAudio: /* @__PURE__ */ defineAsyncComponent(() => import(
@@ -848,7 +848,7 @@ const components = {
     /* webpackChunkName: "components/sidebar-booking-calendar" */
   ).then((c) => c.default || c)),
   SidebarComponent: /* @__PURE__ */ defineAsyncComponent(() => import(
-    './Component-2b70740a.mjs'
+    './Component-96132678.mjs'
     /* webpackChunkName: "components/sidebar-component" */
   ).then((c) => c.default || c)),
   SidebarFaq: /* @__PURE__ */ defineAsyncComponent(() => import(
@@ -1217,9 +1217,9 @@ const _wrapIf = (component, props, slots) => {
   return { default: () => props ? h(component, props === true ? {} : props, slots) : h(Fragment, {}, slots) };
 };
 const layouts = {
-  blank: () => import('./blank-6c707320.mjs').then((m) => m.default || m),
-  default: () => import('./default-389419e6.mjs').then((m) => m.default || m),
-  sidebar: () => import('./sidebar-2fadcd08.mjs').then((m) => m.default || m)
+  blank: () => import('./blank-297a539d.mjs').then((m) => m.default || m),
+  default: () => import('./default-22276b1a.mjs').then((m) => m.default || m),
+  sidebar: () => import('./sidebar-2880b239.mjs').then((m) => m.default || m)
 };
 const LayoutLoader = /* @__PURE__ */ defineComponent({
   name: "LayoutLoader",
