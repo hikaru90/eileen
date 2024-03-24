@@ -7,6 +7,24 @@ const defaults = [
     ],
   },
   {
+    type: "contact",
+    content: {
+      heading: "Schreiben Sie mir eine Nachricht",
+      recipient: "alexbueckner@gmail.com",
+      image: "solar_energy_a2mPxBJIkJ.jpg",
+    },
+  },
+  {
+    type: "map",
+    content: {
+      address: "Dimple Goertz<br/>Paar- und Sexualtherapeutin & Beziehungscoach<br/>Breitscheidstraße 33<br/>70176 Stuttgart",
+      phone: "+49 XXX",
+      openinghours: "(Erreichbar Mo-Do, 10-19h)",
+      mail: "kontakt@eileengeorge.de",
+      image: "",
+    },
+  },
+  {
     type: "services",
     options: [
       { label: "Paartherapie Kennenlerngespräch (50 Min.)", value: "coupleTherapyIntroduction50" },
@@ -124,6 +142,19 @@ const defaults = [
     type: "portraitText",
     content: {
       heading: "Willkommen & Schön, dass Du da bist.",
+      image: "solar_energy_a2mPxBJIkJ.jpg",
+      text: "Mein Name ist Eileen. Ich begleite Dich als zertifizierte psychologisch-systemische Individualcoachin in schwierigen Lebenssituationen, bei vermindertem Selbstwertempfinden und bei Wünschen nach Veränderung. Ganz gleich, an welchen Themen wir gemeinsam arbeiten, Du kommst in unserer Arbeit sanft in einen Zustand der tieferen Verbindung mit Dir selbst und findest zu einem größeren Vertrauen in Dich und Deinen Weg.",
+      cta: {
+        text: "Buchen",
+        icon: "icon-caret-right",
+        link: "/buchen",
+      },
+    },
+  },
+  {
+    type: "myWork-Bak",
+    content: {
+      heading: "Mein Weg & meine Arbeit",
       image: "solar_energy_a2mPxBJIkJ.jpg",
       text: "Mein Name ist Eileen. Ich begleite Dich als zertifizierte psychologisch-systemische Individualcoachin in schwierigen Lebenssituationen, bei vermindertem Selbstwertempfinden und bei Wünschen nach Veränderung. Ganz gleich, an welchen Themen wir gemeinsam arbeiten, Du kommst in unserer Arbeit sanft in einen Zustand der tieferen Verbindung mit Dir selbst und findest zu einem größeren Vertrauen in Dich und Deinen Weg.",
       cta: {

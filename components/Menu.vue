@@ -1,4 +1,6 @@
 <script setup lang="ts">
+  import { useAuthStore } from "~/store/auth";
+  const authStore = useAuthStore();
   const { pb } = usePocketbase();
 
   const records = await pb.collection("pages").getFullList(200 /* batch size */, {
@@ -10,6 +12,7 @@
     menuIsOpen: false,
     hoverIndex: null,
     menuEntryCount: 0,
+    top: 0,
   });
 
   const menuEntries = computed(() => {
@@ -40,6 +43,24 @@
     if (!slug) return;
     state.menuIsOpen = false;
   };
+
+  const handleScroll = (e) => {
+    const scrollTop = e.target.scrollTop;
+    state.top = scrollTop;
+  };
+
+  onMounted(() => {
+    if (process.client) {
+      window.document.getElementById("content-container").addEventListener("scroll", handleScroll);
+    }
+  });
+  onUnmounted(() => {
+    if (process.client) {
+      window.document
+        .getElementById("content-container")
+        .removeEventListener("scroll", handleScroll);
+    }
+  });
 </script>
 
 <template>
@@ -53,8 +74,8 @@
       class="fixed z-30 bg-white top-0 left-0 w-full h-full transform transition-all select-none"
     >
       <div class="max-container w-full">
-        <div class="flex items-center justify-between py-6 mb-10">
-          <div class="font-heading text-2xl text-coffee">
+        <div class="flex items-center justify-between py-4 mb-10">
+          <div class="font-heading text-lg text-coffee">
             <NuxtLink to="/"> Eileen George </NuxtLink>
           </div>
 
@@ -127,10 +148,19 @@
       </div>
     </div>
 
-    <div class="absolute top-0 left-0 w-full shadow-sm z-20 text-white">
+    <div
+      :class="[
+        state.top > 0 ? 'bg-white shadow-xl shadow-coffee/5' : 'shadow-sm',
+        authStore.token ? 'absolute' : 'fixed',
+      ]"
+      class="top-0 left-0 w-full z-20 text-white transition duration-100"
+    >
       <div class="max-container w-full">
-        <div class="flex items-center justify-between py-6">
-          <div class="font-heading text-2xl text-coffee">
+        <div
+          :class="[state.top > 0 ? 'py-4 lg:py-4' : 'py-4 lg:py-6']"
+          class="flex items-center justify-between transition-all duration-150"
+        >
+          <div class="font-heading text-lg lg:text-2xl text-coffee">
             <NuxtLink to="/"> Eileen George </NuxtLink>
           </div>
 
@@ -140,10 +170,10 @@
               @click="toggleMenu"
               class="flex items-center justify-center rounded p-1"
             >
-              <nuxt-icon name="icon-menu" class="text-2xl text-white" />
+              <nuxt-icon name="icon-menu" class="text-2xl text-coffee" />
             </button>
           </div>
-          <div class="flex items-center gap-4 text-coffee">
+          <div class="hidden lg:flex items-center gap-4 text-coffee">
             <div
               v-for="(menuEntry, index) in menuEntries"
               v-show="menuEntry.inMenu"
@@ -190,7 +220,7 @@
           <div class="hidden lg:block">
             <NuxtLink
               to="/buchen"
-              class="bg-white rounded-full text-darkCoffee flex items-center px-5 py-2 shadow-md shadow-coffee/10"
+              class="bg-salmon rounded-full text-white flex items-center px-5 py-2 shadow-md shadow-coffee/10"
             >
               <div style="text-shadow: rgba(0, 0, 0, 0.8) 0 0 40px" class="">Buchen</div>
               <!-- <div

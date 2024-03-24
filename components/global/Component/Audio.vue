@@ -202,7 +202,7 @@
         <div
           v-for="(audio, index) in props.component.content.audios"
           :key="'audio' + index"
-          class="w-full md:w-1/2 md:max-w-[500px] shadow-2xl shadow-coffee/30 rounded-lg overflow-hidden bg-white relative border border-coffee border-opacity-10"
+          class="w-full md:w-1/2 md:max-w-[500px] shadow-2xl shadow-coffee/10 rounded-lg overflow-hidden bg-white relative border border-coffee border-opacity-10"
         >
           <div
             class="mb-4 font-heading text-lg lg:text-xl flex items-center gap-4 border-b border-coffee border-opacity-10 px-6 py-3"
@@ -240,7 +240,7 @@
 
       <div class="flex justify-center relative mb-12">
         <div
-          style="background-image: radial-gradient(circle, #fef1d0 0%, transparent 60%)"
+          style="background-image: radial-gradient(circle, #FAF1DF 0%, transparent 60%)"
           class="absolute left-1/2 top-1/2 -z-10 w-[1600px] h-[1600px] transform -translate-x-1/2 -translate-y-1/2"
         ></div>
         <div class="max-w-lg text-2xl font-heading text-center">
@@ -254,12 +254,12 @@
             type="text"
             v-model="state.mail"
             :placeholder="props.component.content.placeholder"
-            class="px-5 py-2 shadow-xl shadow-coffee/20 rounded-full flex-grow max-w-[300px] border border-coffee border-opacity-10"
+            class="px-5 py-2 shadow-xl shadow-coffee/5 rounded-full flex-grow max-w-[300px] border border-coffee border-opacity-10"
           />
           <button
             @click="subscribe"
             :class="[{ 'pointer-events-none cursor-default': state.subscriptionPending }]"
-            class="shadow-xl shadow-coffee/20 bg-coffee px-5 py-2 rounded-full text-white flex-shrink-0 flex items-center justify-center"
+            class="shadow-xl shadow-coffee/20 bg-salmon px-5 py-2 rounded-full text-white flex-shrink-0 flex items-center justify-center"
           >
             <div v-show="!state.subscriptionPending">
               {{ props.component.content.cta }}

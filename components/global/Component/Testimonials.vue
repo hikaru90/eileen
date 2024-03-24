@@ -130,8 +130,8 @@
           <div
             :class="[
               visibleSlides.includes(index)
-                ? 'shadow-2xl shadow-coffee/20 scale-100'
-                : 'shadow-sm shadow-coffee/20 scale-80',
+                ? 'shadow-2xl shadow-coffee/10 scale-100'
+                : 'shadow-sm shadow-coffee/10 scale-80',
             ]"
             class="bg-white px-8 pt-8 pb-12 h-full border border-coffee border-opacity-10 rounded-lg overflow-hidden transition-all duration-300 delay-100 transform"
           >
@@ -155,13 +155,13 @@
       <div class="flex items-center justify-end gap-1px mr-6 mt-10 rounded-full">
         <button
           @click="prev"
-          class="py-1 pl-1.5 pr-2.5 bg-coffee border-r border-orange border-opacity-30 text-white rounded-l-full hover:bg-opacity-90 transition shadow-md shadow-coffee/20"
+          class="py-1 pl-1.5 pr-2.5 bg-salmon border-r border-orange border-opacity-30 text-white rounded-l-full hover:bg-opacity-90 transition shadow-md shadow-coffee/10"
         >
           <nuxt-icon name="icon-caret-left" class="text-2xl" />
         </button>
         <button
           @click="next"
-          class="py-1 pr-1.5 pl-2.5 bg-coffee border-r border-orange border-opacity-30 text-white rounded-r-full hover:bg-opacity-90 transition shadow-md shadow-coffee/20"
+          class="py-1 pr-1.5 pl-2.5 bg-salmon border-r border-orange border-opacity-30 text-white rounded-r-full hover:bg-opacity-90 transition shadow-md shadow-coffee/10"
         >
           <nuxt-icon name="icon-caret-right" class="text-2xl" />
         </button>

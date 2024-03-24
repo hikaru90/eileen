@@ -66,22 +66,21 @@
         </div>
       </div>
     </div>
-    <div class="w-full h-full absolute top-0 left-0">
+    <div class="w-full h-full absolute top-0 left-0 z-0">
       <div
         style="
           background-image: radial-gradient(
-            circle,
-            rgb(250, 244, 216) 0%,
-            #FBF9F7 60%,
-            #f9f3ec 100%
+            circle at center,
+            transparent 0%,
+            #ffffff 100%
           );
-          mix-blend-mode: multiply;
+          
         "
-        class="w-full h-full opacity-20 absolute"
+        class="w-full h-full opacity-100 absolute z-10"
       ></div>
       <div
         :style="[{ backgroundImage: `url(${getCurrentImageUrl(props.component.content.image)})` }]"
-        class="w-full h-full bg-cover bg-center opacity-70"
+        class="w-full h-full bg-cover bg-center opacity-80"
       ></div>
     </div>
   </div>

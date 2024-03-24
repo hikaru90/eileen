@@ -20,7 +20,7 @@
             <div>
               <EditorBar v-if="authStore.token" />
             </div>
-            <div :class="[{ 'overflow-x-hidden': !authStore.token }]" class="flex flex-col flex-grow relative">
+            <div :class="[{ 'overflow-hidden': !authStore.token }]" class="flex flex-col flex-grow relative">
               <Menu id="top" class="" />
               <slot />
             </div>

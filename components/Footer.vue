@@ -19,7 +19,7 @@
 </script>
 <template>
   <footer
-    style="background: linear-gradient(30deg, #f6f4f2 0%, #f9f2ed 60%)"
+    style="background: linear-gradient(30deg, #FFF9F5 0%, #FBF9F7 60%)"
     class="py-20 text-coffee"
   >
     <div class="max-container">

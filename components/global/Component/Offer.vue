@@ -34,7 +34,7 @@
       style="
         background-image: radial-gradient(
           circle,
-          #FEF1D0 0%,
+          #FAF1DF 0%,
           transparent 60%
         );
       "
@@ -53,7 +53,7 @@
         <div
           v-for="(offer, index) in props.component.content.offers"
           :key="'slide' + index"
-          class="w-full md:w-1/2 md:max-w-[390px] shadow-2xl shadow-coffee/30 rounded-lg overflow-hidden border border-coffee border-opacity-10"
+          class="w-full md:w-1/2 md:max-w-[390px] shadow-2xl shadow-coffee/10 rounded-lg overflow-hidden border border-coffee border-opacity-10"
         >
           <div :style="[{ backgroundImage: `url(${getCurrentImageUrl(offer.image)})` }]" class="w-full h-52 bg-cover">
 
@@ -86,7 +86,7 @@
 
             <NuxtLink
                 to="/buchen"
-                class="bg-coffee rounded-full text-white inline-flex items-center px-5 py-2 shadow-md"
+                class="bg-salmon rounded-full text-white inline-flex items-center px-5 py-2 shadow-md"
               >
                 <div style="text-shadow: rgba(0, 0, 0, 0.8) 0 0 40px" class="">
                   Buchen
