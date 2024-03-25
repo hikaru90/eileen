@@ -40,7 +40,7 @@
 </script>
 <template>
   <div class="p-4">
-    <div class="mb-4">
+    <!-- <div class="mb-4">
       <h2 class="text-xs mb-2 opacity-40">Heading</h2>
       <input
         @change="saveContent"
@@ -48,36 +48,38 @@
         type="text"
         class="w-full rounded-sm pl-1 bg-transparent border border-darkOffwhite border-opacity-20"
       />
+    </div> -->
+    <div class="flex flex-col gap-2">
+      <ArrayPane
+        v-for="(block, index) in componentContent.blocks"
+        @arrayChanged="saveContent"
+        :key="'child' + index"
+        :array="componentContent.blocks"
+        :entry="faq"
+        :index="index"
+        :label="block.heading"
+      >
+        <div class="px-2">
+          <input
+            @change="saveContent"
+            v-model="block.heading"
+            type="text"
+            class="w-full rounded-sm pl-1 bg-transparent border border-darkOffwhite border-opacity-20 mb-2"
+          />
+          <textarea
+            @change="saveContent"
+            v-model="block.text"
+            type="text"
+            class="w-full rounded-sm pl-1 bg-transparent border border-darkOffwhite border-opacity-20"
+          />
+        </div>
+      </ArrayPane>
     </div>
-    <div class="mb-4">
-      <h2 class="text-xs mb-2 opacity-40">Text</h2>
-      <textarea
-        @change="saveContent"
-        v-model="componentContent.text"
-        type="text"
-        class="w-full rounded-sm pl-1 bg-transparent border border-darkOffwhite border-opacity-20"
-      />
-    </div>
-    <div class="mb-4">
-      <h2 class="text-xs mb-2 opacity-40">Hintergrundbild</h2>
-      <input
-        @change="saveContent"
-        v-model="componentContent.image"
-        type="text"
-        class="w-full rounded-sm pl-1 bg-transparent border border-darkOffwhite border-opacity-20"
-      />
-    </div>
-    <h2 class="text-xs opacity-40">Dateien</h2>
-    <div v-for="(filename, index) in componentFiles" class="flex items-center gap-2">
-      <div
-        :style="[{ backgroundImage: `url(${getCurrentImageUrl(filename)})` }]"
-        class="w-10 h-10 bg-contain bg-no-repeat bg-center"
-      ></div>
-      <span>{{ filename }}</span>
-      <button @click="deleteFile(filename)" class="border border-red rounded-sm">
-        <nuxt-icon name="icon-cross" class="text-red text-xl" />
-      </button>
-    </div>
-    <input @change="handleFiles" type="file" class="mt-2 mb-4" />
+    <button aria-label="Block hinzufügen"
+      @click="componentContent.blocks.push({ heading: '', text: '' })"
+      class="rounded-sm hover:bg-white hover:bg-opacity-20 px-2 border border-darkOffwhite border-opacity-20"
+    >
+    Block hinzufügen
+    </button>
   </div>
 </template>
