@@ -75,7 +75,7 @@
     >
       <div class="max-container w-full">
         <div class="flex items-center justify-between py-4 mb-10">
-          <div class="font-heading text-lg text-coffee">
+          <div style="font-style: italic;" class="font-heading text-lg text-coffee">
             <NuxtLink to="/"> Eileen George </NuxtLink>
           </div>
 
@@ -155,7 +155,7 @@
           :class="[state.top > 0 ? 'py-4 lg:py-4' : 'py-4 lg:py-6']"
           class="flex items-center justify-between transition-all duration-150"
         >
-          <div class="font-heading text-lg lg:text-2xl text-coffee">
+          <div style="font-style: italic;" class="font-heading text-lg lg:text-2xl text-coffee italic">
             <NuxtLink to="/"> Eileen George </NuxtLink>
           </div>
 
