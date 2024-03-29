@@ -46,8 +46,11 @@
           </h2>
 
           <div class="flex flex-col lg:flex-row gap-16 items-center lg:items-start">
-            <p class="markdown text-coffee max-w-[44rem]" v-html="$mdRenderer.set({ html: true }).render(props.component.content.text)">
-            </p>
+            <div class="max-w-[44rem]">
+              <p class="markdown text-coffee" v-html="$mdRenderer.set({ html: true }).render(props.component.content.text)">
+              </p>
+              <NuxtLink :to="props.component.content.cta.link" class="inline-flex border border-salmon rounded-full text-coffee items-center px-5 py-2 shadow-md mt-3"> {{props.component.content.cta.text}} </NuxtLink>
+            </div>
             <img :src="getCurrentImageUrl(props.component.content.image)" alt="Eileen George" class="w-full md:max-w-[380px] rounded-lg shadow-2xl shadow-coffee/30 -order-1 lg:order-1 flex-shrink-0">
           </div>
         </div>

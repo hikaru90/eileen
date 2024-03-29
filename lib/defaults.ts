@@ -130,6 +130,7 @@ const defaults = [
     type: "heroSmall",
     content: {
       heading: "Paartherapie",
+      subline: "Subline",
       image: "solar_energy_a2mPxBJIkJ.jpg",
       cta: {
         text: "Buchen",

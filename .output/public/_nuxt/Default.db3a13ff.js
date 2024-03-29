@@ -1,0 +1,1 @@
+import{a as e,o as t,f as o}from"./entry.e5944ccf.js";const n={style:{"min-height":"20px"}},p=e({__name:"Default",props:{block:null,depth:{default:0}},setup(a){return(s,c)=>(t(),o("div",n," Suche bitte einen Block aus "))}});export{p as default};

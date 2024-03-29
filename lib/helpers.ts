@@ -19,3 +19,23 @@ export const groupBy = (collection, property) => {
 export const sortBy = (collection, property) => {
   return collection.sort((a, b) => (a[property] > b[property]) ? 1 : -1)
 }
+
+export const waitForDOM = (idOfElement, callback, maxAttempts = 10, interval = 400) => {
+  console.log('waitForDOM');
+  if(process.client){
+
+    let attempt = 0;
+    const checkDOM = () => {
+      const dom = document.getElementById(idOfElement);
+      if (dom) {
+        callback();
+      } else if (attempt < maxAttempts) {
+        attempt++;
+        setTimeout(checkDOM, interval);
+      } else {
+        console.error(`Element with ID ${idOfElement} not found after ${maxAttempts} attempts.`);
+      }
+    };
+    checkDOM();
+  }
+};

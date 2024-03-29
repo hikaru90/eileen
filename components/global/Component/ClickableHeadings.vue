@@ -1,5 +1,6 @@
 <script setup lang="ts">
   import defaults from "~/lib/defaults";
+  import { waitForDOM } from '~/lib/helpers'
   const config = useRuntimeConfig();
 
   const props = withDefaults(
@@ -23,14 +24,14 @@
   const getHeightFromWidthAndTextWidth = (text) => {
     if (process.client) {
       try {
-        const tempDiv = document.createElement("div");
-        tempDiv.style.visibility = "hidden";
-        tempDiv.innerText = text;
-        document.getElementById("text-container").appendChild(tempDiv);
-        const height = tempDiv.offsetHeight;
-        document.getElementById("text-container").removeChild(tempDiv);
-
-        return height;
+          const tempDiv = document.createElement("div");
+          tempDiv.style.visibility = "hidden";
+          tempDiv.innerText = text;
+          document.getElementById("text-container").appendChild(tempDiv);
+          const height = tempDiv.offsetHeight;
+          document.getElementById("text-container").removeChild(tempDiv);
+          
+          return height;
       } catch (err) {
         console.log("err", err);
         return 0;
@@ -62,8 +63,8 @@
   };
 
   onMounted(async () => {
-    await nextTick();
-    enrichBlocks();
+    waitForDOM("text-container",enrichBlocks)
+    
     // getHeightFromWidthAndTextWidth(JSON.parse(JSON.stringify(props.component.content.blocks))[0].text)
   });
   onUnmounted(() => {});
@@ -112,10 +113,10 @@
                   </button>
                 </div>
               </div>
-              <div id="text-container">
+              <div id="text-container" class="leading-loose ">
                 <p v-if="state.enrichedBlocks.length > 0"
                   :style="{ height: `${state.enrichedBlocks[state.selectedIndex].height}px` }"
-                  class="markdown mb-10 leading-loose transition-all duration-300 mb-20"
+                  class="markdown transition-all duration-300"
                   v-html="
                     $mdRenderer.set({ html: true }).render(state.enrichedBlocks[state.selectedIndex].text)
                   "

@@ -1,6 +1,7 @@
 <script setup lang="ts">
   import defaults from "~/lib/defaults";
   import WaveSurfer from "wavesurfer.js";
+  import { waitForDOM } from '~/lib/helpers'
 
   const { pb } = usePocketbase();
 
@@ -37,6 +38,7 @@
     return imgUrl;
   };
   const createAudioInstance = (index, container, file) => {
+    console.log('createAudioInstance', index);
     const audioInstance = WaveSurfer.create({
       container: container,
       height: 28,
@@ -174,15 +176,18 @@
       }, 1000);
     }
   };
-
-  onMounted(() => {
-    if (process.client) {
-      for (const audio of Object.entries(props.component.content.audios)) {
+  const mountAudios = () => {
+    for (const audio of Object.entries(props.component.content.audios)) {
         const index = audio[0];
         const value = audio[1];
         const containerSelector = "#audio" + index;
-        createAudioInstance(index, containerSelector, getCurrentFileUrl(value.file));
+        createAudioInstance(index, containerSelector, getCurrentFileUrl(value.file))
       }
+  }
+
+  onMounted(async () => {
+    if (process.client) {
+      waitForDOM("audio0",mountAudios)
     }
   });
 </script>
@@ -215,19 +220,19 @@
                 v-if="state.audios.length > 0"
                 class="absolute left-0 top-1/2 transform -translate-y-1/2"
               >
-                {{ formatTime(Number(state.audios[index].times.total)) }}
+                {{ formatTime(Number(state.audios[index]?.times.total)) }}
               </div>
               <div
                 :id="'audio' + index"
                 class="inline-block ml-[60px] h-7 w-[calc(100%-100px)] overflow-hidden"
               ></div>
               <button
-                v-if="state.audios.length > 0"
+                v-if="state.audios?.length > 0"
                 @click="togglePlayPause(index)"
                 class="inline-flex ml-[4px] w-[32px] h-[32px] items-center justify-center border border-coffee border-opacity-30 align-top rounded-lg"
               >
                 <nuxt-icon
-                  v-if="state.audios[index].isPlaying"
+                  v-if="state.audios[index]?.isPlaying"
                   name="icon-pause"
                   class="text-4xl"
                 />
