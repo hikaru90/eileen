@@ -1,1 +1,0 @@
-const a=(t,u)=>{for(var e=0,o,s,r=[],n=[];e<t.length;e++)o=t[e][u],s=r.indexOf(o),s>-1?n[s].push(t[e]):(r.push(o),n.push([t[e]]));return n},d=(t,u,e=10,o=400)=>{console.log("waitForDOM");{let s=0;const r=()=>{document.getElementById(t)?u():s<e?(s++,setTimeout(r,o)):console.error(`Element with ID ${t} not found after ${e} attempts.`)};r()}};export{a as g,d as w};
