@@ -1242,8 +1242,8 @@ const _wrapIf = (component, props, slots) => {
 };
 const layouts = {
   blank: () => import('./blank-29cc2211.mjs').then((m) => m.default || m),
-  default: () => import('./default-a97c6a5c.mjs').then((m) => m.default || m),
-  sidebar: () => import('./sidebar-03335613.mjs').then((m) => m.default || m)
+  default: () => import('./default-224b3b3f.mjs').then((m) => m.default || m),
+  sidebar: () => import('./sidebar-c85893d1.mjs').then((m) => m.default || m)
 };
 const LayoutLoader = /* @__PURE__ */ defineComponent({
   name: "LayoutLoader",
