@@ -18,9 +18,11 @@
   <div class="mt-28 mb-40">
     <div class="max-container">
       <div class="flex flex-col items-center justify-center mb-10">
-        <h2 class="font-bold text-lg md:text-xl lg:text-2xl mb-16">
+        <IntersectonPop>
+        <h2 class="shiny-pop text-salmon font-bold text-lg md:text-xl lg:text-2xl mb-16">
           {{ props.component.content?.heading }}
         </h2>
+      </IntersectonPop>
       </div>
       <div class="flex flex-col md:flex-row gap-32 items-center justify-center mb-32">
         <div v-for="(card, index) in props.component.content?.prices" class="relative">

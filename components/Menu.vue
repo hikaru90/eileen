@@ -132,17 +132,12 @@
           </div>
           <NuxtLink
             @click="closeMenu('buchen')"
-            to="/buchen"
             :style="[{ transitionDelay: `${(state.menuEntryCount + 1) * 100}ms` }]"
             :class="[state.menuIsOpen ? 'transition-all opacity-100' : 'opacity-0']"
-            class="border-2 border-gold rounded flex items-center px-3 py-2 duration-300"
+            to="/buchen"
+            class="bg-salmon rounded-full text-white flex items-center px-5 py-2 shadow-md shadow-coffee/10"
           >
-            <div class="font-bold">Buchen</div>
-            <div
-              class="flex items-center justify-center bg-gradient-to-b from-gold via-lightGold to-darkGold rounded-full ml-2 w-4 h-4"
-            >
-              <nuxt-icon name="icon-caret-right" class="text-sm text-coffee" />
-            </div>
+            <div style="text-shadow: rgba(0, 0, 0, 0.8) 0 0 40px" class="">Buchen</div>
           </NuxtLink>
         </div>
       </div>

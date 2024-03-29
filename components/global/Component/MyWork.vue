@@ -39,11 +39,13 @@
     <div class="max-container h-full relative z-10">
       <div class="h-full flex items-center justify-center py-16 md:py-24">
         <div class="mt-10">
+          <IntersectonPop>
           <h2
-            class="font-heading text-lg sm:text-xl md:text-3xl lg:text-4xl mb-16 text-center text-coffee"
+            class="shiny-pop font-heading text-lg sm:text-xl md:text-3xl lg:text-4xl mb-16 text-center text-salmon"
           >
             {{ props.component.content.heading }}
           </h2>
+        </IntersectonPop>
 
           <div class="flex flex-col lg:flex-row gap-16 items-center lg:items-start">
             <div class="max-w-[44rem]">

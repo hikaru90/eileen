@@ -42,12 +42,14 @@
     <div class="max-container h-full relative z-10">
       <div class="h-full flex items-center justify-center">
         <div class="mt-10">
+          <IntersectonPop>
           <h2
             style="max-width: 15em"
-            class="text-coffee font-heading text-2xl sm:text-5xl md:text-6xl lg:text-7xl mb-10 lg:mb-20 text-center"
+            class="shiny-pop text-salmon font-heading text-2xl sm:text-5xl md:text-6xl lg:text-7xl mb-10 lg:mb-20 text-center"
             v-html="$mdRenderer.set({ html: true }).render(props.component.content.heading)"
           >
           </h2>
+        </IntersectonPop>
           <p class="text-coffee uppercase text-center text-xs sm:text-lg" v-html="$mdRenderer.set({ html: true }).render(props.component.content.subline)"></p>
           <!-- <NuxtLink
             :to="props.component.content.cta.link"

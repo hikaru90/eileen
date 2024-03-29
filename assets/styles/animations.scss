@@ -1,3 +1,39 @@
+.shiny-pop.animation {
+  @apply pb-3;
+  background-size: 300% 100%;
+  background-image: linear-gradient(
+    80deg,
+    #cb9b51 0%,
+    #be8f12 25%,
+    #f3ea6c 30%,
+    #be8f12 35%,
+    #cb9b51 78%,
+  );
+  color: transparent;
+  background-clip: text;
+  animation: pop forwards 2s, diagonal forwards 10s 400ms infinite;
+}
+
+@keyframes pop {
+  0% {
+    transform: scale(1.2);
+  }
+  10%{
+    transform: scale(1);
+  }
+}
+@keyframes diagonal {
+  0% {
+    background-position: 0% 100%
+  }
+  10% {
+    background-position: 100% 100%
+  }
+  100% {
+    background-position: 100% 100%
+  }
+}
+
 @keyframes fade {
   0% {
     opacity: 0.1;

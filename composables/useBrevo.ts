@@ -6,7 +6,7 @@ const getTemplate = (templateName: string, formData: object) => {
       name: "contactForm",
       subject: "Neue Kontaktanfrage",
       content: `<html><body>
-      Liebe Dimple,<br /><br />
+      Liebe Eileen,<br /><br />
     
       es gibt eine neue Kontaktanfrage von Deiner Seite.<br /><br />
 
@@ -15,16 +15,16 @@ const getTemplate = (templateName: string, formData: object) => {
       E-Mail: ${formData?.mail}<br />
       Nachricht: ${formData?.message}<br /><br />
 
-      Liebe Grüße aus dem Backend<br />
+      Liebe Grüße aus dem Backend ♥️<br />
       </body></html>`,
     },
     {
       name: "bookingRequestUser",
-      subject: "Ihre Buchungsanfrage bei Dimple Goertz",
+      subject: "Deine Buchungsanfrage bei Eileen George",
       content: `<html><body>
       Liebe/r ${formData?.firstName} ${formData?.lastName},<br /><br />
     
-      vielen Dank für Ihre Anfrage. Sobald ich Ihre Daten geprüft habe, werde ich Sie umgehend über die Bestätigung Ihres Termins informieren.<br /><br />
+      vielen Dank für Deine Anfrage. Sobald ich Deine Daten geprüft habe, werde ich Dich umgehend über die Bestätigung des Termins informieren.<br /><br />
       
       <strong>Anfragendetails:</strong><br />
       Datum: ${formData?.timeslot?.day}.${formData?.timeslot?.month}.${formData?.timeslot?.year}<br />
@@ -32,15 +32,18 @@ const getTemplate = (templateName: string, formData: object) => {
       
       Herzliche Grüße<br /><br />
       
-      <strong>Dimple Goertz</strong><br />
-      Paar- und Sexualtherapeutin & Beziehungscoach<br />
-      Breitscheidstraße 33<br />
-      70176 Stuttgart<br />
-      +49 1573 1664595<br />
-      kontakt@dimplegoertz.de<br /><br />
-      ____<br />
+      <strong>Eileen George</strong><br />
+      Psychologisches Coaching<br />
+      Selbstwert & innere Kind arbeit<br />
+      Embodiment<br />
+      Werkstraße 5<br />
+      24955 Harrislee<br />
+      kontakt@eileengeorge.de<br />
+      +49 1525 140 2928<br />
+      <br />
+      <br />
       STORNIERUNGSRICHTLINIE<br />
-      Eine kostenlose Stornierung Ihres Termins ist bis zu 48 Stunden vorher möglich. Danach wird eine Ausfallgebühr von 50% fällig.<br />
+      Eine kostenlose Stornierung Deines Termins ist bis zu 48 Stunden vorher möglich. Danach wird eine Ausfallgebühr von 50% fällig.<br />
       </body></html>`,
     },
     {
@@ -49,39 +52,44 @@ const getTemplate = (templateName: string, formData: object) => {
       content: `<html><body>
       Liebe/r ${formData?.firstName} ${formData?.lastName},<br /><br />
     
-      vielen Dank für Ihre Terminbuchung, die ich Ihnen hiermit gerne bestätige.<br /><br />
+      vielen Dank für Deine Terminbuchung, die ich Dir hiermit gerne bestätige.<br /><br />
 
       ${
         formData?.place === "inPerson"
-          ? "Ich freue mich, Sie bald persönlich in Stuttgart zu empfangen.<br /><br />"
-          : "Ich sende Ihnen den entsprechenden Link für die Durchführung Ihres Onlinetermins im Vorfeld zu.<br /><br />"
+          ? "Ich freue mich, Dich bald persönlich zu empfangen.<br /><br />"
+          : "Ich sende Dir den entsprechenden Link für die Durchführung Deines Onlinetermins im Vorfeld zu.<br /><br />"
       }
       
       <strong>Termin:</strong><br />
-      Datum: ${formData?.timeslot?.day}.${formData?.timeslot?.month}.${formData?.timeslot?.year}<br />
+      Datum: ${formData?.timeslot?.day}.${formData?.timeslot?.month}.${
+        formData?.timeslot?.year
+      }<br />
       Uhrzeit: ${formData?.timeslot?.timeslot}<br /><br />
       
       Herzliche Grüße<br /><br />
       
-      <strong>Dimple Goertz</strong><br />
-      Paar- und Sexualtherapeutin & Beziehungscoach<br />
-      Breitscheidstraße 33<br />
-      70176 Stuttgart<br />
-      +49 1573 1664595<br />
-      kontakt@dimplegoertz.de<br /><br />
-      ____<br />
+      <strong>Eileen George</strong><br />
+      Psychologisches Coaching<br />
+      Selbstwert & innere Kind arbeit<br />
+      Embodiment<br />
+      Werkstraße 5<br />
+      24955 Harrislee<br />
+      kontakt@eileengeorge.de<br />
+      +49 1525 140 2928<br />
+      <br />
+      <br />
       STORNIERUNGSRICHTLINIE<br />
-      Eine kostenlose Stornierung Ihres Termins ist bis zu 48 Stunden vorher möglich. Danach wird eine Ausfallgebühr von 50% fällig.<br />
+      Eine kostenlose Stornierung Deines Termins ist bis zu 48 Stunden vorher möglich. Danach wird eine Ausfallgebühr von 50% fällig.<br />
       </body></html>`,
     },
     {
       name: "bookingRequestOwner",
       subject: `Neue Buchungsanfrage von ${formData?.firstName} ${formData?.lastName}`,
       content: `<html><body>
-      Liebe Dimple,<br /><br />
+      Liebe Eileen,<br /><br />
     
       es liegt eine neue Buchung von ${formData?.firstName} ${formData?.lastName} im Backend bereit und wartet auf Moderation.<br />
-      <a href="https://dimplegoertz.de/buchungen" title="Dimple Goertz Buchungen">Zu den Buchungen</a>
+      <a href="https://eileengeorge.de/buchungen" title="Eileen George Buchungen">Zu den Buchungen</a>
       <br /><br />
       
       <strong>Anfragendetails:</strong><br />
@@ -96,7 +104,7 @@ const getTemplate = (templateName: string, formData: object) => {
       Rechnungsadresse: ${formData?.invoiceAddress}<br /><br />
       E-Mail: ${formData?.mail}<br /><br />
       
-      Herzliche Grüße aus dem Backend<br />
+      Viel Liebe aus dem Backend ♥️<br />
       <strong>Alex</strong><br />
       </body></html>`,
     },
@@ -107,7 +115,7 @@ const getTemplate = (templateName: string, formData: object) => {
 
 export default function useBrevo() {
   const config = useRuntimeConfig();
-  
+
   const sendMail = async (template: string, to: string, formData: object) => {
     const response = await fetch("https://api.brevo.com/v3/smtp/email", {
       method: "POST",

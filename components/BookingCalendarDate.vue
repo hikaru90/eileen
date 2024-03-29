@@ -297,27 +297,27 @@
     </div>
     <div class="w-full lg:w-1/2">
       <template v-if="!state.selectedDate">
-        <h2 class="font-bold text-md mb-10 mt-6">
-          Hier können Sie ganz bequem über das Online Buchungstool einen Erst- oder Folgetermin
+        <h2 class="text-md mb-10 mt-6">
+          Hier kannst Du ganz bequem über das Online Buchungstool einen Erst- oder Folgetermin
           buchen.<br /><br />
-          Wählen Sie ein Datum und eine passende Uhrzeit aus.
+          Wähle dafür ein Datum und eine passende Uhrzeit aus.
         </h2>
       </template>
       <template v-else>
         <template v-if="state.timeslots.length === 0">
           Am
-          <span class="font-bold">
+          <span class="">
             {{ new Date(state.selectedDate).toLocaleDateString("de-DE", {}) }}
           </span>
-          stehen Ihnen leider keine freien Termine zur Verfügung.
+          stehen Dir leider keine freien Termine zur Verfügung.
         </template>
         <template v-else>
           <div class="mb-3">
             Am
-            <span class="font-bold">
+            <span class="">
               {{ new Date(state.selectedDate).toLocaleDateString("de-DE", {}) }}
             </span>
-            stehen Ihnen folgende Termine zur Verfügung:
+            stehen Dir folgende Termine zur Verfügung:
           </div>
 
           <div class="flex items-center flex-wrap gap-2">

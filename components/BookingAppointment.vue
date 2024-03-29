@@ -135,7 +135,7 @@ import { DeprecationTypes } from "nuxt/dist/app/compat/capi";
           <div class="">
             {{ entry.name }}
           </div>
-          <div class="font-bold">
+          <div class="">
             {{ entry.value }}
           </div>
         </div>

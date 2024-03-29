@@ -12,7 +12,7 @@
 
     <div class="max-container">
       <div class="flex flex-col md:flex-row items-start md:items-center justify-start mb-20">
-        <nuxt-img format="webp" src="/dimple_goertz2.jpg" alt="Eileen George" style="max-width: 260px" class="w-full mr-10 rounded-md" />
+        <nuxt-img format="webp" src="/eileen_george.jpg" alt="Eileen George" style="max-width: 260px" class="w-full mr-10 rounded-md" />
         <h1 class="mt-6">
           <span class="font-heading text-xl lg:text-4xl">Eileen George<br /> </span>
           <span class="text-2xl"> Paartherapeutin und systemischer Coach </span>

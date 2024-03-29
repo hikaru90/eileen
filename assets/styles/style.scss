@@ -1,5 +1,5 @@
-@import 'animations';
-@import 'fonts';
+@import "animations";
+@import "fonts";
 
 body,
 html,
@@ -13,22 +13,23 @@ html,
 
 // *{ box-shadow: inset 0 0 2px 0 rgba(0,0,0,0.1); }
 
-ul{
+ul {
   @apply ml-4;
-  li{
+  li {
     @apply list-disc;
   }
 }
 
-.max-container{
+.max-container {
   max-width: 1200px;
   @apply w-full px-6 sm:px-10 my-0 mx-auto block;
 }
 
-.outer-container{
+.outer-container {
   @apply w-full px-8;
 }
 
-.nuxt-icon svg{
+.nuxt-icon svg {
   margin-bottom: 0 !important;
 }
+

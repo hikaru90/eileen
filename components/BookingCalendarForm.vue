@@ -193,17 +193,16 @@
 </script>
 <template>
   <div class="flex flex-col items-center justify-center text-center">
-    <div class="mb-4">Sie haben folgenden Termin ausgewählt:</div>
-    <div class="font-bold text-xl border-2 rounded border-gold inline-block px-4 py-1 mb-10">
+    <div class="mb-4">Du hast folgenden Termin ausgewählt:</div>
+    <div class="text-xl border rounded-full border-gold inline-block px-4 py-1 mb-10">
       {{ timeslotString }}
     </div>
     <div class="w-full lg:w-2/3 mb-10">
-      Um Ihre Buchung abzuschließen, benötige ich noch ein paar Informationen von Ihnen. Füllen Sie
-      bitte untenstehendes Formular aus.
+      Um Deine Buchung abzuschließen, benötige ich noch ein paar Informationen von Dir. Füll bitte untenstehendes Formular aus.
     </div>
 
     <form @submit.prevent="submitForm" class="w-full lg:w-2/3 flex flex-wrap -m-2">
-      <FormHeading class="mb-4">Ihre Angaben</FormHeading>
+      <FormHeading class="mb-4">Deine Angaben</FormHeading>
 
       <FormInput
         v-model="state.form.firstName.value"
@@ -261,15 +260,15 @@
       <FormHeading class="mb-4">Terminvorbereitung</FormHeading>
       <FormInputTextarea
         v-model="state.form.description.value"
-        label="Beschreibung Ihres Themas"
-        placeholder="Bitte beschreiben Sie kurz Ihr Thema"
+        label="Beschreibung Deines Themas"
+        placeholder="Bitte beschreibe kurz Dein Thema"
         :validation="state.form.description.validation"
         class="p-2 w-full"
       />
       <FormInputTextarea
         v-model="state.form.invoiceAddress.value"
         label="Rechnungsadresse"
-        placeholder="Bitte tragen Sie die gewünschte Rechnungsadresse ein"
+        placeholder="Bitte trage die gewünschte Rechnungsadresse ein"
         :validation="state.form.invoiceAddress.validation"
         class="p-2 w-full mb-6"
       />
@@ -300,7 +299,7 @@
           type="submit"
           class="border-2 border-gold bg-gold rounded text-offwhite flex items-center px-3 py-2 mb-20"
         >
-          <div class="text-coffee font-bold">Termin buchen</div>
+          <div class="text-coffee">Termin buchen</div>
           <div class="flex items-center justify-center bg-white rounded-full ml-2 w-4 h-4">
             <nuxt-icon name="icon-check" class="text-sm text-coffee" />
           </div>

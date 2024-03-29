@@ -21,7 +21,6 @@ export const sortBy = (collection, property) => {
 }
 
 export const waitForDOM = (idOfElement, callback, maxAttempts = 10, interval = 400) => {
-  console.log('waitForDOM');
   if(process.client){
 
     let attempt = 0;

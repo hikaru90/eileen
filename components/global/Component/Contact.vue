@@ -85,7 +85,7 @@
     for (let input of state.form) {
       if (input.validation === "required") {
         if (!input.value) {
-          input.error = "Füllen Sie bitte dieses Feld aus.";
+          input.error = "Fülle bitte dieses Feld aus.";
           errors.push(1);
         } else input.error = "";
       }
@@ -125,11 +125,13 @@
   <div class="mb-28">
     <div class="max-container">
       <div class="flex items-center justify-center">
+        <IntersectonPop>
         <h2
-          class="font-heading text-lg sm:text-xl md:text-3xl lg:text-4xl mb-16 text-center text-coffee"
+          class="shiny-pop text-salmon font-heading text-lg sm:text-xl md:text-3xl lg:text-4xl mb-16 text-center"
         >
           {{ props.component.content?.heading }}
         </h2>
+      </IntersectonPop>
       </div>
       <div class="flex flex-col lg:flex-row gap-16">
         <div
@@ -150,7 +152,7 @@
                   :class="[input.class]"
                   class="px-2 mt-3"
                 >
-                  <label :for="'input' + index" class="text-sm font-bold block ml-1"
+                  <label :for="'input' + index" class="text-sm block ml-1"
                     >{{ input.label }}
                     <template v-if="input.validation === 'required'"> </template>
                     <template v-else> (optional) </template>
@@ -202,13 +204,13 @@
                     <template v-if="state.success">
                       <div class="font-heading text-2xl mb-2">Vielen Dank!</div>
                       <p class="max-w-[24em]">
-                        Ihre Nachricht ist bei mir eingegangen. Ich melde mich sobald wie möglich bei Ihnen.
+                        Deine Nachricht ist bei mir eingegangen. Ich melde mich sobald wie möglich bei Dir.
                       </p>
                     </template>
                     <template v-else>
                       <div class="font-heading text-2xl mb-2 text-red">Oh!</div>
                       <p class="max-w-[24em]">
-                        Bei dem Versand Ihrer Nachricht ist ein Fehler aufgetreten. Versuchen Sie es bitte erneut. Falls der Fehler bestehen bleibt, senden Sie mir bitte eine E-Mail an <a href="mailto:kontakt@dimplegoertz.de" class="underline">kontakt@eileengeorge.de</a>.
+                        Bei dem Versand Deiner Nachricht ist ein Fehler aufgetreten. Versuche es bitte erneut. Falls der Fehler bestehen bleibt, sende mir bitte eine E-Mail an <a href="mailto:kontakt@eileengeorge.de" class="underline">kontakt@eileengeorge.de</a>.
                       </p>
                     </template>
                   </template>

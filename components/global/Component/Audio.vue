@@ -196,11 +196,13 @@
   <div class="py-16 md:py-24 relative">
     <div class="max-container">
       <div class="flex items-center justify-center">
+        <IntersectonPop>
         <h2
-          class="font-heading text-lg sm:text-xl md:text-3xl lg:text-4xl mb-16 text-center text-coffee"
+          class="shiny-pop text-salmon font-heading text-lg sm:text-xl md:text-3xl lg:text-4xl mb-16 text-center"
         >
           {{ props.component.content.heading }}
         </h2>
+      </IntersectonPop>
       </div>
 
       <div class="flex flex-col items-center gap-8 relative mb-32">

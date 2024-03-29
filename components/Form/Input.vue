@@ -41,7 +41,7 @@
       }
       if (props.validation?.includes("email")) {
         if (props.modelValue?.includes("@") === false) {
-          errors.push("Bitte geben Sie eine gültige E-Mail-Adresse ein");
+          errors.push("Bitte gib eine gültige E-Mail-Adresse ein");
         }
       }
     }

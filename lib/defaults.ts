@@ -9,7 +9,7 @@ const defaults = [
   {
     type: "contact",
     content: {
-      heading: "Schreiben Sie mir eine Nachricht",
+      heading: "Schreib mir eine Nachricht",
       recipient: "alexbueckner@gmail.com",
       image: "solar_energy_a2mPxBJIkJ.jpg",
     },
@@ -17,7 +17,7 @@ const defaults = [
   {
     type: "map",
     content: {
-      address: "Dimple Goertz<br/>Paar- und Sexualtherapeutin & Beziehungscoach<br/>Breitscheidstraße 33<br/>70176 Stuttgart",
+      address: "Eileen George<br/>Werkstraße 5<br/>24955 Harrislee",
       phone: "+49 XXX",
       openinghours: "(Erreichbar Mo-Do, 10-19h)",
       mail: "kontakt@eileengeorge.de",
@@ -27,24 +27,24 @@ const defaults = [
   {
     type: "services",
     options: [
-      { label: "Paartherapie Kennenlerngespräch (50 Min.)", value: "coupleTherapyIntroduction50" },
-      { label: "Paartherapie (Paar) (80 Min.)", value: "coupleTherapy80" },
-      { label: "Paartherapie (Einzelperson) (50 Min.)", value: "coupleTherapySingle50" },
-      { label: "Paartherapie (Einzelperson) (80 Min.)", value: "coupleTherapySingleIntense80" },
+      { label: "Psychologisches Coaching (60 Min.)", value: "psychologicalCoaching60" },
+      { label: "Find Your Way Home (Gruppe) (4 x 90 Min.)", value: "findYourWayHome90" },
+      // { label: "Paartherapie (Einzelperson) (50 Min.)", value: "coupleTherapySingle50" },
+      // { label: "Paartherapie (Einzelperson) (80 Min.)", value: "coupleTherapySingleIntense80" },
 
-      { label: "Sexualtherapie Kennenlerngespräch (50 Min.)", value: "sexTherapyIntroduction50" },
-      { label: "Sexualtherapie (Paar) (80 Min.)", value: "sexTherapy80" },
-      { label: "Sexualtherapie (Einzelperson) (50 Min.)", value: "sexTherapySingle50" },
-      { label: "Sexualtherapie (Einzelperson) (80 Min.)", value: "sexTherapySingleIntense80" },
+      // { label: "Sexualtherapie Kennenlerngespräch (50 Min.)", value: "sexTherapyIntroduction50" },
+      // { label: "Sexualtherapie (Paar) (80 Min.)", value: "sexTherapy80" },
+      // { label: "Sexualtherapie (Einzelperson) (50 Min.)", value: "sexTherapySingle50" },
+      // { label: "Sexualtherapie (Einzelperson) (80 Min.)", value: "sexTherapySingleIntense80" },
 
-      {
-        label: "Beziehungscoaching (Einzelperson) (50 Min.)",
-        value: "relationshipCoachingSingle50",
-      },
-      {
-        label: "Beziehungscoaching intensiv (Einzelperson) (80 Min.)",
-        value: "relationshipCoachingSingleIntense80",
-      },
+      // {
+      //   label: "Beziehungscoaching (Einzelperson) (50 Min.)",
+      //   value: "relationshipCoachingSingle50",
+      // },
+      // {
+      //   label: "Beziehungscoaching intensiv (Einzelperson) (80 Min.)",
+      //   value: "relationshipCoachingSingleIntense80",
+      // },
     ],
   },
   {

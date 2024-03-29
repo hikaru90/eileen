@@ -42,11 +42,13 @@
     ></div>
     <div class="max-container">
       <div class="flex items-center justify-center">
+        <IntersectonPop>
         <h2
-          class="font-heading text-lg sm:text-xl md:text-3xl lg:text-4xl mb-16 text-center text-coffee"
+          class="shiny-pop font-heading text-lg sm:text-xl md:text-3xl lg:text-4xl mb-16 text-center text-salmon"
         >
           {{ props.component.content.heading }}
         </h2>
+      </IntersectonPop>
       </div>
 
       <div class="flex flex-col md:flex-row itmes-stretch justify-center gap-16 relative">

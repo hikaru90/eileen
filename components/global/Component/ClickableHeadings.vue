@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import defaults from "~/lib/defaults";
-  import { waitForDOM } from '~/lib/helpers'
+  import { waitForDOM } from "~/lib/helpers";
   const config = useRuntimeConfig();
 
   const props = withDefaults(
@@ -24,14 +24,14 @@
   const getHeightFromWidthAndTextWidth = (text) => {
     if (process.client) {
       try {
-          const tempDiv = document.createElement("div");
-          tempDiv.style.visibility = "hidden";
-          tempDiv.innerText = text;
-          document.getElementById("text-container").appendChild(tempDiv);
-          const height = tempDiv.offsetHeight;
-          document.getElementById("text-container").removeChild(tempDiv);
-          
-          return height;
+        const tempDiv = document.createElement("div");
+        tempDiv.style.visibility = "hidden";
+        tempDiv.innerText = text;
+        document.getElementById("text-container").appendChild(tempDiv);
+        const height = tempDiv.offsetHeight;
+        document.getElementById("text-container").removeChild(tempDiv);
+
+        return height;
       } catch (err) {
         console.log("err", err);
         return 0;
@@ -63,8 +63,8 @@
   };
 
   onMounted(async () => {
-    waitForDOM("text-container",enrichBlocks)
-    
+    waitForDOM("text-container", enrichBlocks);
+
     // getHeightFromWidthAndTextWidth(JSON.parse(JSON.stringify(props.component.content.blocks))[0].text)
   });
   onUnmounted(() => {});
@@ -83,9 +83,11 @@
             :key="'block' + index"
             class="lg:hidden"
           >
-            <div class="font-heading text-lg sm:text-xl md:text-2xl mb-6">
-              {{ block.heading }}
-            </div>
+            <IntersectonPop>
+              <div class="shiny-pop text-salmon font-heading text-lg sm:text-xl md:text-2xl mb-6">
+                {{ block.heading }}
+              </div>
+            </IntersectonPop>
             <p
               class="markdown mb-10"
               v-html="$mdRenderer.set({ html: true }).render(block.text)"
@@ -102,8 +104,12 @@
                 >
                   <button
                     @click="state.selectedIndex = index"
-                    :class="[index === state.selectedIndex ? 'text-coffee border-coffee/20' : 'text-coffee/60 border-transparent']"
-                    class="font-heading text-lg sm:text-xl md:text-2xl mb-2 whitespace-nowrap relative hover:text-coffee hover:border-coffee/10 transition py-2 px-5 border rounded-full"
+                    :class="[
+                      index === state.selectedIndex
+                        ? 'text-salmon border-coffee/20'
+                        : 'text-salmon/60 border-transparent',
+                    ]"
+                    class="font-heading text-lg sm:text-xl md:text-2xl mb-2 whitespace-nowrap relative hover:text-salmon hover:border-coffee/10 transition py-2 px-5 border rounded-full"
                   >
                     {{ block.heading }}
                     <!-- <div
@@ -113,12 +119,15 @@
                   </button>
                 </div>
               </div>
-              <div id="text-container" class="leading-loose ">
-                <p v-if="state.enrichedBlocks.length > 0"
+              <div id="text-container" class="leading-loose">
+                <p
+                  v-if="state.enrichedBlocks.length > 0"
                   :style="{ height: `${state.enrichedBlocks[state.selectedIndex].height}px` }"
                   class="markdown transition-all duration-300"
                   v-html="
-                    $mdRenderer.set({ html: true }).render(state.enrichedBlocks[state.selectedIndex].text)
+                    $mdRenderer
+                      .set({ html: true })
+                      .render(state.enrichedBlocks[state.selectedIndex].text)
                   "
                 ></p>
               </div>

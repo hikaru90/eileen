@@ -1,5 +1,4 @@
 /** @type {import('tailwindcss').Config} */
-
 module.exports = {
   mode: 'jit',
   content: [
@@ -51,7 +50,7 @@ module.exports = {
         darkGrey: "#666",
         darkCoffee: '#42250E',
         coffee: '#724622',
-        salmon: '#724622',
+        salmon: '#be8f12',
         // salmon: '#244ED9',
         black: "#F6F4F2",
         blackHighlight: "#FEF1D0",

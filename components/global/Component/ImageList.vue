@@ -31,9 +31,11 @@
   <div class="mb-36 mt-24">
     <div class="max-container">
       <div class="flex items-center justify-center">
-        <h2 class="font-bold text-lg md:text-xl lg:text-2xl mb-20">
+        <IntersectonPop>
+        <h2 class="shiny-pop text-salmon font-bold text-lg md:text-xl lg:text-2xl mb-20">
           {{ props.component.content.heading }}
         </h2>
+      </IntersectonPop>
       </div>
       <div class="flex flex-col lg:flex-row lg:items-stretch justify-center">
         <div class="w-full lg:w-1/2 lg:flex lg:justify-end mb-20 lg:mb-0">

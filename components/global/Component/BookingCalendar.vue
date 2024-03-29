@@ -78,19 +78,18 @@
     <template v-if="state.formSubmitted">
       <div v-if="state.success" class="flex justify-center my-20">
         <div
-          class="w-full lg:w-2/3 font-bold border-2 rounded border-green bg-green bg-opacity-40 inline-block px-6 py-4 mb-10 text-center"
+          class="w-full lg:w-2/3 border-2 rounded border-green bg-green bg-opacity-40 inline-block px-6 py-4 mb-10 text-center"
         >
-          Vielen Dank für Ihre Buchung. <br />
-          Ich melde mich zeitnah per E-Mail bei Ihnen.
-          <!-- Sie haben soeben eine Zusammenfassung Ihrer Daten per E-Mail erhalten. -->
+          Vielen Dank für Deine Buchung. <br />
+          Ich melde mich zeitnah per E-Mail bei Dir.
         </div>
       </div>
       <div v-else class="flex justify-center my-20">
         <div
-          class="w-full lg:w-2/3 font-bold border-2 rounded border-red bg-red bg-opacity-40 inline-block px-6 py-4 mb-10 text-center"
+          class="w-full lg:w-2/3 border-2 rounded border-red bg-red bg-opacity-40 inline-block px-6 py-4 mb-10 text-center"
         >
-          Bei der Übermittlung Ihrer Daten ist leider ein Fehler aufgetreten. <br />Versuchen Sie es
-          bitte erneut. Sollte das Problem weiterhin bestehen, schreiben Sie mir bitte eine Mail an
+          Bei der Übermittlung Deiner Daten ist leider ein Fehler aufgetreten. <br />Versuch es
+          bitte erneut. Sollte das Problem weiterhin bestehen, schreib mir bitte eine Mail an
           <a href="mailto:kontakt@eileengeorge.de" class="underline">kontakt@eileengeorge.de</a>.
         </div>
       </div>
@@ -105,13 +104,13 @@
           class="flex flex-col gap-4 items-center justify-center w-1/3 py-10"
         >
           <div
-            :class="[state.currentStep === step.id ? 'bg-gold' : 'bg-darkOffwhite']"
+            :class="[state.currentStep === step.id ? 'bg-salmon/60' : 'bg-darkOffwhite']"
             class="w-full h-[5px] rounded relative"
           >
             <div
               :class="[
                 state.currentStep === step.id
-                  ? 'bg-gradient-to-b from-gold via-lightGold to-darkGold'
+                  ? 'bg-salmon'
                   : 'bg-darkOffwhite',
               ]"
               class="w-5 h-5 rounded-full absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2"
@@ -120,7 +119,7 @@
             </div>
           </div>
           <div
-            :class="[state.currentStep === step.id ? 'text-coffee font-bold' : 'text-lightGrey']"
+            :class="[state.currentStep === step.id ? 'text-coffee' : 'text-lightGrey']"
             class=""
           >
             {{ step.name }}

@@ -31,7 +31,7 @@
     if (state.touched) {
       if (props.validation?.includes("required")) {
         if (!props.modelValue) {
-          errors.push("Wählen Sie bitte eine Option");
+          errors.push("Wähle bitte eine Option");
         }
       }
     }

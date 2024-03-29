@@ -43,7 +43,7 @@
     if (state.touched) {
       if (props.validation?.includes("required")) {
         if (props.modelValue === false) {
-          errors.push("Bitte bestätigen Sie dieses Feld");
+          errors.push("Bitte bestätige dieses Feld");
         }
       }
     }
