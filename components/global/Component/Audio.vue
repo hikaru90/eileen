@@ -1,7 +1,7 @@
 <script setup lang="ts">
   import defaults from "~/lib/defaults";
   import WaveSurfer from "wavesurfer.js";
-  import { waitForDOM } from '~/lib/helpers'
+  import { waitForDOM, setCookie } from "~/lib/helpers";
 
   const { pb } = usePocketbase();
 
@@ -38,7 +38,7 @@
     return imgUrl;
   };
   const createAudioInstance = (index, container, file) => {
-    console.log('createAudioInstance', index);
+    console.log("createAudioInstance", index);
     const audioInstance = WaveSurfer.create({
       container: container,
       height: 28,
@@ -73,12 +73,11 @@
         let remainingTime = totalTime - currentTime;
 
         // state.audios[index].times.total = totalTime.toFixed(1)
-        state.audios[index].isPlaying = true
+        state.audios[index].isPlaying = true;
         state.audios[index].times.current = currentTime.toFixed(1);
         state.audios[index].times.remaining = remainingTime.toFixed(1);
-      }
-      else{
-        state.audios[index].isPlaying = false
+      } else {
+        state.audios[index].isPlaying = false;
       }
     });
     audioInstance.on("ready", function () {
@@ -112,9 +111,11 @@
   const clearErrors = () => {
     state.errors = [];
   };
+  
   const addSuccess = (success) => {
+    setCookie("subscribed", true);
     state.successes.push(success);
-    state.mail = ''
+    state.mail = "";
     setTimeout(() => {
       clearSuccesses();
     }, 3000);
@@ -153,22 +154,22 @@
         const resultList = await pb.collection("subscriptions").getList(1, 50, {
           filter: `mail = "${state.mail}"`,
         });
-        if(resultList.items.length > 0){
+        if (resultList.items.length > 0) {
           addError("Diese E-Mail Adresse ist bereits registriert.");
-          state.subscriptionPending = false
-          return
+          state.subscriptionPending = false;
+          return;
         }
 
         const res = await pb.collection("subscriptions").create({
           mail: state.mail,
         });
 
-        addSuccess("Du hast Dich erfolgreich eingetragen.")
-        state.subscriptionPending = false
-        return true
+        addSuccess("Du hast Dich erfolgreich eingetragen.");
+        state.subscriptionPending = false;
+        return true;
       } catch (err) {
         console.log("err", err);
-        state.subscriptionPending = false
+        state.subscriptionPending = false;
       }
 
       setTimeout(() => {
@@ -178,16 +179,16 @@
   };
   const mountAudios = () => {
     for (const audio of Object.entries(props.component.content.audios)) {
-        const index = audio[0];
-        const value = audio[1];
-        const containerSelector = "#audio" + index;
-        createAudioInstance(index, containerSelector, getCurrentFileUrl(value.file))
-      }
-  }
+      const index = audio[0];
+      const value = audio[1];
+      const containerSelector = "#audio" + index;
+      createAudioInstance(index, containerSelector, getCurrentFileUrl(value.file));
+    }
+  };
 
   onMounted(async () => {
     if (process.client) {
-      waitForDOM("audio0",mountAudios)
+      waitForDOM("audio0", mountAudios);
     }
   });
 </script>
@@ -197,12 +198,12 @@
     <div class="max-container">
       <div class="flex items-center justify-center">
         <IntersectonPop>
-        <h2
-          class="shiny-pop text-salmon font-heading text-lg sm:text-xl md:text-3xl lg:text-4xl mb-16 text-center"
-        >
-          {{ props.component.content.heading }}
-        </h2>
-      </IntersectonPop>
+          <h2
+            class="shiny-pop text-salmon font-heading text-lg sm:text-xl md:text-3xl lg:text-4xl mb-16 text-center"
+          >
+            {{ props.component.content.heading }}
+          </h2>
+        </IntersectonPop>
       </div>
 
       <div class="flex flex-col items-center gap-8 relative mb-32">
@@ -247,7 +248,7 @@
 
       <div class="flex justify-center relative mb-12">
         <div
-          style="background-image: radial-gradient(circle, #FAF1DF 0%, transparent 60%)"
+          style="background-image: radial-gradient(circle, #faf1df 0%, transparent 60%)"
           class="absolute left-1/2 top-1/2 -z-10 w-[1600px] h-[1600px] transform -translate-x-1/2 -translate-y-1/2"
         ></div>
         <div class="max-w-lg text-2xl font-heading text-center">
@@ -275,7 +276,7 @@
               <nuxt-icon name="icon-pending" class="text-2xl text-white" />
             </div>
           </button>
-          <input type="submit" class="hidden">
+          <input type="submit" class="hidden" />
         </form>
         <div
           v-for="(error, index) in state.errors"

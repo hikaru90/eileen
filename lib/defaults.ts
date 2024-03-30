@@ -96,6 +96,12 @@ const defaults = [
     },
   },
   {
+    type: "downloads",
+    content: {
+      heading: "Downloads",
+    },
+  },
+  {
     type: "audio",
     content: {
       heading: "Geführte Meditationen",

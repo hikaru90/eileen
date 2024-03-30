@@ -38,3 +38,25 @@ export const waitForDOM = (idOfElement, callback, maxAttempts = 10, interval = 4
     checkDOM();
   }
 };
+
+export const setCookie = (name, value, days?) => {
+  let expires = "";
+  if (days) {
+    let date = new Date();
+    date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
+    expires = "; expires=" + date.toUTCString();
+  }
+  document.cookie = name + "=" + value + expires + "; path=/";
+};
+
+export const getCookie = (name) => {
+  const cookies = document.cookie.split(';');
+  for (let i = 0; i < cookies.length; i++) {
+      const cookiePair = cookies[i].trim().split('=');
+      if (cookiePair[0] === name) {
+          return decodeURIComponent(cookiePair[1]);
+      }
+  }
+
+  return null;
+}
