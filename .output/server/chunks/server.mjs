@@ -788,7 +788,7 @@ const components = {
     /* webpackChunkName: "components/component-audio" */
   ).then((c) => c.default || c)),
   ComponentBookingCalendar: /* @__PURE__ */ defineAsyncComponent(() => import(
-    './BookingCalendar-54ce8648.mjs'
+    './BookingCalendar-6cedb024.mjs'
     /* webpackChunkName: "components/component-booking-calendar" */
   ).then((c) => c.default || c)),
   ComponentClickableHeadings: /* @__PURE__ */ defineAsyncComponent(() => import(
@@ -796,7 +796,7 @@ const components = {
     /* webpackChunkName: "components/component-clickable-headings" */
   ).then((c) => c.default || c)),
   ComponentContact: /* @__PURE__ */ defineAsyncComponent(() => import(
-    './Contact-70dd019f.mjs'
+    './Contact-487071fb.mjs'
     /* webpackChunkName: "components/component-contact" */
   ).then((c) => c.default || c)),
   ComponentDefault: /* @__PURE__ */ defineAsyncComponent(() => import(
@@ -812,7 +812,7 @@ const components = {
     /* webpackChunkName: "components/component-faq" */
   ).then((c) => c.default || c)),
   ComponentHeroBig: /* @__PURE__ */ defineAsyncComponent(() => import(
-    './HeroBig-9be2c58f.mjs'
+    './HeroBig-79a5699c.mjs'
     /* webpackChunkName: "components/component-hero-big" */
   ).then((c) => c.default || c)),
   ComponentHeroSmall: /* @__PURE__ */ defineAsyncComponent(() => import(
@@ -828,7 +828,7 @@ const components = {
     /* webpackChunkName: "components/component-image-rotation" */
   ).then((c) => c.default || c)),
   ComponentMap: /* @__PURE__ */ defineAsyncComponent(() => import(
-    './Map-a45be57e.mjs'
+    './Map-1b379e1a.mjs'
     /* webpackChunkName: "components/component-map" */
   ).then((c) => c.default || c)),
   ComponentMyWork: /* @__PURE__ */ defineAsyncComponent(() => import(
@@ -868,7 +868,7 @@ const components = {
     /* webpackChunkName: "components/sidebar-clickable-headings" */
   ).then((c) => c.default || c)),
   SidebarComponent: /* @__PURE__ */ defineAsyncComponent(() => import(
-    './Component-0ccb978b.mjs'
+    './Component-861795a8.mjs'
     /* webpackChunkName: "components/sidebar-component" */
   ).then((c) => c.default || c)),
   SidebarContact: /* @__PURE__ */ defineAsyncComponent(() => import(
@@ -1001,7 +1001,7 @@ const _routes = [
     meta: __nuxt_page_meta$1 || {},
     alias: (__nuxt_page_meta$1 == null ? void 0 : __nuxt_page_meta$1.alias) || [],
     redirect: (__nuxt_page_meta$1 == null ? void 0 : __nuxt_page_meta$1.redirect) || void 0,
-    component: () => import('./buchungen-e7375b58.mjs').then((m) => m.default || m)
+    component: () => import('./buchungen-d91a56ef.mjs').then((m) => m.default || m)
   },
   {
     name: (__nuxt_page_meta == null ? void 0 : __nuxt_page_meta.name) ?? "login",

@@ -249,8 +249,8 @@
       <FormInputSelect
         v-model="state.form.place.value"
         :options="[
-          { label: 'In meiner Praxis', value: 'inPerson' },
           { label: 'Online', value: 'online' },
+          { label: 'Vor Ort in Harrislee', value: 'inPerson' },
         ]"
         label="Wo soll der Termin stattfinden?"
         :validation="state.form.place.validation"

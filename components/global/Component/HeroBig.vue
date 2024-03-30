@@ -45,7 +45,7 @@
           <IntersectonPop>
           <h2
             style="max-width: 15em"
-            class="shiny-pop text-salmon font-heading text-2xl sm:text-5xl md:text-6xl lg:text-7xl mb-10 lg:mb-20 text-center"
+            class="shiny-pop text-salmon font-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl mb-10 lg:mb-20 text-center"
             v-html="$mdRenderer.set({ html: true }).render(props.component.content.heading)"
           >
           </h2>

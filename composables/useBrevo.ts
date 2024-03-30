@@ -34,7 +34,7 @@ const getTemplate = (templateName: string, formData: object) => {
       
       <strong>Eileen George</strong><br />
       Psychologisches Coaching<br />
-      Selbstwert & innere Kind arbeit<br />
+      Selbstwert & Innere Kind Arbeit<br />
       Embodiment<br />
       Werkstraße 5<br />
       24955 Harrislee<br />
@@ -42,7 +42,7 @@ const getTemplate = (templateName: string, formData: object) => {
       +49 1525 140 2928<br />
       <br />
       <br />
-      STORNIERUNGSRICHTLINIE<br />
+      Stornierungsrichtlinie<br />
       Eine kostenlose Stornierung Deines Termins ist bis zu 48 Stunden vorher möglich. Danach wird eine Ausfallgebühr von 50% fällig.<br />
       </body></html>`,
     },
@@ -51,26 +51,31 @@ const getTemplate = (templateName: string, formData: object) => {
       subject: "Terminbestätigung",
       content: `<html><body>
       Liebe/r ${formData?.firstName} ${formData?.lastName},<br /><br />
-    
-      vielen Dank für Deine Terminbuchung, die ich Dir hiermit gerne bestätige.<br /><br />
-
-      ${
-        formData?.place === "inPerson"
-          ? "Ich freue mich, Dich bald persönlich zu empfangen.<br /><br />"
-          : "Ich sende Dir den entsprechenden Link für die Durchführung Deines Onlinetermins im Vorfeld zu.<br /><br />"
-      }
       
+      Ich habe mir Deinen Wunschtermin eingetragen und freue mich sehr auf unsere gemeinsame Sitzung.<br/>
+      Für die endgültige Bestätigung des Termins, überweise bitte den Rechnungsbetrag über folgenden Link:
+      paypal.com/XXX<br /><br />
+
       <strong>Termin:</strong><br />
       Datum: ${formData?.timeslot?.day}.${formData?.timeslot?.month}.${
         formData?.timeslot?.year
       }<br />
       Uhrzeit: ${formData?.timeslot?.timeslot}<br /><br />
+
+
+      ${
+        formData?.place === "inPerson"
+          ? "Ich freue mich, Dich bald in meinen Räumlichkeiten in Harrislee zu empfangen, melde mich davor aber noch einmal persönlich bei Dir per Mail.<br /><br />"
+          : "Ich sende Dir den entsprechenden Link für die Durchführung Deines Onlinetermins im Vorfeld zu und melde mich davor aber auch einmal persönlich per Mail bei Dir.<br /><br />"
+      }
+
+      Bei Fragen oder anderen Anliegen, melde Dich gerne jederzeit bei mir.<br/><br/>
       
-      Herzliche Grüße<br /><br />
-      
-      <strong>Eileen George</strong><br />
+      Herzliche Grüße<br />
+      Von dem Buchungssystem von Eileen<br/><br/>
+      Eileen George<br/>
       Psychologisches Coaching<br />
-      Selbstwert & innere Kind arbeit<br />
+      Selbstwert & Innere Kind Arbeit<br />
       Embodiment<br />
       Werkstraße 5<br />
       24955 Harrislee<br />
@@ -78,7 +83,7 @@ const getTemplate = (templateName: string, formData: object) => {
       +49 1525 140 2928<br />
       <br />
       <br />
-      STORNIERUNGSRICHTLINIE<br />
+      Stornierungsrichtlinie<br />
       Eine kostenlose Stornierung Deines Termins ist bis zu 48 Stunden vorher möglich. Danach wird eine Ausfallgebühr von 50% fällig.<br />
       </body></html>`,
     },
