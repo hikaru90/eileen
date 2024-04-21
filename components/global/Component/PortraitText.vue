@@ -20,7 +20,7 @@
   const getCurrentImageUrl = (filename) => {
     const img = useImage();
     const imgUrl = img(
-      `${config.SERVER_URL}/api/files/${props.component.collectionName}/${props.component.id}/${filename}`,
+      `${config.public.SERVER_URL}/api/files/${props.component.collectionName}/${props.component.id}/${filename}`,
       {
         format: "webp",
       }
@@ -53,7 +53,7 @@
       </div>
     </div>
     <div
-      class="w-32 h-32 md:w-52 md:h-52 absolute top-0 left-1/2 transform -translate-y-1/2 -translate-x-1/2 rounded-full overflow-hidden shadow-2xl shadow-coffee/30"
+      class="w-24 h-24 sm:w-32 sm:h-32 lg:w-52 lg:h-52 absolute top-0 left-1/2 transform -translate-y-1/2 -translate-x-1/2 rounded-full overflow-hidden shadow-2xl shadow-coffee/30"
     >
       <div
         style="

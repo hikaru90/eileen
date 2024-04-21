@@ -4,7 +4,7 @@ import { vOnClickOutside } from '@vueuse/components'
   const emit = defineEmits(["update:modelValue"]);
 
   const icons = Object.keys(
-    import.meta.glob("~/assets/icons/*.svg", { as: "raw", eager: true })
+    import.meta.glob("~/assets/icons/*.svg", { query: "?raw", eager: true })
   ).map((path) => {
     const array = path.split("/");
     return array[array.length - 1].split(".")[0];

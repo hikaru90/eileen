@@ -9,7 +9,7 @@
   const { slugify } = contentStore;
 
   const files = Object.keys(
-    import.meta.glob("~/components/global/Block/*.vue", { as: "raw", eager: true })
+    import.meta.glob("~/components/global/Block/*.vue", { query: "?raw", eager: true })
   ).map((path) => {
     const array = path.split("/");
     return array[array.length - 1].split(".")[0];

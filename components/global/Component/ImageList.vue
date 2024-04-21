@@ -18,7 +18,7 @@
   const currentImageUrl = computed(() => {
     const img = useImage();
     const imgUrl = img(
-      `${config.SERVER_URL}/api/files/${props.component.collectionName}/${props.component.id}/${props.component.content.image}`,
+      `${config.public.SERVER_URL}/api/files/${props.component.collectionName}/${props.component.id}/${props.component.content.image}`,
       {
         format: "webp",
       }

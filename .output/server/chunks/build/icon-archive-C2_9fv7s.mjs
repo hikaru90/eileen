@@ -1,0 +1,8 @@
+const iconArchive = '<?xml version="1.0" encoding="UTF-8"?>\r\n<svg id="a" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">\r\n  <path d="M12.36,33.146c0,1.377,1.117,2.494,2.494,2.494h18.291c1.378,0,2.494-1.117,2.494-2.494v-14.134H12.36v14.134Zm6.651-10.185c0-.343,.281-.624,.624-.624h8.73c.343,0,.624,.281,.624,.624v.416c0,.343-.281,.624-.624,.624h-8.73c-.343,0-.624-.281-.624-.624v-.416Z"/>\r\n  <path d="M35.64,12.36H12.36c-.919,0-1.663,.744-1.663,1.663v2.494c0,.457,.374,.831,.831,.831h24.943c.457,0,.831-.374,.831-.831v-2.494c0-.919-.743-1.663-1.663-1.663Z"/>\r\n</svg>';
+const __vite_glob_0_17 = /* @__PURE__ */ Object.freeze({
+  __proto__: null,
+  default: iconArchive
+});
+
+export { __vite_glob_0_17 as _ };
+//# sourceMappingURL=icon-archive-C2_9fv7s.mjs.map

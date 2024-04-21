@@ -15,7 +15,7 @@ const getTemplate = (templateName: string, formData: object) => {
       E-Mail: ${formData?.mail}<br />
       Nachricht: ${formData?.message}<br /><br />
 
-      Liebe Grüße aus dem Backend ♥️<br />
+      Viel Liebe aus dem Backend ♥️<br />
       </body></html>`,
     },
     {
@@ -24,15 +24,16 @@ const getTemplate = (templateName: string, formData: object) => {
       content: `<html><body>
       Liebe/r ${formData?.firstName} ${formData?.lastName},<br /><br />
     
-      vielen Dank für Deine Anfrage. Sobald ich Deine Daten geprüft habe, werde ich Dich umgehend über die Bestätigung des Termins informieren.<br /><br />
+      vielen Dank für Deine Terminanfrage.<br/>
+      Sobald ich Deine Daten geprüft habe, melde ich mich noch einmal für die Bestätigung des Termins bei Dir.<br /><br />
       
       <strong>Anfragendetails:</strong><br />
       Datum: ${formData?.timeslot?.day}.${formData?.timeslot?.month}.${formData?.timeslot?.year}<br />
       Uhrzeit: ${formData?.timeslot?.timeslot}<br /><br />
       
-      Herzliche Grüße<br /><br />
-      
-      <strong>Eileen George</strong><br />
+      Herzliche Grüße<br />
+      von dem Buchungssystem von Eileen<br/><br/>
+      <strong>Eileen George<br/></strong>
       Psychologisches Coaching<br />
       Selbstwert & Innere Kind Arbeit<br />
       Embodiment<br />
@@ -72,8 +73,8 @@ const getTemplate = (templateName: string, formData: object) => {
       Bei Fragen oder anderen Anliegen, melde Dich gerne jederzeit bei mir.<br/><br/>
       
       Herzliche Grüße<br />
-      Von dem Buchungssystem von Eileen<br/><br/>
-      Eileen George<br/>
+      von dem Buchungssystem von Eileen<br/><br/>
+      <strong>Eileen George<br/></strong>
       Psychologisches Coaching<br />
       Selbstwert & Innere Kind Arbeit<br />
       Embodiment<br />

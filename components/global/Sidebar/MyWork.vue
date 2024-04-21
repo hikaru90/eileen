@@ -1,7 +1,8 @@
 <script setup lang="ts">
   import { useSidebarStore } from "~/store/sidebar";
   import { storeToRefs } from "pinia";
-  import EventBus from "~/plugins/mitt";
+  //import EventBus from "~/plugins/mitt";
+const { $event } = useNuxtApp()
   const sidebarStore = useSidebarStore();
   const { setComponentContent, saveContent, deleteFile } = sidebarStore;
   const { componentContent, componentId, componentType, componentFiles } =
@@ -22,13 +23,13 @@
       .collection(componentType.value + "s")
       .update(componentId.value, formData);
     console.log("createdRecord", createdRecord);
-    EventBus.emit("refresh");
+    $event("refresh");
   };
 
   const getCurrentImageUrl = (filename) => {
     const img = useImage();
     const imgUrl = img(
-      `${config.SERVER_URL}/api/files/${componentType.value + "s"}/${
+      `${config.public.SERVER_URL}/api/files/${componentType.value + "s"}/${
         componentId.value
       }/${filename}?thumb=160x90f`,
       {

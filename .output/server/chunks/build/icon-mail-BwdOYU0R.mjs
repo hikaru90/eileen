@@ -1,0 +1,8 @@
+const iconMail = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">\r\n  <g>\r\n    <path d="M25.926,25.42a4.4,4.4,0,0,1-3.852,0L9.6,19.292V32.571a1.746,1.746,0,0,0,1.746,1.746H36.658A1.746,1.746,0,0,0,38.4,32.571V19.292Z"/>\r\n    <path d="M24.909,23.35,37.76,17.038a1.152,1.152,0,0,0,.644-1.033v-.576a1.746,1.746,0,0,0-1.746-1.746H11.342A1.746,1.746,0,0,0,9.6,15.429v.576a1.152,1.152,0,0,0,.644,1.033L23.092,23.35A2.064,2.064,0,0,0,24.909,23.35Z"/>\r\n  </g>\r\n</svg>\r\n';
+const __vite_glob_0_62 = /* @__PURE__ */ Object.freeze({
+  __proto__: null,
+  default: iconMail
+});
+
+export { __vite_glob_0_62 as _ };
+//# sourceMappingURL=icon-mail-BwdOYU0R.mjs.map

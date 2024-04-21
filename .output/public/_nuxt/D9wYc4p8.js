@@ -1,0 +1,5 @@
+const e=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">\r
+  <circle cx="24" cy="17.181" r="6.062"/>\r
+  <path d="M36.123,33.85v1.516a1.515,1.515,0,0,1-1.515,1.515H13.392a1.515,1.515,0,0,1-1.515-1.515V33.85a9.092,9.092,0,0,1,9.092-9.092h6.062A9.092,9.092,0,0,1,36.123,33.85Z"/>\r
+</svg>\r
+`,r=Object.freeze(Object.defineProperty({__proto__:null,default:e},Symbol.toStringTag,{value:"Module"}));export{r as _};

@@ -1,0 +1,8 @@
+const iconSave = '<?xml version="1.0" encoding="UTF-8"?>\r\n<svg id="a" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">\r\n  <path d="M11.808,10.284h21.335l4.125,4.125c.286,.286,.446,.673,.447,1.077v20.704c0,.842-.682,1.524-1.524,1.524H11.808c-.842,0-1.524-.682-1.524-1.524V11.808c0-.842,.682-1.524,1.524-1.524Zm4.572,1.524v7.62h13.716v-7.62h-13.716Zm-1.524,12.192v10.668h18.287v-10.668H14.856Zm10.668-10.668h3.048v4.572h-3.048v-4.572Z"/>\r\n</svg>';
+const __vite_glob_0_96 = /* @__PURE__ */ Object.freeze({
+  __proto__: null,
+  default: iconSave
+});
+
+export { __vite_glob_0_96 as _ };
+//# sourceMappingURL=icon-save-SSnHH_R2.mjs.map

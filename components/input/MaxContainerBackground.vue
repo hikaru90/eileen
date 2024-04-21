@@ -1,7 +1,8 @@
 <script setup lang="ts">
   import { useSidebarStore } from "~/store/sidebar";
   import { storeToRefs } from "pinia";
-  import EventBus from "~/plugins/mitt";
+  //import EventBus from "~/plugins/mitt";
+const { $event } = useNuxtApp()
   const sidebarStore = useSidebarStore();
   const { limitBackgroundToMaxContainer } = storeToRefs(sidebarStore);
   const { saveLimitToMaxContainer, setComponentBackgroundToMaxContainer } = sidebarStore
@@ -9,7 +10,7 @@
   const setLimitBackgroundToMaxContainerAndSave = (event) => {
     setComponentBackgroundToMaxContainer(event.target.checked)
     saveLimitToMaxContainer()
-    EventBus.emit('refresh')
+    $event('refresh')
   }
 </script>
 

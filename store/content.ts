@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import EventBus from "~/plugins/mitt";
+import EventBus from "~/lib/mitt";
 const { pb } = usePocketbase();
 
 export const useContentStore = defineStore("contentStore", {

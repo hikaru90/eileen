@@ -3,7 +3,8 @@
   import { useSidebarStore } from "~~/store/sidebar";
   import { storeToRefs } from "pinia";
   import { useAuthStore } from "~/store/auth";
-  import EventBus from "~/plugins/mitt";
+  //import EventBus from "~/plugins/mitt";
+  const { $event, $listen } = useNuxtApp();
   const { pb } = usePocketbase();
   const authStore = useAuthStore();
   const sidebarStore = useSidebarStore();
@@ -26,11 +27,12 @@
     currentContainer: null,
   });
 
-  const { pending, data: pageContent } = await useAsyncData("pageContent", () =>
-    pb.collection("pages").getFirstListItem(`slug="${slug}"`, {
-      expand: "containers.block.blocks,containers.component,seo",
-    })
-  );
+  const { pending, data: pageContent } = await useAsyncData("pageContent", async () => {
+     const res = await pb.collection("pages").getFirstListItem(`slug="${slug}"`, {
+        expand: "containers.block.blocks,containers.component,seo",
+      })
+      return structuredClone(res)
+  });
   state.storePending = false;
 
   useHead({
@@ -40,7 +42,7 @@
     meta: [{ name: "description", content: pageContent.value.expand.seo.description }],
   });
 
-  EventBus.on("refresh", () => {
+  $listen("refresh", () => {
     console.log("content saved");
     state.storePending = true;
     refresh();

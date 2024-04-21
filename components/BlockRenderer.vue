@@ -4,7 +4,8 @@
   import { useContentStore } from "~/store/content";
   import { onClickOutside } from "@vueuse/core";
   import { useAuthStore } from "~/store/auth";
-  import EventBus from "~/plugins/mitt";
+  const { $event } = useNuxtApp()
+
 
   const { pb } = usePocketbase();
   const authStore = useAuthStore();
@@ -159,7 +160,7 @@
     let allBlocks = props.block.blocks;
     allBlocks.push(block.id);
     const updatedBlock = await pb.collection("blocks").update(container.id, { blocks: allBlocks });
-    EventBus.emit("refresh");
+    $event("refresh");
   };
 
   onMounted(() => {});

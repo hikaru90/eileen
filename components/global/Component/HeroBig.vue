@@ -20,7 +20,7 @@
   const getCurrentImageUrl = (filename) => {
     const img = useImage();
     const imgUrl = img(
-      `${config.SERVER_URL}/api/files/${props.component.collectionName}/${props.component.id}/${filename}`,
+      `${config.public.SERVER_URL}/api/files/${props.component.collectionName}/${props.component.id}/${filename}`,
       {
         format: "webp",
       }
@@ -35,7 +35,7 @@
 <template>
   <div
     :class="[{ '-mt-24': props.isFirst }]"
-    class="h-[400px] lg:h-[900px] relative bg-[#F6F4F2] text-white overflow-visible"
+    class="h-dvh lg:h-[900px] relative bg-[#F6F4F2] text-white overflow-visible"
   >
     <!-- <div class="absolute z-20 bottom-0 left-1/2 transform translate-y-1/2 -translate-x-1/3 rounded-full w-5 h-5 bg-gradient-to-b from-gold via-lightGold to-darkGold">
     </div> -->

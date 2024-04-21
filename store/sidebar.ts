@@ -1,5 +1,6 @@
 import { defineStore } from "pinia";
-import EventBus from "~/plugins/mitt";
+import EventBus from "~/lib/mitt";
+import mitt from 'mitt'
 const { pb } = usePocketbase();
 
 export const useSidebarStore = defineStore("sidebarStore", {
@@ -114,7 +115,7 @@ export const useSidebarStore = defineStore("sidebarStore", {
         const record = await pb
           .collection(this.componentType + "s")
           .update(this.componentId, { isMaxContainer: this.componentIsMaxContainer });
-        EventBus.emit("refresh");
+          EventBus.emit("refresh");
         return record;
       } catch (err) {
         console.log("error saving isMaxContainer", err);
@@ -126,7 +127,7 @@ export const useSidebarStore = defineStore("sidebarStore", {
         const record = await pb
           .collection(this.componentType + "s")
           .update(this.componentId, { limitBackgroundToMaxContainer: this.limitBackgroundToMaxContainer });
-        EventBus.emit("refresh");
+          EventBus.emit("refresh");
         return record;
       } catch (err) {
         console.log("error saving limitBackgroundToMaxContainer", err);
@@ -138,7 +139,7 @@ export const useSidebarStore = defineStore("sidebarStore", {
         const record = await pb
           .collection(this.componentType + "s")
           .update(this.componentId, { blocks: this.componentChildren.map((child) => child.id) });
-        EventBus.emit("refresh");
+          EventBus.emit("refresh");
         return record;
       } catch (err) {
         console.log("error saving componentChildren", err);

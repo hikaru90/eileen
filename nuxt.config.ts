@@ -28,7 +28,7 @@ export default defineNuxtConfig({
 
   modules: ["@nuxtjs/tailwindcss", "@pinia/nuxt", "@vueuse/nuxt", "nuxt-icons", "@nuxt/image"],
 
-  plugins: ["~/plugins/piniaStore", { src: "~/plugins/markdown-it", ssr: false }],
+  plugins: ["~/plugins/piniaStore", "~/plugins/mitt", { src: "~/plugins/markdown-it", ssr: false }],
 
   tailwindcss: {
     exposeConfig: true,

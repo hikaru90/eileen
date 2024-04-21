@@ -1,0 +1,8 @@
+const iconInfo = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">\r\n  <path d="M28.426,9.893a14.785,14.785,0,1,0,9.681,18.533A14.785,14.785,0,0,0,28.426,9.893Zm-2.875,19.65a.66.66,0,0,1-.66.659H23.109a.66.66,0,0,1-.66-.659V24.659a.66.66,0,0,1,.66-.659h1.782a.66.66,0,0,1,.66.659Zm0-9.3a.66.66,0,0,1-.66.659H23.109a.66.66,0,0,1-.66-.659V18.457a.66.66,0,0,1,.66-.659h1.782a.66.66,0,0,1,.66.659Z"/>\r\n</svg>\r\n';
+const __vite_glob_0_54 = /* @__PURE__ */ Object.freeze({
+  __proto__: null,
+  default: iconInfo
+});
+
+export { __vite_glob_0_54 as _ };
+//# sourceMappingURL=icon-info-CvHs7EyO.mjs.map

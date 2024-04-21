@@ -3,7 +3,8 @@
   import { useSidebarStore } from "~/store/sidebar";
   import { useContentStore } from "~/store/content";
   import { storeToRefs } from "pinia";
-  import EventBus from "~/plugins/mitt";
+  //import EventBus from "~/plugins/mitt";
+const { $event } = useNuxtApp()
   const sidebarStore = useSidebarStore();
   const contentStore = useContentStore();
   const { setComponentContent, setComponentContentType, saveContent, saveContentType } =
@@ -34,7 +35,7 @@
     saveContent(true);
     setTimeout(() => {
       saveContentType(true);
-      EventBus.emit("refresh");
+      $event("refresh");
     }, 500);
   };
 
@@ -62,7 +63,7 @@
   });
 
   const files = Object.keys(
-    import.meta.glob("~/components/global/Component/*.vue", { as: "raw", eager: true })
+    import.meta.glob("~/components/global/Component/*.vue", { query: "?raw", eager: true })
   ).map((path) => {
     const array = path.split("/");
     return array[array.length - 1].split(".")[0];

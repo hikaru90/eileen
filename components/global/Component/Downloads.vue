@@ -31,7 +31,7 @@
 
   const getCurrentImageUrl = (id, filename) => {
     const img = useImage();
-    const imgUrl = img(`${config.SERVER_URL}/api/files/downloads/${id}/${filename}`, {
+    const imgUrl = img(`${config.public.SERVER_URL}/api/files/downloads/${id}/${filename}`, {
       format: "webp",
     });
     return imgUrl;
@@ -101,8 +101,8 @@
 
         addSuccess("Du hast Dich erfolgreich eingetragen.");
         state.subscriptionPending = false;
-        state.userSubribed = true
-        state.newsletterSignupOpen = false
+        state.userSubribed = true;
+        state.newsletterSignupOpen = false;
         return true;
       } catch (err) {
         console.log("err", err);
@@ -137,17 +137,17 @@
   };
 
   const handleDownload = (id, filename) => {
-    console.log('state.userSubribed',state.userSubribed);
-    if(!state.userSubribed) {
-      state.newsletterSignupOpen = true
-      return
+    console.log("state.userSubribed", state.userSubribed);
+    if (!state.userSubribed) {
+      state.newsletterSignupOpen = true;
+      return;
     }
-    downloadFile(id, filename)
-  }
+    downloadFile(id, filename);
+  };
 
   onMounted(() => {
-    const userSubribed = getCookie('subscribed')
-    if(userSubribed) state.userSubribed = true
+    const userSubribed = getCookie("subscribed");
+    if (userSubribed) state.userSubribed = true;
   });
   onUnmounted(() => {});
 </script>
@@ -168,95 +168,99 @@
             ></h2>
           </IntersectonPop>
         </div>
-        <div class="flex-grow flex flex-col md:flex-row md:flex-wrap">
-          <div
-            v-if="state.newsletterSignupOpen"
-            class="w-full md:w-1/2 shadow-2xl shadow-coffee/10 rounded-lg overflow-hidden bg-white relative border border-coffee border-opacity-10 py-4 px-5"
-          >
-            <h3 class="font-heading text-lg md:text-2xl mb-4 mt-1 ml-1">Datei herunterladen</h3>
-            <p class="pl-1">
-              Um diese Datei herunterzuladen, gib bitte Deine E-Mail-Adresse ein um Dich in meinem
-              Newsletter einzutragen. Ich verwende Deine Daten ausschließlich um neue Meditationen
-              und Inspiration mit Dir zu teilen. Ich werde Deine E-Mail-Adresse nicht für andere
-              Zwecke verwenden oder weitergeben, versprochen.
-            </p>
-            <div class="relative">
-              <form
-                @submit.prevent="subscribe"
-                class="flex items-center gap-4 justify-start mt-5 mb-1"
-              >
-                <input
-                  type="text"
-                  v-model="state.mail"
-                  placeholder="E-Mail Adresse"
-                  class="px-5 py-2 shadow-xl shadow-coffee/5 rounded-full flex-grow border border-coffee border-opacity-10"
-                />
-                <button type="submit"
-                  :class="[{ 'pointer-events-none cursor-default': state.subscriptionPending }]"
-                  class="shadow-xl shadow-coffee/20 bg-salmon px-5 py-2 rounded-full text-white flex-shrink-0 flex items-center justify-center"
+        <div class="flex-grow flex flex-col md:flex-row md:flex-wrap -mx-3">
+          <div class="px-3 w-full md:w-1/2" v-for="(download, index) in downloads"
+              :key="'audio' + index">
+            <div
+              v-if="state.newsletterSignupOpen"
+              class="shadow-2xl shadow-coffee/10 rounded-lg overflow-hidden bg-white relative border border-coffee border-opacity-10 py-4 px-5"
+            >
+              <h3 class="font-heading text-lg md:text-2xl mb-4 mt-1 ml-1">Datei herunterladen</h3>
+              <p class="pl-1">
+                Um diese Datei herunterzuladen, gib bitte Deine E-Mail-Adresse ein. Damit trägst Du
+                Dich gleichzeitig in meinen Newsletter ein. Ich verwende Deine Daten ausschließlich
+                um neue Meditationen und Inspiration mit Dir zu teilen. Ich werde Deine
+                E-Mail-Adresse nicht für andere Zwecke verwenden oder weitergeben, versprochen.
+              </p>
+              <div class="relative">
+                <form
+                  @submit.prevent="subscribe"
+                  class="flex items-center gap-4 justify-start mt-5 mb-1"
                 >
-                  <div v-show="!state.subscriptionPending">Eintragen</div>
-                  <div v-show="state.subscriptionPending" class="animate-spin">
-                    <nuxt-icon name="icon-pending" class="text-2xl text-white" />
+                  <input
+                    type="text"
+                    v-model="state.mail"
+                    placeholder="E-Mail Adresse"
+                    class="px-5 py-2 shadow-xl shadow-coffee/5 rounded-full flex-grow border border-coffee border-opacity-10"
+                  />
+                  <button
+                    type="submit"
+                    :class="[{ 'pointer-events-none cursor-default': state.subscriptionPending }]"
+                    class="shadow-xl shadow-coffee/20 bg-salmon px-5 py-2 rounded-full text-white flex-shrink-0 flex items-center justify-center"
+                  >
+                    <div v-show="!state.subscriptionPending">Eintragen</div>
+                    <div v-show="state.subscriptionPending" class="animate-spin">
+                      <nuxt-icon name="icon-pending" class="text-2xl text-white" />
+                    </div>
+                  </button>
+                  <input type="submit" class="hidden" />
+                </form>
+                <div v-for="(error, index) in state.errors" :key="index" class="w-full mt-4">
+                  <div class="bg-lightRed px-3 py-1 text-darkRed rounded-lg">
+                    {{ error }}
                   </div>
-                </button>
-                <input type="submit" class="hidden" />
-              </form>
-              <div
-                v-for="(error, index) in state.errors"
-                :key="index"
-                class="w-full mt-4"
-              >
-                <div class="bg-lightRed px-3 py-1 text-darkRed rounded-lg">
-                  {{ error }}
                 </div>
-              </div>
-              <div
-                v-for="(success, index) in state.successes"
-                :key="index"
-                class="mt-4"
-              >
-                <div class="bg-green px-3 py-1 text-white rounded-lg">
-                  {{ success }}
+                <div v-for="(success, index) in state.successes" :key="index" class="mt-4">
+                  <div class="bg-green px-3 py-1 text-white rounded-lg">
+                    {{ success }}
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div
-            v-else
-            v-for="(download, index) in downloads"
-            :key="'audio' + index"
-            class="w-full md:w-1/2 shadow-2xl shadow-coffee/10 rounded-lg overflow-hidden bg-white relative border border-coffee border-opacity-10 flex"
-          >
             <div
-              :style="[
-                { backgroundImage: `url(${getCurrentImageUrl(download.id, download.thumbnail)})` },
-              ]"
-              class="relative w-1/3 h-full bg-cover bg-center flex-grow-0 flex-shrink-0"
-            ></div>
-            <div>
+              v-else
+              
+              class="shadow-2xl shadow-coffee/10 rounded-lg overflow-hidden bg-white relative border border-coffee border-opacity-10 flex h-full"
+            >
+            <!-- <div class="absolute top-2 left-2 px-2 py-0.5 bg-white/70 rounded z-10 text-sm">
+              .{{ download.filetype }}
+            </div> -->
               <div
-                class="mb-4 font-heading text-lg lg:text-xl gap-4 border-b border-coffee border-opacity-10 px-6 py-3 flex items-center justify-between"
-              >
-                {{ download.name }}
-                <div class="font-body text-sm text-coffee/50">
-                  {{ new Date(download.created).toLocaleDateString("de-DE") }}
+                :style="[
+                  {
+                    backgroundImage: `url(${getCurrentImageUrl(download.id, download.thumbnail)})`,
+                  },
+                ]"
+                class="relative w-1/3 h-full bg-cover bg-center flex-grow-0 flex-shrink-0"
+              ></div>
+              <div>
+                <div
+                  class="mb-4 font-heading text-lg lg:text-xl gap-4 border-b border-coffee border-opacity-10 px-6 py-3 flex items-center justify-between"
+                >
+                  {{ download.name }}
+                  <div class="font-body text-sm text-coffee/50">
+                    {{ new Date(download.created).toLocaleDateString("de-DE") }}
+                  </div>
                 </div>
-              </div>
-              <div class="px-6 pt-1 pb-5">
-                <div class="flex gap-10">
-                  <div class="flex-grow">
-                    <div class="pl-1">
-                      {{ download.description }}
-                    </div>
-                    <button @click="handleDownload(download.id, download.file)" class="flex items-center justify-center flex-shrink-0 mt-4 mb-1">
-                      <div
-                        class="flex items-center justify-center gap-1 pl-3 pr-2 py-1 border border-grey/20 rounded-full hover:bg-salmon/80 text-coffee hover:text-white transition"
-                      >
-                        Herunterladen
-                        <nuxt-icon name="icon-download" class="text-2xl -ml-1" />
+                <div class="px-6 pt-1 pb-5">
+                  <div class="flex gap-10">
+                    <div class="flex-grow">
+                      <div class="pl-1">
+                        {{ download.description }}
                       </div>
-                    </button>
+                      <button
+                        @click="handleDownload(download.id, download.file)"
+                        class="flex items-center justify-center flex-shrink-0 mt-4 mb-1"
+                      >
+                        <div
+                          class="flex items-center justify-center gap-1 pl-3 pr-2 py-1 border border-grey/20 rounded-full hover:bg-salmon/80 text-coffee hover:text-white transition capitalize"
+                        >
+                        {{ download.filetype }}
+                        Herunterladen
+                          <nuxt-icon name="icon-download" class="text-2xl -ml-1" />
+                        </div>
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>

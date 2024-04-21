@@ -1,0 +1,8 @@
+const iconModules = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">\r\n  <g>\r\n    <rect x="15.108" y="12.043" width="5.274" height="5.274" rx="0.5"/>\r\n    <rect x="21.373" y="12.043" width="5.274" height="5.274" rx="0.5"/>\r\n    <rect x="27.638" y="12.043" width="5.274" height="5.274" rx="0.5"/>\r\n    <rect x="15.108" y="18.266" width="5.274" height="5.274" rx="0.5"/>\r\n    <rect x="21.373" y="18.266" width="5.274" height="5.274" rx="0.5"/>\r\n    <rect x="27.638" y="18.266" width="5.274" height="5.274" rx="0.5"/>\r\n    <rect x="15.108" y="24.489" width="5.274" height="5.274" rx="0.5"/>\r\n    <rect x="21.373" y="24.489" width="5.274" height="5.274" rx="0.5"/>\r\n    <rect x="27.638" y="24.489" width="5.274" height="5.274" rx="0.5"/>\r\n    <rect x="15.108" y="30.712" width="5.274" height="5.274" rx="0.5"/>\r\n    <rect x="21.373" y="30.712" width="5.274" height="5.274" rx="0.5"/>\r\n    <rect x="27.638" y="30.712" width="5.274" height="5.274" rx="0.5"/>\r\n    <path d="M32.167,37.644H15.833a2.406,2.406,0,0,1-2.4-2.4V12.758a2.406,2.406,0,0,1,2.4-2.4H32.167a2.406,2.406,0,0,1,2.4,2.4V35.242A2.406,2.406,0,0,1,32.167,37.644ZM15.833,11.222A1.538,1.538,0,0,0,14.3,12.758V35.242a1.538,1.538,0,0,0,1.536,1.536H32.167A1.538,1.538,0,0,0,33.7,35.242V12.758a1.538,1.538,0,0,0-1.536-1.536Z"/>\r\n  </g>\r\n</svg>\r\n';
+const __vite_glob_0_73 = /* @__PURE__ */ Object.freeze({
+  __proto__: null,
+  default: iconModules
+});
+
+export { __vite_glob_0_73 as _ };
+//# sourceMappingURL=icon-modules-BrfaQYfx.mjs.map

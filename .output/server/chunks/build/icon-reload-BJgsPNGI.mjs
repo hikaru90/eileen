@@ -1,0 +1,8 @@
+const iconReload = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">\r\n  <path d="M33.34,21.908a1,1,0,1,0-1.978.3,8.676,8.676,0,1,1-2.534-4.919l-2.859-.15a1.012,1.012,0,0,0-1.052.945,1,1,0,0,0,.946,1.052l5.293.278h.052a1,1,0,0,0,1-1.052l-.278-5.293a.987.987,0,0,0-1.052-.946,1,1,0,0,0-.946,1.052l.134,2.539a10.645,10.645,0,1,0,3.275,6.2Z"/>\r\n</svg>\r\n';
+const __vite_glob_0_93 = /* @__PURE__ */ Object.freeze({
+  __proto__: null,
+  default: iconReload
+});
+
+export { __vite_glob_0_93 as _ };
+//# sourceMappingURL=icon-reload-BJgsPNGI.mjs.map

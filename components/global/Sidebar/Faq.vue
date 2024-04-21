@@ -1,7 +1,6 @@
 <script setup lang="ts">
   import { useSidebarStore } from "~/store/sidebar";
   import { storeToRefs } from "pinia";
-  import EventBus from "~/plugins/mitt";
   const sidebarStore = useSidebarStore();
   const { setComponentContent, saveContent, deleteFile } = sidebarStore;
   const { componentContent, componentId, componentType, componentFiles } =

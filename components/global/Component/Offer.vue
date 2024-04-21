@@ -18,7 +18,7 @@
   const getCurrentImageUrl = (filename) => {
     const img = useImage();
     const imgUrl = img(
-      `${config.SERVER_URL}/api/files/${props.component.collectionName}/${props.component.id}/${filename}`,
+      `${config.public.SERVER_URL}/api/files/${props.component.collectionName}/${props.component.id}/${filename}`,
       {
         format: "webp",
       }

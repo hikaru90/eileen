@@ -1,7 +1,8 @@
 <script setup lang="ts">
   import { useSidebarStore } from "~/store/sidebar";
   import { storeToRefs } from "pinia";
-  import EventBus from "~/plugins/mitt";
+  //import EventBus from "~/plugins/mitt";
+const { $event } = useNuxtApp()
   const sidebarStore = useSidebarStore();
   const { componentIsMaxContainer } = storeToRefs(sidebarStore);
   const { saveIsMaxContainer, setComponentIsMaxContainer } = sidebarStore
@@ -9,7 +10,7 @@
   const setMaxContainerAndSave = (event) => {
     setComponentIsMaxContainer(event.target.checked)
     saveIsMaxContainer()
-    EventBus.emit('refresh')
+    $event('refresh')
   }
 </script>
 

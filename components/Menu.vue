@@ -8,6 +8,10 @@
     expand: "subpages",
   });
 
+  const touchPoints = await pb.collection("contactOptions").getFullList(200, {
+    sort: "-order",
+  });
+
   const state = reactive({
     menuIsOpen: false,
     hoverIndex: null,
@@ -43,10 +47,31 @@
     if (!slug) return;
     state.menuIsOpen = false;
   };
-
   const handleScroll = (e) => {
     const scrollTop = e.target.scrollTop;
     state.top = scrollTop;
+  };
+  const isInOpeningHours = (link) => {
+    if (!link?.start && !link?.end) return true;
+
+    const startDay = new Date(link.start).getDay();
+    const endDay = new Date(link.end).getDay();
+    const currentWeekday = state.currentTime.getDay();
+    // Check if current day matches the weekday of start and end dates
+    if (currentWeekday < startDay || currentWeekday > endDay) {
+      return false;
+    }
+
+    const start = new Date(link.start).getUTCHours();
+    const end = new Date(link.end).getUTCHours();
+    console.log("link.end", link.end);
+    console.log("link.end", new Date(link.end));
+    console.log("link.end", new Date(link.end).getUTCHours());
+    console.log("start", start);
+    console.log("end", end);
+    console.log("state.currentTime.getHours() >= start", state.currentTime.getUTCHours() >= start);
+    console.log("state.currentTime.getHours() <= end", state.currentTime.getUTCHours() <= end);
+    return state.currentTime.getUTCHours() >= start && state.currentTime.getUTCHours() <= end;
   };
 
   onMounted(() => {
@@ -75,7 +100,7 @@
     >
       <div class="max-container w-full">
         <div class="flex items-center justify-between py-4 mb-10">
-          <div style="font-style: italic;" class="font-heading text-lg text-coffee">
+          <div style="font-style: italic" class="font-heading text-lg text-coffee">
             <NuxtLink to="/"> Eileen George </NuxtLink>
           </div>
 
@@ -139,6 +164,18 @@
           >
             <div style="text-shadow: rgba(0, 0, 0, 0.8) 0 0 40px" class="">Buchen</div>
           </NuxtLink>
+          <div v-if="touchPoints?.length > 0" class="flex items-center gap-2">
+            <a
+              v-for="(link, index) in touchPoints"
+              :href="link.link"
+              target="_blank"
+              :key="'link' + index"
+              :class="[isInOpeningHours(link) ? 'block' : 'hidden']"
+              class="flex items-center justify-center w-8 h-8 rounded-lg"
+            >
+              <nuxt-icon :name="link.icon" class="text-2xl text-coffee" />
+            </a>
+          </div>
         </div>
       </div>
     </div>
@@ -155,11 +192,30 @@
           :class="[state.top > 0 ? 'py-4 lg:py-4' : 'py-4 lg:py-6']"
           class="flex items-center justify-between transition-all duration-150"
         >
-          <div style="font-style: italic;" class="font-heading text-lg lg:text-2xl text-coffee italic">
+          <div
+            style="font-style: italic"
+            class="font-heading text-lg lg:text-2xl text-coffee italic"
+          >
             <NuxtLink to="/"> Eileen George </NuxtLink>
           </div>
 
-          <div class="lg:hidden">
+          <div class="lg:hidden flex items-center gap-2">
+            <div v-if="touchPoints?.length > 0" class="flex items-center gap-1">
+              <a
+                v-for="(link, index) in touchPoints"
+                v-show="!link.hiddenInMobileMenu"
+                :href="link.link"
+                target="_blank"
+                :key="'link' + index"
+                :class="[isInOpeningHours(link) ? 'block' : 'hidden']"
+                class="flex items-center justify-center w-6 h-6 rounded group"
+              >
+                <nuxt-icon
+                  :name="link.icon"
+                  class="text-2xl text-coffee group-hover:text-gold transition"
+                />
+              </a>
+            </div>
             <button
               aria-label="Menü öffnen"
               @click="toggleMenu"
@@ -212,7 +268,22 @@
               </div>
             </div>
           </div>
-          <div class="hidden lg:block">
+          <div class="hidden lg:flex lg:items-center lg:gap-3">
+            <div v-if="touchPoints?.length > 0" class="flex items-center gap-1">
+              <a
+                v-for="(link, index) in touchPoints"
+                :href="link.link"
+                target="_blank"
+                :key="'link' + index"
+                :class="[isInOpeningHours(link) ? 'block' : 'hidden']"
+                class="flex items-center justify-center w-6 h-6 rounded group"
+              >
+                <nuxt-icon
+                  :name="link.icon"
+                  class="text-2xl text-coffee group-hover:text-gold transition"
+                />
+              </a>
+            </div>
             <NuxtLink
               to="/buchen"
               class="bg-salmon rounded-full text-white flex items-center px-5 py-2 shadow-md shadow-coffee/10"

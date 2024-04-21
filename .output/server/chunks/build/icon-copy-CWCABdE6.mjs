@@ -1,0 +1,8 @@
+const iconCopy = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">\r\n  <path d="M33.868,12.843h-14a1.213,1.213,0,0,0-1.213,1.213v4.676H14.132a1.212,1.212,0,0,0-1.212,1.212v14a1.213,1.213,0,0,0,1.212,1.213h14a1.213,1.213,0,0,0,1.213-1.213V29.268h4.523a1.212,1.212,0,0,0,1.212-1.212v-14A1.213,1.213,0,0,0,33.868,12.843ZM26.92,32.732H15.345V21.157h3.31v6.9a1.213,1.213,0,0,0,1.213,1.212H26.92Z"/>\r\n</svg>\r\n';
+const __vite_glob_0_33 = /* @__PURE__ */ Object.freeze({
+  __proto__: null,
+  default: iconCopy
+});
+
+export { __vite_glob_0_33 as _ };
+//# sourceMappingURL=icon-copy-CWCABdE6.mjs.map

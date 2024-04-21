@@ -95,15 +95,15 @@
 
 <template>
   <div class="py-16 md:py-24 relative">
-    <div class="max-container">
+    <div class="max-container !px-0 !md:px-3">
       <div class="flex items-center justify-center">
         <IntersectonPop>
           <h2
-          class="shiny-pop font-heading text-lg sm:text-xl md:text-3xl lg:text-4xl mb-16 text-center text-salmon"
+            class="shiny-pop font-heading text-lg sm:text-xl md:text-3xl lg:text-4xl mb-16 text-center text-salmon"
           >
-          {{ props.component.content.heading }}
-        </h2>
-      </IntersectonPop>
+            {{ props.component.content.heading }}
+          </h2>
+        </IntersectonPop>
       </div>
 
       <div
