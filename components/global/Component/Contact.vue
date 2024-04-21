@@ -111,7 +111,7 @@
       await sendMail("contactForm", props.component.content?.recipient, getFormData());
       state.pending = false;
       state.submitted = true;
-      state.success = true;
+    state.success = true;
     } catch (err) {
       console.log("error sending contact form", err);
       state.pending = false;

@@ -55,7 +55,8 @@ const getTemplate = (templateName: string, formData: object) => {
       
       Ich habe mir Deinen Wunschtermin eingetragen und freue mich sehr auf unsere gemeinsame Sitzung.<br/>
       Für die endgültige Bestätigung des Termins, überweise bitte den Rechnungsbetrag über folgenden Link:
-      paypal.com/XXX<br /><br />
+      <a href="https://www.paypal.com/ncp/payment/TT3QLBPLZPAT2">https://www.paypal.com/ncp/payment/TT3QLBPLZPAT2</a>
+      <br /><br />
 
       <strong>Termin:</strong><br />
       Datum: ${formData?.timeslot?.day}.${formData?.timeslot?.month}.${
