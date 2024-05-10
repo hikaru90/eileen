@@ -73,7 +73,20 @@ import { DeprecationTypes } from "nuxt/dist/app/compat/capi";
     };
 
     await pb.collection("bookings").update(props.booking.id, { confirmed: true });
-    await sendMail("bookingConfirmationUser", props.booking.mail, formData);
+    // await sendMail("bookingConfirmationUser", props.booking.mail, formData);
+
+    const sendMailRes = await fetch("/api/mail/sendMail", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          template: 'bookingConfirmationUser',
+          recipient: props.booking.mail,
+          formData: formData,
+        }),
+      });
+
     emit("refreshBookings");
   };
 

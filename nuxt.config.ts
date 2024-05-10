@@ -35,14 +35,10 @@ export default defineNuxtConfig({
   },
 
   runtimeConfig: {
-    // The private keys which are only available within server-side
-    // apiSecret: '123',
-    // Keys within public, will be also exposed to the client-side
-    // GITHUB_ACTIONS_TOKEN: process.env.GITHUB_ACTIONS_TOKEN,
+    BREVO_API_KEY: process.env.BREVO_API_KEY,
     public: {
       ENV: process.env.ENV,
       SERVER_URL: process.env.SERVER_URL,
-      BREVO_API_KEY: process.env.BREVO_API_KEY,
     },
   },
 });
