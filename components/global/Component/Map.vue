@@ -2,7 +2,6 @@
   import useBrevo from "~~/composables/useBrevo";
   import defaults from "~/lib/defaults";
 
-  const { sendMail } = useBrevo();
   const config = useRuntimeConfig();
 
   const props = withDefaults(

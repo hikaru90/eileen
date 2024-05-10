@@ -1,12 +1,9 @@
 <script setup lang="ts">
-  import useBrevo from "~~/composables/useBrevo";
-
   import { vOnClickOutside } from "@vueuse/components";
   import defaults from "~/lib/defaults";
   import { BookingAppointment } from "~~/.nuxt/components";
-import { DeprecationTypes } from "nuxt/dist/app/compat/capi";
+  import { DeprecationTypes } from "nuxt/dist/app/compat/capi";
   const { pb } = usePocketbase();
-  const { sendMail } = useBrevo();
 
   const props = defineProps<{
     booking: object;
@@ -49,15 +46,14 @@ import { DeprecationTypes } from "nuxt/dist/app/compat/capi";
   };
 
   const approveBooking = async () => {
-    const start = props.booking.start
-    const end = props.booking.end
+    const start = props.booking.start;
+    const end = props.booking.end;
 
-    const year = new Date(props.booking.start).getFullYear()
+    const year = new Date(props.booking.start).getFullYear();
     const paddedMonth = String(new Date(props.booking.start).getMonth() + 1).padStart(2, "0");
     const paddedDay = String(new Date(props.booking.start).getDate()).padStart(2, "0");
-    const paddedHour = props.booking.start.split(' ')[1].split(':')[0];
-    const paddedMinutes = props.booking.start.split(':')[1].split(':')[0];
-    
+    const paddedHour = props.booking.start.split(" ")[1].split(":")[0];
+    const paddedMinutes = props.booking.start.split(":")[1].split(":")[0];
 
     const formData = {
       firstName: props.booking.firstName,
@@ -69,23 +65,26 @@ import { DeprecationTypes } from "nuxt/dist/app/compat/capi";
       place: props.booking.place,
       description: props.booking.description,
       invoiceAddress: props.booking.invoiceAddress,
-      timeslot: {"year":year, "month": paddedMonth, "day": paddedDay,"timeslot": `${paddedHour}:${paddedMinutes}`},
+      timeslot: {
+        year: year,
+        month: paddedMonth,
+        day: paddedDay,
+        timeslot: `${paddedHour}:${paddedMinutes}`,
+      },
     };
 
     await pb.collection("bookings").update(props.booking.id, { confirmed: true });
-    // await sendMail("bookingConfirmationUser", props.booking.mail, formData);
-
     const sendMailRes = await fetch("/api/mail/sendMail", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          template: 'bookingConfirmationUser',
-          recipient: props.booking.mail,
-          formData: formData,
-        }),
-      });
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        template: "bookingConfirmationUser",
+        recipient: props.booking.mail,
+        formData: formData,
+      }),
+    });
 
     emit("refreshBookings");
   };
@@ -115,7 +114,7 @@ import { DeprecationTypes } from "nuxt/dist/app/compat/capi";
     :class="[
       props.booking.deleted ? 'bg-red opacity-20' : '',
       props.booking.confirmed ? 'bg-green' : '',
-      { 'bg-offwhite' : !props.booking.deleted && !props.booking.confirmed }
+      { 'bg-offwhite': !props.booking.deleted && !props.booking.confirmed },
     ]"
     class="select-none border border-darkGrey border-opacity-40 rounded"
   >

@@ -1,8 +1,6 @@
 <script setup lang="ts">
-  import useBrevo from "~~/composables/useBrevo";
   import defaults from "~/lib/defaults";
 
-  const { sendMail } = useBrevo();
   const config = useRuntimeConfig();
 
   const props = withDefaults(
@@ -108,10 +106,21 @@
       const formIsValid = validateForm();
       if (!formIsValid) return;
 
-      await sendMail("contactForm", props.component.content?.recipient, getFormData());
+      const sendMailRes = await fetch("/api/mail/sendMail", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          template: "contactForm",
+          recipient: props.component.content?.recipient,
+          formData: getFormData(),
+        }),
+      });
+
       state.pending = false;
       state.submitted = true;
-    state.success = true;
+      state.success = true;
     } catch (err) {
       console.log("error sending contact form", err);
       state.pending = false;
@@ -126,12 +135,12 @@
     <div class="max-container">
       <div class="flex items-center justify-center">
         <IntersectonPop>
-        <h2
-          class="shiny-pop text-salmon font-heading text-lg sm:text-xl md:text-3xl lg:text-4xl mb-16 text-center"
-        >
-          {{ props.component.content?.heading }}
-        </h2>
-      </IntersectonPop>
+          <h2
+            class="shiny-pop text-salmon font-heading text-lg sm:text-xl md:text-3xl lg:text-4xl mb-16 text-center"
+          >
+            {{ props.component.content?.heading }}
+          </h2>
+        </IntersectonPop>
       </div>
       <div class="flex flex-col lg:flex-row gap-16">
         <div
@@ -141,9 +150,7 @@
           class="flex-grow bg-cover shadow-2xl shadow-coffee/20 w-full h-60 lg:h-auto lg:w-1/3 rounded"
         ></div>
         <div class="-ml-[3%] -mr-[5%] lg:mx-auto w-auto lg:w-2/3">
-          <div
-            class="bg-white shadow-2xl shadow-coffee/20 py-5 px-10"
-          >
+          <div class="bg-white shadow-2xl shadow-coffee/20 py-5 px-10">
             <template v-if="!state.submitted">
               <div class="flex flex-wrap -mx-3">
                 <div
@@ -194,26 +201,31 @@
               </div>
             </template>
             <template v-else>
-                <div class="h-60 flex flex-col items-start justify-center">
-                  <template v-if="state.pending">
-                    <div class="animate-spin">
-                      <nuxt-icon name="icon-pending" class="text-4xl text-black animate-spin" />
-                    </div>
+              <div class="h-60 flex flex-col items-start justify-center">
+                <template v-if="state.pending">
+                  <div class="animate-spin">
+                    <nuxt-icon name="icon-pending" class="text-4xl text-black animate-spin" />
+                  </div>
+                </template>
+                <template v-else>
+                  <template v-if="state.success">
+                    <div class="font-heading text-2xl mb-2">Vielen Dank!</div>
+                    <p class="max-w-[24em]">
+                      Deine Nachricht ist bei mir eingegangen. Ich melde mich sobald wie möglich bei
+                      Dir.
+                    </p>
                   </template>
                   <template v-else>
-                    <template v-if="state.success">
-                      <div class="font-heading text-2xl mb-2">Vielen Dank!</div>
-                      <p class="max-w-[24em]">
-                        Deine Nachricht ist bei mir eingegangen. Ich melde mich sobald wie möglich bei Dir.
-                      </p>
-                    </template>
-                    <template v-else>
-                      <div class="font-heading text-2xl mb-2 text-red">Oh!</div>
-                      <p class="max-w-[24em]">
-                        Bei dem Versand Deiner Nachricht ist ein Fehler aufgetreten. Versuche es bitte erneut. Falls der Fehler bestehen bleibt, sende mir bitte eine E-Mail an <a href="mailto:kontakt@eileengeorge.de" class="underline">kontakt@eileengeorge.de</a>.
-                      </p>
-                    </template>
+                    <div class="font-heading text-2xl mb-2 text-red">Oh!</div>
+                    <p class="max-w-[24em]">
+                      Bei dem Versand Deiner Nachricht ist ein Fehler aufgetreten. Versuche es bitte
+                      erneut. Falls der Fehler bestehen bleibt, sende mir bitte eine E-Mail an
+                      <a href="mailto:kontakt@eileengeorge.de" class="underline"
+                        >kontakt@eileengeorge.de</a
+                      >.
+                    </p>
                   </template>
+                </template>
               </div>
             </template>
           </div>

@@ -1,8 +1,4 @@
 <script setup lang="ts">
-  import useBrevo from "~~/composables/useBrevo";
-
-  const { sendMail } = useBrevo();
-
   const props = defineProps<{
     component: object;
   }>();
@@ -61,9 +57,39 @@
         };
         console.log("formData", formData);
 
-        await sendMail('bookingRequestUser', payload.formValues.mail, formData);
-        await sendMail('bookingRequestOwner', 'kontakt@eileengeorge.de', formData);
-        await sendMail('bookingRequestOwner', 'alexbueckner@gmail.com', formData);
+        const sendMailRes1 = await fetch("/api/mail/sendMail", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            template: "bookingRequestUser",
+            recipient: payload.formValues.mail,
+            formData: formData,
+          }),
+        });
+        const sendMailRes2 = await fetch("/api/mail/sendMail", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            template: "bookingRequestOwner",
+            recipient: "kontakt@eileengeorge.de",
+            formData: formData,
+          }),
+        });
+        const sendMailRes3 = await fetch("/api/mail/sendMail", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            template: "bookingRequestOwner",
+            recipient: "alexbueckner@gmail.com",
+            formData: formData,
+          }),
+        });
         state.success = true;
       }
       state.formSubmitted = true;
@@ -108,20 +134,13 @@
             class="w-full h-[5px] rounded relative"
           >
             <div
-              :class="[
-                state.currentStep === step.id
-                  ? 'bg-salmon'
-                  : 'bg-darkOffwhite',
-              ]"
+              :class="[state.currentStep === step.id ? 'bg-salmon' : 'bg-darkOffwhite']"
               class="w-5 h-5 rounded-full absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2"
             >
               <nuxt-icon v-if="stepIsValid(step.id)" name="icon-check" class="text-xl" />
             </div>
           </div>
-          <div
-            :class="[state.currentStep === step.id ? 'text-coffee' : 'text-lightGrey']"
-            class=""
-          >
+          <div :class="[state.currentStep === step.id ? 'text-coffee' : 'text-lightGrey']" class="">
             {{ step.name }}
           </div>
         </button>

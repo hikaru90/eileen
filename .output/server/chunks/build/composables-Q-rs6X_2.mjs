@@ -1,5 +1,5 @@
 import { i as useRuntimeConfig, e as useNuxtApp } from './server.mjs';
-import { y as encodeParam, n as joinURL, z as encodePath, l as hasProtocol, A as withLeadingSlash, p as parseURL, o as defu } from '../runtime.mjs';
+import { A as encodeParam, o as joinURL, B as encodePath, m as hasProtocol, C as withLeadingSlash, p as parseURL, q as defu } from '../runtime.mjs';
 
 function createMapper(map) {
   return (key) => {
