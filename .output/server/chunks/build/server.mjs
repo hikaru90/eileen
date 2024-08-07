@@ -1406,9 +1406,9 @@ const LazyComponentHeroBig = defineAsyncComponent(() => import('./HeroBig-B8dZLd
 const LazyComponentHeroSmall = defineAsyncComponent(() => import('./HeroSmall-BWNrvsk1.mjs').then((r) => r["default"] || r.default || r));
 const LazyComponentImageList = defineAsyncComponent(() => import('./ImageList-BPrwqmr7.mjs').then((r) => r["default"] || r.default || r));
 const LazyComponentImageRotation = defineAsyncComponent(() => import('./ImageRotation-BZriqyiX.mjs').then((r) => r["default"] || r.default || r));
-const LazyComponentMap = defineAsyncComponent(() => import('./Map-Bh7tUiZZ.mjs').then((r) => r["default"] || r.default || r));
+const LazyComponentMap = defineAsyncComponent(() => import('./Map-BLBxcXHN.mjs').then((r) => r["default"] || r.default || r));
 const LazyComponentMyWork = defineAsyncComponent(() => import('./MyWork-DGG102DR.mjs').then((r) => r["default"] || r.default || r));
-const LazyComponentOffer = defineAsyncComponent(() => import('./Offer-DuWjd_vF.mjs').then((r) => r["default"] || r.default || r));
+const LazyComponentOffer = defineAsyncComponent(() => import('./Offer-D3fGyfz9.mjs').then((r) => r["default"] || r.default || r));
 const LazyComponentPortraitText = defineAsyncComponent(() => import('./PortraitText-B3R7ges3.mjs').then((r) => r["default"] || r.default || r));
 const LazyComponentPrices = defineAsyncComponent(() => import('./Prices-BRbtsQE7.mjs').then((r) => r["default"] || r.default || r));
 const LazyComponentTestimonials = defineAsyncComponent(() => import('./Testimonials-Ci4d5HqQ.mjs').then((r) => r["default"] || r.default || r));
@@ -1416,7 +1416,7 @@ const LazySidebarAudio = defineAsyncComponent(() => import('./Audio-D1wYZFWR.mjs
 const LazySidebarBlock = defineAsyncComponent(() => import('./Block-CLjwYLvz.mjs').then((r) => r["default"] || r.default || r));
 const LazySidebarBookingCalendar = defineAsyncComponent(() => import('./BookingCalendar-CNr-WOvF.mjs').then((r) => r["default"] || r.default || r));
 const LazySidebarClickableHeadings = defineAsyncComponent(() => import('./ClickableHeadings-BBePH_nk.mjs').then((r) => r["default"] || r.default || r));
-const LazySidebarComponent = defineAsyncComponent(() => import('./Component-Cu227TUa.mjs').then((r) => r["default"] || r.default || r));
+const LazySidebarComponent = defineAsyncComponent(() => import('./Component-CWVVBBdv.mjs').then((r) => r["default"] || r.default || r));
 const LazySidebarContact = defineAsyncComponent(() => import('./Contact-BbGNvGEt.mjs').then((r) => r["default"] || r.default || r));
 const LazySidebarDownloads = defineAsyncComponent(() => import('./Downloads-DMV5lQwS.mjs').then((r) => r["default"] || r.default || r));
 const LazySidebarFaq = defineAsyncComponent(() => import('./Faq-C0BzZpj1.mjs').then((r) => r["default"] || r.default || r));
@@ -1519,8 +1519,8 @@ const plugins = [
 ];
 const layouts = {
   blank: () => import('./blank-CYvuOZut.mjs').then((m) => m.default || m),
-  default: () => import('./default-Clp6Uc9Q.mjs').then((m) => m.default || m),
-  sidebar: () => import('./sidebar-BNYrOZef.mjs').then((m) => m.default || m)
+  default: () => import('./default-BzHO8YXr.mjs').then((m) => m.default || m),
+  sidebar: () => import('./sidebar-CJPkbQdV.mjs').then((m) => m.default || m)
 };
 const LayoutLoader = defineComponent({
   name: "LayoutLoader",

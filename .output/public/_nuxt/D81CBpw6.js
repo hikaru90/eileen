@@ -1,1 +1,0 @@
-import{f as e,o as t,c as o}from"./k1IzlGhG.js";const n={style:{"min-height":"20px"}},r=e({__name:"Default",props:{block:{},depth:{default:0}},setup(c){return(s,a)=>(t(),o("div",n," Suche bitte einen Block aus "))}});export{r as default};

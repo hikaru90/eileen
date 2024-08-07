@@ -1,1 +1,0 @@
-import{_ as e}from"./DlAUqK2U.js";import{o,c as t,a as s}from"./k1IzlGhG.js";const c={},a={class:"max-container"},n=s("div",{class:"p-20"},"Default Component",-1),r=[n];function _(i,d){return o(),t("div",a,r)}const m=e(c,[["render",_]]);export{m as default};
