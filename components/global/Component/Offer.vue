@@ -87,11 +87,11 @@
             </div>
 
             <NuxtLink
-                to="/buchen"
+                :to="`mailto:kontakt@eileengeorge.de?subject=Terminvereinbarung - ${offer.name}`"
                 class="bg-salmon rounded-full text-white inline-flex items-center px-5 py-2 shadow-md"
               >
                 <div style="text-shadow: rgba(0, 0, 0, 0.8) 0 0 40px" class="">
-                  Buchen
+                  Termin vereinbaren
                 </div>
               </NuxtLink>
           </div>

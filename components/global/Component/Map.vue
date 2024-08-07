@@ -1,5 +1,4 @@
 <script setup lang="ts">
-  import useBrevo from "~~/composables/useBrevo";
   import defaults from "~/lib/defaults";
 
   const config = useRuntimeConfig();
