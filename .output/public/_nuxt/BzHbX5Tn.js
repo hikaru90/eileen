@@ -1,0 +1,1 @@
+import{_ as e}from"./B0ShGUTG.js";import{f as t,o as n,c as a,b as r}from"./BtqrO9Ir.js";import"./CuWq9ctS.js";import"./DR3C1UCQ.js";import"./DlAUqK2U.js";const c={class:"max-container"},u=t({__name:"bak-index",setup(s){return(_,m)=>{const o=e;return n(),a("div",c,[r(o)])}}});export{u as default};

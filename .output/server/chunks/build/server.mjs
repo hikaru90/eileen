@@ -1408,7 +1408,7 @@ const LazyComponentImageList = defineAsyncComponent(() => import('./ImageList-BP
 const LazyComponentImageRotation = defineAsyncComponent(() => import('./ImageRotation-BZriqyiX.mjs').then((r) => r["default"] || r.default || r));
 const LazyComponentMap = defineAsyncComponent(() => import('./Map-BLBxcXHN.mjs').then((r) => r["default"] || r.default || r));
 const LazyComponentMyWork = defineAsyncComponent(() => import('./MyWork-DGG102DR.mjs').then((r) => r["default"] || r.default || r));
-const LazyComponentOffer = defineAsyncComponent(() => import('./Offer-D3fGyfz9.mjs').then((r) => r["default"] || r.default || r));
+const LazyComponentOffer = defineAsyncComponent(() => import('./Offer-CM-lSOIi.mjs').then((r) => r["default"] || r.default || r));
 const LazyComponentPortraitText = defineAsyncComponent(() => import('./PortraitText-B3R7ges3.mjs').then((r) => r["default"] || r.default || r));
 const LazyComponentPrices = defineAsyncComponent(() => import('./Prices-BRbtsQE7.mjs').then((r) => r["default"] || r.default || r));
 const LazyComponentTestimonials = defineAsyncComponent(() => import('./Testimonials-Ci4d5HqQ.mjs').then((r) => r["default"] || r.default || r));
@@ -1416,7 +1416,7 @@ const LazySidebarAudio = defineAsyncComponent(() => import('./Audio-D1wYZFWR.mjs
 const LazySidebarBlock = defineAsyncComponent(() => import('./Block-CLjwYLvz.mjs').then((r) => r["default"] || r.default || r));
 const LazySidebarBookingCalendar = defineAsyncComponent(() => import('./BookingCalendar-CNr-WOvF.mjs').then((r) => r["default"] || r.default || r));
 const LazySidebarClickableHeadings = defineAsyncComponent(() => import('./ClickableHeadings-BBePH_nk.mjs').then((r) => r["default"] || r.default || r));
-const LazySidebarComponent = defineAsyncComponent(() => import('./Component-CWVVBBdv.mjs').then((r) => r["default"] || r.default || r));
+const LazySidebarComponent = defineAsyncComponent(() => import('./Component-YIYmnS-y.mjs').then((r) => r["default"] || r.default || r));
 const LazySidebarContact = defineAsyncComponent(() => import('./Contact-BbGNvGEt.mjs').then((r) => r["default"] || r.default || r));
 const LazySidebarDownloads = defineAsyncComponent(() => import('./Downloads-DMV5lQwS.mjs').then((r) => r["default"] || r.default || r));
 const LazySidebarFaq = defineAsyncComponent(() => import('./Faq-C0BzZpj1.mjs').then((r) => r["default"] || r.default || r));
