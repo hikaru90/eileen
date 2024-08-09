@@ -86,7 +86,15 @@
               </div>
             </div>
 
-            <NuxtLink
+            <NuxtLink v-if="offer.name === 'Find Your Way Home'"
+                :to="`mailto:kontakt@eileengeorge.de?subject=Auf Warteliste eintragen - ${offer.name}`"
+                class="bg-salmon rounded-full text-white inline-flex items-center px-5 py-2 shadow-md"
+              >
+                <div style="text-shadow: rgba(0, 0, 0, 0.8) 0 0 40px" class="">
+                  Auf Warteliste eintragen
+                </div>
+              </NuxtLink>
+              <NuxtLink v-else
                 :to="`mailto:kontakt@eileengeorge.de?subject=Terminvereinbarung - ${offer.name}`"
                 class="bg-salmon rounded-full text-white inline-flex items-center px-5 py-2 shadow-md"
               >
