@@ -23,7 +23,6 @@
   });
 
   const state = reactive({
-    storePending: true,
     currentContainer: null,
   });
 
@@ -33,7 +32,6 @@
       })
       return structuredClone(res)
   });
-  state.storePending = false;
 
   useHead({
     title: pageContent.value.expand.seo.title
@@ -44,7 +42,6 @@
 
   $listen("refresh", () => {
     console.log("content saved");
-    state.storePending = true;
     refresh();
   });
 
@@ -53,7 +50,6 @@
       await refreshNuxtData("pageContent");
       setPage(pageContent.value);
     }, 400);
-    state.storePending = false;
   };
 
   const moveUpAndSave = (array, index) => {
@@ -76,7 +72,7 @@
   };
 
   const currentContainerAuth = computed(() => {
-    if (authStore.token) {
+    if (authStore?.token) {
       return state.currentContainer;
     }
     return null;
@@ -84,7 +80,7 @@
 
   const isSelected = (container) => {
     const id = container?.expand.block?.id || container?.expand.component?.id;
-    if (componentId.value === id) return true;
+    if (componentId?.value === id) return true;
     return false;
   };
 
@@ -123,9 +119,9 @@
 
 <template>
   <main class="mt-24">
-    <div v-if="state.storePending">pending</div>
+    <div v-if="pending">pending</div>
     <div v-else>
-      <DebugPane v-if="contentStore.debugVisible" :content="page" @refresh="refresh" />
+      <DebugPane v-if="contentStore?.debugVisible" :content="page" @refresh="refresh" />
 
       <div class="">
         <div class="">
@@ -142,8 +138,8 @@
             v-for="(container, index) in page.expand.containers"
             :key="container.id"
             :class="[
-              { 'hover:shadow-edit': authStore.token && currentContainerAuth },
-              { 'cursor-cell': authStore.token },
+              { 'hover:shadow-edit': authStore?.token && currentContainerAuth },
+              { 'cursor-cell': authStore?.token },
               { 'shadow-edit': isSelected(container) },
             ]"
             class="relative"

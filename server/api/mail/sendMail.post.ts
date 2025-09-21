@@ -1,8 +1,6 @@
 import { getTemplate } from '~~/composables/useBrevo'
 const config = useRuntimeConfig();
 
-console.log('config',config);
-
 const sendMail = async (template: string, to: string, formData: object) => {
   const response = await fetch("https://api.brevo.com/v3/smtp/email", {
     method: "POST",

@@ -1,8 +1,6 @@
 <script setup lang="ts">
   import { vOnClickOutside } from "@vueuse/components";
   import defaults from "~/lib/defaults";
-  import { BookingAppointment } from "~~/.nuxt/components";
-  import { DeprecationTypes } from "nuxt/dist/app/compat/capi";
   const { pb } = usePocketbase();
 
   const props = defineProps<{

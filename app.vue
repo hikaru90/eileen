@@ -9,7 +9,11 @@
   const { refresh } = authStore;
   // const { windowWidth } = storeToRefs(contentStore)
   const { setWindowWidth } = contentStore;
-  refresh();
+  
+  // Only refresh auth if we're on the client and have a token
+  if (process.client) {
+    refresh();
+  }
 
   const sidebarStore = useSidebarStore();
   const {

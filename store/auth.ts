@@ -30,24 +30,27 @@ export const useAuthStore = defineStore("authStore",{
     },
     async refresh(){
       try{
-
-        if(process.client){
+        if(process.client && pb.authStore.isValid){
           const authData = await pb.collection("users").authRefresh();
           if(pb.authStore.isValid){
             this.user = pb.authStore.model;
             this.token = pb.authStore.token;
           }
-          // console.log(pb.authStore.token);
-          // console.log(pb.authStore.model.id);
         }
       }catch(err){
-        
+        console.log('Auth refresh failed:', err);
+        // If refresh fails, clear the auth state
+        this.logout();
       }
     },
     logout() {
       console.log('logging out');
       if(process.client){
+        // Clear PocketBase auth store
+        pb.authStore.clear();
+        // Clear local storage
         window.localStorage.removeItem("pocketbase_auth");
+        // Clear Pinia store
         this.user = null;
         this.token = null;
       }
