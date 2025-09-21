@@ -9,3 +9,4 @@ dist
 unoptimizedAssets
 backup
 .vscode/settings.json
+.output
