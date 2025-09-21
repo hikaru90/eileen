@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-const { pb } = usePocketbase();
+import { getPocketBase } from "~/lib/pocketbase";
 
 export const useAuthStore = defineStore("authStore",{
   state: () => ({
@@ -11,6 +11,7 @@ export const useAuthStore = defineStore("authStore",{
       console.log('email',email);
       console.log('password',password);
       
+      const pb = getPocketBase();
       const authData = await pb
       .collection("users")
       .authWithPassword(email, password);
@@ -30,6 +31,7 @@ export const useAuthStore = defineStore("authStore",{
     },
     async refresh(){
       try{
+        const pb = getPocketBase();
         if(process.client && pb.authStore.isValid){
           const authData = await pb.collection("users").authRefresh();
           if(pb.authStore.isValid){
@@ -46,6 +48,7 @@ export const useAuthStore = defineStore("authStore",{
     logout() {
       console.log('logging out');
       if(process.client){
+        const pb = getPocketBase();
         // Clear PocketBase auth store
         pb.authStore.clear();
         // Clear local storage
