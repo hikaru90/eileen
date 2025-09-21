@@ -1,8 +1,0 @@
-const iconUpload = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">\r\n  <g>\r\n    <path d="M16.6,12.126a1,1,0,0,0,0,2H31.4a1,1,0,0,0,0-2Z"/>\r\n    <path d="M24.374,15.578a.988.988,0,0,0-.366-.074L24,15.5l-.008,0a1.488,1.488,0,0,0-.674.267L16.486,22.14A1,1,0,1,0,17.849,23.6L23,18.8V34.874a1,1,0,0,0,2,0V18.8l5.151,4.8a1,1,0,1,0,1.363-1.463l-6.832-6.369a.919.919,0,0,0-.154-.1A.949.949,0,0,0,24.374,15.578Z"/>\r\n  </g>\r\n</svg>\r\n';
-const __vite_glob_0_107 = /* @__PURE__ */ Object.freeze({
-  __proto__: null,
-  default: iconUpload
-});
-
-export { __vite_glob_0_107 as _ };
-//# sourceMappingURL=icon-upload-BRt7Toe0.mjs.map

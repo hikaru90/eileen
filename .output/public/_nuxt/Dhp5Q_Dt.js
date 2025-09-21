@@ -1,7 +1,0 @@
-const o=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">\r
-  <g>\r
-    <path d="M31.4,35.874a1,1,0,1,0,0-2H16.6a1,1,0,0,0,0,2Z"/>\r
-    <path d="M23.626,32.422a.988.988,0,0,0,.366.074l.008,0,.008,0a1.488,1.488,0,0,0,.674-.267l6.832-6.369A1,1,0,0,0,30.151,24.4L25,29.2V13.126a1,1,0,1,0-2,0V29.2l-5.151-4.8a1,1,0,1,0-1.363,1.463l6.832,6.369a.919.919,0,0,0,.154.1A.949.949,0,0,0,23.626,32.422Z"/>\r
-  </g>\r
-</svg>\r
-`,t=Object.freeze(Object.defineProperty({__proto__:null,default:o},Symbol.toStringTag,{value:"Module"}));export{t as _};
