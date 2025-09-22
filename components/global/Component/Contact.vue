@@ -101,6 +101,7 @@
   };
 
   const handleSubmit = async () => {
+    
     state.pending = true;
     try {
       const formIsValid = validateForm();
