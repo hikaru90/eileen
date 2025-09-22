@@ -113,7 +113,7 @@
         },
         body: JSON.stringify({
           template: "contactForm",
-          recipient: props.component.content?.recipient,
+          recipient: 'alexbueckner@gmail.com',
           formData: getFormData(),
         }),
       });

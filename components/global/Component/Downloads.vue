@@ -86,18 +86,19 @@
       state.subscriptionPending = true;
 
       try {
-        const resultList = await pb.collection("subscriptions").getList(1, 50, {
-          filter: `mail = "${state.mail}"`,
+        const response = await fetch("/api/mail/addSubscriber", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email: state.mail,
+          }),
         });
-        if (resultList.items.length > 0) {
-          addError("Diese E-Mail Adresse ist bereits registriert.");
-          state.subscriptionPending = false;
-          return;
-        }
 
-        const res = await pb.collection("subscriptions").create({
-          mail: state.mail,
-        });
+        if (!response.ok) {
+          throw new Error("Failed to subscribe");
+        }
 
         addSuccess("Du hast Dich erfolgreich eingetragen.");
         state.subscriptionPending = false;
@@ -106,12 +107,9 @@
         return true;
       } catch (err) {
         console.log("err", err);
+        addError("Fehler beim Eintragen. Bitte versuche es erneut.");
         state.subscriptionPending = false;
       }
-
-      setTimeout(() => {
-        state.subscriptionPending = false;
-      }, 1000);
     }
   };
 

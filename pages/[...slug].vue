@@ -119,8 +119,6 @@ onMounted(() => {
 
 <template>
   <main class="mt-24">
-    <div v-if="pending">pending</div>
-    <div v-else>
       <DebugPane
         v-if="contentStore?.debugVisible"
         :content="page"
@@ -203,6 +201,5 @@ onMounted(() => {
           </div>
         </div>
       </template>
-    </div>
   </main>
 </template>
