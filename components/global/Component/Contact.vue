@@ -113,7 +113,7 @@
         },
         body: JSON.stringify({
           template: "contactForm",
-          recipient: 'alexbueckner@gmail.com',
+          recipient: 'kontakt@eileengeorge.de',
           formData: getFormData(),
         }),
       });
