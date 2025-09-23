@@ -81,7 +81,7 @@ const { $event } = useNuxtApp()
         <button @click="state.modalVisible = false" class="border border-red border-opacity-30 rounded px-2">
           Abbrechen
         </button>
-        <button @click="changeType(state.componentTypeStore)" class="border bg-green border-green border-opacity-30 rounded px-4 py-1">
+        <button @click="changeType(state.componentTypeStore)" class="border bg-green/600border-green/600border-opacity-30 rounded px-4 py-1">
           Ja
         </button>
       </div>

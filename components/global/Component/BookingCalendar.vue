@@ -104,7 +104,7 @@
     <template v-if="state.formSubmitted">
       <div v-if="state.success" class="flex justify-center my-20">
         <div
-          class="w-full lg:w-2/3 border-2 rounded border-green bg-green bg-opacity-40 inline-block px-6 py-4 mb-10 text-center"
+          class="w-full lg:w-2/3 border-2 rounded border-green/600bg-green/600bg-opacity-40 inline-block px-6 py-4 mb-10 text-center"
         >
           Vielen Dank für Deine Buchung. <br />
           Ich melde mich zeitnah per E-Mail bei Dir.

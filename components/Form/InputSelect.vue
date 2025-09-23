@@ -65,8 +65,8 @@
           </option>
         </select>
         <div class="absolute top-1/2 right-5 transform -translate-y-1/2">
-            <div v-if="isValid" class="bg-green bg-opacity-40 rounded">
-              <nuxt-icon name="icon-check" class="text-green text-xl" />
+            <div v-if="isValid" class="bg-green/600bg-opacity-40 rounded">
+              <nuxt-icon name="icon-check" class="text-green/600text-xl" />
             </div>
             <div v-if="isValid === false" class="bg-red bg-opacity-40 rounded">
               <nuxt-icon name="icon-cross" class="text-red text-xl" />

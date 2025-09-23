@@ -5,29 +5,47 @@
   });
 
   const handleScroll = (event) => {
-    const scrollPosition = document.querySelector("#content-container").scrollTop;
-    if (scrollPosition > state.threshold) state.visible = true;
-    else state.visible = false;
+    const contentContainer = document.querySelector("#content-container");
+    if (contentContainer) {
+      const scrollPosition = contentContainer.scrollTop;
+      if (scrollPosition > state.threshold) state.visible = true;
+      else state.visible = false;
+    }
   };
 
   const scrollToTop = () => {
     if (process.client) {
-      document.querySelector("#content-container").scrollTo({
-        top: 0,
-        behavior: "smooth",
-      });
+      const contentContainer = document.querySelector("#content-container");
+      if (contentContainer) {
+        contentContainer.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        });
+      } else {
+        // Fallback to window scroll if no content-container exists
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        });
+      }
     }
   };
 
   onMounted(() => {
     if (process.client) {
-      document.querySelector("#content-container").addEventListener("scroll", handleScroll);
+      const contentContainer = document.querySelector("#content-container");
+      if (contentContainer) {
+        contentContainer.addEventListener("scroll", handleScroll);
+      }
     }
   });
 
   onBeforeUnmount(() => {
     if (process.client) {
-      document.querySelector("#content-container").removeEventListener("scroll", handleScroll);
+      const contentContainer = document.querySelector("#content-container");
+      if (contentContainer) {
+        contentContainer.removeEventListener("scroll", handleScroll);
+      }
     }
   });
 </script>

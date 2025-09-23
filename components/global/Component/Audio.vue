@@ -290,7 +290,7 @@
           :key="index"
           class="absolute w-full top-full flex flex-col items-center mt-4"
         >
-          <div class="bg-green px-3 py-1 text-white rounded-lg">
+          <div class="bg-green/600px-3 py-1 text-white rounded-lg">
             {{ success }}
           </div>
         </div>

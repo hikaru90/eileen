@@ -19,7 +19,7 @@
         <div>
           <EditorBar v-if="authStore.token" />
         </div>
-        <div class="flex flex-col flex-grow relative">
+        <div class="flex flex-col flex-grow relative pt-20">
           <Menu class="" />
             <slot />
         </div>

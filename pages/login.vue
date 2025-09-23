@@ -47,7 +47,7 @@
         placeholder="Passwort"
         class="border border-grey border-opacity-20 rounded px-3 py-2"
         />
-        <button type="submit" class="bg-green rounded px-3 py-2">Einloggen</button>
+        <button type="submit" class="bg-green-500/60 rounded px-3 py-2">Einloggen</button>
       </form>
       <div v-if="state.error" class="bg-lightRed text-red rounded px-3 py-0.5 mt-3 w-full absolute -bottom-3 transform translate-y-full left-0">
         {{state.error}}

@@ -1,15 +1,14 @@
+definePageMeta({
+  layout: 'default'
+});
+
 <script setup lang="ts">
 import { useAuthStore } from "~/store/auth";
 
 const authStore = useAuthStore();
 const { pb } = usePocketbase();
 
-// Redirect if not authenticated
-if (!authStore.token) {
-  await navigateTo('/login');
-}
 
-// Reactive state
 const state = reactive({
   pages: [] as any[],
   loading: true,
@@ -19,8 +18,6 @@ const state = reactive({
   deletingPage: null as any,
   showDeleteConfirm: false,
 });
-
-// Form data for create/edit
 const formData = reactive({
   title: '',
   slug: '',
@@ -29,8 +26,6 @@ const formData = reactive({
   menuOrder: 0,
   footerGroup: '',
 });
-
-// Load pages
 const loadPages = async () => {
   try {
     state.loading = true;
@@ -45,8 +40,6 @@ const loadPages = async () => {
     state.loading = false;
   }
 };
-
-// Create new page
 const createPage = async () => {
   try {
     const data = {
@@ -57,7 +50,7 @@ const createPage = async () => {
       menuOrder: formData.menuOrder,
       footerGroup: formData.footerGroup || null,
     };
-    
+
     await pb.collection('pages').create(data);
     await loadPages();
     resetForm();
@@ -67,8 +60,6 @@ const createPage = async () => {
     alert('Error creating page. Please try again.');
   }
 };
-
-// Update page
 const updatePage = async () => {
   try {
     const data = {
@@ -79,7 +70,7 @@ const updatePage = async () => {
       menuOrder: formData.menuOrder,
       footerGroup: formData.footerGroup || null,
     };
-    
+
     await pb.collection('pages').update(state.editingPage.id, data);
     await loadPages();
     resetForm();
@@ -90,8 +81,6 @@ const updatePage = async () => {
     alert('Error updating page. Please try again.');
   }
 };
-
-// Delete page
 const deletePage = async () => {
   try {
     await pb.collection('pages').delete(state.deletingPage.id);
@@ -103,8 +92,6 @@ const deletePage = async () => {
     alert('Error deleting page. Please try again.');
   }
 };
-
-// Form helpers
 const resetForm = () => {
   formData.title = '';
   formData.slug = '';
@@ -113,13 +100,12 @@ const resetForm = () => {
   formData.menuOrder = 0;
   formData.footerGroup = '';
 };
-
 const openCreateForm = () => {
   resetForm();
   state.showCreateForm = true;
 };
-
 const openEditForm = (page: any) => {
+  console.log('Opening edit form for page:', page);
   state.editingPage = page;
   formData.title = page.title || '';
   formData.slug = page.slug || '';
@@ -128,14 +114,12 @@ const openEditForm = (page: any) => {
   formData.menuOrder = page.menuOrder || 0;
   formData.footerGroup = page.footerGroup || '';
   state.showEditForm = true;
+  console.log('Edit form state:', { showEditForm: state.showEditForm, editingPage: state.editingPage });
 };
-
 const openDeleteConfirm = (page: any) => {
   state.deletingPage = page;
   state.showDeleteConfirm = true;
 };
-
-// Generate slug from title
 const generateSlug = (title: string) => {
   return title
     .toLowerCase()
@@ -144,8 +128,6 @@ const generateSlug = (title: string) => {
     .replace(/-+/g, '-')
     .trim();
 };
-
-// Watch title to auto-generate slug
 watch(() => formData.title, (newTitle) => {
   if (newTitle && !formData.slug) {
     formData.slug = generateSlug(newTitle);
@@ -153,7 +135,12 @@ watch(() => formData.title, (newTitle) => {
 });
 
 // Load pages on mount
-onMounted(() => {
+onMounted(async () => {
+  // Check authentication after middleware has run
+  if (!pb.authStore.isValid) {
+    await navigateTo('/login');
+    return;
+  }
   loadPages();
 });
 </script>
@@ -187,47 +174,73 @@ onMounted(() => {
       </div>
 
       <!-- Loading State -->
-      <div v-if="state.loading" class="text-center py-8">
+      <div
+        v-if="state.loading"
+        class="text-center py-8"
+      >
         <div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
         <p class="mt-2 text-gray-600">Loading pages...</p>
       </div>
 
       <!-- Pages Table -->
-      <div v-else class="bg-white shadow overflow-hidden sm:rounded-md">
-        <div v-if="state.pages.length === 0" class="text-center py-8 text-gray-500">
+      <div
+        v-else
+        class=""
+      >
+        <div
+          v-if="state.pages.length === 0"
+          class="text-center py-8 text-gray-500"
+        >
           No pages found. Create your first page to get started.
         </div>
-        <ul v-else class="divide-y divide-gray-200">
-          <li v-for="page in state.pages" :key="page.id" class="px-6 py-4">
+        <div
+          v-else
+          class="flex flex-col gap-2"
+        >
+          <div
+            v-for="page in state.pages"
+            :key="page.id"
+            class="px-6 py-4 bg-white shadow rounded-md"
+          >
             <div class="flex items-center justify-between">
-              <div class="flex-1">
+              <div class="flex gap-2">
                 <div class="flex items-center gap-3">
-                  <h3 class="text-lg font-medium text-gray-900">{{ page.title }}</h3>
-                  <span
-                    v-if="page.published"
-                    class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800"
+                  <h3 class="text-lg font-medium text-gray-900 w-28 overflow-hidden text-ellipsis whitespace-nowrap">
+                    {{ page.title }}</h3>
+                  <div
+                    class="w-20 rounded-full flex items-center justify-center text-xs py-0.5"
+                    :class="page.published ? 'bg-green-100 text-green-800': 'bg-gray-100 text-gray-800'"
                   >
-                    Published
-                  </span>
-                  <span
-                    v-else
-                    class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800"
+                    <template v-if="page.published">
+                      Published
+                    </template>
+                    <template v-else>
+                      Draft
+                    </template>
+                  </div>
+                  <div
+                    class="w-20 rounded-full flex items-center justify-center text-xs py-0.5"
+                    :class="page.inMenu ? 'bg-blue-100 text-blue-800': ''"
                   >
-                    Draft
-                  </span>
-                  <span
-                    v-if="page.inMenu"
-                    class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800"
-                  >
+                  <template v-if="page.inMenu">
                     In Menu
-                  </span>
+                  </template>
+                  <template v-else>
+                  </template>
+                  </div>
                 </div>
                 <div class="mt-1 text-sm text-gray-500">
                   <span class="font-mono">{{ page.slug || 'No slug' }}</span>
-                  <span v-if="page.footerGroup" class="ml-4">
+                  <span
+                    v-if="page.footerGroup"
+                    class="ml-4"
+                  >
                     Footer: {{ page.footerGroup }}
                   </span>
-                  <span v-if="page.menuOrder" class="ml-4">
+                  <span
+                    v-if="page.menuOrder"
+                    class="ml-4"
+                  >
                     Order: {{ page.menuOrder }}
                   </span>
                 </div>
@@ -253,8 +266,8 @@ onMounted(() => {
                 </button>
               </div>
             </div>
-          </li>
-        </ul>
+          </div>
+        </div>
       </div>
 
       <!-- Create Form Modal -->
@@ -265,7 +278,10 @@ onMounted(() => {
         <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
           <div class="mt-3">
             <h3 class="text-lg font-medium text-gray-900 mb-4">Create New Page</h3>
-            <form @submit.prevent="createPage" class="space-y-4">
+            <form
+              @submit.prevent="createPage"
+              class="space-y-4"
+            >
               <div>
                 <label class="block text-sm font-medium text-gray-700">Title *</label>
                 <input
@@ -342,12 +358,17 @@ onMounted(() => {
       <!-- Edit Form Modal -->
       <div
         v-if="state.showEditForm"
-        class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50"
+        @click="state.showEditForm = false; state.editingPage = null"
+        class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full"
+        style="background-color: rgba(0, 0, 0, 0.8) !important; z-index: 9999 !important;"
       >
-        <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
+        <div @click.stop class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white" style="z-index: 10000 !important;">
           <div class="mt-3">
             <h3 class="text-lg font-medium text-gray-900 mb-4">Edit Page</h3>
-            <form @submit.prevent="updatePage" class="space-y-4">
+            <form
+              @submit.prevent="updatePage"
+              class="space-y-4"
+            >
               <div>
                 <label class="block text-sm font-medium text-gray-700">Title *</label>
                 <input
@@ -430,7 +451,7 @@ onMounted(() => {
           <div class="mt-3">
             <h3 class="text-lg font-medium text-gray-900 mb-4">Delete Page</h3>
             <p class="text-gray-600 mb-6">
-              Are you sure you want to delete "<strong>{{ state.deletingPage?.title }}</strong>"? 
+              Are you sure you want to delete "<strong>{{ state.deletingPage?.title }}</strong>"?
               This action cannot be undone.
             </p>
             <div class="flex justify-end gap-3">

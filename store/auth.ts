@@ -6,6 +6,9 @@ export const useAuthStore = defineStore("authStore",{
     user: null,
     token: null,
   }),
+  getters: {
+    isAuthenticated: (state) => !!state.token,
+  },
   actions: {
     async login(email: string, password: string) {
       console.log('email',email);
@@ -24,25 +27,40 @@ export const useAuthStore = defineStore("authStore",{
       this.user = pb.authStore.model;
       this.token = pb.authStore.token;
 
-      this.router.go(-1)
-      // //setCookie
-      // const cookie = useCookie("pocketbase_auth");
-      // cookie.value = pb.authStore.token;
+      // Navigate back to previous page or home
+      const router = useRouter();
+      router.go(-1);
     },
     async refresh(){
       try{
         const pb = getPocketBase();
-        if(process.client && pb.authStore.isValid){
-          const authData = await pb.collection("users").authRefresh();
+        if(process.client){
+          // Check if we have a token in localStorage first
+          const storedAuth = localStorage.getItem('pocketbase_auth');
+          if(storedAuth){
+            try {
+              const authData = JSON.parse(storedAuth);
+              pb.authStore.save(authData.token, authData.model);
+            } catch(e) {
+              console.log('Failed to parse stored auth data');
+            }
+          }
+          
+          // Try to refresh if we have a valid token
           if(pb.authStore.isValid){
-            this.user = pb.authStore.model;
-            this.token = pb.authStore.token;
+            const authData = await pb.collection("users").authRefresh();
+            if(pb.authStore.isValid){
+              this.user = pb.authStore.model;
+              this.token = pb.authStore.token;
+            }
           }
         }
       }catch(err){
         console.log('Auth refresh failed:', err);
-        // If refresh fails, clear the auth state
-        this.logout();
+        // Only logout if the token is actually invalid, not on network errors
+        if(err.status === 400 || err.status === 401) {
+          this.logout();
+        }
       }
     },
     logout() {
@@ -56,6 +74,9 @@ export const useAuthStore = defineStore("authStore",{
         // Clear Pinia store
         this.user = null;
         this.token = null;
+        // Navigate to login page
+        const router = useRouter();
+        router.push('/login');
       }
     },
   },

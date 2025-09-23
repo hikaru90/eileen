@@ -19,6 +19,8 @@
     top: 0,
   });
 
+  const isClient = process.client;
+
   const menuEntries = computed(() => {
     let entries = records.filter((record) => record.inMenu === true);
     entries.sort((a, b) => a.menuOrder - b.menuOrder);
@@ -75,15 +77,19 @@
   };
 
   onMounted(() => {
-    if (process.client) {
-      window.document.getElementById("content-container").addEventListener("scroll", handleScroll);
+    if (isClient) {
+      const contentContainer = window.document.getElementById("content-container");
+      if (contentContainer) {
+        contentContainer.addEventListener("scroll", handleScroll);
+      }
     }
   });
   onUnmounted(() => {
-    if (process.client) {
-      window.document
-        .getElementById("content-container")
-        .removeEventListener("scroll", handleScroll);
+    if (isClient) {
+      const contentContainer = window.document.getElementById("content-container");
+      if (contentContainer) {
+        contentContainer.removeEventListener("scroll", handleScroll);
+      }
     }
   });
 </script>
@@ -183,7 +189,7 @@
     <div
       :class="[
         state.top > 0 ? 'bg-white shadow-xl shadow-coffee/5' : 'shadow-sm',
-        authStore.token ? 'absolute' : 'fixed',
+        isClient && authStore.token ? 'absolute' : 'fixed',
       ]"
       class="top-0 left-0 w-full z-20 text-white transition duration-100"
     >

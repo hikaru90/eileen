@@ -187,7 +187,7 @@
         </button>
         <button
           @click="approveBooking"
-          class="border-2 border-green/70 hover:border-green text-green/70 hover:text-green rounded px-4 py-1 flex items-center"
+          class="border-2 border-green/70 hover:border-green/600text-green/70 hover:text-green/600rounded px-4 py-1 flex items-center"
         >
           <nuxt-icon name="icon-check" class="text-2xl -ml-2" />
           Bestätigen

@@ -70,7 +70,7 @@
             </div>
 
             <div class="border border-coffee border-opacity-20 rounded-full inline-flex items-center text-xs px-2 gap-1 mb-10 -ml-0.5">
-              <nuxt-icon name="icon-camera" class="text-xs text-green opacity-80" /> online verfügbar
+              <nuxt-icon name="icon-camera" class="text-xs text-green/600opacity-80" /> online verfügbar
             </div>
 
             <div class="min-h-[60px] mb-10">

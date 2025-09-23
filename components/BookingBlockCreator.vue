@@ -74,7 +74,7 @@
       </div>
       <button
         @click="createBlock"
-        class="border-2 border-green hover:border-green/50 text-green hover:text-green/70 rounded px-4 py-1 flex items-center"
+        class="border-2 border-green/600hover:border-green/50 text-green/600hover:text-green/70 rounded px-4 py-1 flex items-center"
       >
         <nuxt-icon name="icon-trash" class="text-2xl -ml-2" />
         Erstellen

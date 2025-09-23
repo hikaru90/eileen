@@ -209,7 +209,7 @@
                   </div>
                 </div>
                 <div v-for="(success, index) in state.successes" :key="index" class="mt-4">
-                  <div class="bg-green px-3 py-1 text-white rounded-lg">
+                  <div class="bg-green/600px-3 py-1 text-white rounded-lg">
                     {{ success }}
                   </div>
                 </div>
