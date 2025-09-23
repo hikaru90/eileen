@@ -152,6 +152,8 @@ const defaults = [
       subline: "Subline",
       subline2: "Additional Subline",
       date: "15. März 2024",
+      linkTitle: "Mehr erfahren",
+      linkTarget: "/about",
       image: "solar_energy_a2mPxBJIkJ.jpg",
       cta: {
         text: "Buchen",
@@ -221,6 +223,37 @@ const defaults = [
           answer: "Testantwort",
         },
       ],
+    },
+  },
+  {
+    type: "tiles",
+    content: {
+      heading: "Unsere Services",
+      tiles: [
+        {
+          title: "Beratung",
+          description: "Professionelle Beratung für Ihre individuellen Bedürfnisse",
+          icon: "icon-heart",
+          linkTitle: "Mehr erfahren",
+          linkTarget: "/beratung",
+        },
+        {
+          title: "Coaching",
+          description: "Persönliches Coaching für Ihren Erfolg",
+          icon: "icon-star",
+          linkTitle: "Details",
+          linkTarget: "/coaching",
+        },
+      ],
+    },
+  },
+  {
+    type: "subscribe",
+    content: {
+      heading: "Newsletter abonnieren",
+      description: "Bleiben Sie auf dem Laufenden mit unserem Newsletter. Erhalten Sie regelmäßig Tipps, Inspirationen und Updates direkt in Ihr Postfach.",
+      buttonText: "Jetzt abonnieren",
+      groupId: "164511800528734081",
     },
   },
   {

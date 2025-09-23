@@ -35,7 +35,7 @@ onUnmounted(() => { });
 <template>
   <div
     :class="[{ '-mt-24': props.isFirst }]"
-    class="relative text-white overflow-visible py-20"
+    class="relative text-white overflow-visible py-24"
   >
     <!-- <div class="absolute z-20 bottom-0 left-1/2 transform translate-y-1/2 -translate-x-1/3 rounded-full w-5 h-5 bg-gradient-to-b from-gold via-lightGold to-darkGold">
     </div> -->
@@ -52,21 +52,38 @@ onUnmounted(() => { });
           </IntersectonPop>
           <div
             v-if="props.component.content.subline"
-            class="text-coffee uppercase text-center text-xs sm:text-lg mt-6"
+            class="text-coffee uppercase text-center text-xs sm:text-lg mt-6 max-w-[27em]"
           >
             {{ props.component.content.subline }}
           </div>
-          <div
-            v-if="props.component.content.subline2"
-            class="text-coffee uppercase text-center text-xs sm:text-base mt-3 opacity-80"
-          >
-            {{ props.component.content.subline2 }}
+          <div class="flex items-center justify-center gap-4 mt-4">
+            <div
+              v-if="props.component.content.date"
+              class="text-coffee flex items-center justify-center gap-1 bg-white rounded-lg px-2 py-1"
+            >
+              <nuxt-icon
+                name="icon-info"
+                class="text-grey-800 opacity-80"
+              />
+              <span class="text-^ sm:text-base">
+                {{ props.component.content.date }}
+              </span>
+            </div>
+            <div
+              v-if="props.component.content.subline2"
+              class="text-coffee text-center text-xs sm:text-base opacity-80 bg-white rounded-lg px-2 py-1"
+            >
+              {{ props.component.content.subline2 }}
+            </div>
           </div>
-          <div
-            v-if="props.component.content.date"
-            class="text-coffee text-center text-xs sm:text-sm mt-4 opacity-60 "
-          >
-            {{ props.component.content.date }}
+          <div v-if="props.component.content.linkTitle && props.component.content.linkTarget" class="mt-8 text-center">
+            <NuxtLink
+              :to="props.component.content.linkTarget"
+              class="inline-flex items-center gap-2 bg-salmon text-white px-6 py-3 rounded-full hover:bg-salmon/90 transition-colors"
+            >
+              {{ props.component.content.linkTitle }}
+              <nuxt-icon name="icon-arrow_down" class="text-lg" />
+            </NuxtLink>
           </div>
         </div>
       </div>
