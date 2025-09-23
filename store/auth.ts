@@ -27,6 +27,14 @@ export const useAuthStore = defineStore("authStore",{
       this.user = pb.authStore.model;
       this.token = pb.authStore.token;
 
+      // Save auth state to localStorage
+      if (process.client) {
+        localStorage.setItem('pocketbase_auth', JSON.stringify({
+          token: pb.authStore.token,
+          model: pb.authStore.model
+        }));
+      }
+
       // Navigate back to previous page or home
       const router = useRouter();
       router.go(-1);
@@ -41,6 +49,9 @@ export const useAuthStore = defineStore("authStore",{
             try {
               const authData = JSON.parse(storedAuth);
               pb.authStore.save(authData.token, authData.model);
+              // Update store state
+              this.user = pb.authStore.model;
+              this.token = pb.authStore.token;
             } catch(e) {
               console.log('Failed to parse stored auth data');
             }
@@ -52,10 +63,15 @@ export const useAuthStore = defineStore("authStore",{
             if(pb.authStore.isValid){
               this.user = pb.authStore.model;
               this.token = pb.authStore.token;
+              // Update localStorage
+              localStorage.setItem('pocketbase_auth', JSON.stringify({
+                token: pb.authStore.token,
+                model: pb.authStore.model
+              }));
             }
           }
         }
-      }catch(err){
+      }catch(err: any){
         console.log('Auth refresh failed:', err);
         // Only logout if the token is actually invalid, not on network errors
         if(err.status === 400 || err.status === 401) {

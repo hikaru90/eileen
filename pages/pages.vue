@@ -4,9 +4,10 @@ definePageMeta({
 
 <script setup lang="ts">
 import { useAuthStore } from "~/store/auth";
+import { getPocketBase } from "~/lib/pocketbase";
 
 const authStore = useAuthStore();
-const { pb } = usePocketbase();
+const pb = getPocketBase();
 
 
 const state = reactive({
@@ -25,23 +26,40 @@ const formData = reactive({
   inMenu: false,
   menuOrder: 0,
   footerGroup: '',
+  metaTitle: '',
+  metaDescription: '',
 });
 const loadPages = async () => {
   try {
     state.loading = true;
+    console.log('Loading pages with auth token:', pb.authStore.token);
     const pages = await pb.collection('pages').getFullList(200, {
       sort: '-created',
       expand: 'seo,containers,subpages'
     });
     state.pages = pages;
-  } catch (error) {
+  } catch (error: any) {
     console.error('Error loading pages:', error);
+    console.error('Error details:', {
+      status: error.status,
+      message: error.message,
+      data: error.data
+    });
   } finally {
     state.loading = false;
   }
 };
 const createPage = async () => {
   try {
+    // First create the SEO info record
+    const seoData = {
+      slug: formData.slug,
+      title: formData.metaTitle || formData.title,
+      description: formData.metaDescription || ''
+    };
+    const seoRecord = await pb.collection('seoinfos').create(seoData);
+
+    // Then create the page with the SEO record ID
     const data = {
       title: formData.title,
       slug: formData.slug,
@@ -49,19 +67,46 @@ const createPage = async () => {
       inMenu: formData.inMenu,
       menuOrder: formData.menuOrder,
       footerGroup: formData.footerGroup || null,
+      seo: seoRecord.id,
+      containers: [],
+      subpages: []
     };
+
+    console.log('Creating page with auth token:', pb.authStore.token);
+    console.log('PocketBase auth state before create:', {
+      isValid: pb.authStore.isValid,
+      token: pb.authStore.token,
+      model: pb.authStore.model
+    });
+
+    // Check if the token is actually being sent in headers
+    console.log('PocketBase instance headers:', pb.authStore.token ? 'Authorization: ' + pb.authStore.token : 'No auth token');
 
     await pb.collection('pages').create(data);
     await loadPages();
     resetForm();
     state.showCreateForm = false;
-  } catch (error) {
+  } catch (error: any) {
     console.error('Error creating page:', error);
-    alert('Error creating page. Please try again.');
+    console.error('Error details:', {
+      status: error.status,
+      message: error.message,
+      data: error.data
+    });
   }
 };
 const updatePage = async () => {
   try {
+    // Update the SEO info record if it exists
+    if (state.editingPage.seo) {
+      const seoData = {
+        slug: formData.slug,
+        title: formData.metaTitle || formData.title,
+        description: formData.metaDescription || ''
+      };
+      await pb.collection('seoinfos').update(state.editingPage.seo, seoData);
+    }
+
     const data = {
       title: formData.title,
       slug: formData.slug,
@@ -99,6 +144,8 @@ const resetForm = () => {
   formData.inMenu = false;
   formData.menuOrder = 0;
   formData.footerGroup = '';
+  formData.metaTitle = '';
+  formData.metaDescription = '';
 };
 const openCreateForm = () => {
   resetForm();
@@ -113,6 +160,8 @@ const openEditForm = (page: any) => {
   formData.inMenu = page.inMenu || false;
   formData.menuOrder = page.menuOrder || 0;
   formData.footerGroup = page.footerGroup || '';
+  formData.metaTitle = page.expand?.seo?.title || '';
+  formData.metaDescription = page.expand?.seo?.description || '';
   state.showEditForm = true;
   console.log('Edit form state:', { showEditForm: state.showEditForm, editingPage: state.editingPage });
 };
@@ -137,6 +186,12 @@ watch(() => formData.title, (newTitle) => {
 // Load pages on mount
 onMounted(async () => {
   // Check authentication after middleware has run
+  console.log('PocketBase auth state:', {
+    isValid: pb.authStore.isValid,
+    token: pb.authStore.token,
+    model: pb.authStore.model
+  });
+  
   if (!pb.authStore.isValid) {
     await navigateTo('/login');
     return;
@@ -299,6 +354,24 @@ onMounted(async () => {
                   class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
                 />
               </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700">Meta Title</label>
+                <input
+                  v-model="formData.metaTitle"
+                  type="text"
+                  placeholder="Leave empty to use page title"
+                  class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700">Meta Description</label>
+                <textarea
+                  v-model="formData.metaDescription"
+                  rows="3"
+                  placeholder="SEO description for this page"
+                  class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                ></textarea>
+              </div>
               <div class="flex items-center">
                 <input
                   v-model="formData.published"
@@ -385,6 +458,24 @@ onMounted(async () => {
                   type="text"
                   class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
                 />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700">Meta Title</label>
+                <input
+                  v-model="formData.metaTitle"
+                  type="text"
+                  placeholder="Leave empty to use page title"
+                  class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700">Meta Description</label>
+                <textarea
+                  v-model="formData.metaDescription"
+                  rows="3"
+                  placeholder="SEO description for this page"
+                  class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                ></textarea>
               </div>
               <div class="flex items-center">
                 <input

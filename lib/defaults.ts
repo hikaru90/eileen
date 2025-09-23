@@ -146,6 +146,21 @@ const defaults = [
     },
   },
   {
+    type: "heroSmallExtended",
+    content: {
+      heading: "Paartherapie",
+      subline: "Subline",
+      subline2: "Additional Subline",
+      date: "15. März 2024",
+      image: "solar_energy_a2mPxBJIkJ.jpg",
+      cta: {
+        text: "Buchen",
+        icon: "icon-caret-right",
+        link: "/buchen",
+      },
+    },
+  },
+  {
     type: "portraitText",
     content: {
       heading: "Willkommen & Schön, dass Du da bist.",

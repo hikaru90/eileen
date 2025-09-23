@@ -16,7 +16,17 @@ const { viewports, componentId } = storeToRefs(sidebarStore);
 
 const route = useRoute();
 let slug = route.params.slug;
-slug = !slug ? "index" : slug;
+// Handle different slug formats for catch-all routes
+if (!slug || (Array.isArray(slug) && slug.length === 0)) {
+  slug = "index";
+} else if (Array.isArray(slug)) {
+  slug = slug.join('/');
+}
+
+// Filter out Chrome DevTools requests
+if (slug.includes('.well-known')) {
+  throw createError({ statusCode: 404, statusMessage: 'Page Not Found' });
+}
 
 definePageMeta({
   layout: "sidebar",
@@ -27,17 +37,35 @@ const state = reactive({
 });
 
 const { pending, data: pageContent } = await useAsyncData("pageContent", async () => {
-  const res = await pb.collection("pages").getFirstListItem(`slug="${slug}"`, {
-    expand: "containers.block.blocks,containers.component,seo",
-  })
-  return structuredClone(res)
+  try {
+    const res = await pb.collection("pages").getFirstListItem(`slug="${slug}"`, {
+      expand: "containers.block.blocks,containers.component,seo",
+    })
+    // Convert to plain object to avoid serialization issues
+    return JSON.parse(JSON.stringify(res))
+  } catch (error) {
+    console.error('Error loading page with slug:', slug, error.status || error.message)
+    if (error.status === 404) {
+      throw createError({ statusCode: 404, statusMessage: `Page "${slug}" not found` });
+    }
+    return null
+  }
 });
 
-useHead({
-  title: pageContent.value.expand.seo.title
-    ? `Eileen George — ${pageContent.value.expand.seo.title}`
-    : `Eileen George — ${pageContent.value.title}`,
-  meta: [{ name: "description", content: pageContent.value.expand.seo.description }],
+useHead(() => {
+  if (!pageContent.value) {
+    return {
+      title: 'Eileen George',
+      meta: [{ name: "description", content: '' }],
+    }
+  }
+
+  return {
+    title: pageContent.value.expand?.seo?.title
+      ? `Eileen George — ${pageContent.value.expand?.seo?.title}`
+      : `Eileen George — ${pageContent.value.title}`,
+    meta: [{ name: "description", content: pageContent.value.expand?.seo?.description || '' }],
+  }
 });
 
 $listen("refresh", () => {
@@ -48,7 +76,10 @@ $listen("refresh", () => {
 const refresh = async () => {
   await setTimeout(async () => {
     await refreshNuxtData("pageContent");
-    setPage(pageContent.value);
+    if (pageContent.value) {
+      // Ensure we pass a clean copy to the store
+      setPage(JSON.parse(JSON.stringify(pageContent.value)));
+    }
   }, 400);
 };
 
@@ -79,7 +110,7 @@ const currentContainerAuth = computed(() => {
 });
 
 const isSelected = (container) => {
-  const id = container?.expand.block?.id || container?.expand.component?.id;
+  const id = container?.expand?.block?.id || container?.expand?.component?.id;
   if (componentId?.value === id) return true;
   return false;
 };
@@ -113,7 +144,10 @@ const addComponent = async (index) => {
 };
 
 onMounted(() => {
-  setPage(pageContent.value);
+  if (pageContent.value) {
+    // Ensure we pass a clean copy to the store
+    setPage(JSON.parse(JSON.stringify(pageContent.value)));
+  }
 });
 </script>
 
@@ -145,7 +179,7 @@ onMounted(() => {
             />
             <div
               @mouseenter="state.currentContainer = index"
-              v-if="page?.expand"
+              v-if="page?.expand?.containers"
               v-for="(container, index) in page.expand.containers"
               :key="container.id"
               :class="[
