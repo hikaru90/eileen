@@ -102,7 +102,7 @@
       style="
         background-image: radial-gradient(
           circle,
-          ##ffe2c4 0%,
+          #ffe2c4 0%,
           transparent 40%
         );
       "
