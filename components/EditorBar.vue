@@ -48,6 +48,12 @@
             Seiten bearbeiten
           </button> -->
           <button 
+            @click="navigateTo('/pages')"
+            class="rounded-sm border border-lightBlue px-3 py-1 mx-2"
+          >
+            Pages
+          </button>
+          <button 
             @click="navigateTo('/buchungen')"
             class="rounded-sm border border-lightBlue px-3 py-1 mx-2"
           >

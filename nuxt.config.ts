@@ -37,6 +37,8 @@ export default defineNuxtConfig({
   runtimeConfig: {
     BREVO_API_KEY: process.env.BREVO_API_KEY,
     MAILERLITE_API_KEY: process.env.MAILERLITE_API_KEY,
+    POCKETBASE_ADMIN_EMAIL: process.env.POCKETBASE_ADMIN_EMAIL,
+    POCKETBASE_ADMIN_PASSWORD: process.env.POCKETBASE_ADMIN_PASSWORD,
     public: {
       ENV: process.env.ENV,
       SERVER_URL: process.env.SERVER_URL,
