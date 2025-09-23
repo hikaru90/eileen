@@ -105,7 +105,7 @@
     box-shadow: 0px 1px 3px 0px rgba(black, 0.5);
   }
   input:checked + .slider {
-    @apply bg-green;
+    @apply bg-green-500;
   }
   input:focus + .slider {
     @apply outline outline-2;

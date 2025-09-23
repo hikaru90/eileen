@@ -44,7 +44,7 @@
         </div>
         <ListEntry name="Published">
           <template v-if="page.published">
-            <div class="bg-green/600rounded-full flex items-center justify-center w-5 h-5 mt-1">
+            <div class="bg-green-500/60 rounded-full flex items-center justify-center w-5 h-5 mt-1">
               <nuxt-icon name="icon-check" class="text-xl" />
             </div>
           </template>

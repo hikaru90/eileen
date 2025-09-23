@@ -111,7 +111,7 @@
   <div
     :class="[
       props.booking.deleted ? 'bg-red opacity-20' : '',
-      props.booking.confirmed ? 'bg-green' : '',
+      props.booking.confirmed ? 'bg-green-500' : '',
       { 'bg-offwhite': !props.booking.deleted && !props.booking.confirmed },
     ]"
     class="select-none border border-darkGrey border-opacity-40 rounded"
@@ -187,7 +187,7 @@
         </button>
         <button
           @click="approveBooking"
-          class="border-2 border-green/70 hover:border-green/600text-green/70 hover:text-green/600rounded px-4 py-1 flex items-center"
+          class="border-2 border-green-500/70 hover:border-green-500/600text-green-500/70 hover:text-green-500/600rounded px-4 py-1 flex items-center"
         >
           <nuxt-icon name="icon-check" class="text-2xl -ml-2" />
           Bestätigen
