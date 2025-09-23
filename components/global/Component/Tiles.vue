@@ -23,7 +23,7 @@
         background-image: radial-gradient(
           circle,
           #FAF1DF 0%,
-          transparent 60%
+          transparent 50%
         );
       "
       class="absolute left-1/2 top-1/2 -z-10 w-[2000px] h-[2000px] transform -translate-x-1/2 -translate-y-1/2"

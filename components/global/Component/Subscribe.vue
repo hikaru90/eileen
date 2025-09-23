@@ -21,6 +21,8 @@
     errorMessage: "",
   });
 
+  const anmeldenRef = ref(null);
+
   const validateEmail = (email: string) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
@@ -77,17 +79,31 @@
     }
   };
 
+  // Debug: Component mounting
+  onMounted(() => {
+    console.log('Subscribe component mounted');
+    console.log('anmeldenRef:', anmeldenRef.value);
+    const element = document.getElementById('anmelden');
+    console.log('Element with id anmelden:', element);
+    if (anmeldenRef.value) {
+      console.log('anmeldenRef ID attribute:', anmeldenRef.value.id);
+    }
+  });
+
 </script>
 
 <template>
-  <div id="anmelden" class="my-28">
+  <div ref="anmeldenRef" class="my-28">
+    <div id="anmelden">
+
+    </div>
     <div class="max-container relative">
       <div
       style="
         background-image: radial-gradient(
           circle,
-          #FAF1DF 0%,
-          transparent 60%
+          ##ffe2c4 0%,
+          transparent 40%
         );
       "
       class="absolute left-1/2 top-1/2 -z-10 w-[2000px] h-[2000px] transform -translate-x-1/2 -translate-y-1/2"
@@ -108,7 +124,7 @@
         <!-- Success Message -->
         <div v-if="state.isSuccess" class="mb-6 p-4 bg-green-100 border border-green-300 rounded-lg">
           <p class="text-green-800 font-medium">
-            Vielen Dank! Sie haben sich erfolgreich für unseren Newsletter angemeldet.
+            Vielen Dank für deine Anmeldung! Ich melde mich bei dir.
           </p>
         </div>
 

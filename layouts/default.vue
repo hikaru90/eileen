@@ -15,17 +15,21 @@
       <Placeholder />
     </template>
     <template v-else> -->
-      <div class="flex flex-col flex-grow">
-        <div>
-          <EditorBar v-if="authStore.token" />
-        </div>
-        <div class="flex flex-col flex-grow relative pt-20">
-          <Menu class="" />
-            <slot />
+      <div class="flex flex-grow h-screen">
+        <div id="content-container" class="flex flex-col flex-grow overflow-auto relative">
+          <div class="flex flex-col flex-grow">
+            <div>
+              <EditorBar v-if="authStore.token" />
+            </div>
+            <div class="flex flex-col flex-grow relative pt-20">
+              <Menu class="" />
+              <slot />
+            </div>
+          </div>
+          <UpButton />
+          <Footer />
         </div>
       </div>
-      <UpButton />
-      <Footer />
     <!-- </template> -->
   </div>
 </template>
