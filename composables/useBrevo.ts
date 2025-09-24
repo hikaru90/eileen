@@ -115,6 +115,43 @@ export const getTemplate = (templateName: string, formData: object) => {
       <strong>Alex</strong><br />
       </body></html>`,
     },
+    {
+      name: "newsletterOptIn",
+      subject: "Bestätige deine Newsletter-Anmeldung",
+      content: `<html><body style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
+        <div style="text-align: center; margin-bottom: 30px;">
+          <h1 style="color: #e67e22; font-size: 28px; margin-bottom: 10px;">Eileen George</h1>
+          <p style="color: #666; font-style: italic;">Psychologisches Coaching • Selbstwert & Innere Kind Arbeit • Embodiment</p>
+        </div>
+
+        <h2 style="color: #333; font-size: 24px; margin-bottom: 20px;">
+          Hallo${formData?.name ? ` ${formData.name}` : ''},
+        </h2>
+
+        <p style="color: #555; font-size: 16px; line-height: 1.6; margin-bottom: 25px;">
+          vielen Dank für dein Interesse an meinem Newsletter! Um deine Anmeldung abzuschließen, klicke bitte auf den folgenden Link:
+        </p>
+
+        <div style="text-align: center; margin: 30px 0;">
+          <a href="${formData?.confirmationUrl}"
+             style="display: inline-block; background-color: #e67e22; color: white; padding: 15px 30px; text-decoration: none; border-radius: 25px; font-weight: bold; font-size: 16px;">
+            Newsletter-Anmeldung bestätigen
+          </a>
+        </div>
+
+        <p style="color: #777; font-size: 14px; line-height: 1.5; margin-bottom: 20px;">
+          Falls du diese E-Mail nicht angefordert hast, kannst du sie einfach ignorieren. Ohne Bestätigung wird deine E-Mail-Adresse nicht zu unserer Liste hinzugefügt.
+        </p>
+
+        <div style="border-top: 1px solid #eee; padding-top: 20px; margin-top: 30px; text-align: center; color: #888; font-size: 12px;">
+          <p>
+            <strong>Eileen George</strong><br>
+            Werkstraße 5, 24955 Harrislee<br>
+            kontakt@eileengeorge.de • +49 1525 140 2928
+          </p>
+        </div>
+      </body></html>`,
+    },
   ];
 
   return templates.find((template) => template.name === templateName);

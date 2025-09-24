@@ -48,7 +48,6 @@
   };
 
   const addSuccess = (success) => {
-    setCookie("subscribed", true);
     state.successes.push(success);
     state.mail = "";
     setTimeout(() => {
@@ -86,28 +85,63 @@
       state.subscriptionPending = true;
 
       try {
-        const response = await fetch("/api/mail/addSubscriber", {
+        // First, check if user is already subscribed
+        const checkResponse = await fetch("/api/mail/checkSubscriber", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
             email: state.mail,
+            groupId: "164511800528734081",
+          }),
+        });
+
+        if (!checkResponse.ok) {
+          throw new Error("Failed to check subscription status");
+        }
+
+        const checkData = await checkResponse.json();
+        console.log("Subscription check result:", checkData);
+
+        // If already subscribed and active, set cookie and allow download
+        if (checkData.subscribed && checkData.status === 'active') {
+          console.log("User is already subscribed and active - skipping opt-in email");
+          setCookie("subscribed", true);
+          addSuccess("Du bist bereits angemeldet! Downloads sind jetzt verfügbar.");
+          state.subscriptionPending = false;
+          state.userSubribed = true;
+          state.newsletterSignupOpen = false;
+          return true;
+        }
+
+        // If not subscribed or inactive, send opt-in email
+        console.log("User is not subscribed or inactive - sending opt-in email");
+        const response = await fetch("/api/mail/sendOptIn", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email: state.mail,
+            groupId: "164511800528734081", // Default group ID
+            redirectUrl: "/download", // Redirect back to download page after confirmation
           }),
         });
 
         if (!response.ok) {
-          throw new Error("Failed to subscribe");
+          throw new Error("Failed to send opt-in email");
         }
 
-        addSuccess("Du hast Dich erfolgreich eingetragen.");
+        addSuccess("Bestätigungs-E-Mail gesendet! Bitte prüfe dein Postfach.");
         state.subscriptionPending = false;
-        state.userSubribed = true;
+        // Note: Don't set userSubscribed = true here, as they need to confirm first
+        // The download will remain locked until they confirm via email
         state.newsletterSignupOpen = false;
         return true;
       } catch (err) {
         console.log("err", err);
-        addError("Fehler beim Eintragen. Bitte versuche es erneut.");
+        addError("Fehler beim Verarbeiten der Anfrage. Bitte versuche es erneut.");
         state.subscriptionPending = false;
       }
     }
@@ -135,6 +169,10 @@
   };
 
   const handleDownload = (id, filename) => {
+    const userSubribed = getCookie("subscribed");
+    if (userSubribed) {
+      state.userSubribed = true;
+    }
     console.log("state.userSubribed", state.userSubribed);
     if (!state.userSubribed) {
       state.newsletterSignupOpen = true;
@@ -175,8 +213,8 @@
             >
               <h3 class="font-heading text-lg md:text-2xl mb-4 mt-1 ml-1">Datei herunterladen</h3>
               <p class="pl-1">
-                Um diese Datei herunterzuladen, gib bitte Deine E-Mail-Adresse ein. Damit trägst Du
-                Dich gleichzeitig in meinen Newsletter ein. Ich verwende Deine Daten ausschließlich
+                Um diese Datei herunterzuladen, gib bitte Deine E-Mail-Adresse ein. Du erhältst eine Bestätigungs-E-Mail
+                und trägst Dich damit gleichzeitig in meinen Newsletter ein. Ich verwende Deine Daten ausschließlich
                 um neue Meditationen und Inspiration mit Dir zu teilen. Ich werde Deine
                 E-Mail-Adresse nicht für andere Zwecke verwenden oder weitergeben, versprochen.
               </p>

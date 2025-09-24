@@ -113,7 +113,6 @@
   };
   
   const addSuccess = (success) => {
-    setCookie("subscribed", true);
     state.successes.push(success);
     state.mail = "";
     setTimeout(() => {
@@ -151,26 +150,55 @@
       state.subscriptionPending = true;
 
       try {
-        const response = await fetch("/api/mail/addSubscriber", {
+        // First, check if user is already subscribed
+        const checkResponse = await fetch("/api/mail/checkSubscriber", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
             email: state.mail,
+            groupId: "164511800528734081", // Newsletter group ID
+          }),
+        });
+
+        if (!checkResponse.ok) {
+          throw new Error("Failed to check subscription status");
+        }
+
+        const checkData = await checkResponse.json();
+
+        // If already subscribed and active, set cookie and show success
+        if (checkData.subscribed && checkData.status === 'active') {
+          setCookie("subscribed", true);
+          addSuccess("Du bist bereits angemeldet! Newsletter-Inhalte sind verfügbar.");
+          state.subscriptionPending = false;
+          return true;
+        }
+
+        // If not subscribed or inactive, send opt-in email
+        const response = await fetch("/api/mail/sendOptIn", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email: state.mail,
+            groupId: "164511800528734081", // Newsletter group ID
+            showSuccessPage: true, // Show newsletter success page
           }),
         });
 
         if (!response.ok) {
-          throw new Error("Failed to subscribe");
+          throw new Error("Failed to send opt-in email");
         }
 
-        addSuccess("Du hast Dich erfolgreich eingetragen.");
+        addSuccess("Bestätigungs-E-Mail gesendet! Bitte prüfe dein Postfach.");
         state.subscriptionPending = false;
         return true;
       } catch (err) {
         console.log("err", err);
-        addError("Fehler beim Eintragen. Bitte versuche es erneut.");
+        addError("Fehler beim Verarbeiten der Anfrage. Bitte versuche es erneut.");
         state.subscriptionPending = false;
       }
     }

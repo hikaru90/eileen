@@ -191,7 +191,7 @@
         state.top > 0 ? 'bg-white shadow-xl shadow-coffee/5' : 'shadow-sm',
         isClient && authStore.token ? 'absolute' : 'fixed',
       ]"
-      class="top-0 left-0 w-full z-10 text-white transition duration-100"
+      class="top-0 left-0 w-full z-50 text-white transition duration-100"
     >
       <div class="max-container w-full">
         <div

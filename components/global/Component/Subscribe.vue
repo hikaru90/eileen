@@ -19,6 +19,7 @@
     isSubmitting: false,
     isSuccess: false,
     errorMessage: "",
+    infoMessage: "",
   });
 
   const anmeldenRef = ref(null);
@@ -31,6 +32,7 @@
   const handleSubmit = async () => {
     // Reset states
     state.errorMessage = "";
+    state.infoMessage = "";
     state.isSuccess = false;
 
     // Validation
@@ -52,7 +54,37 @@
     state.isSubmitting = true;
 
     try {
-      const response = await fetch("/api/mail/addSubscriber", {
+      // First, check if user is already subscribed
+      const checkResponse = await fetch("/api/mail/checkSubscriber", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: state.email,
+          groupId: props.component.content.groupId || "164515782361876122",
+        }),
+      });
+
+      if (!checkResponse.ok) {
+        throw new Error("Failed to check subscription status");
+      }
+
+      const checkData = await checkResponse.json();
+      console.log("Newsletter subscription check result:", checkData);
+
+      // If already subscribed and active, show info message
+      if (checkData.subscribed && checkData.status === 'active') {
+        console.log("User is already subscribed and active - skipping opt-in email");
+        state.name = "";
+        state.email = "";
+        state.infoMessage = "Du bist bereits angemeldet!";
+        return;
+      }
+
+      // If not subscribed or inactive, send opt-in email
+      console.log("User is not subscribed or inactive - sending opt-in email");
+      const response = await fetch("/api/mail/sendOptIn", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -60,19 +92,20 @@
         body: JSON.stringify({
           email: state.email,
           name: state.name,
-          groupId: props.component.content.groupId,
+          groupId: props.component.content.groupId || "164515782361876122",
+          showSuccessPage: true,
         }),
       });
 
       if (!response.ok) {
-        throw new Error("Subscription failed");
+        throw new Error("Opt-in email sending failed");
       }
 
       state.isSuccess = true;
       state.name = "";
       state.email = "";
     } catch (error) {
-      console.error("Subscription error:", error);
+      console.error("Opt-in error:", error);
       state.errorMessage = "Ein Fehler ist aufgetreten. Bitte versuchen Sie es später erneut.";
     } finally {
       state.isSubmitting = false;
@@ -124,8 +157,13 @@
         <!-- Success Message -->
         <div v-if="state.isSuccess" class="mb-6 p-4 bg-green-100 border border-green-300 rounded-lg">
           <p class="text-green-800 font-medium">
-            Vielen Dank für deine Anmeldung! Ich melde mich bei dir.
+            Vielen Dank! Bitte prüfe dein E-Mail-Postfach und bestätige deine Workshop-Anmeldung über den Link in der E-Mail.
           </p>
+        </div>
+
+        <!-- Info Message -->
+        <div v-if="state.infoMessage" class="mb-6 p-4 bg-blue-100 border border-blue-300 rounded-lg">
+          <p class="text-blue-800">{{ state.infoMessage }}</p>
         </div>
 
         <!-- Error Message -->
