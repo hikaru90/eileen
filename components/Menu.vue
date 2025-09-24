@@ -102,7 +102,7 @@
           ? 'opacity-100 scale-100 pointer-events-auto'
           : 'scale-110 opacity-0 pointer-events-none',
       ]"
-      class="fixed z-30 bg-white top-0 left-0 w-full h-full transform transition-all select-none"
+      class="fixed z-20 bg-white top-0 left-0 w-full h-full transform transition-all select-none"
     >
       <div class="max-container w-full">
         <div class="flex items-center justify-between py-4 mb-10">
@@ -191,7 +191,7 @@
         state.top > 0 ? 'bg-white shadow-xl shadow-coffee/5' : 'shadow-sm',
         isClient && authStore.token ? 'absolute' : 'fixed',
       ]"
-      class="top-0 left-0 w-full z-20 text-white transition duration-100"
+      class="top-0 left-0 w-full z-10 text-white transition duration-100"
     >
       <div class="max-container w-full">
         <div

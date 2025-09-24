@@ -18,6 +18,7 @@ const state = reactive({
   showEditForm: false,
   deletingPage: null as any,
   showDeleteConfirm: false,
+  duplicatingPage: null as any,
 });
 const formData = reactive({
   title: '',
@@ -135,6 +136,155 @@ const deletePage = async () => {
   } catch (error) {
     console.error('Error deleting page:', error);
     alert('Error deleting page. Please try again.');
+  }
+};
+const duplicateComponent = async (componentId: string) => {
+  try {
+    const originalComponent = await pb.collection('components').getOne(componentId);
+    const duplicatedComponent = await pb.collection('components').create({
+      type: originalComponent.type,
+      content: originalComponent.content
+    });
+    return duplicatedComponent.id;
+  } catch (error) {
+    console.error('Error duplicating component:', error);
+    throw error;
+  }
+};
+
+const duplicateBlock = async (blockId: string) => {
+  try {
+    const originalBlock = await pb.collection('blocks').getOne(blockId, {
+      expand: 'blocks'
+    });
+
+    // Recursively duplicate nested blocks
+    const duplicatedNestedBlocks = [];
+    if (originalBlock.blocks && originalBlock.blocks.length > 0) {
+      for (const nestedBlockId of originalBlock.blocks) {
+        const duplicatedNestedBlockId = await duplicateBlock(nestedBlockId);
+        duplicatedNestedBlocks.push(duplicatedNestedBlockId);
+      }
+    }
+
+    const duplicatedBlock = await pb.collection('blocks').create({
+      type: originalBlock.type,
+      content: originalBlock.content,
+      blocks: duplicatedNestedBlocks
+    });
+
+    return duplicatedBlock.id;
+  } catch (error) {
+    console.error('Error duplicating block:', error);
+    throw error;
+  }
+};
+
+const duplicateContainer = async (containerId: string) => {
+  try {
+    const originalContainer = await pb.collection('containers').getOne(containerId);
+
+    const containerData: any = {};
+
+    // Duplicate component if exists
+    if (originalContainer.component) {
+      containerData.component = await duplicateComponent(originalContainer.component);
+    }
+
+    // Duplicate block if exists
+    if (originalContainer.block) {
+      containerData.block = await duplicateBlock(originalContainer.block);
+    }
+
+    const duplicatedContainer = await pb.collection('containers').create(containerData);
+    return duplicatedContainer.id;
+  } catch (error) {
+    console.error('Error duplicating container:', error);
+    throw error;
+  }
+};
+
+const duplicatePage = async (page: any) => {
+  if (state.duplicatingPage) return; // Prevent multiple simultaneous duplications
+
+  try {
+    state.duplicatingPage = page.id;
+    console.log('Duplicating page:', page);
+
+    // Generate unique slug for the copy
+    let copySlug = `${page.slug}-copy`;
+    let copyTitle = `${page.title} - Copy`;
+    let copyCounter = 1;
+
+    // Check if slug already exists and increment until unique
+    while (true) {
+      try {
+        await pb.collection('pages').getFirstListItem(`slug="${copySlug}"`);
+        copyCounter++;
+        copySlug = `${page.slug}-copy-${copyCounter}`;
+        copyTitle = `${page.title} - Copy ${copyCounter}`;
+      } catch (error) {
+        // Slug is unique (404 error means it doesn't exist)
+        if (error.status === 404) break;
+        throw error;
+      }
+    }
+
+    // First create a new SEO info record
+    const seoData = {
+      slug: copySlug,
+      title: `${page.expand?.seo?.title || page.title} - Copy${copyCounter > 1 ? ` ${copyCounter}` : ''}`,
+      description: page.expand?.seo?.description || ''
+    };
+    const seoRecord = await pb.collection('seoinfos').create(seoData);
+
+    // Duplicate all containers
+    const duplicatedContainers = [];
+    if (page.containers && page.containers.length > 0) {
+      for (const containerId of page.containers) {
+        const duplicatedContainerId = await duplicateContainer(containerId);
+        duplicatedContainers.push(duplicatedContainerId);
+      }
+    }
+
+    // Duplicate subpages if any (recursive)
+    const duplicatedSubpages = [];
+    if (page.subpages && page.subpages.length > 0) {
+      for (const subpageId of page.subpages) {
+        try {
+          const subpage = await pb.collection('pages').getOne(subpageId, {
+            expand: 'containers,seo'
+          });
+          const duplicatedSubpage = await duplicatePage(subpage);
+          duplicatedSubpages.push(duplicatedSubpage.id);
+        } catch (error) {
+          console.warn('Could not duplicate subpage:', subpageId, error);
+        }
+      }
+    }
+
+    // Create the duplicated page
+    const data = {
+      title: copyTitle,
+      slug: copySlug,
+      published: false, // Set to draft by default
+      inMenu: false, // Remove from menu by default
+      menuOrder: page.menuOrder || 0,
+      footerGroup: page.footerGroup || null,
+      seo: seoRecord.id,
+      containers: duplicatedContainers,
+      subpages: duplicatedSubpages
+    };
+
+    const duplicatedPage = await pb.collection('pages').create(data);
+    await loadPages();
+    console.log('Page duplicated successfully with all content');
+    return duplicatedPage;
+  } catch (error: any) {
+    console.error('Error duplicating page:', error);
+    alert(`Error duplicating page: ${error.message || 'Please try again.'}`);
+  } finally {
+    state.duplicatingPage = null;
   }
 };
 const resetForm = () => {
@@ -312,6 +462,13 @@ onMounted(async () => {
                   class="text-blue-600 hover:text-blue-900 text-sm font-medium"
                 >
                   Edit
+                </button>
+                <button
+                  @click="duplicatePage(page)"
+                  :disabled="state.duplicatingPage === page.id"
+                  class="text-green-600 hover:text-green-900 text-sm font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {{ state.duplicatingPage === page.id ? 'Duplicating...' : 'Duplicate' }}
                 </button>
                 <button
                   @click="openDeleteConfirm(page)"
@@ -554,7 +711,7 @@ onMounted(async () => {
               </button>
               <button
                 @click="deletePage"
-                class="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700"
+                class="px-4 py-2 bg-red text-white rounded-md hover:bg-red-700"
               >
                 Delete Page
               </button>

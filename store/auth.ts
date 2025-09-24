@@ -35,9 +35,9 @@ export const useAuthStore = defineStore("authStore",{
         }));
       }
 
-      // Navigate back to previous page or home
+      // Navigate to home page after successful login
       const router = useRouter();
-      router.go(-1);
+      await router.push('/');
     },
     async refresh(){
       try{
