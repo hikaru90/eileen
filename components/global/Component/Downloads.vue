@@ -1,191 +1,197 @@
 <script setup lang="ts">
-  import defaults from "~/lib/defaults";
-  import { setCookie, getCookie } from "~/lib/helpers";
-  const { pb } = usePocketbase();
-  const config = useRuntimeConfig();
+import defaults from "~/lib/defaults";
+import { setCookie, getCookie } from "~/lib/helpers";
+const { pb } = usePocketbase();
+const config = useRuntimeConfig();
 
-  const props = withDefaults(
-    defineProps<{
-      component?: object;
-      isFirst?: boolean;
-    }>(),
-    {
-      component: {
-        content: defaults.find((el) => el.type === "heroBig").content,
-      },
-      isFirst: false,
-    }
-  );
+const props = withDefaults(
+  defineProps<{
+    component?: object;
+    isFirst?: boolean;
+  }>(),
+  {
+    component: {
+      content: defaults.find((el) => el.type === "heroBig").content,
+    },
+    isFirst: false,
+  }
+);
 
-  const downloads = await pb.collection("downloads").getFullList(200 /* batch size */);
+const downloads = await pb.collection("downloads").getFullList(200 /* batch size */);
 
-  const state = reactive({
-    newsletterSignupOpen: false,
-    mail: "",
-    subscriptionPending: false,
-    subscriptionSubmitted: false,
-    errors: [],
-    successes: [],
-    userSubribed: false,
+const state = reactive({
+  newsletterSignupOpen: false,
+  mail: "",
+  subscriptionPending: false,
+  subscriptionSubmitted: false,
+  errors: [],
+  successes: [],
+  userSubribed: false,
+});
+
+const getCurrentImageUrl = (id, filename) => {
+  const img = useImage();
+  const imgUrl = img(`${config.public.SERVER_URL}/api/files/downloads/${id}/${filename}`, {
+    format: "webp",
   });
+  return imgUrl;
+};
 
-  const getCurrentImageUrl = (id, filename) => {
-    const img = useImage();
-    const imgUrl = img(`${config.public.SERVER_URL}/api/files/downloads/${id}/${filename}`, {
-      format: "webp",
-    });
-    return imgUrl;
-  };
+const addError = (error) => {
+  state.errors.push(error);
+  setTimeout(() => {
+    clearErrors();
+  }, 3000);
+};
+const clearErrors = () => {
+  state.errors = [];
+};
 
-  const addError = (error) => {
-    state.errors.push(error);
-    setTimeout(() => {
-      clearErrors();
-    }, 3000);
-  };
-  const clearErrors = () => {
-    state.errors = [];
-  };
-
-  const addSuccess = (success) => {
-    state.successes.push(success);
-    state.mail = "";
-    setTimeout(() => {
-      clearSuccesses();
-    }, 3000);
-  };
-  const clearSuccesses = () => {
-    state.successes = [];
-  };
-  const isValidEmail = (email) => {
-    // Check if the string contains '@' and '.'
-    if (email.includes("@") && email.includes(".")) {
-      // Split the email address by '@'
-      const parts = email.split("@");
-      // Check if there are exactly two parts
-      if (parts.length === 2) {
-        // Check if the second part (domain) contains '.'
-        if (parts[1].includes(".")) {
-          return true;
-        }
-      }
-    }
-    return false;
-  };
-  const subscribe = async () => {
-    if (!state.mail) {
-      addError("Bitte gib eine E-Mail ein.");
-      return;
-    }
-    if (!isValidEmail(state.mail)) {
-      addError("Bitte gib eine gültige E-Mail Adresse ein.");
-      return;
-    }
-    if (!state.subscriptionPending) {
-      state.subscriptionPending = true;
-
-      try {
-        // First, check if user is already subscribed
-        const checkResponse = await fetch("/api/mail/checkSubscriber", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            email: state.mail,
-            groupId: "164511800528734081",
-          }),
-        });
-
-        if (!checkResponse.ok) {
-          throw new Error("Failed to check subscription status");
-        }
-
-        const checkData = await checkResponse.json();
-        console.log("Subscription check result:", checkData);
-
-        // If already subscribed and active, set cookie and allow download
-        if (checkData.subscribed && checkData.status === 'active') {
-          console.log("User is already subscribed and active - skipping opt-in email");
-          setCookie("subscribed", true);
-          addSuccess("Du bist bereits angemeldet! Downloads sind jetzt verfügbar.");
-          state.subscriptionPending = false;
-          state.userSubribed = true;
-          state.newsletterSignupOpen = false;
-          return true;
-        }
-
-        // If not subscribed or inactive, send opt-in email
-        console.log("User is not subscribed or inactive - sending opt-in email");
-        const response = await fetch("/api/mail/sendOptIn", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            email: state.mail,
-            groupId: "164511800528734081", // Default group ID
-            redirectUrl: "/download", // Redirect back to download page after confirmation
-          }),
-        });
-
-        if (!response.ok) {
-          throw new Error("Failed to send opt-in email");
-        }
-
-        addSuccess("Bestätigungs-E-Mail gesendet! Bitte prüfe dein Postfach.");
-        state.subscriptionPending = false;
-        // Note: Don't set userSubscribed = true here, as they need to confirm first
-        // The download will remain locked until they confirm via email
-        state.newsletterSignupOpen = false;
+const addSuccess = (success) => {
+  state.successes.push(success);
+  state.mail = "";
+  setTimeout(() => {
+    clearSuccesses();
+  }, 3000);
+};
+const clearSuccesses = () => {
+  state.successes = [];
+};
+const isValidEmail = (email) => {
+  // Check if the string contains '@' and '.'
+  if (email.includes("@") && email.includes(".")) {
+    // Split the email address by '@'
+    const parts = email.split("@");
+    // Check if there are exactly two parts
+    if (parts.length === 2) {
+      // Check if the second part (domain) contains '.'
+      if (parts[1].includes(".")) {
         return true;
-      } catch (err) {
-        console.log("err", err);
-        addError("Fehler beim Verarbeiten der Anfrage. Bitte versuche es erneut.");
-        state.subscriptionPending = false;
       }
     }
-  };
+  }
+  return false;
+};
+const subscribe = async () => {
+  if (!state.mail) {
+    addError("Bitte gib eine E-Mail ein.");
+    return;
+  }
+  if (!isValidEmail(state.mail)) {
+    addError("Bitte gib eine gültige E-Mail Adresse ein.");
+    return;
+  }
+  if (!state.subscriptionPending) {
+    state.subscriptionPending = true;
 
-  const downloadFile = async (id, filename) => {
     try {
-      // const url = product.url
-      const url = `${config.public.SERVER_URL}/api/files/downloads/${id}/${filename}`;
-      console.log("url", url);
-      const res = await $fetch(url);
+      // First, check if user is already subscribed
+      const checkResponse = await fetch("/api/mail/checkSubscriber", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: state.mail,
+          groupId: "164511800528734081",
+        }),
+      });
 
-      console.log("download res", res);
+      if (!checkResponse.ok) {
+        throw new Error("Failed to check subscription status");
+      }
 
-      const blob = new Blob([res], { type: res.type });
-      const a = document.createElement("a");
-      a.setAttribute("href", URL.createObjectURL(blob));
-      a.setAttribute("download", filename);
-      a.setAttribute("target", "_blank");
-      a.click();
-      URL.revokeObjectURL(a.href);
+      const checkData = await checkResponse.json();
+      console.log("Subscription check result:", checkData);
+
+      // If already subscribed and active, set cookie and allow download
+      if (checkData.subscribed && checkData.status === 'active') {
+        console.log("User is already subscribed and active - skipping opt-in email");
+        setCookie("subscribed", true);
+        addSuccess("Du bist bereits angemeldet! Downloads sind jetzt verfügbar.");
+        state.subscriptionPending = false;
+        state.userSubribed = true;
+        // Delay closing the signup form to show success message
+        setTimeout(() => {
+          state.newsletterSignupOpen = false;
+        }, 3000);
+        return true;
+      }
+
+      // If not subscribed or inactive, send opt-in email
+      console.log("User is not subscribed or inactive - sending opt-in email");
+      const response = await fetch("/api/mail/sendOptIn", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: state.mail,
+          groupId: "164511800528734081", // Default group ID
+          redirectUrl: "/download", // Redirect back to download page after confirmation
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to send opt-in email");
+      }
+
+      addSuccess("Bestätigungs-E-Mail gesendet! Bitte prüfe dein Postfach.");
+      state.subscriptionPending = false;
+      // Note: Don't set userSubscribed = true here, as they need to confirm first
+      // The download will remain locked until they confirm via email
+      // Delay closing the signup form to show success message
+      setTimeout(() => {
+        state.newsletterSignupOpen = false;
+      }, 3000);
+      return true;
     } catch (err) {
-      console.log("error in downloading template", err);
+      console.log("err", err);
+      addError("Fehler beim Verarbeiten der Anfrage. Bitte versuche es erneut.");
+      state.subscriptionPending = false;
     }
-  };
+  }
+};
 
-  const handleDownload = (id, filename) => {
-    const userSubribed = getCookie("subscribed");
-    if (userSubribed) {
-      state.userSubribed = true;
-    }
-    console.log("state.userSubribed", state.userSubribed);
-    if (!state.userSubribed) {
-      state.newsletterSignupOpen = true;
-      return;
-    }
-    downloadFile(id, filename);
-  };
+const downloadFile = async (id, filename) => {
+  try {
+    // const url = product.url
+    const url = `${config.public.SERVER_URL}/api/files/downloads/${id}/${filename}`;
+    console.log("url", url);
+    const res = await $fetch(url);
 
-  onMounted(() => {
-    const userSubribed = getCookie("subscribed");
-    if (userSubribed) state.userSubribed = true;
-  });
-  onUnmounted(() => {});
+    console.log("download res", res);
+
+    const blob = new Blob([res], { type: res.type });
+    const a = document.createElement("a");
+    a.setAttribute("href", URL.createObjectURL(blob));
+    a.setAttribute("download", filename);
+    a.setAttribute("target", "_blank");
+    a.click();
+    URL.revokeObjectURL(a.href);
+  } catch (err) {
+    console.log("error in downloading template", err);
+  }
+};
+
+const handleDownload = (id, filename) => {
+  const userSubribed = getCookie("subscribed");
+  if (userSubribed) {
+    state.userSubribed = true;
+  }
+  console.log("state.userSubribed", state.userSubribed);
+  if (!state.userSubribed) {
+    state.newsletterSignupOpen = true;
+    return;
+  }
+  downloadFile(id, filename);
+};
+
+onMounted(() => {
+  const userSubribed = getCookie("subscribed");
+  if (userSubribed) state.userSubribed = true;
+});
+onUnmounted(() => { });
 </script>
 
 <template>
@@ -204,16 +210,14 @@
             ></h2>
           </IntersectonPop>
         </div>
-        <!-- Success messages displayed at component level -->
-        <div v-for="(success, index) in state.successes" :key="index" class="mb-4 max-w-md mx-auto">
-          <div class="bg-green-500/60 px-4 py-2 text-white rounded-lg text-center">
-            {{ success }}
-          </div>
-        </div>
+
 
         <div class="flex-grow flex flex-col md:flex-row md:flex-wrap -mx-3">
-          <div class="px-3 w-full md:w-1/2" v-for="(download, index) in downloads"
-              :key="'audio' + index">
+          <div
+            class="px-3 w-full md:w-1/2"
+            v-for="(download, index) in downloads"
+            :key="'audio' + index"
+          >
             <div
               v-if="state.newsletterSignupOpen"
               class="shadow-2xl shadow-coffee/10 rounded-lg overflow-hidden bg-white relative border border-coffee border-opacity-10 py-4 px-5"
@@ -242,25 +246,48 @@
                     class="shadow-xl shadow-coffee/20 bg-salmon px-5 py-2 rounded-full text-white flex-shrink-0 flex items-center justify-center"
                   >
                     <div v-show="!state.subscriptionPending">Eintragen</div>
-                    <div v-show="state.subscriptionPending" class="animate-spin">
-                      <nuxt-icon name="icon-pending" class="text-2xl text-white" />
+                    <div
+                      v-show="state.subscriptionPending"
+                      class="animate-spin"
+                    >
+                      <nuxt-icon
+                        name="icon-pending"
+                        class="text-2xl text-white"
+                      />
                     </div>
                   </button>
-                  <input type="submit" class="hidden" />
+                  <input
+                    type="submit"
+                    class="hidden"
+                  />
                 </form>
-                <div v-for="(error, index) in state.errors" :key="index" class="w-full mt-4">
+                <div
+                  v-for="(error, index) in state.errors"
+                  :key="index"
+                  class="w-full mt-4"
+                >
                   <div class="bg-lightRed px-3 py-1 text-darkRed rounded-lg">
                     {{ error }}
+                  </div>
+                </div>
+                <!-- Success messages displayed at component level -->
+                <div
+                  v-for="(success, index) in state.successes"
+                  :key="index"
+                  class="mb-4 max-w-md mx-auto mt-4"
+                >
+                  <div class="bg-green-500/60 px-4 py-2 text-white rounded-lg text-center">
+                    {{ success }}
                   </div>
                 </div>
               </div>
             </div>
             <div
               v-else
-              
               class="shadow-2xl shadow-coffee/10 rounded-lg overflow-hidden bg-white relative border border-coffee border-opacity-10 flex h-full"
             >
-            <!-- <div class="absolute top-2 left-2 px-2 py-0.5 bg-white/70 rounded z-10 text-sm">
+
+              <!-- <div class="absolute top-2 left-2 px-2 py-0.5 bg-white/70 rounded z-10 text-sm">
               .{{ download.filetype }}
             </div> -->
               <div
@@ -293,9 +320,12 @@
                         <div
                           class="flex items-center justify-center gap-1 pl-3 pr-2 py-1 border border-grey/20 rounded-full hover:bg-salmon/80 text-coffee hover:text-white transition capitalize"
                         >
-                        {{ download.filetype }}
-                        Herunterladen
-                          <nuxt-icon name="icon-download" class="text-2xl -ml-1" />
+                          {{ download.filetype }}
+                          Herunterladen
+                          <nuxt-icon
+                            name="icon-download"
+                            class="text-2xl -ml-1"
+                          />
                         </div>
                       </button>
                     </div>
@@ -311,9 +341,9 @@
 </template>
 
 <style>
-  .slide:last-child {
-    .connector {
-      display: none;
-    }
+.slide:last-child {
+  .connector {
+    display: none;
   }
+}
 </style>

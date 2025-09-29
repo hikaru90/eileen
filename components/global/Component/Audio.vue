@@ -171,7 +171,7 @@
         // If already subscribed and active, set cookie and show success
         if (checkData.subscribed && checkData.status === 'active') {
           setCookie("subscribed", true);
-          addSuccess("Du bist bereits angemeldet! Newsletter-Inhalte sind verfügbar.");
+          addSuccess("Du bist bereits angemeldet!");
           state.subscriptionPending = false;
           return true;
         }

@@ -5,8 +5,8 @@ definePageMeta({
 
 // Set page title and meta description
 useSeoMeta({
-  title: 'Newsletter-Anmeldung bestätigt - Eileen George',
-  description: 'Vielen Dank für die Bestätigung deiner Newsletter-Anmeldung. Du erhältst ab sofort wertvolle Inhalte rund um psychologisches Coaching.',
+  title: 'Anmeldung bestätigt - Eileen George',
+  description: 'Vielen Dank für die Bestätigung deiner Anmeldung. Du erhältst ab sofort wertvolle Inhalte rund um psychologisches Coaching.',
 });
 </script>
 
@@ -26,7 +26,7 @@ useSeoMeta({
 
         <!-- Main Heading -->
         <h1 class="font-heading text-3xl sm:text-3xl lg:text-4xl text-coffee mb-6">
-          Newsletter-Anmeldung bestätigt!
+          Anmeldung bestätigt!
         </h1>
 
         <!-- Success Message -->
