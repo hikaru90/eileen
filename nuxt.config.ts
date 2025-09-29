@@ -40,6 +40,7 @@ export default defineNuxtConfig({
     POCKETBASE_ADMIN_EMAIL: process.env.POCKETBASE_ADMIN_EMAIL,
     POCKETBASE_ADMIN_PASSWORD: process.env.POCKETBASE_ADMIN_PASSWORD,
     public: {
+      BASE_URL: process.env.BASE_URL,
       ENV: process.env.ENV,
       SERVER_URL: process.env.SERVER_URL,
     },

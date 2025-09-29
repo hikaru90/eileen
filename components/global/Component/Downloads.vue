@@ -204,6 +204,13 @@
             ></h2>
           </IntersectonPop>
         </div>
+        <!-- Success messages displayed at component level -->
+        <div v-for="(success, index) in state.successes" :key="index" class="mb-4 max-w-md mx-auto">
+          <div class="bg-green-500/60 px-4 py-2 text-white rounded-lg text-center">
+            {{ success }}
+          </div>
+        </div>
+
         <div class="flex-grow flex flex-col md:flex-row md:flex-wrap -mx-3">
           <div class="px-3 w-full md:w-1/2" v-for="(download, index) in downloads"
               :key="'audio' + index">
@@ -244,11 +251,6 @@
                 <div v-for="(error, index) in state.errors" :key="index" class="w-full mt-4">
                   <div class="bg-lightRed px-3 py-1 text-darkRed rounded-lg">
                     {{ error }}
-                  </div>
-                </div>
-                <div v-for="(success, index) in state.successes" :key="index" class="mt-4">
-                  <div class="bg-green-500/60 px-3 py-1 text-white rounded-lg">
-                    {{ success }}
                   </div>
                 </div>
               </div>

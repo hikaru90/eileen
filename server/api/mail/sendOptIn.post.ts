@@ -22,7 +22,12 @@ export default defineEventHandler(async (event) => {
     const token = Buffer.from(JSON.stringify(confirmationData)).toString('base64url');
 
     // Create confirmation URL
-    const confirmationUrl = `${config.public.baseUrl || 'http://localhost:3000'}/api/mail/confirmSubscription?token=${token}`;
+    const confirmationUrl = `${config.public.BASE_URL}/api/mail/confirmSubscription?token=${token}`;
+
+    // Determine if this is newsletter or workshop signup
+    const isNewsletterGroup = groupId === "164511800528734081";
+    const signupType = isNewsletterGroup ? "Newsletter" : "Workshop";
+    const signupTypeGerman = isNewsletterGroup ? "Newsletter" : "Workshop";
 
     // Send opt-in email via Brevo
     const response = await fetch("https://api.brevo.com/v3/smtp/email", {
@@ -41,8 +46,8 @@ export default defineEventHandler(async (event) => {
           email: "kontakt@eileengeorge.de",
           name: "Eileen George",
         },
-        to: [{ email: email, name: "Newsletter Subscriber" }],
-        subject: "Bestätige deine Newsletter-Anmeldung",
+        to: [{ email: email, name: isNewsletterGroup ? "Newsletter Subscriber" : "Workshop Subscriber" }],
+        subject: `Bestätige deine ${signupTypeGerman}-Anmeldung`,
         htmlContent: `
           <html>
             <head>
@@ -65,14 +70,14 @@ export default defineEventHandler(async (event) => {
               <!-- Main content -->
               <div style="background: white; border-radius: 10px; padding: 40px 30px; box-shadow: 0 4px 15px rgba(114, 70, 34, 0.1); margin-bottom: 20px;">
                 <p style="color: #724622; font-size: 16px; line-height: 1.7; margin-bottom: 30px; font-weight: 400;">
-                  vielen Dank für dein Interesse an meinem Newsletter! Um deine Anmeldung abzuschließen, klicke bitte auf den folgenden Link:
+                  vielen Dank für dein Interesse an mein${isNewsletterGroup ? 'em Newsletter' : 'en Workshops'}! Um deine Anmeldung abzuschließen, klicke bitte auf den folgenden Link:
                 </p>
 
                 <!-- CTA Button -->
                 <div style="text-align: center; margin: 40px 0;">
                   <a href="${confirmationUrl}"
                      style="display: inline-block; background-color: #be8f12; color: white; padding: 18px 35px; text-decoration: none; border-radius: 50px; font-weight: 700; font-size: 16px; box-shadow: 0 4px 15px rgba(190, 143, 18, 0.3); transition: all 0.3s ease; text-shadow: 0 1px 2px rgba(0,0,0,0.1);">
-                    Newsletter-Anmeldung bestätigen
+                    ${signupTypeGerman}-Anmeldung bestätigen
                   </a>
                 </div>
 

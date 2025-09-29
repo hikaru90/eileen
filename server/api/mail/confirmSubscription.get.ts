@@ -45,11 +45,16 @@ export default defineEventHandler(async (event) => {
       api_key: config.MAILERLITE_API_KEY
     });
 
+    let groupIdsParam = ['164511800528734081'];
+    if (!groupIdsParam.includes(groupId)) {
+      groupIdsParam.push(groupId);
+    }
+
     // Add subscriber to MailerLite
     const params = {
       email: email,
       fields: {},
-      groups: [groupId],
+      groups: groupIdsParam,
       status: "active",
       subscribed_at: new Date().toISOString().slice(0, 19).replace('T', ' '),
       opted_in_at: new Date().toISOString().slice(0, 19).replace('T', ' '),
